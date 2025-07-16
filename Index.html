@@ -1,253 +1,102 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>شحن عملات TikTok</title>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Tajawal', sans-serif;
-      margin: 0;
-      background: #fff;
-    }
-    .container {
-      max-width: 400px;
-      margin: auto;
-      padding: 20px;
-    }
-    h1 {
-      text-align: center;
-      font-weight: 700;
-    }
-    .tiktok {
-      color: red;
-    }
-    #username {
-      width: 100%;
-      padding: 12px;
-      font-size: 18px;
-      margin-bottom: 20px;
-      border: 2px solid #ccc;
-      border-radius: 10px;
-      text-align: center;
-    }
-    .coins {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-    .coin-option {
-      background: #f2f2f2;
-      padding: 15px;
-      border-radius: 12px;
-      text-align: center;
-      cursor: pointer;
-      font-weight: 700;
-      transition: 0.2s;
-      font-size: 18px;
-      position: relative;
-    }
-    .coin-option.selected {
-      border: 2px solid #ff2d55;
-      background-color: #fff0f4;
-    }
-    .coin-option small {
-      display: block;
-      margin-top: 6px;
-      font-size: 13px;
-      color: #777;
-      font-weight: normal;
-    }
-    .coin-option .coin-img {
-      width: 32px;
-      vertical-align: middle;
-      margin-right: 4px;
-    }
-    .custom-input {
-      width: 80%;
-      font-size: 16px;
-      padding: 6px;
-      border: none;
-      background: transparent;
-      text-align: center;
-      font-weight: bold;
-      margin-top: 6px;
-    }
-    #charge, #payNow {
-      width: 100%;
-      padding: 14px;
-      margin-top: 25px;
-      background: #ff2d55;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .popup {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-    }
-    .popup-content {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      width: 90%;
-      max-width: 350px;
-      font-family: 'Tajawal', sans-serif;
-      position: relative;
-    }
-    .payment-method {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin: 15px 0;
-    }
-    .payment-method img {
-      width: 80px;
-    }
-    .progress-container {
-      display: none;
-      width: 100%;
-      background-color: #111;
-      border-radius: 6px;
-      margin-top: 20px;
-    }
-    .progress-bar {
-      height: 12px;
-      width: 0%;
-      background-color: #fff;
-      border-radius: 6px;
-    }
-    #progressText {
-      margin-top: 10px;
-      font-weight: bold;
-    }
-    #successSection {
-      display: none;
-      margin-top: 20px;
-    }
-    #successSection img {
-      width: 100px;
-      margin-bottom: 10px;
-    }
+    body { font-family: 'Tajawal', sans-serif; margin: 0; background: #fff; }
+    .container { max-width: 400px; margin: auto; padding: 20px; }
+    h1 { text-align: center; font-weight: 700; }
+    .tiktok { color: red; }
+    #username { width: 100%; padding: 12px; font-size: 18px; margin-bottom: 20px; border: 2px solid #ccc; border-radius: 10px; text-align: center; }
+    .coins { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .coin-option { background: #f2f2f2; padding: 15px; border-radius: 12px; text-align: center; cursor: pointer; font-weight: 700; transition: 0.2s; font-size: 18px; }
+    .coin-option.selected { border: 2px solid #ff2d55; background-color: #fff0f4; }
+    .coin-option small { display: block; margin-top: 6px; font-size: 13px; color: #777; font-weight: normal; }
+    .coin-option .coin-img { width: 32px; vertical-align: middle; margin-right: 4px; }
+    #charge, #payNow { width: 100%; padding: 14px; margin-top: 25px; background: #ff2d55; color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; }
+    .popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); justify-content: center; align-items: center; z-index: 1000; }
+    .popup-content { background: white; padding: 20px; border-radius: 10px; text-align: center; width: 90%; max-width: 350px; }
+    .progress-container { display: none; width: 100%; background-color: #111; border-radius: 6px; margin-top: 20px; }
+    .progress-bar { height: 12px; width: 0%; background-color: #fff; border-radius: 6px; }
+    #progressText { margin-top: 10px; font-weight: bold; }
+    #successSection { display: none; margin-top: 20px; }
+    #successSection img { width: 100px; margin-bottom: 10px; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1><span class="tiktok">TikTok</span> شحن عملات</h1>
-    <input type="text" id="username" placeholder="اكتب اسم المستخدم" />
-    <div class="coins">
-      <div class="coin-option" data-amount="30"><img src="coin.png" class="coin-img" alt="coin">30<small>$0.38</small></div>
-      <div class="coin-option" data-amount="350"><img src="coin.png" class="coin-img" alt="coin">350<small>$4.50</small></div>
-      <div class="coin-option" data-amount="700"><img src="coin.png" class="coin-img" alt="coin">700<small>$8.90</small></div>
-      <div class="coin-option" data-amount="1400"><img src="coin.png" class="coin-img" alt="coin">1,400<small>$17.78</small></div>
-      <div class="coin-option" data-amount="3500"><img src="coin.png" class="coin-img" alt="coin">3,500<small>$44.30</small></div>
-      <div class="coin-option" data-amount="7000"><img src="coin.png" class="coin-img" alt="coin">7,000<small>$88.00</small></div>
-      <div class="coin-option" data-amount="17000"><img src="coin.png" class="coin-img" alt="coin">17,000<small>$221.38</small></div>
-      <div class="coin-option custom" onclick="selectCustom()">
-        <img src="coin.png" class="coin-img" alt="coin">مخصص
-        <input type="number" id="customAmount" class="custom-input" placeholder="اكتب عدد" />
-      </div>
+<div class="container">
+  <h1><span class="tiktok">TikTok</span> شحن عملات</h1>
+  <input type="text" id="username" placeholder="اكتب اسم المستخدم" />
+  <div class="coins">
+    <div class="coin-option" data-amount="30"><img src="coin.png" class="coin-img">30<small>$0.38</small></div>
+    <div class="coin-option" data-amount="350"><img src="coin.png" class="coin-img">350<small>$4.50</small></div>
+    <div class="coin-option" data-amount="700"><img src="coin.png" class="coin-img">700<small>$8.90</small></div>
+    <div class="coin-option" data-amount="1400"><img src="coin.png" class="coin-img">1,400<small>$17.78</small></div>
+  </div>
+  <button id="charge">الشحن</button>
+</div>
+
+<div class="popup" id="paymentPopup">
+  <div class="popup-content">
+    <p id="popupUser"></p>
+    <p id="popupCoins"></p>
+    <div class="progress-container" id="progressContainer">
+      <div class="progress-bar" id="progressBar"></div>
     </div>
-    <button id="charge">الشحن</button>
-  </div>  <div class="popup" id="paymentPopup">
-    <div class="popup-content">
-      <p id="popupUser"></p>
-      <p id="popupCoins"></p>
-      <div class="payment-method">
-        <span>طريقة الدفع: Visa</span>
-        <img src="visa.png" alt="Visa">
-      </div>
-      <div class="progress-container" id="progressContainer">
-        <div class="progress-bar" id="progressBar"></div>
-      </div>
-      <p id="progressText"></p>
-      <div id="successSection">
-        <img src="success.png" alt="نجاح">
-        <p style="font-weight: bold; font-size: 18px;">تم الدفع بنجاح!</p>
-      </div>
-      <button id="payNow">ادفع الآن</button>
+    <p id="progressText"></p>
+    <div id="successSection">
+      <img src="success.png" alt="نجاح">
+      <p style="font-weight: bold; font-size: 18px;">تم الدفع بنجاح!</p>
     </div>
-  </div><audio id="clickSound" src="click.mp3"></audio> <audio id="successSound" src="success.mp3"></audio>
+    <button id="payNow">ادفع الآن</button>
+  </div>
+</div>
 
-  <script>
-    const chargeButton = document.getElementById('charge');
-    const customInput = document.getElementById('customAmount');
-    const popup = document.getElementById('paymentPopup');
-    const payNowBtn = document.getElementById('payNow');
-    const clickSound = document.getElementById('clickSound');
+<script>
+const chargeButton = document.getElementById('charge');
+const popup = document.getElementById('paymentPopup');
+const payNowBtn = document.getElementById('payNow');
 
-    function updateChargeCoins(value) {
-      chargeButton.innerText = `شحن ${value} عملة`;
+chargeButton.addEventListener('click', () => {
+  const username = document.getElementById('username').value;
+  const selected = document.querySelector('.coin-option.selected');
+  if (!username || !selected) {
+    alert('ادخل الاسم واختار عدد العملات');
+    return;
+  }
+  document.getElementById('popupUser').innerText = 'اسم المستخدم: ' + username;
+  document.getElementById('popupCoins').innerText = 'عدد العملات: ' + selected.dataset.amount;
+  popup.style.display = 'flex';
+});
+
+document.querySelectorAll('.coin-option').forEach(option => {
+  option.addEventListener('click', () => {
+    document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
+    option.classList.add('selected');
+  });
+});
+
+payNowBtn.addEventListener('click', () => {
+  payNowBtn.disabled = true;
+  const progressBar = document.getElementById('progressBar');
+  const progressContainer = document.getElementById('progressContainer');
+  const progressText = document.getElementById('progressText');
+  const successSection = document.getElementById('successSection');
+  progressContainer.style.display = 'block';
+  let percent = 0;
+  const interval = setInterval(() => {
+    percent += 1;
+    progressBar.style.width = percent + '%';
+    progressText.innerText = percent + '%';
+    if (percent >= 100) {
+      clearInterval(interval);
+      successSection.style.display = 'block';
     }
-
-    function selectCustom() {
-      document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
-      document.querySelector('.coin-option.custom').classList.add('selected');
-      updateChargeCoins(customInput.value);
-    }
-
-    customInput.addEventListener('input', (e) => {
-      updateChargeCoins(e.target.value);
-    });
-
-    document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
-      option.addEventListener('click', () => {
-        document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
-        option.classList.add('selected');
-        updateChargeCoins(option.dataset.amount);
-      });
-    });
-
-    document.querySelectorAll('button, .coin-option, #username, #customAmount').forEach(el => {
-      el.addEventListener('click', () => {
-        clickSound.currentTime = 0;
-        clickSound.play();
-      });
-    });
-
-    chargeButton.addEventListener('click', () => {
-      const username = document.getElementById('username').value;
-      const selected = document.querySelector('.coin-option.selected');
-      const amount = selected ? selected.dataset.amount : '';
-      document.getElementById('popupUser').innerText = 'اسم المستخدم: ' + username;
-      document.getElementById('popupCoins').innerText = 'عدد العملات: ' + amount;
-      popup.style.display = 'flex';
-    });
-
-    payNowBtn.addEventListener('click', () => {
-      payNowBtn.disabled = true;
-      payNowBtn.style.opacity = 0.5;
-
-      const progressBar = document.getElementById('progressBar');
-      const progressContainer = document.getElementById('progressContainer');
-      const progressText = document.getElementById('progressText');
-      const successSection = document.getElementById('successSection');
-
-      progressContainer.style.display = 'block';
-      let percent = 0;
-      const interval = setInterval(() => {
-        percent += 1;
-        progressBar.style.width = percent + '%';
-        progressText.innerText = percent + '%';
-        if (percent >= 100) {
-          clearInterval(interval);
-          document.getElementById('successSound').play();
-          successSection.style.display = 'block';
-        }
-      }, 80);
-    });
-  </script></body>
+  }, 50);
+});
+</script>
+</body>
 </html>
