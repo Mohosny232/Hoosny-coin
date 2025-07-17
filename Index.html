@@ -120,16 +120,18 @@
     .progress-container {
   display: none;
   width: 100%;
-  background-color: transparent; /* ← الخلفية شفافة */
+  background-color: transparent; /* الخلفية الشفافة */
   border-radius: 6px;
   margin-top: 20px;
-    }
-    .progress-bar {
+  border: 2px solid #000; /* لو عايز إطار أسود حوالين الشريط */
+}
+
+.progress-bar {
   height: 12px;
   width: 0%;
-  background-color: #000; /* ← اسود بدل أبيض */
+  background-color: #000; /* لون الخط اللي بيتحرك */
   border-radius: 6px;
-    }    
+}
     #progressText {
       margin-top: 10px;
       font-weight: bold;
