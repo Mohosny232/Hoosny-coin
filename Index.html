@@ -164,24 +164,26 @@
     <button id="charge">الشحن</button>
   </div>
 
-  <div class="popup" id="paymentPopup">
-    <div class="popup-content">
-      <p id="popupUser"></p>
-      <p id="popupCoins"></p>
-      <div class="payment-method" style="display: flex; align-items: center; gap: 10px; font-weight: normal; font-size: 16px;">
-  <span style="color: #333;">طريقة الدفع: 2432******</span>
-  <img src="visa.png" alt="Visa" style="width: 50px; height: auto;">
-      </div>
-      <div class="progress-container" id="progressContainer">
-        <div class="progress-bar" id="progressBar"></div>
-      </div>
-      <p id="progressText"></p>
-      <div id="successSection">
-        <img src="success.png" alt="نجاح">
-        <p style="font-weight: bold; font-size: 18px;">تم الدفع بنجاح!</p>
-      </div>
-      <button id="payNow">ادفع الآن</button>
-    </div>
+  <div class="popup-content">
+  <p id="popupUser"></p>
+  <p id="popupCoins"></p>
+  <div class="payment-method" style="display: flex; align-items: center; gap: 10px; font-weight: normal; font-size: 16px;">
+    <span style="color: #333;">طريقة الدفع: 2432******</span>
+    <img src="visa.png" alt="Visa" style="width: 50px; height: auto;">
+  </div>
+
+  <div class="progress-container" id="progressContainer" style="display: none; width: 100%; background-color: #111; border-radius: 6px; margin-top: 20px;">
+    <div class="progress-bar" id="progressBar" style="height: 12px; width: 0%; background-color: white; border-radius: 6px;"></div>
+  </div>
+
+  <p id="progressText" style="margin-top: 10px; font-weight: bold;"></p>
+
+  <div id="successSection" style="display: none; margin-top: 20px; text-align: center;">
+    <img src="success.png" alt="نجاح" style="width: 60px;">
+    <p style="font-weight: bold; font-size: 18px;">✅ تم الدفع بنجاح!</p>
+  </div>
+
+  <button id="payNow">ادفع الآن</button>
   </div>
 
   <audio id="clickSound" src="click.mp3"></audio>
