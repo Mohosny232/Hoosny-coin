@@ -240,13 +240,21 @@
       document.getElementById('popupCoins').innerText = 'عدد العملات: ' + amount;
       popup.style.display = 'flex';
     });
-
-    const payNowBtn = document.getElementById('payNowBtn');
+     const payNowBtn = document.getElementById('payNowBtn');
 const progressBar = document.getElementById('progressBar');
 const progressContainer = document.getElementById('progressContainer');
 const popup = document.getElementById('popup');
+const successSection = document.getElementById('successSection'); // لازم يكون معرف في HTML
+const successSound = document.getElementById('successSound'); // صوت النجاح
+
+let paymentDone = false;
 
 payNowBtn.addEventListener('click', () => {
+  if (paymentDone) {
+    popup.style.display = 'none';
+    return;
+  }
+
   payNowBtn.disabled = true;
   payNowBtn.innerText = "جاري الدفع...";
   payNowBtn.style.opacity = 0.5;
@@ -259,21 +267,16 @@ payNowBtn.addEventListener('click', () => {
     progressBar.style.width = width + '%';
     if (width >= 100) {
       clearInterval(interval);
-    document.getElementById('successSound').play();
-     successSection.style.display = 'block';
+      successSound.play();
+      successSection.style.display = 'block';
       payNowBtn.innerText = "✅ تم الدفع";
       payNowBtn.disabled = false;
       payNowBtn.style.opacity = 1;
-      payNowBtn.style.color = "white";
+      paymentDone = true;
     }
-  }, 30); // 3 ثواني تقريبا
+  }, 30);
 });
-
-payNowBtn.addEventListener('click', () => {
-  if (payNowBtn.innerText.includes("تم الدفع")) {
-    popup.style.display = 'none';
-  }
-});     
+    
 let deferredPrompt;
 const installBtn = document.getElementById('installBtn');
 
