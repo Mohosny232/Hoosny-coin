@@ -187,7 +187,9 @@
   <audio id="clickSound" src="click.mp3"></audio>
   <audio id="successSound" src="success.mp3"></audio>
   <audio id="typeSound" src="type.mp3"></audio>
-
+<button id="installBtn" style="display: none; padding: 10px 15px; background: black; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">
+  📲 تثبيت hoosnycoin
+</button>
   <script>
     const chargeButton = document.getElementById('charge');
     const customInput = document.getElementById('customAmount');
@@ -263,6 +265,30 @@
         }
       }, 80);
     });
+    
+let deferredPrompt;
+const installBtn = document.getElementById('installBtn');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.style.display = 'block';
+});
+
+installBtn.addEventListener('click', async () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') {
+      console.log('✅ تم تثبيت hoosnycoin');
+      installBtn.style.display = 'none';
+    } else {
+      console.log('❌ تم رفض التثبيت');
+    }
+    deferredPrompt = null;
+  }
+});
+
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js')
         .then(() => console.log('✅ Service Worker Registered'))
