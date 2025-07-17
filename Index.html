@@ -253,34 +253,32 @@ chargeButton.addEventListener('click', () => {
 
 // زر الدفع
 
-  payNow.addEventListener('click', () => {
-    if (paymentDone) return;
+  payNowBtn.addEventListener('click', () => {
+  if (paymentDone) return;
 
-    payNow.disabled = true;
-    payNow.innerText = "جاري الدفع...";
-    payNow.style.opacity = 0.5;
+  payNowBtn.disabled = true;
+  payNowBtn.innerText = "جاري الدفع...";
+  payNowBtn.style.opacity = 0.5;
 
-    progressContainer.style.display = 'block';
+  progressContainer.style.display = 'block';
 
-    let width = 0;
-    const interval = setInterval(() => {
-      width++;
-      progressBar.style.width = width + '%';
-      progressText.innerText = `${width}%`;
+  let width = 0;
+  const interval = setInterval(() => {
+    width++;
+    progressBar.style.width = width + '%';
+    progressText.innerText = `${width}%`;
 
-      if (width >= 100) {
-        clearInterval(interval);
-        payNow.innerText = "✅ تم الدفع";
-        payNow.disabled = false;
-        payNow.style.opacity = 1;
-        successSection.style.display = 'block';
-        paymentDone = true;
-        progressText.innerText = "100% اكتمل الدفع!";
-      }
-    }, 30);
-  });
+    if (width >= 100) {
+      clearInterval(interval);
+      payNowBtn.innerText = "✅ تم الدفع";
+      payNowBtn.disabled = false;
+      payNowBtn.style.opacity = 1;
+      successSection.style.display = 'block';
+      paymentDone = true;
+      progressText.innerText = "100% اكتمل الدفع!";
+    }
+  }, 30);
 });
-
 
 function selectCustom() {
   document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
