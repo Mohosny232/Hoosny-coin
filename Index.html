@@ -250,16 +250,18 @@ chargeButton.addEventListener('click', () => {
 });
 
 // زر الدفع
-payNowBtn.addEventListener('click', () => {
-  if (paymentDone) {
-    popup.style.display = 'none';
-    return;
-  }
 
+
+
+payNowBtn.addEventListener('click', () => {
+  if (paymentDone) return; // بعد الدفع الزر مش هيعمل حاجة تاني
+
+  // 1. جاري الدفع...
   payNowBtn.disabled = true;
   payNowBtn.innerText = "جاري الدفع...";
   payNowBtn.style.opacity = 0.5;
   payNowBtn.style.color = "white";
+
   progressContainer.style.display = 'block';
 
   let width = 0;
@@ -269,14 +271,19 @@ payNowBtn.addEventListener('click', () => {
 
     if (width >= 100) {
       clearInterval(interval);
-      successSound.play();
-      successSection.style.display = 'block';
+
+      // 2. تم الدفع ✅
       payNowBtn.innerText = "✅ تم الدفع";
       payNowBtn.disabled = false;
       payNowBtn.style.opacity = 1;
+      payNowBtn.style.color = "white";
+      
+      successSection.style.display = 'block';
+      successSound.play();
+      
       paymentDone = true;
     }
-  }, 30);
+  }, 30); // حوالي 3 ثواني
 });
 
 function selectCustom() {
