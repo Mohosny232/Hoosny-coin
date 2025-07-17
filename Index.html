@@ -191,64 +191,65 @@
   📲 تثبيت hoosnycoin
 </button>
   <script>
-    const chargeButton = document.getElementById('charge');
-    const customInput = document.getElementById('customAmount');
-    const popup = document.getElementById('paymentPopup');
-    const payNowBtn = document.getElementById('payNow');
-    const clickSound = document.getElementById('clickSound');
-    const typeSound = document.getElementById('typeSound');
-
-    function updateChargeCoins(value) {
-      chargeButton.innerText = `شحن ${value} عملة`;
-    }
-
-    function selectCustom() {
-      document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
-      document.querySelector('.coin-option.custom').classList.add('selected');
-      updateChargeCoins(customInput.value);
-    }
-
-    customInput.addEventListener('input', (e) => {
-      updateChargeCoins(e.target.value);
-    });
-
-    document.getElementById('username').addEventListener('input', () => {
-      typeSound.currentTime = 0;
-      typeSound.play();
-    });
-
-    document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
-      option.addEventListener('click', () => {
-        document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
-        option.classList.add('selected');
-        updateChargeCoins(option.dataset.amount);
-      });
-    });
-
-    document.querySelectorAll('button, .coin-option, #username, #customAmount').forEach(el => {
-      el.addEventListener('click', () => {
-        clickSound.currentTime = 0;
-        clickSound.play();
-      });
-    });
-
-    chargeButton.addEventListener('click', () => {
-      const username = document.getElementById('username').value;
-      const selected = document.querySelector('.coin-option.selected');
-      const amount = selected ? selected.dataset.amount : '';
-      document.getElementById('popupUser').innerText = 'اسم المستخدم: ' + username;
-      document.getElementById('popupCoins').innerText = 'عدد العملات: ' + amount;
-      popup.style.display = 'flex';
-    });
-     const payNowBtn = document.getElementById('payNowBtn');
+const chargeButton = document.getElementById('charge');
+const customInput = document.getElementById('customAmount');
+const popup = document.getElementById('paymentPopup');
+const payNowBtn = document.getElementById('payNowBtn');
 const progressBar = document.getElementById('progressBar');
 const progressContainer = document.getElementById('progressContainer');
-const popup = document.getElementById('popup');
-const successSection = document.getElementById('successSection'); // لازم يكون معرف في HTML
-const successSound = document.getElementById('successSound'); // صوت النجاح
+const successSection = document.getElementById('successSection');
+const successSound = document.getElementById('successSound');
+const clickSound = document.getElementById('clickSound');
+const typeSound = document.getElementById('typeSound');
 
 let paymentDone = false;
 
+// تحديث زر الشحن
+function updateChargeCoins(value) {
+  chargeButton.innerText = `شحن ${value} عملة`;
+}
+
+// لما يكتب رقم عملات يدوي
+customInput.addEventListener('input', (e) => {
+  selectCustom();
+  updateChargeCoins(e.target.value);
+});
+
+// تشغيل صوت الكتابة
+document.getElementById('username').addEventListener('input', () => {
+  typeSound.currentTime = 0;
+  typeSound.play();
+});
+
+// اختيارات الكوينات الجاهزة
+document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
+  option.addEventListener('click', () => {
+    document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
+    option.classList.add('selected');
+    updateChargeCoins(option.dataset.amount);
+  });
+});
+
+// صوت عند أي ضغطة
+document.querySelectorAll('button, .coin-option, #username, #customAmount').forEach(el => {
+  el.addEventListener('click', () => {
+    clickSound.currentTime = 0;
+    clickSound.play();
+  });
+});
+
+// لما يضغط شحن يفتح البوب اب
+chargeButton.addEventListener('click', () => {
+  const username = document.getElementById('username').value;
+  const selected = document.querySelector('.coin-option.selected');
+  const amount = selected ? selected.dataset.amount : customInput.value;
+
+  document.getElementById('popupUser').innerText = 'اسم المستخدم: ' + username;
+  document.getElementById('popupCoins').innerText = 'عدد العملات: ' + amount;
+  popup.style.display = 'flex';
+});
+
+// زر الدفع
 payNowBtn.addEventListener('click', () => {
   if (paymentDone) {
     popup.style.display = 'none';
@@ -259,12 +260,13 @@ payNowBtn.addEventListener('click', () => {
   payNowBtn.innerText = "جاري الدفع...";
   payNowBtn.style.opacity = 0.5;
   payNowBtn.style.color = "white";
-
   progressContainer.style.display = 'block';
+
   let width = 0;
   const interval = setInterval(() => {
-    width += 1;
+    width++;
     progressBar.style.width = width + '%';
+
     if (width >= 100) {
       clearInterval(interval);
       successSound.play();
@@ -276,6 +278,12 @@ payNowBtn.addEventListener('click', () => {
     }
   }, 30);
 });
+
+function selectCustom() {
+  document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
+  document.querySelector('.coin-option.custom').classList.add('selected');
+}
+  
     
 let deferredPrompt;
 const installBtn = document.getElementById('installBtn');
