@@ -241,31 +241,39 @@
       popup.style.display = 'flex';
     });
 
-    payNowBtn.addEventListener('click', () => {
-      payNowBtn.disabled = true;
-      payNowBtn.innerText = "جاري الدفع...";
-      payNowBtn.style.opacity = 0.5;
+    const payNowBtn = document.getElementById('payNowBtn');
+const progressBar = document.getElementById('progressBar');
+const progressContainer = document.getElementById('progressContainer');
+const popup = document.getElementById('popup');
+
+payNowBtn.addEventListener('click', () => {
+  payNowBtn.disabled = true;
+  payNowBtn.innerText = "جاري الدفع...";
+  payNowBtn.style.opacity = 0.5;
+  payNowBtn.style.color = "white";
+
+  progressContainer.style.display = 'block';
+  let width = 0;
+  const interval = setInterval(() => {
+    width += 1;
+    progressBar.style.width = width + '%';
+    if (width >= 100) {
+      clearInterval(interval);
+    document.getElementById('successSound').play();
+     successSection.style.display = 'block';
+      payNowBtn.innerText = "✅ تم الدفع";
+      payNowBtn.disabled = false;
+      payNowBtn.style.opacity = 1;
       payNowBtn.style.color = "white";
+    }
+  }, 30); // 3 ثواني تقريبا
+});
 
-      const progressBar = document.getElementById('progressBar');
-      const progressContainer = document.getElementById('progressContainer');
-      const progressText = document.getElementById('progressText');
-      const successSection = document.getElementById('successSection');
-
-      progressContainer.style.display = 'block';
-      let percent = 0;
-      const interval = setInterval(() => {
-        percent += 1;
-        progressBar.style.width = percent + '%';
-        progressText.innerText = percent + '%';
-        if (percent >= 100) {
-          clearInterval(interval);
-          document.getElementById('successSound').play();
-          successSection.style.display = 'block';
-        }
-      }, 80);
-    });
-    
+payNowBtn.addEventListener('click', () => {
+  if (payNowBtn.innerText.includes("تم الدفع")) {
+    popup.style.display = 'none';
+  }
+});     
 let deferredPrompt;
 const installBtn = document.getElementById('installBtn');
 
