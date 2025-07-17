@@ -254,10 +254,24 @@ chargeButton.addEventListener('click', () => {
   popup.style.display = 'flex';
 });
 
-// زر الدفع
 
-  payNowBtn.addEventListener('click', () => {
-  if (paymentDone) return;
+// زر "ادفع الآن"
+payNowBtn.addEventListener('click', () => {
+  if (paymentDone) {
+    // ✅ لما تضغط تم الدفع
+    popup.style.display = 'none';
+    
+    // ✅ ترجع كل حاجة من الأول
+    paymentDone = false;
+    progressBar.style.width = '0%';
+    progressText.innerText = '';
+    successSection.style.display = 'none';
+    payNowBtn.innerText = 'ادفع الآن';
+    payNowBtn.disabled = false;
+    payNowBtn.style.opacity = '1';
+    progressContainer.style.display = 'none';
+    return;
+  }
 
   payNowBtn.disabled = true;
   payNowBtn.innerText = "جاري الدفع...";
@@ -289,11 +303,7 @@ payNow.addEventListener('click', () => {
     popup.style.display = 'none';
   }
 });
- document.querySelector('.popup-content').style.display = 'none';
-    // ✅ إعادة ضبط كل شيء لحالة جديدة
-    paymentDone = false;
-    progressBar.style.width = '0%';
-   
+  
 
 function selectCustom() {
   document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
