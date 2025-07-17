@@ -289,7 +289,11 @@ payNow.addEventListener('click', () => {
     popup.style.display = 'none';
   }
 });
-
+ document.querySelector('.popup-content').style.display = 'none';
+    // ✅ إعادة ضبط كل شيء لحالة جديدة
+    paymentDone = false;
+    progressBar.style.width = '0%';
+   
 
 function selectCustom() {
   document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
