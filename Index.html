@@ -99,6 +99,18 @@
       align-items: center;
       z-index: 1000;
     }
+    #charge {
+  width: 100%;
+  padding: 14px;
+  margin-top: 25px;
+  background: #ff2d55;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+    }
     .popup-content {
       background: white;
       padding: 20px;
@@ -166,8 +178,10 @@
   <input type="number" id="customAmount" class="custom-input" placeholder="اكتب عدد" />
      </div>
     </div>
-    <button id="charge">الشحن</button>
-  </div>
+    <!-- عنصر الحاوي للزر -->
+<div style="width: 100%; display: flex; justify-content: center; padding: 0 16px;">
+  <button id="charge">Recharge</button>
+</div>
 
   <div id="paymentPopup" class="popup">
   <div class="popup-content">
