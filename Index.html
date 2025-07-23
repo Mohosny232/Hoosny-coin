@@ -161,9 +161,11 @@
       <div class="coin-option" data-amount="17000"><img src="coin.png" class="coin-img" alt="coin">17,000<small>$36.38</small></div>
       <div class="coin-option custom" onclick="selectCustom()">
         <img src="coin.png" class="coin-img" alt="coin">مخصص
-        <input type="number" id="customAmount" class="custom-input" placeholder="اكتب عدد" />
-      </div>
-    </div>
+        <div class="coin-option custom" onclick="selectCustom()">
+  <div id="customPrice" style="font-size: 13px; color: #333; margin-bottom: 5px;"></div>
+  <img src="coin.png" class="coin-img" alt="coin">مخصص
+  <input type="number" id="customAmount" class="custom-input" placeholder="اكتب عدد" />
+        </div>
     <button id="charge">الشحن</button>
   </div>
 
@@ -217,8 +219,20 @@ function updateChargeCoins(value) {
 
 // لما يكتب رقم عملات يدوي
 customInput.addEventListener('input', (e) => {
+  const value = parseInt(e.target.value);
   selectCustom();
-  updateChargeCoins(e.target.value);
+  updateChargeCoins(value);
+
+  // حساب السعر حسب عدد العملات
+  const coinPrice = 0.004;
+  const priceElement = document.getElementById('customPrice');
+
+  if (!isNaN(value) && value > 0) {
+    const totalPrice = (value * coinPrice).toFixed(2);
+    priceElement.innerText = `${value} عملة - $${totalPrice}`;
+  } else {
+    priceElement.innerText = '';
+  }
 });
 
 // تشغيل صوت الكتابة
