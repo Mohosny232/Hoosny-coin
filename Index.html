@@ -179,8 +179,20 @@
      </div>
     </div>
     <!-- عنصر الحاوي للزر -->
-<div style="width: 100%; display: flex; justify-content: center; padding: 0 16px;">
-  <button id="charge">Recharge</button>
+<div style="display: flex; justify-content: center; width: 100%; padding: 0 16px;">
+  <button id="charge" style="
+    width: 100%;
+    max-width: 500px;
+    padding: 14px;
+    margin-top: 25px;
+    background: #ff2d55;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+  ">Recharge</button>
 </div>
 
   <div id="paymentPopup" class="popup">
@@ -368,7 +380,7 @@ installBtn.addEventListener('click', async () => {
       navigator.serviceWorker.register('sw.js')
         .then(() => console.log('✅ Service Worker Registered'))
         .catch(err => console.log('❌ Service Worker Error:', err));
-    }
+    }  
   </script>
-</body>
-</html>
+  <body>
+<html>
