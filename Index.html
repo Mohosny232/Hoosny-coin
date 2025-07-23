@@ -225,7 +225,7 @@ customInput.addEventListener('input', (e) => {
 
   // احسب السعر: كل 30 عملة = 0.12 دولار
   const price = ((value / 30) * 0.12).toFixed(2);
-  document.getElementById('customPrice').innerText = value > 0 ? `${price} USD` : '';
+  document.getElementById('customPrice').innerText = value > 0 ? `${price} $` : '';
 });
 
 // تشغيل صوت الكتابة
