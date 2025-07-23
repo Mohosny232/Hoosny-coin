@@ -161,31 +161,54 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1><span class="tiktok">TikTok</span>Coin Recharge</h1>
-    <input type="text" id="username" placeholder="اكتب اسم المستخدم" />
-    <div class="coins">
-      <div class="coin-option" data-amount="30"><img src="coin.png" class="coin-img" alt="coin">30<small>$0.12</small></div>
-      <div class="coin-option" data-amount="350"><img src="coin.png" class="coin-img" alt="coin">350<small>$0.99</small></div>
-      <div class="coin-option" data-amount="700"><img src="coin.png" class="coin-img" alt="coin">700<small>$1.20</small></div>
-      <div class="coin-option" data-amount="1400"><img src="coin.png" class="coin-img" alt="coin">1,400<small>$2.40</small></div>
-      <div class="coin-option" data-amount="3500"><img src="coin.png" class="coin-img" alt="coin">3,500<small>$7.28</small></div>
-      <div class="coin-option" data-amount="7000"><img src="coin.png" class="coin-img" alt="coin">7,000<small>$14.56</small></div>
-      <div class="coin-option" data-amount="17000"><img src="coin.png" class="coin-img" alt="coin">17,000<small>$36.38</small></div>
-      <div class="coin-option custom" onclick="selectCustom()">
-     <div class="coin-option custom" onclick="selectCustom()">
-  <img src="coin.png" class="coin-img" alt="coin">مخصص
-  <div id="customPrice" style="font-size: 12px; color: gray; margin-top: 4px;"></div>
-  <input type="number" id="customAmount" class="custom-input" placeholder="اكتب عدد" />
-     </div>
+<div class="container">
+  <h1><span class="tiktok">TikTok</span> Coin Recharge</h1>
+
+  <input type="text" id="username" placeholder="اكتب اسم المستخدم" />
+
+  <div class="coins">
+    <div class="coin-option" data-amount="30">
+      <img src="coin.png" class="coin-img" alt="coin">30
+      <small>$0.12</small>
     </div>
-    <!-- عنصر الحاوي للزر -->
-<!-- عنصر الحاوي للزر -->
-<div style="width: 100%; display: flex; justify-content: center;">
-  <button id="charge">Recharge</button>
-  </div>
+    <div class="coin-option" data-amount="350">
+      <img src="coin.png" class="coin-img" alt="coin">350
+      <small>$0.99</small>
+    </div>
+    <div class="coin-option" data-amount="700">
+      <img src="coin.png" class="coin-img" alt="coin">700
+      <small>$1.20</small>
+    </div>
+    <div class="coin-option" data-amount="1400">
+      <img src="coin.png" class="coin-img" alt="coin">1,400
+      <small>$2.40</small>
+    </div>
+    <div class="coin-option" data-amount="3500">
+      <img src="coin.png" class="coin-img" alt="coin">3,500
+      <small>$7.28</small>
+    </div>
+    <div class="coin-option" data-amount="7000">
+      <img src="coin.png" class="coin-img" alt="coin">7,000
+      <small>$14.56</small>
+    </div>
+    <div class="coin-option" data-amount="17000">
+      <img src="coin.png" class="coin-img" alt="coin">17,000
+      <small>$36.38</small>
     </div>
 
+    <!-- خيار مخصص -->
+    <div class="coin-option custom" onclick="selectCustom()">
+      <img src="coin.png" class="coin-img" alt="coin">مخصص
+      <div id="customPrice" style="font-size: 12px; color: gray; margin-top: 4px;"></div>
+      <input type="number" id="customAmount" class="custom-input" placeholder="اكتب عدد" />
+    </div>
+  </div>
+
+  <!-- زر الشحن -->
+  <div style="width: 100%; display: flex; justify-content: center; margin-top: 25px;">
+    <button id="charge">Recharge</button>
+  </div>
+     </div>
   <div id="paymentPopup" class="popup">
   <div class="popup-content">
   <p id="popupUser"></p>
