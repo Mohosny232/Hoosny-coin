@@ -266,7 +266,7 @@ customInput.addEventListener('input', (e) => {
   updateChargeCoins(value);
 
   // احسب السعر: كل 30 عملة = 0.12 دولار
-  const price = ((value / 30) * 0.12).toFixed(2);
+  const price = (value * 0.00214).toFixed(2);
   document.getElementById('customPrice').innerText = value > 0 ? `${price} $` : '';
 });
 
