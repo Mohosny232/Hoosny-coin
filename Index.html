@@ -257,7 +257,7 @@ let paymentDone = false;
 
 // تحديث زر الشحن
 function updateChargeCoins(value) {
-  chargeButton.innerHTML = `<img src="coin.png" style="width: 32px; vertical-align: middle; margin-left: 6px;"> شحن ${value} عملة`;
+  chargeButton.innerHTML = `شحن ${value} <img src="coin.png" style="width: 32px; vertical-align: middle; margin: 0 4px;"> عملة`;
 }
 // لما يكتب رقم عملات يدوي
 customInput.addEventListener('input', (e) => {
