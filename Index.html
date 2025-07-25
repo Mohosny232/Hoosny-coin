@@ -208,12 +208,9 @@
 
   <!-- زر الشحن -->
 <!-- زر الشحن مع صورة الكوين -->
-<div style="width: 100%; display: flex; justify-content: center;">
-  <button id="charge">
-    <img src="coin.png" alt="coin" style="width: 20px; height: 20px; vertical-align: middle; margin-inline-end: 8px;">
-    Recharge
-  </button>
-</div>
+  <div style="width: 100%; display: flex; justify-content: center; margin-top: 25px;">
+    <button id="charge">Recharge</button>
+  </div>
      </div>
   <div id="paymentPopup" class="popup">
   <div class="popup-content">
@@ -260,9 +257,8 @@ let paymentDone = false;
 
 // تحديث زر الشحن
 function updateChargeCoins(value) {
-  chargeButton.innerText = `شحن ${value} عملة`;
+  chargeButton.innerHTML = `<img src="coin.png" style="width: 32px; vertical-align: middle; margin-left: 6px;"> شحن ${value} عملة`;
 }
-
 // لما يكتب رقم عملات يدوي
 customInput.addEventListener('input', (e) => {
   selectCustom();
