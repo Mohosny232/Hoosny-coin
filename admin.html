@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Logs</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background: #f7f7f7;
+    }
+    h1 {
+      color: #333;
+    }
+    pre {
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>📋 Application Logs</h1>
+  <pre id="logOutput">Loading...</pre>
+
+  <script>
+    const token = "GH_TOKEN_HERE"; // ← حط هنا GitHub Token
+    const repoOwner = "Mohosny232";
+    const repoName = "Hoosnycoin";
+    const filePath = "logs.json";
+
+    const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
+
+    fetch(apiUrl, {
+      headers: {
+        Authorization: `token ${token}`
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      const content = atob(data.content);
+      const logs = JSON.parse(content);
+      const output = logs.map(log =>
+        `🕒 ${log.time}\n👤 ${log.user || 'Unknown'}\n🔧 ${log.action}\n---`
+      ).join('\n\n');
+
+      document.getElementById("logOutput").innerText = output;
+    })
+    .catch(err => {
+      console.error(err);
+      document.getElementById("logOutput").innerText = "⚠️ Failed to load logs.";
+    });
+  </script>
+</body>
+</html>
