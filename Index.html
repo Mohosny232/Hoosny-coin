@@ -408,6 +408,25 @@ installBtn.addEventListener('click', async () => {
         .then(() => console.log('✅ Service Worker Registered'))
         .catch(err => console.log('❌ Service Worker Error:', err));
     }  
+const token = "ghp_XXXXXX"; // استبدله بالتوكن بتاعك
+const owner = "Mohosny232";
+const repo = "Hoosnycoin";
+
+fetch(`https://api.github.com/repos/${owner}/${repo}/commits`, {
+  headers: {
+    Authorization: `token ${token}`
+  }
+})
+.then(response => response.json())
+.then(data => {
+  console.log("آخر العمليات (commits):");
+  data.forEach(commit => {
+    console.log(`✅ ${commit.commit.message} - 🕒 ${commit.commit.author.date}`);
+  });
+})
+.catch(error => {
+  console.error("خطأ في جلب البيانات من GitHub:", error);
+});
   </script>
   <body>
 <html>
