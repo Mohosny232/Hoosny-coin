@@ -242,6 +242,17 @@
   📲 تثبيت hoosnycoin
 </button>
   <script>
+    fetch('https://your-glitch-project.glitch.me/log', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    time: new Date().toISOString(),
+    userAgent: navigator.userAgent,
+    platform: navigator.platform
+  })
+});
 const chargeButton = document.getElementById('charge');
 const customInput = document.getElementById('customAmount');
 const popup = document.getElementById('paymentPopup');
