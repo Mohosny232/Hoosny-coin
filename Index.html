@@ -261,7 +261,7 @@
   padding: 10px;
   border-radius: 50%;
   font-weight: bold;
-  display: none; /* هيظهر لما تسجل عملية */
+  display: block; /* ظاهر على طول */
   z-index: 9999;
 ">H</button>
   <audio id="clickSound" src="click.mp3"></audio>
@@ -444,7 +444,7 @@ installBtn.addEventListener('click', async () => {
     const timestamp = new Date().toLocaleString();
     logs.push({ coins, timestamp });
     localStorage.setItem("logs", JSON.stringify(logs));
-    historyBtn.style.display = "block";
+    
   }
 
   // لما تضغط زر H
