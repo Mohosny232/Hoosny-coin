@@ -161,35 +161,6 @@
       margin-bottom: 10px;
     }
     
-    #historyBtn {
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 50%;
-  font-weight: bold;
-  z-index: 9999;
-  cursor: pointer;
-    }
-
-    /* البوب آب */
-    #logPopup {
-      position: fixed;
-      bottom: 60px;
-      left: 10px;
-      background: white;
-      color: black;
-      border: 1px solid #ccc;
-      padding: 10px;
-      max-height: 200px;
-      width: 300px;
-      overflow-y: auto;
-      display: none;
-      z-index: 9999;
-      border-radius: 10px;
-    }
-  
   </style>
 </head>
 <body>
@@ -276,12 +247,13 @@
   📲 تثبيت hoosnycoin
 </button>
  
-  <button id="historyBtn">H</button>
+<button id="historyBtn" style="position: fixed; bottom: 10px; left: 10px; background: black; color: white; padding: 10px; border: none; border-radius: 6px;">
+  H
+</button>
 
-  <div id="logPopup">
-    <strong>سجل العمليات:</strong>
-    <ul id="logsList"></ul>
-  </div>
+<div id="logPopup" style="display: none; position: fixed; bottom: 60px; left: 10px; background: white; padding: 10px; border: 1px solid #ccc; border-radius: 6px;">
+  <ul id="logsList" style="margin: 0; padding: 0; list-style: none;"></ul>
+</div>
     
     <script>
   
