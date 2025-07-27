@@ -164,6 +164,39 @@
   </style>
 </head>
 <body>
+  <!-- زر عرض السجل (H) يكون ظاهر دايمًا -->
+<button id="historyBtn" style="
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  background: black;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  z-index: 999;
+">
+  H
+</button>
+
+<!-- البوب أب اللي بيعرض السجلات -->
+<div id="logPopup" style="
+  display: none;
+  position: fixed;
+  bottom: 60px;
+  left: 10px;
+  background: white;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  z-index: 999;
+  max-height: 200px;
+  overflow-y: auto;
+">
+  <ul id="logsList" style="margin: 0; padding: 0; list-style: none;"></ul>
+</div>
+</div>
 <div class="container">
   <h1><span class="tiktok"></span> </h1>
 
@@ -246,15 +279,7 @@
 <button id="installBtn" style="display: none; padding: 10px 15px; background: black; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">
   📲 تثبيت hoosnycoin
 </button>
- 
-<button id="historyBtn" style="position: fixed; bottom: 10px; left: 10px; background: black; color: white; padding: 10px; border: none; border-radius: 6px;">
-  H
-</button>
-
-<div id="logPopup" style="display: none; position: fixed; bottom: 60px; left: 10px; background: white; padding: 10px; border: 1px solid #ccc; border-radius: 6px;">
-  <ul id="logsList" style="margin: 0; padding: 0; list-style: none;"></ul>
-</div>
-    
+   
     <script>
   
     fetch('https://your-glitch-project.glitch.me/log', {
@@ -417,7 +442,33 @@ installBtn.addEventListener('click', async () => {
     deferredPrompt = null;
   }
 });
- 
+ const historyBtn = document.getElementById("historyBtn");
+  const logPopup = document.getElementById("logPopup");
+  const logsList = document.getElementById("logsList");
+
+  // دالة حفظ السجل
+  function saveLog(coins) {
+    const logs = JSON.parse(localStorage.getItem("logs") || "[]");
+    const timestamp = new Date().toLocaleString();
+    logs.push({ coins, timestamp });
+    localStorage.setItem("logs", JSON.stringify(logs));
+  }
+
+  // لما تضغط على زر H يعرض أو يخفي السجل
+  historyBtn.addEventListener("click", () => {
+    const logs = JSON.parse(localStorage.getItem("logs") || "[]");
+    logsList.innerHTML = logs.map(log =>
+      `<li>🔸 ${log.coins} عملة - ${log.timestamp}</li>`
+    ).join("");
+    logPopup.style.display = logPopup.style.display === "none" ? "block" : "none";
+  });
+
+  // تستخدم الدالة دي لما تختار عدد العملات
+  function updateChargeCoins(value) {
+    document.getElementById("charge").innerText = `شحن ${value} عملة`;
+    saveLog(value);
+  }
+  
   
   
   </script>
