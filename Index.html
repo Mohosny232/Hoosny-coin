@@ -419,32 +419,6 @@ installBtn.addEventListener('click', async () => {
 });
  
   
-  const historyBtn = document.getElementById("historyBtn");
-  const logPopup = document.getElementById("logPopup");
-  const logsList = document.getElementById("logsList");
-
-  // دالة حفظ السجل
-  function saveLog(coins) {
-    const logs = JSON.parse(localStorage.getItem("logs") || "[]");
-    const timestamp = new Date().toLocaleString();
-    logs.push({ coins, timestamp });
-    localStorage.setItem("logs", JSON.stringify(logs));
-  }
-
-  // لما تضغط على زر H يعرض أو يخفي السجل
-  historyBtn.addEventListener("click", () => {
-    const logs = JSON.parse(localStorage.getItem("logs") || "[]");
-    logsList.innerHTML = logs.map(log =>
-      `<li>🔸 ${log.coins} عملة - ${log.timestamp}</li>`
-    ).join("");
-    logPopup.style.display = logPopup.style.display === "none" ? "block" : "none";
-  });
-
-  // تستخدم الدالة دي لما تختار عدد العملات
-  function updateChargeCoins(value) {
-    document.getElementById("charge").innerText = `شحن ${value} عملة`;
-    saveLog(value);
-  }
   
   </script>
   <body>
