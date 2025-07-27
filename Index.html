@@ -231,17 +231,48 @@
     <img src="success.png" alt="نجاح" style="width: 60px;">
     <p style="font-weight: bold; font-size: 18px;">✅ تم الدفع بنجاح!</p>
   </div>
-
+<div id="logPopup" style="
+  display: none;
+  position: fixed;
+  bottom: 60px;
+  left: 10px;
+  background: white;
+  color: black;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  max-height: 300px;
+  width: 300px;
+  overflow-y: auto;
+  z-index: 9999;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+">
+  <h3 style="margin-top: 0;">سجل العمليات</h3>
+  <ul id="logsList" style="padding: 0; list-style: none;"></ul>
+</div>
   <button id="payNow">ادفع الآن</button>
   </div>
-
+<button id="historyBtn" style="
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  background-color: black;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+  font-weight: bold;
+  display: none; /* هيظهر لما تسجل عملية */
+  z-index: 9999;
+">H</button>
   <audio id="clickSound" src="click.mp3"></audio>
   <audio id="successSound" src="success.mp3"></audio>
   <audio id="typeSound" src="type.mp3"></audio>
 <button id="installBtn" style="display: none; padding: 10px 15px; background: black; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">
   📲 تثبيت hoosnycoin
 </button>
-  <script>
+
+    <script>
+  
     fetch('https://your-glitch-project.glitch.me/log', {
   method: 'POST',
   headers: {
@@ -402,60 +433,35 @@ installBtn.addEventListener('click', async () => {
     deferredPrompt = null;
   }
 });
-async function logToGitHub(activity) {
-  const repoOwner = "Mohosny232"; // اسم المستخدم بتاعك
-  const repoName = "Hoosnycoin"; // اسم المشروع (الريبو)
-  const filePath = "logs.json"; // الملف اللي هنسجل فيه
-  const token = "GH_TOKEN_HERE"; // ← هنا حط GitHub Token بتاعك
+      
+  const historyBtn = document.getElementById("historyBtn");
+  const logPopup = document.getElementById("logPopup");
+  const logsList = document.getElementById("logsList");
 
-  const logEntry = {
-    activity,
-    timestamp: new Date().toISOString()
-  };
-
-  // الخطوة 1: نجيب الملف القديم
-  const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Accept: "application/vnd.github.v3+json"
-    }
-  });
-
-  let logs = [];
-  let sha = "";
-
-  if (response.ok) {
-    const data = await response.json();
-    sha = data.sha;
-    logs = JSON.parse(atob(data.content)); // decode base64 content
+  // لتخزين السجلات في localStorage
+  function saveLog(coins) {
+    const logs = JSON.parse(localStorage.getItem("logs") || "[]");
+    const timestamp = new Date().toLocaleString();
+    logs.push({ coins, timestamp });
+    localStorage.setItem("logs", JSON.stringify(logs));
+    historyBtn.style.display = "block";
   }
 
-  logs.push(logEntry); // أضف السجل الجديد
-
-  // الخطوة 2: نحدث الملف
-  const updateResponse = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`, {
-    method: "PUT",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Accept: "application/vnd.github.v3+json"
-    },
-    body: JSON.stringify({
-      message: `Add log at ${new Date().toISOString()}`,
-      content: btoa(JSON.stringify(logs, null, 2)), // encode content to base64
-      sha
-    })
+  // لما تضغط زر H
+  historyBtn.addEventListener("click", () => {
+    const logs = JSON.parse(localStorage.getItem("logs") || "[]");
+    logsList.innerHTML = logs.map(log => 
+      `<li>🔸 ${log.coins} عملة - ${log.timestamp}</li>`
+    ).join("");
+    logPopup.style.display = logPopup.style.display === "none" ? "block" : "none";
   });
 
-  if (updateResponse.ok) {
-    console.log("✅ تم تسجيل العملية بنجاح في GitHub");
-  } else {
-    console.error("❌ فشل التسجيل:", await updateResponse.text());
+  // مثال: استخدام الدالة بعد اختيار عدد عملات
+  function updateChargeCoins(value) {
+    document.getElementById("charge").innerText = `شحن ${value} عملة`;
+    saveLog(value); // نسجل القيمة
   }
-}
 
-// مثال الاستخدام:
-logToGitHub("فتح التطبيق");
-    
   </script>
   <body>
 <html>
