@@ -165,13 +165,17 @@
 </head>
 <body>
   <!-- زر عرض السجل (H) يكون ظاهر دايمًا -->
+<!-- زر حرف H المخفي -->
 <button id="historyBtn" style="
   position: fixed;
   bottom: 10px;
   left: 10px;
-  ;
+  background: transparent;
   color: white;
+  border: none;
   font-size: 16px;
+  z-index: 999;
+  opacity: 0.05; /* يخليه شبه مخفي بس لسه قابل للضغط */
 ">
   H
 </button>
