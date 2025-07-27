@@ -160,6 +160,38 @@
       width: 100px;
       margin-bottom: 10px;
     }
+    
+    #historyBtn {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      background-color: black;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 50%;
+      font-weight: bold;
+      z-index: 9999;
+      display: block; /* مهم جدًا */
+      cursor: pointer;
+    }
+
+    /* البوب آب */
+    #logPopup {
+      position: fixed;
+      bottom: 60px;
+      left: 10px;
+      background: white;
+      color: black;
+      border: 1px solid #ccc;
+      padding: 10px;
+      max-height: 200px;
+      width: 300px;
+      overflow-y: auto;
+      display: none;
+      z-index: 9999;
+      border-radius: 10px;
+    }
+  
   </style>
 </head>
 <body>
@@ -232,44 +264,27 @@
     <p style="font-weight: bold; font-size: 18px;">✅ تم الدفع بنجاح!</p>
   </div>
 <div id="logPopup" style="
-  display: none;
-  position: fixed;
-  bottom: 60px;
-  left: 10px;
-  background: white;
-  color: black;
-  padding: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  max-height: 300px;
-  width: 300px;
-  overflow-y: auto;
-  z-index: 9999;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
-">
+
   <h3 style="margin-top: 0;">سجل العمليات</h3>
   <ul id="logsList" style="padding: 0; list-style: none;"></ul>
 </div>
   <button id="payNow">ادفع الآن</button>
   </div>
-<button id="historyBtn" style="
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-  color: white;
-  padding: 10px;
-  border-radius: 50%;
-  font-weight: bold;
-  display: block; /* ظاهر على طول */
-  z-index: 9999;
-">H</button>
+
   <audio id="clickSound" src="click.mp3"></audio>
   <audio id="successSound" src="success.mp3"></audio>
   <audio id="typeSound" src="type.mp3"></audio>
 <button id="installBtn" style="display: none; padding: 10px 15px; background: black; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">
   📲 تثبيت hoosnycoin
 </button>
+ 
+  <button id="historyBtn">H</button>
 
+  <div id="logPopup">
+    <strong>سجل العمليات:</strong>
+    <ul id="logsList"></ul>
+  </div>
+    
     <script>
   
     fetch('https://your-glitch-project.glitch.me/log', {
