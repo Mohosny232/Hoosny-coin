@@ -1,5 +1,5 @@
 {
-  "name": "getcoins",
+  "name": "Get Coins",
   "short_name": "Get Coins",
   "start_url": "index.html",
   "display": "standalone",
