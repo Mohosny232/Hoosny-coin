@@ -288,10 +288,21 @@
     <button id="charge">Recharge</button>
   </div>
      </div>
+>
 <div id="paymentPopup" class="popup">
   <div class="popup-content">
-    <p id="popupUser"></p>
-    <p id="popupCoins"></p>
+    <p>هل تريد الدفع الآن؟</p>
+    <button id="payNow">ادفع الآن</button>
+  </div>
+</div>
+
+<!-- اللودر -->
+<div id="tiktok-loader">
+  <div class="orbit-loader">
+    <span class="dot dot1"></span>
+    <span class="dot dot2"></span>
+  </div>
+</div>
 
     <!-- وسيلة الدفع -->
     <div class="payment-method" style="display: flex; align-items: center; gap: 10px; font-weight: normal; font-size: 16px;">
@@ -316,13 +327,7 @@
   </div>
 </div>
 
-<!-- اللودر -->
-<div id="tiktok-loader" style="display: none;">
-  <div class="orbit-loader">
-    <span class="dot dot1"></span>
-    <span class="dot dot2"></span>
-  </div>
-</div>
+
 
 <!-- أصوات -->
 <audio id="clickSound" src="click.mp3"></audio>
@@ -347,7 +352,11 @@
     platform: navigator.platform
   })
 });
-const chargeButton = document.getElementById('charge');
+
+ 
+ const payBtn = document.getElementById("payNow");  
+ const popup = document.getElementById("paymentPopup"); 
+const loader = document.getElementById("tiktok-loader");           const chargeButton = document.getElementById('charge');
 const customInput = document.getElementById('customAmount');
 const popup = document.getElementById('paymentPopup');
 const payNowBtn = document.getElementById('payNow');
@@ -421,11 +430,6 @@ chargeButton.addEventListener('click', () => {
 // زر "ادفع الآن"
 // زر "ادفع الآن"
 // زر "ادفع الآن"
-payNowBtn.addEventListener('click', () => {
-  // اخفاء البوب أب
-  popup.style.display = 'none';
-
-  // عرض اللودر
   
     
     // ✅ ترجع كل حاجة من الأول
@@ -539,26 +543,22 @@ installBtn.addEventListener('click', async () => {
   });
 
   // زر ادفع الآن
-  payNowBtn.addEventListener("click", () => {
+  
+document.getElementById("tiktok-loader");
+
+  payBtn.addEventListener("click", () => {
+    // اخفاء البوب أب
     popup.style.display = "none";
-
-    // تشغيل صوت النجاح
-    const successSound = document.getElementById("successSound");
-    successSound.currentTime = 0;
-    successSound.play().catch(()=>{});
-
-    // إظهار اللودر
+    // اظهار اللودر
     loader.style.display = "flex";
-
-    // بعد ثانيتين يخفي اللودر ويعرض رسالة نجاح
+    // بعد 2 ثانية يروح للصفحة التانية
     setTimeout(() => {
-      loader.style.display = "none";
-      popup.style.display = "flex";
-      document.getElementById("successSection").style.display = "block";
+      window.location.href = "page2.html"; // غيرها للصفحة اللي عايزها
     }, 2000);
   });
+</script>
+</body>
+</html>
 
   
-  </script>
-  <body>
-<html>
+
