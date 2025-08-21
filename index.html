@@ -405,10 +405,25 @@ chargeButton.addEventListener('click', () => {
 });
 
 // زر "ادفع الآن"
+
+    
 payNowBtn.addEventListener('click', () => {
   if (paymentDone) {
     // ✅ لما تضغط تم الدفع
-    popup.style.display = 'none';
+    popup.style.display = 'none'; // يخفي البوب أب
+
+    // إظهار اللودر
+    document.getElementById("tiktok-loader").style.display = "flex";
+
+    // بعد 3 ثواني يختفي اللودر ويتنقل للصفحة
+    setTimeout(function(){
+      document.getElementById("tiktok-loader").style.display = "none";
+      window.location.href = "page2.html"; // تحويل للصفحة
+    }, 3000);
+  }
+});
+
+
     
     // ✅ ترجع كل حاجة من الأول
     paymentDone = false;
