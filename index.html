@@ -418,6 +418,21 @@ chargeButton.addEventListener('click', () => {
     }, 3000);
   });
 
+  function payNow() {
+    // اجلب اسم المستخدم من حقل الإدخال في البوب
+    const username = document.getElementById("usernameInput").value || "You";
+
+    // اجلب عدد الكوينز المختار من البوب
+    const coins = document.getElementById("coinInput").value || "0";
+
+    // خزّن البيانات في localStorage
+    localStorage.setItem("receiverName", username);
+    localStorage.setItem("transferredCoins", coins);
+
+    // روح لصفحة التأكيد
+    window.location.href = "page2.html";
+  }
+
 function selectCustom() {
   document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
   document.querySelector('.coin-option.custom').classList.add('selected');
