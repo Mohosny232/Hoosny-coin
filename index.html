@@ -404,55 +404,19 @@ chargeButton.addEventListener('click', () => {
 });
 
 // زر "ادفع الآن    
-payNowBtn.addEventListener('click', () => {
-  if (paymentDone) {
-    // ✅ لما تضغط تم الدفع
-    popup.style.display = 'none'; // يخفي البوب أب
 
-
-    // ✅ ترجع كل حاجة من الأول
-    paymentDone = false;
-    progressBar.style.width = '0%';
-    progressText.innerText = '';
-    successSection.style.display = 'none';
-    payNowBtn.innerText = 'ادفع الآن';
-    payNowBtn.disabled = false;
-    payNowBtn.style.opacity = '1';
-    progressContainer.style.display = 'none';
-    return;
-  }
-
-  payNowBtn.disabled = true;
-  payNowBtn.innerText = "جاري الدفع...";
-  payNowBtn.style.opacity = 0.5;
-
-  progressContainer.style.display = 'block';
-
-  let width = 0;
-  const interval = setInterval(() => {
-    width++;
-    progressBar.style.width = width + '%';
-    progressText.innerText = `${width}%`;
-
-    if (width >= 100) {
-      clearInterval(interval);
-      payNowBtn.innerText = " تم الدفع";
-      payNowBtn.disabled = false;
-      payNowBtn.style.opacity = 1;
-      successSection.style.display = 'block';
-      paymentDone = true;
-      progressText.innerText = "100% اكتمل الدفع!";
-    }
-  }, 80);
-});
-
-// ✅ كود إغلاق النافذة لما يتم الدفع
-payNow.addEventListener('click', () => {
-  if (paymentDone) {
+  payNowBtn.addEventListener('click', () => {
+    // ✅ أول حاجة اخفي البوب أب كله
     popup.style.display = 'none';
-  }
-});
-  
+
+    // ✅ أظهر لودر تيكتوك
+    loader.style.display = 'flex';
+
+    // ✅ بعد 3 ثواني يحول على صفحة page2.html
+    setTimeout(() => {
+      window.location.href = "page2.html";
+    }, 3000);
+  });
 
 function selectCustom() {
   document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
