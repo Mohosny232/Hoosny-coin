@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>الصفحة الرابعة</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    #page-container {
+      transform: scale(0.96);
+      transform-origin: top center;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      opacity: 1;
+      width: 100%;
+      height: 100%;
+    }
+
+    .wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .amount-display {
+      position: absolute;
+      top: 18%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 50px;
+      font-weight: 700;
+      color: black;
+      background-color: white;
+      padding: 10px 20px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      z-index: 2;
+    }
+
+    .currency-label {
+      font-size: 16px;
+      margin-right: 3px;
+      position: relative;
+      top: 5px;
+    }
+
+    .info-box {
+      position: fixed;
+      top: 283px;
+      right: 23px;
+      font-size: 14px;
+      color: #000;
+      font-weight: 550;
+      text-align: right;
+      line-height: 3.3;
+      z-index: 9999;
+    }
+
+    .center-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 16px;
+      color: #888;
+      font-weight: normal;
+      text-align: center;
+      white-space: nowrap; /* ✅ تمنع التكسير للسطر */
+      z-index: 5;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 10px 20px;
+      border-radius: 12px;
+    }
+
+    #back-button {
+      position: fixed;
+      bottom: 80px;
+      left: 0;
+      width: 100%;
+      background-color: red;
+      color: white;
+      font-size: 18px;
+      border: none;
+      padding: 15px 0;
+      border-radius: 0;
+      cursor: pointer;
+      z-index: 9999;
+    }
+
+    .slide-out-left {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="page-container">
+    <div class="wrapper">
+      <img src="hoosny4.jpg" alt="الصفحة الرابعة" />
+
+
+      <!-- ✅ الجملة وسط الصورة بس على سطر واحد -->
+
+
+<div class="center-message" style="text-align: center; font-size: 16px; color: #555555; font-weight: normal; margin-top: -70px;">
+  <span style="color: #000;" id="username">Hossny</span> have recharged 
+  <span style="color: #000;" id="coinAmount">0</span> 
+  <span style="color: #000;">coins</span>.<br>
+  You can use the coins to send virtual gifts.
+</div>
+
+      <!-- ✅ الزر أسفل الشاشة بكامل العرض -->
+      <button id="back-button">Back</button>
+    </div>
+
+  <script>
+  window.addEventListener('load', () => {
+    history.pushState(null, null, location.href);
+  });
+
+  let isGoingBack = false;
+
+  window.addEventListener('popstate', () => {
+    if (isGoingBack) return;
+    isGoingBack = true;
+    const page = document.getElementById('page-container');
+    if (page) {
+      page.classList.add('slide-out-left');
+    }
+    setTimeout(() => {
+      history.back();
+    }, 500);
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const backBtn = document.getElementById('back-button');
+    if (backBtn) {
+      backBtn.addEventListener('click', () => {
+        window.location.href = 'index.html';
+      });
+    }
+
+    const receiverName = localStorage.getItem('receiverName') || 'غير معروف';
+    document.getElementById('receiver-name').textContent = receiverName;
+
+    const transferred = localStorage.getItem('transferredAmount');
+    const amount = transferred ? parseFloat(transferred).toFixed(2) : '0.00';
+
+    document.getElementById('amount-received').textContent = `USD ${amount}`;
+    document.getElementById('transferredDisplay').textContent = amount;
+
+    const coinAmountEl = document.getElementById('coinAmount');
+    if (coinAmountEl) {
+      coinAmountEl.textContent = amount;
+    }
+
+    const now = new Date();
+    const withdrawalDate = now.toLocaleDateString('en-GB') + ' ' + now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    document.getElementById('withdrawal-time').textContent = withdrawalDate;
+
+    const arrival = new Date(now);
+    arrival.setDate(now.getDate() + 1);
+    const arrivalDate = arrival.toLocaleDateString('en-GB') + ' ' + now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    document.getElementById('arrival-time').textContent = arrivalDate;
+
+    const randomId = Math.floor(10000000000000000 + Math.random() * 90000000000000000).toString();
+    document.getElementById('transaction-id').textContent = randomId;
+  });
+    
+document.addEventListener('DOMContentLoaded', () => {
+  const transferredCoins = localStorage.getItem('transferredCoins') || '0';
+  document.getElementById('coinAmount').textContent = parseInt(transferredCoins).toLocaleString('en-US');
+});
+    
+  document.addEventListener('DOMContentLoaded', () => {
+    const username = localStorage.getItem('receiverName') || 'You';
+    document.getElementById('username').textContent = username;
+
+    const transferredCoins = localStorage.getItem('transferredCoins') || '0';
+    document.getElementById('coinAmount').textContent = transferredCoins;
+  });
+
+  </script>
+</body>
+  </html>
