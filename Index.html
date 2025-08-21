@@ -528,6 +528,36 @@ installBtn.addEventListener('click', async () => {
   }
   
   
+  const chargeBtn = document.getElementById("charge");
+  const popup = document.getElementById("paymentPopup");
+  const payNowBtn = document.getElementById("payNow");
+  const loader = document.getElementById("tiktok-loader");
+
+  // زر Recharge يفتح البوب أب
+  chargeBtn.addEventListener("click", () => {
+    popup.style.display = "flex";
+  });
+
+  // زر ادفع الآن
+  payNowBtn.addEventListener("click", () => {
+    popup.style.display = "none";
+
+    // تشغيل صوت النجاح
+    const successSound = document.getElementById("successSound");
+    successSound.currentTime = 0;
+    successSound.play().catch(()=>{});
+
+    // إظهار اللودر
+    loader.style.display = "flex";
+
+    // بعد ثانيتين يخفي اللودر ويعرض رسالة نجاح
+    setTimeout(() => {
+      loader.style.display = "none";
+      popup.style.display = "flex";
+      document.getElementById("successSection").style.display = "block";
+    }, 2000);
+  });
+
   
   </script>
   <body>
