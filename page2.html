@@ -139,12 +139,12 @@
     </div>
 
   <script>
+  // منع الرجوع للخلف بطريقة عشوائية + إضافة حركة خروج
   window.addEventListener('load', () => {
     history.pushState(null, null, location.href);
   });
 
   let isGoingBack = false;
-
   window.addEventListener('popstate', () => {
     if (isGoingBack) return;
     isGoingBack = true;
@@ -158,6 +158,7 @@
   });
 
   document.addEventListener('DOMContentLoaded', () => {
+    // زر الرجوع
     const backBtn = document.getElementById('back-button');
     if (backBtn) {
       backBtn.addEventListener('click', () => {
@@ -165,46 +166,49 @@
       });
     }
 
+    // جلب البيانات من localStorage
     const receiverName = localStorage.getItem('receiverName') || 'غير معروف';
-    document.getElementById('receiver-name').textContent = receiverName;
+    const transferredAmount = localStorage.getItem('transferredAmount');
+    const transferredCoins = localStorage.getItem('transferredCoins') || '0';
 
-    const transferred = localStorage.getItem('transferredAmount');
-    const amount = transferred ? parseFloat(transferred).toFixed(2) : '0.00';
+    // عرض الاسم
+    const usernameEl = document.getElementById('username');
+    const receiverNameEl = document.getElementById('receiver-name');
+    if (usernameEl) usernameEl.textContent = receiverName;
+    if (receiverNameEl) receiverNameEl.textContent = receiverName;
 
-    document.getElementById('amount-received').textContent = `USD ${amount}`;
-    document.getElementById('transferredDisplay').textContent = amount;
+    // عرض المبلغ بالدولار
+    const amount = transferredAmount ? parseFloat(transferredAmount).toFixed(2) : '0.00';
+    const amountReceivedEl = document.getElementById('amount-received');
+    const transferredDisplayEl = document.getElementById('transferredDisplay');
+    if (amountReceivedEl) amountReceivedEl.textContent = `USD ${amount}`;
+    if (transferredDisplayEl) transferredDisplayEl.textContent = amount;
 
+    // عرض الكوينز
     const coinAmountEl = document.getElementById('coinAmount');
-    if (coinAmountEl) {
-      coinAmountEl.textContent = amount;
-    }
+    if (coinAmountEl) coinAmountEl.textContent = parseInt(transferredCoins).toLocaleString('en-US');
 
+    // وقت السحب
     const now = new Date();
-    const withdrawalDate = now.toLocaleDateString('en-GB') + ' ' + now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-    document.getElementById('withdrawal-time').textContent = withdrawalDate;
+    const withdrawalDate = now.toLocaleDateString('en-GB') + ' ' +
+      now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    const withdrawalEl = document.getElementById('withdrawal-time');
+    if (withdrawalEl) withdrawalEl.textContent = withdrawalDate;
 
+    // وقت الوصول (+ يوم)
     const arrival = new Date(now);
     arrival.setDate(now.getDate() + 1);
-    const arrivalDate = arrival.toLocaleDateString('en-GB') + ' ' + now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-    document.getElementById('arrival-time').textContent = arrivalDate;
+    const arrivalDate = arrival.toLocaleDateString('en-GB') + ' ' +
+      now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    const arrivalEl = document.getElementById('arrival-time');
+    if (arrivalEl) arrivalEl.textContent = arrivalDate;
 
+    // رقم العملية عشوائي
     const randomId = Math.floor(10000000000000000 + Math.random() * 90000000000000000).toString();
-    document.getElementById('transaction-id').textContent = randomId;
+    const transactionEl = document.getElementById('transaction-id');
+    if (transactionEl) transactionEl.textContent = randomId;
   });
-    
-document.addEventListener('DOMContentLoaded', () => {
-  const transferredCoins = localStorage.getItem('transferredCoins') || '0';
-  document.getElementById('coinAmount').textContent = parseInt(transferredCoins).toLocaleString('en-US');
-});
-    
-  document.addEventListener('DOMContentLoaded', () => {
-    const username = localStorage.getItem('receiverName') || 'You';
-    document.getElementById('username').textContent = username;
-
-    const transferredCoins = localStorage.getItem('transferredCoins') || '0';
-    document.getElementById('coinAmount').textContent = transferredCoins;
-  });
-
+  
   </script>
 </body>
   </html>
