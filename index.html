@@ -403,16 +403,13 @@ chargeButton.addEventListener('click', () => {
   popup.style.display = 'flex';
 });
 
-// زر "ادفع الآن"
-    
-
- payNowBtn.addEventListener('click', () => {
+// زر "ادفع الآن    
+payNowBtn.addEventListener('click', () => {
   if (paymentDone) {
     // ✅ لما تضغط تم الدفع
+    popup.style.display = 'none'; // يخفي البوب أب
 
-  popup.style.display = 'none';
-    
-    
+
     // ✅ ترجع كل حاجة من الأول
     paymentDone = false;
     progressBar.style.width = '0%';
