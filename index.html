@@ -363,7 +363,7 @@ customInput.addEventListener('input', (e) => {
   chargeButton.innerText = `شحن ${value} عملة`;
 
   // حساب السعر لكل 30 عملة = 0.12$
-  const price = (value * 0.12 / 30).toFixed(2);
+  const price = (value * 3 / 17000).toFixed(2);
 
   // تحديث السعر داخل div المخصص فقط
   document.getElementById('customPrice').textContent = value > 0 ? `${price} $` : '';
