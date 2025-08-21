@@ -267,6 +267,7 @@
       <small>$3.00</small>
     </div>
 
+
     <!-- خيار مخصص -->
     <div class="coin-option custom" onclick="selectCustom()">
       <img src="coin.png" class="coin-img" alt="coin">مخصص
@@ -345,6 +346,8 @@ const typeSound = document.getElementById('typeSound');
 let paymentDone = false;
 
 // تحديث زر الشحن
+
+// تحديث زر الشحن
 function updateChargeCoins(value) {
   chargeButton.innerHTML = `شحن ${value}<img src="coin.png" style="width: 32px; vertical-align: middle;">عملة`;
 }
@@ -358,7 +361,6 @@ customInput.addEventListener('input', (e) => {
   const price = (value * 0.00017647).toFixed(2);
   document.getElementById('customPrice').innerText = value > 0 ? `${price} $` : '';
 });
-
 // تشغيل صوت الكتابة
 document.getElementById('username').addEventListener('input', () => {
   typeSound.currentTime = 0;
