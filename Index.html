@@ -288,39 +288,48 @@
     <button id="charge">Recharge</button>
   </div>
      </div>
-  <div id="paymentPopup" class="popup">
+<div id="paymentPopup" class="popup">
   <div class="popup-content">
-  <p id="popupUser"></p>
-  <p id="popupCoins"></p>
-  <div class="payment-method" style="display: flex; align-items: center; gap: 10px; font-weight: normal; font-size: 16px;">
-    <span style="color: #333;">طريقة الدفع: 2432******</span>
-    <img src="visa.png" alt="Visa" style="width: 50px; height: auto;">
-  </div>
+    <p id="popupUser"></p>
+    <p id="popupCoins"></p>
 
-
-  <div id="successSection" style="display: none; margin-top: 20px; text-align: center;">
-    <img src="success.png" alt="نجاح" style="width: 60px;">
-    <p style="font-weight: bold; font-size: 18px;">✅ تم الدفع بنجاح!</p>
-  </div>
-<div id="logPopup" style="
-
-  <h3 style="margin-top: 0;"></h3>
-  <ul id="logsList" style="padding: 0; list-style: none;"></ul>
-</div>
-  <button id="payNow">ادفع الآن</button>
-  </div>
-  <!-- اللودر -->
-  <div id="tiktok-loader">
-    <div class="orbit-loader">
-      <span class="dot dot1"></span>
-      <span class="dot dot2"></span>
+    <!-- وسيلة الدفع -->
+    <div class="payment-method" style="display: flex; align-items: center; gap: 10px; font-weight: normal; font-size: 16px;">
+      <span style="color: #333;">طريقة الدفع: 2432******</span>
+      <img src="visa.png" alt="Visa" style="width: 50px; height: auto;">
     </div>
+
+    <!-- رسالة النجاح -->
+    <div id="successSection" style="display: none; margin-top: 20px; text-align: center;">
+      <img src="success.png" alt="نجاح" style="width: 60px;">
+      <p style="font-weight: bold; font-size: 18px;">✅ تم الدفع بنجاح!</p>
+    </div>
+
+    <!-- سجل العمليات -->
+    <div id="logPopup" style="margin-top: 20px;">
+      <h3 style="margin-top: 0;">سجل العمليات</h3>
+      <ul id="logsList" style="padding: 0; list-style: none;"></ul>
+    </div>
+
+    <!-- زر الدفع -->
+    <button id="payNow">ادفع الآن</button>
   </div>
-<div style="display: flex; justify-content: flex-start; margin-top: 20px;">
 </div>
-  <audio id="clickSound" src="click.mp3"></audio>
-  <audio id="successSound" src="success.mp3"></audio>
-  <audio id="typeSound" src="type.mp3"></audio>
+
+<!-- اللودر -->
+<div id="tiktok-loader" style="display: none;">
+  <div class="orbit-loader">
+    <span class="dot dot1"></span>
+    <span class="dot dot2"></span>
+  </div>
+</div>
+
+<!-- أصوات -->
+<audio id="clickSound" src="click.mp3"></audio>
+<audio id="successSound" src="success.mp3"></audio>
+<audio id="typeSound" src="type.mp3"></audio>
+
+<!-- زر تثبيت التطبيق -->
 <button id="installBtn" style="display: none; padding: 10px 15px; background: black; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">
   📲 تثبيت hoosnycoin
 </button>
