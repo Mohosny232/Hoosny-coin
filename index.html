@@ -160,7 +160,12 @@
       width: 100px;
       margin-bottom: 10px;
     }
-    
+      .top-image {
+      width: 180px;        /* حجم الصورة */
+      margin: 0 auto 0px; /* هنا بقى auto تخليها في النص */
+      display: block;      /* مهم عشان تتمركز */
+    }
+    .red-btn {
   </style>
 </head>
 <body>
@@ -242,7 +247,10 @@
 
   <!-- زر الشحن -->
 <!-- زر الشحن مع صورة الكوين -->
+ 
+  <img src="pay12.png" alt="Pay Image" class="top-image">
   <div style="width: 100%; display: flex; justify-content: center; margin-top: 25px;">
+  
     <button id="charge">Recharge</button>
   </div>
      </div>
