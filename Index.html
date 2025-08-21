@@ -411,18 +411,13 @@ chargeButton.addEventListener('click', () => {
 
 // زر "ادفع الآن"
 // زر "ادفع الآن"
+// زر "ادفع الآن"
 payNowBtn.addEventListener('click', () => {
   // اخفاء البوب أب
   popup.style.display = 'none';
 
   // عرض اللودر
-  document.getElementById('tiktok-loader').style.display = 'flex';
-
-  // بعد ثانيتين → يروح لصفحة page2.html
-  setTimeout(() => {
-    window.location.href = "page2.html";
-  }, 2000);
-});
+  
     
     // ✅ ترجع كل حاجة من الأول
     paymentDone = false;
