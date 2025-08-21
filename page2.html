@@ -124,6 +124,7 @@
       <img src="hoosny4.jpg" alt="الصفحة الرابعة" />
 
 
+
       <!-- ✅ الجملة وسط الصورة بس على سطر واحد -->
 
 
@@ -133,6 +134,9 @@
   <span style="color: #000;">coins</span>.<br>
   You can use the coins to send virtual gifts.
 </div>
+
+      <p>المستلم: <span id="username"></span></p>
+<p>عدد العملات: <span id="coins"></span></p>
 
       <!-- ✅ الزر أسفل الشاشة بكامل العرض -->
       <button id="back-button">Back</button>
@@ -167,10 +171,16 @@
     }
 
     // جلب البيانات من localStorage
-    const receiverName = localStorage.getItem('receiverName') || 'غير معروف';
-    const transferredAmount = localStorage.getItem('transferredAmount');
-    const transferredCoins = localStorage.getItem('transferredCoins') || '0';
 
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const username = localStorage.getItem("receiverName") || "غير معروف";
+  const coins = localStorage.getItem("transferredCoins") || "0";
+
+  document.getElementById("username").textContent = username;
+  document.getElementById("coins").textContent = coins;
+});
     // عرض الاسم
     const usernameEl = document.getElementById('username');
     const receiverNameEl = document.getElementById('receiver-name');
