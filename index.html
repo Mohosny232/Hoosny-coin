@@ -403,6 +403,13 @@ chargeButton.addEventListener('click', () => {
   popup.style.display = 'flex';
 });
 
+  // تخزين البيانات فور الضغط على الشحن
+  localStorage.setItem("receiverName", username);
+  localStorage.setItem("transferredCoins", coins);
+
+  // عرض البوب أب
+  document.getElementById("paymentPopup").style.display = "flex";
+});
 // زر "ادفع الآن    
 
   payNowBtn.addEventListener('click', () => {
@@ -418,26 +425,6 @@ chargeButton.addEventListener('click', () => {
       window.location.href = "page2.html";
     }, 3000);
   });
-
-  
-
-
-function payNow() {
-  // اسم المستخدم من الانبوت
-  const username = document.getElementById("usernameInput").value || "غير معروف";
-
-  // عدد العملات من الانبوت
-  const coins = document.getElementById("coinInput").value || "0";
-
-  // خزن في localStorage
-  localStorage.setItem("receiverName", username);
-  localStorage.setItem("transferredCoins", coins);
-
-  // روح للصفحة التانية
-  window.location.href = "page2.html";
-}
-
-
 
   
     
