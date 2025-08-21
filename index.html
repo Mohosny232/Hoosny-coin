@@ -385,28 +385,29 @@ document.querySelectorAll('button, .coin-option, #username, #customAmount').forE
 
 // لما يضغط شحن يفتح البوب اب
 
+// زر الشحن
 chargeButton.addEventListener('click', () => {
-  const username = document.getElementById('username').value;
+  const username = document.getElementById('username').value || "غير معروف"; // اسم المستخدم
   const selected = document.querySelector('.coin-option.selected');
 
   let amount;
   if (selected && selected.classList.contains('custom')) {
-    amount = customInput.value;
+    amount = customInput.value || "0";
   } else if (selected) {
-    amount = selected.dataset.amount;
+    amount = selected.dataset.amount || "0";
   } else {
-    amount = customInput.value;
+    amount = customInput.value || "0";
   }
 
+  // عرض البيانات في البوب
   document.getElementById('popupUser').innerText = 'اسم المستخدم: ' + username;
   document.getElementById('popupCoins').innerText = 'عدد العملات: ' + amount;
   popup.style.display = 'flex';
-});
 
-  // تخزين البيانات فور الضغط على الشحن
+  // ✅ تخزين البيانات في localStorage
   localStorage.setItem("receiverName", username);
-  localStorage.setItem("transferredCoins", coins);
-
+  localStorage.setItem("transferredCoins", amount);
+});
   // عرض البوب أب
   document.getElementById("paymentPopup").style.display = "flex";
 });
