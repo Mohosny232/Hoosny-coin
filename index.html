@@ -421,23 +421,15 @@ chargeButton.addEventListener('click', () => {
 
   
 
-function showPopup() {
-  // لما يتفتح البوب، حط البيانات
-  const username = document.getElementById("usernameInput").value || "غير معروف";
-  const coins = document.getElementById("coinInput").value || "0";
-
-  document.getElementById("popupUser").textContent = username;
-  document.getElementById("popupCoins").textContent = coins;
-
-  document.getElementById("paymentPopup").style.display = "block";
-}
 
 function payNow() {
-  // اجلب النصوص من البوب
-  const username = document.getElementById("popupUser").textContent || "غير معروف";
-  const coins = document.getElementById("popupCoins").textContent || "0";
+  // اسم المستخدم من الانبوت
+  const username = document.getElementById("usernameInput").value || "غير معروف";
 
-  // خزّن البيانات
+  // عدد العملات من الانبوت
+  const coins = document.getElementById("coinInput").value || "0";
+
+  // خزن في localStorage
   localStorage.setItem("receiverName", username);
   localStorage.setItem("transferredCoins", coins);
 
