@@ -406,23 +406,12 @@ chargeButton.addEventListener('click', () => {
 // زر "ادفع الآن"
     
 
-  
+ payNowBtn.addEventListener('click', () => {
+  if (paymentDone) {
+    // ✅ لما تضغط تم الدفع
 
-  payNowBtn.addEventListener("click", function () {
-    // اخفاء البوب
-    popup.style.display = "none";
-
-    // اظهار اللودر
-    loader.style.display = "flex";
-
-    // بعد 3 ثواني يروح لصفحة page2.html
-    setTimeout(() => {
-      window.location.href = "page2.html";
-    }, 3000);
-  });
-
-
-
+  popup.style.display = 'none';
+    
     
     // ✅ ترجع كل حاجة من الأول
     paymentDone = false;
