@@ -135,89 +135,31 @@
   You can use the coins to send virtual gifts.
 </div>
 
-      <p>المستلم: <span id="username"></span></p>
-<p>عدد العملات: <span id="coins"></span></p>
+      
 
       <!-- ✅ الزر أسفل الشاشة بكامل العرض -->
       <button id="back-button">Back</button>
     </div>
 
-  <script>
-  // منع الرجوع للخلف بطريقة عشوائية + إضافة حركة خروج
-  window.addEventListener('load', () => {
-    history.pushState(null, null, location.href);
-  });
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // جلب البيانات المخزنة من الصفحة الرئيسية
+  const username = localStorage.getItem("receiverName") || "غير معروف";
+  const coins = localStorage.getItem("transferredCoins") || "0";
 
-  let isGoingBack = false;
-  window.addEventListener('popstate', () => {
-    if (isGoingBack) return;
-    isGoingBack = true;
-    const page = document.getElementById('page-container');
-    if (page) {
-      page.classList.add('slide-out-left');
-    }
-    setTimeout(() => {
-      history.back();
-    }, 500);
-  });
+  // تحديث الجملة في الصفحة
+  const usernameEl = document.getElementById("username");
+  const coinAmountEl = document.getElementById("coinAmount");
 
-  
+  if (usernameEl) usernameEl.textContent = username;
+  if (coinAmountEl) coinAmountEl.textContent = coins;
 
-
-
-  
-  
-    // جلب البيانات من localStorage
-    const username = localStorage.getItem("receiverName") || "غير معروف";
-    const coins = localStorage.getItem("transferredCoins") || "0";
-
-    document.getElementById("usernameDisplay").textContent = username;
-    document.getElementById("coinsDisplay").textContent = coins;
-
-    // زر الرجوع
-    document.getElementById("back-button").addEventListener("click", () => {
+  // زر العودة للصفحة الرئيسية
+  const backBtn = document.getElementById("back-button");
+  if (backBtn) {
+    backBtn.addEventListener("click", () => {
       window.location.href = "index.html";
     });
-
-
-    // عرض الاسم
-    const usernameEl = document.getElementById('username');
-    const receiverNameEl = document.getElementById('receiver-name');
-    if (usernameEl) usernameEl.textContent = receiverName;
-    if (receiverNameEl) receiverNameEl.textContent = receiverName;
-
-    // عرض المبلغ بالدولار
-    const amount = transferredAmount ? parseFloat(transferredAmount).toFixed(2) : '0.00';
-    const amountReceivedEl = document.getElementById('amount-received');
-    const transferredDisplayEl = document.getElementById('transferredDisplay');
-    if (amountReceivedEl) amountReceivedEl.textContent = `USD ${amount}`;
-    if (transferredDisplayEl) transferredDisplayEl.textContent = amount;
-
-    // عرض الكوينز
-    const coinAmountEl = document.getElementById('coinAmount');
-    if (coinAmountEl) coinAmountEl.textContent = parseInt(transferredCoins).toLocaleString('en-US');
-
-    // وقت السحب
-    const now = new Date();
-    const withdrawalDate = now.toLocaleDateString('en-GB') + ' ' +
-      now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-    const withdrawalEl = document.getElementById('withdrawal-time');
-    if (withdrawalEl) withdrawalEl.textContent = withdrawalDate;
-
-    // وقت الوصول (+ يوم)
-    const arrival = new Date(now);
-    arrival.setDate(now.getDate() + 1);
-    const arrivalDate = arrival.toLocaleDateString('en-GB') + ' ' +
-      now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-    const arrivalEl = document.getElementById('arrival-time');
-    if (arrivalEl) arrivalEl.textContent = arrivalDate;
-
-    // رقم العملية عشوائي
-    const randomId = Math.floor(10000000000000000 + Math.random() * 90000000000000000).toString();
-    const transactionEl = document.getElementById('transaction-id');
-    if (transactionEl) transactionEl.textContent = randomId;
-  });
-  
-  </script>
-</body>
-  </html>
+  }
+});
+</script>
