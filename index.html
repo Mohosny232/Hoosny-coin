@@ -348,27 +348,25 @@ let paymentDone = false;
 // تحديث زر الشحن
 
 // تحديث زر الشحن
-function updateChargeCoins(value) {
-  chargeButton.innerHTML = `شحن ${value}<img src="coin.png" style="width: 32px; vertical-align: middle;">عملة`;
+
+function selectCustom() {
+  document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
+  document.querySelector('.coin-option.custom').classList.add('selected');
 }
-// لما يكتب رقم عملات يدوي
-// لما يكتب رقم عملات يدوي
-// لما يكتب رقم عملات يدوي
+
+// تحديث السعر عند الكتابة في خانة المخصص
 customInput.addEventListener('input', (e) => {
-  selectCustom(); // تحديد الخيار المخصص
+  selectCustom();
   const value = parseInt(e.target.value) || 0;
 
-  // حدث الزر الأساسي ليعرض عدد العملات
+  // تحديث زر الشحن (عدد العملات)
   chargeButton.innerText = `شحن ${value} عملة`;
 
-  // احسب السعر لكل 30 عملة = 0.12 دولار
+  // حساب السعر لكل 30 عملة = 0.12$
   const price = (value * 0.12 / 30).toFixed(2);
 
-  // حدث السعر داخل div المخصص فقط
-  const customPriceEl = document.getElementById('customPrice');
-  if (customPriceEl) {
-    customPriceEl.textContent = value > 0 ? `${price} $` : '';
-  }
+  // تحديث السعر داخل div المخصص فقط
+  document.getElementById('customPrice').textContent = value > 0 ? `${price} $` : '';
 });
 // تشغيل صوت الكتابة
 document.getElementById('username').addEventListener('input', () => {
