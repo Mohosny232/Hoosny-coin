@@ -406,10 +406,11 @@ chargeButton.addEventListener('click', () => {
 
   payNowBtn.addEventListener('click', () => {
     // ✅ أول حاجة اخفي البوب أب كله
+   loader.style.display = 'flex';
     popup.style.display = 'none';
 
     // ✅ أظهر لودر تيكتوك
-    loader.style.display = 'flex';
+    
 
     // ✅ بعد 3 ثواني يحول على صفحة page2.html
     setTimeout(() => {
