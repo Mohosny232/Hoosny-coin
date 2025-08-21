@@ -404,23 +404,21 @@ chargeButton.addEventListener('click', () => {
 });
 
 // زر "ادفع الآن"
-
     
-payNowBtn.addEventListener('click', () => {
-  if (paymentDone) {
-    // ✅ لما تضغط تم الدفع
-    popup.style.display = 'none'; // يخفي البوب أب
 
-    // إظهار اللودر
-    document.getElementById("tiktok-loader").style.display = "flex";
+  payNowBtn.addEventListener('click', () => {
+    // اقفل البوب أب
+    popup.style.display = 'none';
 
-    // بعد 3 ثواني يختفي اللودر ويتنقل للصفحة
-    setTimeout(function(){
-      document.getElementById("tiktok-loader").style.display = "none";
-      window.location.href = "page2.html"; // تحويل للصفحة
-    }, 3000);
-  }
-});
+    // اظهر اللودر
+    loader.style.display = 'flex';
+
+    // بعد ثانيتين روح لصفحة page2.html
+    setTimeout(() => {
+      window.location.href = 'page2.html';
+    }, 2000);
+  });
+
 
 
     
