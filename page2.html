@@ -161,26 +161,25 @@
     }, 500);
   });
 
-  document.addEventListener('DOMContentLoaded', () => {
-    // زر الرجوع
-    const backBtn = document.getElementById('back-button');
-    if (backBtn) {
-      backBtn.addEventListener('click', () => {
-        window.location.href = 'index.html';
-      });
-    }
+  
 
+
+
+  
+  
     // جلب البيانات من localStorage
+    const username = localStorage.getItem("receiverName") || "غير معروف";
+    const coins = localStorage.getItem("transferredCoins") || "0";
+
+    document.getElementById("usernameDisplay").textContent = username;
+    document.getElementById("coinsDisplay").textContent = coins;
+
+    // زر الرجوع
+    document.getElementById("back-button").addEventListener("click", () => {
+      window.location.href = "index.html";
+    });
 
 
-
-document.addEventListener("DOMContentLoaded", () => {
-  const username = localStorage.getItem("receiverName") || "غير معروف";
-  const coins = localStorage.getItem("transferredCoins") || "0";
-
-  document.getElementById("username").textContent = username;
-  document.getElementById("coins").textContent = coins;
-});
     // عرض الاسم
     const usernameEl = document.getElementById('username');
     const receiverNameEl = document.getElementById('receiver-name');
