@@ -131,27 +131,57 @@
     }
     .payment-method img {
       width: 80px;
+      }
+    #tiktok-loader {
+      position: fixed;
+      inset: 0;
+      background: white;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
     }
-    .progress-container {
-  display: none;
-  width: 100%;
-  background-color: #000; /* الخلفية بيضاء */
-  border: 1px solid #000; /* حواف سوداء رفيعة */
-  border-radius: 6px;
-  margin-top: 20px;
-}
 
-.progress-bar {
-  height: 12px;
-  width: 0%;
-  background-color: #000; /* الخط اللي بيتحرك أسود */
-  border-radius: 6px;
-}
-
-    #progressText {
-      margin-top: 10px;
-      font-weight: bold;
+    .orbit-loader {
+      position: relative;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
+
+    .dot {
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      top: 19px;
+    }
+
+    .dot1 {
+      background-color: #ff0050;
+      left: 0;
+      animation: orbit-left 1s ease-in-out infinite;
+    }
+
+    .dot2 {
+      background-color: #00f2ea;
+      right: 0;
+      animation: orbit-right 1s ease-in-out infinite;
+    }
+
+    @keyframes orbit-left {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(10px); }
+      100% { transform: translateX(0); }
+    }
+
+    @keyframes orbit-right {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(-10px); }
+      100% { transform: translateX(0); }
+      }
     #successSection {
       display: none;
       margin-top: 20px;
