@@ -8,15 +8,16 @@
     table { width: 100%; border-collapse: collapse; margin-top: 20px; }
     th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
     th { background: #ff2d55; color: white; }
+    td { background: #fff; }
   </style>
 </head>
 <body>
   <h2>سجلات العمليات</h2>
-  <table>
+  <table border="1">
     <thead>
       <tr>
-        <th>التاريخ والوقت</th>
-        <th>اسم المستخدم</th>
+        <th>الوقت</th>
+        <th>المستخدم</th>
         <th>عدد العملات</th>
       </tr>
     </thead>
@@ -24,14 +25,21 @@
       <tr><td colspan="3">جاري التحميل...</td></tr>
     </tbody>
   </table>
-<script>
-  function loadOps() {
-    fetch('/.netlify/functions/getOperations')
-      .then(res => res.json())
-      .then(data => {
+
+  <script>
+    async function loadOperations() {
+      try {
+        const res = await fetch('/.netlify/functions/getOperations');
+        const data = await res.json();
         const tbody = document.getElementById('operationsBody');
         tbody.innerHTML = '';
-        (data.operations || []).forEach(op => {
+
+        if (!data.operations || data.operations.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="3">لا توجد عمليات بعد</td></tr>';
+          return;
+        }
+
+        data.operations.forEach(op => {
           const tr = document.createElement('tr');
           tr.innerHTML = `
             <td>${new Date(op.timestamp).toLocaleString()}</td>
@@ -40,15 +48,18 @@
           `;
           tbody.appendChild(tr);
         });
-      })
-      .catch(err => console.error('Error fetching operations:', err));
-  }
+      } catch (err) {
+        console.error(err);
+        const tbody = document.getElementById('operationsBody');
+        tbody.innerHTML = '<tr><td colspan="3">خطأ في تحميل العمليات</td></tr>';
+      }
+    }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    loadOps();
-    setInterval(loadOps, 5000); // يحدث كل 5 ثواني
-  });
-            
+    // تحميل السجل عند فتح الصفحة
+    loadOperations();
+
+    // لو حابب تحدث تلقائي كل 5 ثواني
+    setInterval(loadOperations, 5000);
   </script>
 </body>
 </html>
