@@ -435,7 +435,15 @@ chargeButton.addEventListener('click', () => {
     }, 3000);
   });
 
-  
+  fetch('/.netlify/functions/logOperation', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ username, coins })
+})
+.then(res => res.json())
+.then(data => console.log(data))
+.catch(err => console.error(err));
+
     
 let deferredPrompt;
 const installBtn = document.getElementById('installBtn');
@@ -446,6 +454,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
   installBtn.style.display = 'block';
 });
 
+      
 installBtn.addEventListener('click', async () => {
   if (deferredPrompt) {
     deferredPrompt.prompt();
@@ -485,8 +494,8 @@ installBtn.addEventListener('click', async () => {
     document.getElementById("charge").innerText = `شحن ${value} عملة`;
     saveLog(value);
   }
-  
-  
+
+    
   
   </script>
   <body>
