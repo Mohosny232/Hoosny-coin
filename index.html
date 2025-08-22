@@ -358,6 +358,7 @@
 
 
 // عند الضغط على زر الشحن
+// عند الضغط على زر الشحن
 chargeButton.addEventListener('click', () => {
   const username = document.getElementById('username').value || "غير معروف";
   const selected = document.querySelector('.coin-option.selected');
@@ -376,12 +377,14 @@ chargeButton.addEventListener('click', () => {
 
   // حفظ السجل مع اسم المستخدم
   saveLog(coins, username);
-     
-    payNowBtn.addEventListener('click', () => {
-loader.style.display = 'flex';
-setTimeout(() => {
-window.location.href = "page2.html";
-}, 3000);
+});
+
+// ✅ حدث زر "ادفع الآن" يجب أن يكون خارج حدث الشحن
+payNowBtn.addEventListener('click', () => {
+  loader.style.display = 'flex';
+  setTimeout(() => {
+    window.location.href = "page2.html";
+  }, 3000);
 });
 
 // زر H للسجل
