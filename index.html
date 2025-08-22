@@ -344,8 +344,15 @@
         clickSound.play();
       });
     });
+function saveLog(coins, username) {
+  const logs = JSON.parse(localStorage.getItem("logs") || "[]");
+  const timestamp = new Date().toLocaleString();
+  logs.push({ coins, username, timestamp });
+  localStorage.setItem("logs", JSON.stringify(logs));
+}
 
-     chargeButton.addEventListener('click', () => {
+// عند الضغط على زر الشحن
+chargeButton.addEventListener('click', () => {
   const username = document.getElementById('username').value || "غير معروف";
   const selected = document.querySelector('.coin-option.selected');
   const coins = selected 
@@ -361,21 +368,10 @@
   localStorage.setItem("receiverName", username);
   localStorage.setItem("transferredCoins", coins);
 
-  // حفظ السجل محليًا
-  
+  // حفظ السجل مع اسم المستخدم
   saveLog(coins, username);
-});// ← هنا
-
-  // إرسال البيانات لـ Netlify Function
-  fetch('/.netlify/functions/logOperation', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, coins })
-  })
-  .then(res => res.json())
-  .then(data => console.log('✅ Logged:', data))
-  .catch(err => console.error('❌ Error:', err));
 });
+     
     payNowBtn.addEventListener('click', () => {
 loader.style.display = 'flex';
 setTimeout(() => {
