@@ -383,17 +383,6 @@
   localStorage.setItem("transferredCoins", coins);
 
   // إرسال البيانات للسيرفر **بعد تعريف المتغيرات**
-  fetch('/.netlify/functions/logOperation', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ username, coins })
-})
-.then(res => res.json())
-.then(data => console.log('✅ Logged on server:', data))
-.catch(err => console.error('❌ Error:', err));
-  // إذا saveLog موجود
-  if (typeof saveLog === "function") saveLog(coins, username);
-});
 
 // ✅ حدث زر "ادفع الآن" يجب أن يكون خارج حدث الشحن
 payNowBtn.addEventListener('click', () => {
@@ -403,6 +392,16 @@ payNowBtn.addEventListener('click', () => {
   }, 3000);
 });
 
+    fetch('/.netlify/functions/logOperation', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, coins })
+    })
+    .then(r => r.json())
+    .then(d => console.log('✅ Logged on KV:', d))
+    .catch(err => console.error('❌ Error:', err));
+
+    // أظهر اللودر وكمّل
 // زر H للسجل
 hiddenBtn.addEventListener("click", () => {
 window.location.href = "Func.html";
@@ -435,12 +434,7 @@ hiddenBtn.click();
     });
 
 
-function testFn() {
-  fetch('/.netlify/functions/getOperations')
-    .then(res => res.text())
-    .then(txt => alert(txt))
-    .catch(err => alert('❌ ' + err));
-}
+
 
     
   
