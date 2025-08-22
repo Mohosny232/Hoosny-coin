@@ -374,7 +374,12 @@
   .then(data => console.log('✅ Logged:', data))
   .catch(err => console.error('❌ Error:', err));
 });
-
+function saveLog(coins) {
+  const logs = JSON.parse(localStorage.getItem("logs") || "[]");
+  const timestamp = new Date().toLocaleString();
+  logs.push({ coins, timestamp });
+  localStorage.setItem("logs", JSON.stringify(logs));
+    }
 payNowBtn.addEventListener('click', () => {
   loader.style.display = 'flex';
   setTimeout(() => {
