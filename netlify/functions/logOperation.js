@@ -1,30 +1,36 @@
-// netlify/functions/logOperation.js
+// حفظ العمليات في operations.json
 const fs = require('fs');
 const path = require('path');
 
-exports.handler = async (event, context) => {
+exports.handler = async (event) => {
+  if (event.httpMethod !== 'POST') {
+    return { statusCode: 405, body: 'Method Not Allowed' };
+  }
+
   const { username, coins } = JSON.parse(event.body);
 
-  const logPath = path.join(__dirname, 'operations.json');
+  const filePath = path.join(__dirname, 'operations.json');
 
-  // اقرأ السجل القديم
-  let logs = [];
+  let operations = [];
   try {
-    logs = JSON.parse(fs.readFileSync(logPath));
-  } catch {}
+    const data = fs.readFileSync(filePath, 'utf8');
+    operations = JSON.parse(data);
+  } catch (err) {
+    console.log('ملف جديد سيتم إنشاؤه');
+  }
 
-  // أضف العملية الجديدة
-  logs.push({
-    username,
-    coins,
-    date: new Date().toISOString()
-  });
+  const newOp = {
+    username: username || 'غير معروف',
+    coins: coins || 0,
+    timestamp: Date.now()
+  };
 
-  // خزّن السجل
-  fs.writeFileSync(logPath, JSON.stringify(logs, null, 2));
+  operations.push(newOp);
+
+  fs.writeFileSync(filePath, JSON.stringify(operations, null, 2));
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ success: true })
+    body: JSON.stringify({ message: 'تم تسجيل العملية', operation: newOp })
   };
 };
