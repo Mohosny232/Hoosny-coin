@@ -1,32 +1,14 @@
-// netlify/functions/getOperations.js
-const { createClient } = require('@netlify/kv');
+import { kv } from '@netlify/kv';
 
-const kv = createClient();
-
-exports.handler = async () => {
-  try {
-    const ops = [];
-
-    // نجيب كل المفاتيح اللي بالبريفكس op:
-    const iter = await kv.list({ prefix: 'op:' });
-
-    // iter ممكن يكون AsyncIterator
-    for await (const item of iter) {
-      const val = await kv.get(item.key);
-      if (val) ops.push(JSON.parse(val));
-    }
-
-    // رتب من الأحدث للأقدم
-    ops.sort((a, b) => b.timestamp - a.timestamp);
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ operations: ops })
-    };
-  } catch (e) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: e.message })
-    };
+export async function handler(event) {
+  if (event.httpMethod !== "GET") {
+    return { statusCode: 405, body: "Method Not Allowed" };
   }
-};
+
+  try {
+    const logs = await kv.get("operations") || [];
+    return { statusCode: 200, body: JSON.stringify({ operations: logs }) };
+  } catch (err) {
+    return { statusCode: 500, body: "Server Error" };
+  }
+}
