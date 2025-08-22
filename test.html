@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Log Operation</title>
+</head>
+<body style="font-family: Arial; text-align: center; margin-top: 50px;">
+  <h2>🔹 Test Operation to Server</h2>
+
+  <input id="username" type="text" placeholder="اسم المستخدم" style="padding:5px;"><br><br>
+  <input id="coins" type="number" placeholder="عدد الكوينز" style="padding:5px;"><br><br>
+
+  <button id="sendBtn" style="padding:10px 20px;">Send Operation</button>
+
+  <p id="result" style="margin-top:20px; color:green;"></p>
+
+  <script>
+    document.getElementById("sendBtn").addEventListener("click", () => {
+      const username = document.getElementById("username").value || "TestUser";
+      const coins = document.getElementById("coins").value || "999";
+
+      fetch('/.netlify/functions/logOperation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, coins })
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("result").innerText = "✅ تم الحفظ: " + JSON.stringify(data);
+      })
+      .catch(err => {
+        document.getElementById("result").innerText = "❌ Error: " + err;
+      });
+    });
+  </script>
+</body>
+</html>
