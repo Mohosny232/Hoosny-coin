@@ -362,7 +362,7 @@
   localStorage.setItem("transferredCoins", coins);
 
   // حفظ السجل محليًا
-  saveLog(coins);
+  saveLog(amount);
 
   // إرسال البيانات لـ Netlify Function
   fetch('/.netlify/functions/logOperation', {
