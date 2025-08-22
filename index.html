@@ -515,16 +515,24 @@ installBtn.addEventListener('click', async () => {
   }
        
 // عند الضغط على حرف H على الكيبورد
-document.addEventListener('keydown', (e) => {
-  if (e.key.toLowerCase() === 'h') { // حرف H
-    document.getElementById('hiddenBtn').click();
-  }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const hiddenBtn = document.getElementById('hiddenBtn');
+
+  // عند الضغط على حرف H على الكيبورد
+  document.addEventListener('keydown', (e) => {
+    if (e.key.toLowerCase() === 'h') { 
+      hiddenBtn.click();
+    }
+  });
+
+  // عند الضغط على الزر نفسه
+  hiddenBtn.addEventListener("click", () => {
+    window.location.href = "Functions.html";
+  });
 });
 
-// عند الضغط على الزر نفسه (أو بعد الـ click من الكيبورد)
-document.getElementById('hiddenBtn').addEventListener("click", () => {
-  window.location.href = "Functions.html";
-});
+
 
 
   
