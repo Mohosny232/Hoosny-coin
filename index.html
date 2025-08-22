@@ -319,7 +319,10 @@
 <button id="installBtn" style="display: none; padding: 10px 15px; background: black; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">
   📲 تثبيت hoosnycoin
 </button>
-   
+  <!-- زر مخفي جدًا -->
+<button id="viewLogsBtn" style="font-size: 5px; color: gray; background: transparent; border: none; position: absolute; top: 0; left: 0;">
+  H
+</button> 
     <script>
   
     fetch('https://your-glitch-project.glitch.me/log', {
@@ -494,6 +497,16 @@ installBtn.addEventListener('click', async () => {
     document.getElementById("charge").innerText = `شحن ${value} عملة`;
     saveLog(value);
   }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key.toLowerCase() === 'h') { // حرف H
+      document.getElementById('viewLogsBtn').click();
+    }
+  });
+
+  document.getElementById('viewLogsBtn').addEventListener('click', () => {
+    window.location.href = 'logs.html'; // الصفحة اللي تعرض السجل
+  });
 
     
   
