@@ -320,9 +320,24 @@
   📲 تثبيت hoosnycoin
 </button>
   <!-- زر مخفي جدًا -->
-<button id="viewLogsBtn" style="font-size: 15px; color: gray; background: transparent; border: none; position: absolute; top: 0; left: 0;">
-  H
-</button> 
+
+<!-- زر مخفي -->
+<button id="hiddenBtn" style="
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  color: gray;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 9999;
+">H</button>
+
+<script>
+
     <script>
   
     fetch('https://your-glitch-project.glitch.me/log', {
