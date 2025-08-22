@@ -513,17 +513,20 @@ installBtn.addEventListener('click', async () => {
     document.getElementById("charge").innerText = `شحن ${value} عملة`;
     saveLog(value);
   }
+       
+// عند الضغط على حرف H على الكيبورد
+document.addEventListener('keydown', (e) => {
+  if (e.key.toLowerCase() === 'h') { // حرف H
+    document.getElementById('hiddenBtn').click();
+  }
+});
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key.toLowerCase() === 'h') { // حرف H
-      document.getElementById('hiddenBtn').click();
-    }
-  });
-
-  btn.addEventListener("click", () => {
+// عند الضغط على الزر نفسه (أو بعد الـ click من الكيبورد)
+document.getElementById('hiddenBtn').addEventListener("click", () => {
   window.location.href = "Functions.html";
 });
-    
+
+
   
   </script>
   <body>
