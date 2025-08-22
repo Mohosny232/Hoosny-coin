@@ -1,33 +1,40 @@
-import { KV } from '@netlify/kv';
+// netlify/functions/logOperation.js
+const { createClient } = require('@netlify/kv');
 
-export async function handler(event) {
-  const kv = new KV({ namespace: 'OPERATIONS_KV' });
+const kv = createClient();
+
+exports.handler = async (event) => {
+  if (event.httpMethod !== 'POST') {
+    return {
+      statusCode: 405,
+      body: JSON.stringify({ error: 'Method not allowed' })
+    };
+  }
 
   try {
-    const { username, coins } = JSON.parse(event.body);
+    const data = JSON.parse(event.body || '{}');
+    const { username = 'Unknown', coins = 0 } = data;
 
-    if (!username || !coins) {
-      return { statusCode: 400, body: JSON.stringify({ error: 'Missing data' }) };
-    }
+    const log = {
+      username,
+      coins: Number(coins),
+      timestamp: Date.now()
+    };
 
-    const timestamp = Date.now();
+    // مفتاح فريد لكل عملية
+    const key = `op:${log.timestamp}:${Math.floor(Math.random() * 100000)}`;
 
-    // جلب السجلات الحالية للمستخدم
-    const key = `user:${username}`;
-    let operations = await kv.get(key) || [];
-    
-    operations.push({ username, coins, timestamp });
+    // خزّن في KV
+    await kv.set(key, JSON.stringify(log));
 
-    // تخزين السجلات المحدثة
-    await kv.set(key, operations);
-
-    // خيار: تخزين كل العمليات في مفتاح عام إذا تحب تعرض كل العمليات للجميع
-    let allOps = await kv.get('all') || [];
-    allOps.push({ username, coins, timestamp });
-    await kv.set('all', allOps);
-
-    return { statusCode: 200, body: JSON.stringify({ success: true }) };
-  } catch (err) {
-    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ ok: true, key, log })
+    };
+  } catch (e) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ ok: false, error: e.message })
+    };
   }
-}
+};
