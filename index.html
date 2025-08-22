@@ -365,14 +365,13 @@
 
   // إرسال البيانات للسيرفر **بعد تعريف المتغيرات**
   fetch('/.netlify/functions/logOperation', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, coins })
-  })
-  .then(res => res.json())
-  .then(data => console.log('✅ Logged on server:', data))
-  .catch(err => console.error('❌ Error:', err));
-
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ username, coins })
+})
+.then(res => res.json())
+.then(data => console.log('✅ Logged on server:', data))
+.catch(err => console.error('❌ Error:', err));
   // إذا saveLog موجود
   if (typeof saveLog === "function") saveLog(coins, username);
 });
