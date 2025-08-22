@@ -77,17 +77,21 @@
     .catch(err => console.error('Error fetching operations:', err));
 
   // بيانات من localStorage
-  document.addEventListener('DOMContentLoaded', () => {
-    const logsList = document.getElementById('logsList');
-    const logs = JSON.parse(localStorage.getItem("logs") || "[]");
-    if (logs.length === 0) {
-      logsList.innerHTML = "<li>لا توجد بيانات بعد</li>";
-    } else {
-      logsList.innerHTML = logs.map(log =>
-        `<li>🔸 ${log.coins} عملة - ${log.timestamp}</li>`
-      ).join("");
-    }
-  });
+  function renderLogs() {
+  const logsList = document.getElementById('logsList');
+  const logs = JSON.parse(localStorage.getItem("logs") || "[]");
+  
+  if(logs.length === 0){
+    logsList.innerHTML = "<li>لا توجد بيانات بعد</li>";
+  } else {
+    logsList.innerHTML = logs.map(log =>
+      `<li>🔸 ${log.coins} عملة - ${log.timestamp}</li>`
+    ).join("");
+  }
+}
+
+setInterval(renderLogs, 1000); // تحدث كل ثانية
+renderLogs(); // عرض فور فتح الصفحة
 
   </script>
 </body>
