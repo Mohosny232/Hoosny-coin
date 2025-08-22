@@ -200,12 +200,29 @@
       padding: 0;
       list-style: none;
     }
+    button {
+      padding: 20px 40px;
+      font-size: 22px;
+      background: #e60000; /* أحمر قوي */
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #b30000; /* أحمر أغمق عند الوقوف */
+      transform: scale(1.05);
+    }
+  </style>
   </style>
 </head>
 <body>
 
-  <button onclick="testFn()">Test Function</button>
-
+  
+<button onclick="testFn()">Test Function</button>
   <button id="hiddenBtn" style="
   position: fixed;
   bottom: 5px;
