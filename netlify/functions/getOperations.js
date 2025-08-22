@@ -1,22 +1,16 @@
+// جلب جميع العمليات من operations.json
 const fs = require('fs');
 const path = require('path');
 
 exports.handler = async () => {
   const filePath = path.join(__dirname, 'operations.json');
-
   let operations = [];
 
   try {
-    if (fs.existsSync(filePath)) {
-      const data = fs.readFileSync(filePath, 'utf8');
-      operations = JSON.parse(data);
-    }
+    const data = fs.readFileSync(filePath, 'utf8');
+    operations = JSON.parse(data);
   } catch (err) {
-    console.error('Error reading JSON:', err);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ message: 'Failed to read operations' })
-    };
+    console.log('لا يوجد سجلات حتى الآن');
   }
 
   return {
