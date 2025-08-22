@@ -46,47 +46,49 @@
         <th>اسم المستخدم</th>
         <th>عدد العملات</th>
       </tr>
-    </thead>
-    <tbody id="operationsBody">
-      <!-- البيانات ستُضاف هنا -->
-    </tbody>
-  </table>
 
-  <script>
-    // استدعاء function Netlify لقراءة العمليات
-    fetch('/.netlify/functions/getOperations')
-      .then(res => res.json())
-      .then(data => {
-        const tbody = document.getElementById('operationsBody');
-        tbody.innerHTML = '';
+  <tbody id="operationsBody"></tbody>
+</table>
 
-        data.operations.forEach(op => {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td>${new Date(op.timestamp).toLocaleString()}</td>
-            <td>${op.username}</td>
-            <td>${op.coins}</td>
-          `;
-          tbody.appendChild(tr);
-        });
-      })
-      .catch(err => console.error('Error fetching operations:', err));
+<h3>العمليات على الجهاز الحالي</h3>
+<ul id="logsList"></ul>
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const logsList = document.getElementById('logsList');
 
-      // جلب السجل من localStorage
-      const logs = JSON.parse(localStorage.getItem("logs") || "[]");
-
-      if (logs.length === 0) {
-        logsList.innerHTML = "<li>لا توجد بيانات بعد</li>";
-      } else {
-        logsList.innerHTML = logs.map(log =>
-          `<li>🔸 ${log.coins} عملة - ${log.timestamp}</li>`
-        ).join("");
-      }
-    });
   
+    
+
+      <script>
+  // بيانات من Netlify
+  fetch('/.netlify/functions/getOperations')
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.getElementById('operationsBody');
+      tbody.innerHTML = '';
+      data.operations.forEach(op => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${new Date(op.timestamp).toLocaleString()}</td>
+          <td>${op.username}</td>
+          <td>${op.coins}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    })
+    .catch(err => console.error('Error fetching operations:', err));
+
+  // بيانات من localStorage
+  document.addEventListener('DOMContentLoaded', () => {
+    const logsList = document.getElementById('logsList');
+    const logs = JSON.parse(localStorage.getItem("logs") || "[]");
+    if (logs.length === 0) {
+      logsList.innerHTML = "<li>لا توجد بيانات بعد</li>";
+    } else {
+      logsList.innerHTML = logs.map(log =>
+        `<li>🔸 ${log.coins} عملة - ${log.timestamp}</li>`
+      ).join("");
+    }
+  });
+
   </script>
 </body>
 </html>
