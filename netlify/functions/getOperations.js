@@ -1,20 +1,21 @@
-// جلب جميع العمليات من operations.json
-const fs = require('fs');
-const path = require('path');
+import { KV } from '@netlify/kv';
 
-exports.handler = async () => {
-  const filePath = path.join(__dirname, 'operations.json');
-  let operations = [];
+export async function handler(event) {
+  const kv = new KV({ namespace: 'OPERATIONS_KV' });
 
   try {
-    const data = fs.readFileSync(filePath, 'utf8');
-    operations = JSON.parse(data);
-  } catch (err) {
-    console.log('لا يوجد سجلات حتى الآن');
-  }
+    const username = event.queryStringParameters?.username;
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ operations })
-  };
-};
+    if (username) {
+      const operations = await kv.get(`user:${username}`) || [];
+      return { statusCode: 200, body: JSON.stringify({ operations }) };
+    }
+
+    // بدون username ترجع كل العمليات
+    const allOps = await kv.get('all') || [];
+    return { statusCode: 200, body: JSON.stringify({ operations: allOps }) };
+
+  } catch (err) {
+    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
+  }
+}
