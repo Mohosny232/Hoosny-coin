@@ -22,7 +22,6 @@
       font-weight: 700;
       color: red;
     }
-  
     .tiktok {
       color: red;
     }
@@ -101,19 +100,6 @@
       align-items: center;
       z-index: 1000;
     }
-    #charge {
-  width: 90vw; /* يملأ الشاشة تقريبًا كلها */
-  max-width: 500px;
-  padding: 16px;
-  margin-top: 30px;
-  background: #ff2d55;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-    }
     .popup-content {
       background: white;
       padding: 20px;
@@ -131,7 +117,7 @@
     }
     .payment-method img {
       width: 80px;
-      }
+    }
     #tiktok-loader {
       position: fixed;
       inset: 0;
@@ -141,7 +127,6 @@
       align-items: center;
       z-index: 9999;
     }
-
     .orbit-loader {
       position: relative;
       width: 32px;
@@ -150,7 +135,6 @@
       justify-content: center;
       align-items: center;
     }
-
     .dot {
       position: absolute;
       width: 13px;
@@ -158,30 +142,26 @@
       border-radius: 50%;
       top: 19px;
     }
-
     .dot1 {
       background-color: #ff0050;
       left: 0;
       animation: orbit-left 1s ease-in-out infinite;
     }
-
     .dot2 {
       background-color: #00f2ea;
       right: 0;
       animation: orbit-right 1s ease-in-out infinite;
     }
-
     @keyframes orbit-left {
       0% { transform: translateX(0); }
       50% { transform: translateX(10px); }
       100% { transform: translateX(0); }
     }
-
     @keyframes orbit-right {
       0% { transform: translateX(0); }
       50% { transform: translateX(-10px); }
       100% { transform: translateX(0); }
-      }
+    }
     #successSection {
       display: none;
       margin-top: 20px;
@@ -189,313 +169,231 @@
     #successSection img {
       width: 100px;
       margin-bottom: 10px;
-    }  
-       .top-image {
-      width: 200px;        /* حجم الصورة */
-      margin: 0 auto 0px; /* هنا بقى auto تخليها في النص */
-      display: block;      /* مهم عشان تتمركز */
-      margin-top: 10%;
-       }
+    }
+    .top-image {
+      width: 200px;
+      margin: 10% auto 0;
+      display: block;
+    }
+    #hiddenBtn {
+      position: fixed;
+      bottom: 5px;
+      right: 5px;
+      font-size: 10px;
+      color: gray;
+    }
+    #logPopupContent {
+      display: none;
+      position: fixed;
+      bottom: 60px;
+      left: 10px;
+      background: white;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      z-index: 999;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    #logsList {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
   </style>
 </head>
 <body>
-  <!-- زر عرض السجل (H) يكون ظاهر دايمًا -->
-<!-- زر حرف H المخفي -->
+  <button id="hiddenBtn">H</button>
 
-<!-- زر H المخفي (يمكنك تصغيره للحد الأدنى لكن لازم يكون موجود) -->
-<button id="hiddenBtn" style="position: fixed; bottom: 5px; right: 5px; font-size: 10px; color: gray;">H</button>
+  <div id="logPopupContent">
+    <ul id="logsList"></ul>
+  </div>
 
+  <div class="container">
+    <h1><span class="tiktok"></span> </h1>
+    <input type="text" id="username" placeholder="اكتب اسم المستخدم" />
 
-
-<!-- البوب أب اللي بيعرض السجلات -->
-<div id="logPopup" style="
-  display: none;
-  position: fixed;
-  bottom: 60px;
-  left: 10px;
-  background: white;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  z-index: 999;
-  max-height: 200px;
-  overflow-y: auto;
-">
-  <ul id="logsList" style="margin: 0; padding: 0; list-style: none;"></ul>
-</div>
-</div>
-<div class="container">
-  <h1><span class="tiktok"></span> </h1>
-
-  <input type="text" id="username" placeholder="اكتب اسم المستخدم" />
-
-  <div class="coins">
-    <div class="coin-option" data-amount="30">
-      <img src="coin.png" class="coin-img" alt="coin">30
-      <small>$0.01</small>
-    </div>
-    <div class="coin-option" data-amount="350">
-      <img src="coin.png" class="coin-img" alt="coin">350
-      <small>$0.06</small>
-    </div>
-    <div class="coin-option" data-amount="700">
-      <img src="coin.png" class="coin-img" alt="coin">700
-      <small>$0.12</small>
-    </div>
-    <div class="coin-option" data-amount="1400">
-      <img src="coin.png" class="coin-img" alt="coin">1,400
-      <small>$0.25</small>
-    </div>
-    <div class="coin-option" data-amount="3500">
-      <img src="coin.png" class="coin-img" alt="coin">3,500
-      <small>$0.62</small>
-    </div>
-    <div class="coin-option" data-amount="7000">
-      <img src="coin.png" class="coin-img" alt="coin">7,000
-      <small>$1.24</small>
-    </div>
-    <div class="coin-option" data-amount="17000">
-      <img src="coin.png" class="coin-img" alt="coin">17,000
-      <small>$3.00</small>
+    <div class="coins">
+      <div class="coin-option" data-amount="30">
+        <img src="coin.png" class="coin-img" alt="coin">30
+        <small>$0.01</small>
+      </div>
+      <div class="coin-option" data-amount="350">
+        <img src="coin.png" class="coin-img" alt="coin">350
+        <small>$0.06</small>
+      </div>
+      <div class="coin-option" data-amount="700">
+        <img src="coin.png" class="coin-img" alt="coin">700
+        <small>$0.12</small>
+      </div>
+      <div class="coin-option" data-amount="1400">
+        <img src="coin.png" class="coin-img" alt="coin">1,400
+        <small>$0.25</small>
+      </div>
+      <div class="coin-option" data-amount="3500">
+        <img src="coin.png" class="coin-img" alt="coin">3,500
+        <small>$0.62</small>
+      </div>
+      <div class="coin-option" data-amount="7000">
+        <img src="coin.png" class="coin-img" alt="coin">7,000
+        <small>$1.24</small>
+      </div>
+      <div class="coin-option" data-amount="17000">
+        <img src="coin.png" class="coin-img" alt="coin">17,000
+        <small>$3.00</small>
+      </div>
+      <div class="coin-option custom" onclick="selectCustom()">
+        <img src="coin.png" class="coin-img" alt="coin">مخصص
+        <div id="customPrice"></div>
+        <input type="number" id="customAmount" class="custom-input" placeholder="اكتب عدد" />
+      </div>
     </div>
 
+    <img src="pay12.png" alt="Pay Image" class="top-image">
 
-    <!-- خيار مخصص -->
-    <div class="coin-option custom" onclick="selectCustom()">
-      <img src="coin.png" class="coin-img" alt="coin">مخصص
-      <div id="customPrice" style="font-size: 12px; color: gray; margin-top: 4px;"></div>
-      <input type="number" id="customAmount" class="custom-input" placeholder="اكتب عدد" />
+    <div style="width: 100%; display: flex; justify-content: center; margin-top: 0px;">
+      <button id="charge">Recharge</button>
     </div>
   </div>
 
-  <!-- زر الشحن -->
-<!-- زر الشحن مع صورة الكوين -->
- 
-  <img src="pay12.png" alt="Pay Image" class="top-image">
-  <div style="width: 100%; display: flex; justify-content: center; margin-top: 0px;">
-  
-    <button id="charge">Recharge</button>
-
-  </div>
-     </div>
   <div id="paymentPopup" class="popup">
-  <div class="popup-content">
-  <p id="popupUser"></p>
-  <p id="popupCoins"></p>
-  <div class="payment-method" style="display: flex; align-items: center; gap: 10px; font-weight: normal; font-size: 16px;">
-    <span style="color: #333;">طريقة الدفع: 2432******</span>
-    <img src="visa.png" alt="Visa" style="width: 50px; height: auto;">
+    <div class="popup-content">
+      <p id="popupUser"></p>
+      <p id="popupCoins"></p>
+      <div class="payment-method">
+        <span style="color: #333;">طريقة الدفع: 2432******</span>
+        <img src="visa.png" alt="Visa">
+      </div>
+      <div id="successSection">
+        <img src="success.png" alt="نجاح">
+        <p>✅ تم الدفع بنجاح!</p>
+      </div>
+      <button id="payNow">ادفع الآن</button>
+    </div>
   </div>
-    
-<div style="display: flex; justify-content: flex-start; margin-top: 20px;">
-</div>
-  <div id="successSection" style="display: none; margin-top: 20px; text-align: center;">
-    <img src="success.png" alt="نجاح" style="width: 60px;">
-    <p style="font-weight: bold; font-size: 18px;">✅ تم الدفع بنجاح!</p>
-  </div>
-<div id="logPopup" style="
 
-  <h3 style="margin-top: 0;"></h3>
-  <ul id="logsList" style="padding: 0; list-style: none;"></ul>
-</div>
-  <button id="payNow">ادفع الآن</button>
-  </div>
-    <div id="tiktok-loader">
+  <div id="tiktok-loader">
     <div class="orbit-loader">
       <span class="dot dot1"></span>
       <span class="dot dot2"></span>
     </div>
-  </div> 
+  </div>
 
-    <audio id="clickSound" src="click.mp3"></audio>
+  <audio id="clickSound" src="click.mp3"></audio>
   <audio id="successSound" src="success.mp3"></audio>
   <audio id="typeSound" src="type.mp3"></audio>
-<button id="installBtn" style="display: none; padding: 10px 15px; background: black; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">
-  📲 تثبيت hoosnycoin
-</button>
-  <!-- زر مخفي جدًا -->
+  <button id="installBtn">📲 تثبيت hoosnycoin</button>
 
-<!-- زر مخفي -->
+  <script>
+    const chargeButton = document.getElementById('charge');
+    const customInput = document.getElementById('customAmount');
+    const popup = document.getElementById('paymentPopup');  
+    const payNowBtn = document.getElementById('payNow');
+    const loader = document.getElementById('tiktok-loader');
+    const successSection = document.getElementById('successSection');
+    const successSound = document.getElementById('successSound');
+    const clickSound = document.getElementById('clickSound');
+    const typeSound = document.getElementById('typeSound');
+    const hiddenBtn = document.getElementById('hiddenBtn');
+    const logsList = document.getElementById("logsList");
+    const logPopupContent = document.getElementById("logPopupContent");
+    const installBtn = document.getElementById('installBtn');
 
+    let paymentDone = false;
+    let deferredPrompt;
 
-
-
-     <script>
-  
-    fetch('https://your-glitch-project.glitch.me/log', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    time: new Date().toISOString(),
-    userAgent: navigator.userAgent,
-    platform: navigator.platform
-  })
-});
-const chargeButton = document.getElementById('charge');
-const customInput = document.getElementById('customAmount');
-const popup = document.getElementById('paymentPopup');  
-const payNowBtn = document.getElementById('payNow');
-const loader = document.getElementById('tiktok-loader'); // نفس الـ id عند 
-const successSection = document.getElementById('successSection');
-const successSound = document.getElementById('successSound');
-const clickSound = document.getElementById('clickSound');
-const typeSound = document.getElementById('typeSound');
-
-let paymentDone = false;
-
-// تحديث زر الشحن
-
-// تحديث زر الشحن
-
-function selectCustom() {
-  document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
-  document.querySelector('.coin-option.custom').classList.add('selected');
-}
-
-// تحديث السعر عند الكتابة في خانة المخصص
-customInput.addEventListener('input', (e) => {
-  selectCustom();
-  const value = parseInt(e.target.value) || 0;
-
-  // تحديث زر الشحن (عدد العملات)
-  chargeButton.innerText = `شحن ${value} عملة`;
-
-  // حساب السعر لكل 30 عملة = 0.12$
-  const price = (value * 3 / 17000).toFixed(2);
-
-  // تحديث السعر داخل div المخصص فقط
-  document.getElementById('customPrice').textContent = value > 0 ? `${price} $` : '';
-});
-// تشغيل صوت الكتابة
-document.getElementById('username').addEventListener('input', () => {
-  typeSound.currentTime = 0;
-  typeSound.play();
-});
-
-// اختيارات الكوينات الجاهزة
-document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
-  option.addEventListener('click', () => {
-    document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
-    option.classList.add('selected');
-    updateChargeCoins(option.dataset.amount);
-  });
-});
-
-// صوت عند أي ضغطة
-document.querySelectorAll('button, .coin-option, #username, #customAmount').forEach(el => {
-  el.addEventListener('click', () => {
-    clickSound.currentTime = 0;
-    clickSound.play();
-  });
-});
-
-// لما يضغط شحن يفتح البوب اب
-
-// زر الشحن
-chargeButton.addEventListener('click', () => {
-  const username = document.getElementById('username').value || "غير معروف"; // اسم المستخدم
-  const selected = document.querySelector('.coin-option.selected');
-
-  let amount;
-  if (selected && selected.classList.contains('custom')) {
-    amount = customInput.value || "0";
-  } else if (selected) {
-    amount = selected.dataset.amount || "0";
-  } else {
-    amount = customInput.value || "0";
-  }
-
-  // عرض البيانات في البوب
-  document.getElementById('popupUser').innerText = 'اسم المستخدم: ' + username;
-  document.getElementById('popupCoins').innerText = 'عدد العملات: ' + amount;
-  popup.style.display = 'flex';
-
-  // ✅ تخزين البيانات في localStorage
-  localStorage.setItem("receiverName", username);
-  localStorage.setItem("transferredCoins", amount);
-
-  // عرض البوب أب
-  document.getElementById("paymentPopup").style.display = "flex";
-});
-// زر "ادفع الآن    
-
-  payNowBtn.addEventListener('click', () => {
-    // ✅ أول حاجة اخفي البوب أب كله
-   loader.style.display = 'flex';
-    
-
-    // ✅ أظهر لودر تيكتوك
-    
-
-    // ✅ بعد 3 ثواني يحول على صفحة page2.html
-    setTimeout(() => {
-      window.location.href = "page2.html";
-    }, 3000);
-  });
-
-  fetch('/.netlify/functions/logOperation', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ username, coins })
-})
-.then(res => res.json())
-.then(data => console.log(data))
-.catch(err => console.error(err));
-
-    
-let deferredPrompt;
-const installBtn = document.getElementById('installBtn');
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  installBtn.style.display = 'block';
-});
-
-      
-installBtn.addEventListener('click', async () => {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    if (outcome === 'accepted') {
-      console.log('✅ تم تثبيت hoosnycoin');
-      installBtn.style.display = 'none';
-    } else {
-      console.log('❌ تم رفض التثبيت');
+    function selectCustom() {
+      document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
+      document.querySelector('.coin-option.custom').classList.add('selected');
     }
-    deferredPrompt = null;
-  }
-});
-   const logPopup = document.getElementById("logPopup");
-  const logsList = document.getElementById("logsList");
- const hiddenBtn = document.getElementById('hiddenBtn');
 
-  // دالة حفظ السجل
-  function saveLog(coins) {
-    const logs = JSON.parse(localStorage.getItem("logs") || "[]");
-    const timestamp = new Date().toLocaleString();
-    logs.push({ coins, timestamp });
-    localStorage.setItem("logs", JSON.stringify(logs));
-  }
+    customInput.addEventListener('input', (e) => {
+      selectCustom();
+      const value = parseInt(e.target.value) || 0;
+      chargeButton.innerText = `شحن ${value} عملة`;
+      const price = (value * 3 / 17000).toFixed(2);
+      document.getElementById('customPrice').textContent = value > 0 ? `${price} $` : '';
+    });
 
-  // لما تضغط على زر H يعرض أو يخفي السجل
-  historyBtn.addEventListener("click", () => {
-    const logs = JSON.parse(localStorage.getItem("logs") || "[]");
-    logsList.innerHTML = logs.map(log =>
-      `<li>🔸 ${log.coins} عملة - ${log.timestamp}</li>`
-    ).join("");
-    logPopup.style.display = logPopup.style.display === "none" ? "block" : "none";
-  });
+    document.getElementById('username').addEventListener('input', () => {
+      typeSound.currentTime = 0;
+      typeSound.play();
+    });
 
-  // تستخدم الدالة دي لما تختار عدد العملات
-  function updateChargeCoins(value) {
-    document.getElementById("charge").innerText = `شحن ${value} عملة`;
-    saveLog(value);
-  }
-       
+    document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
+      option.addEventListener('click', () => {
+        document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
+        option.classList.add('selected');
+        updateChargeCoins(option.dataset.amount);
+      });
+    });
 
+    document.querySelectorAll('button, .coin-option, #username, #customAmount').forEach(el => {
+      el.addEventListener('click', () => {
+        clickSound.currentTime = 0;
+        clickSound.play();
+      });
+    });
+
+    chargeButton.addEventListener('click', () => {
+      const username = document.getElementById('username').value || "غير معروف";
+      const selected = document.querySelector('.coin-option.selected');
+      let amount = selected ? (selected.classList.contains('custom') ? customInput.value || "0" : selected.dataset.amount) : customInput.value || "0";
+      document.getElementById('popupUser').innerText = 'اسم المستخدم: ' + username;
+      document.getElementById('popupCoins').innerText = 'عدد العملات: ' + amount;
+      popup.style.display = 'flex';
+      localStorage.setItem("receiverName", username);
+      localStorage.setItem("transferredCoins", amount);
+    });
+
+    payNowBtn.addEventListener('click', () => {
+      loader.style.display = 'flex';
+      setTimeout(() => {
+        window.location.href = "page2.html";
+      }, 3000);
+    });
+
+    function saveLog(coins) {
+      const logs = JSON.parse(localStorage.getItem("logs") || "[]");
+      const timestamp = new Date().toLocaleString();
+      logs.push({ coins, timestamp });
+      localStorage.setItem("logs", JSON.stringify(logs));
+    }
+
+    function updateChargeCoins(value) {
+      document.getElementById("charge").innerText = `شحن ${value} عملة`;
+      saveLog(value);
+    }
+
+    hiddenBtn.addEventListener("click", () => {
+      window.location.href = "Func.html";
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key.toLowerCase() === 'h') { 
+        hiddenBtn.click();
+      }
+    });
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'block';
+    });
+
+    installBtn.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          console.log('✅ تم تثبيت hoosnycoin');
+          installBtn.style.display = 'none';
+        } else {
+          console.log('❌ تم رفض التثبيت');
+        }
+        deferredPrompt = null;
+      }
+    });
   </script>
-  <body>
-<html>
+</body>
+</html>
