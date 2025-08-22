@@ -1,0 +1,7 @@
+{
+  "name": "hoosny-coin",
+  "version": "1.0.0",
+  "dependencies": {
+    "@netlify/kv": "^1.0.0"
+  }
+}
