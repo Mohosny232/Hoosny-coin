@@ -344,12 +344,18 @@
         clickSound.play();
       });
     });
-function saveLog(coins, username) {
-  const logs = JSON.parse(localStorage.getItem("logs") || "[]");
-  const timestamp = new Date().toLocaleString();
-  logs.push({ coins, username, timestamp });
-  localStorage.setItem("logs", JSON.stringify(logs));
-}
+
+  // إرسال البيانات للسيرفر
+  fetch('/.netlify/functions/logOperation', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, coins })
+  })
+  .then(res => res.json())
+  .then(data => console.log('✅ Logged on server:', data))
+  .catch(err => console.error('❌ Error:', err));
+});
+
 
 // عند الضغط على زر الشحن
 chargeButton.addEventListener('click', () => {
