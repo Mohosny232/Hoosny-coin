@@ -1,36 +1,33 @@
-// حفظ العمليات في operations.json
-const fs = require('fs');
-const path = require('path');
+import { KV } from '@netlify/kv';
 
-exports.handler = async (event) => {
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
-  }
+export async function handler(event) {
+  const kv = new KV({ namespace: 'OPERATIONS_KV' });
 
-  const { username, coins } = JSON.parse(event.body);
-
-  const filePath = path.join(__dirname, 'operations.json');
-
-  let operations = [];
   try {
-    const data = fs.readFileSync(filePath, 'utf8');
-    operations = JSON.parse(data);
+    const { username, coins } = JSON.parse(event.body);
+
+    if (!username || !coins) {
+      return { statusCode: 400, body: JSON.stringify({ error: 'Missing data' }) };
+    }
+
+    const timestamp = Date.now();
+
+    // جلب السجلات الحالية للمستخدم
+    const key = `user:${username}`;
+    let operations = await kv.get(key) || [];
+    
+    operations.push({ username, coins, timestamp });
+
+    // تخزين السجلات المحدثة
+    await kv.set(key, operations);
+
+    // خيار: تخزين كل العمليات في مفتاح عام إذا تحب تعرض كل العمليات للجميع
+    let allOps = await kv.get('all') || [];
+    allOps.push({ username, coins, timestamp });
+    await kv.set('all', allOps);
+
+    return { statusCode: 200, body: JSON.stringify({ success: true }) };
   } catch (err) {
-    console.log('ملف جديد سيتم إنشاؤه');
+    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
   }
-
-  const newOp = {
-    username: username || 'غير معروف',
-    coins: coins || 0,
-    timestamp: Date.now()
-  };
-
-  operations.push(newOp);
-
-  fs.writeFileSync(filePath, JSON.stringify(operations, null, 2));
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ message: 'تم تسجيل العملية', operation: newOp })
-  };
-};
+}
