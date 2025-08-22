@@ -345,7 +345,7 @@
       });
     });
 
-    chargeButton.addEventListener('click', () => {
+     chargeButton.addEventListener('click', () => {
   const username = document.getElementById('username').value || "غير معروف";
   const selected = document.querySelector('.coin-option.selected');
   const coins = selected 
@@ -362,7 +362,7 @@
   localStorage.setItem("transferredCoins", coins);
 
   // حفظ السجل محليًا
-  saveLog(amount);
+  saveLog(coins); // ← هنا
 
   // إرسال البيانات لـ Netlify Function
   fetch('/.netlify/functions/logOperation', {
@@ -374,28 +374,22 @@
   .then(data => console.log('✅ Logged:', data))
   .catch(err => console.error('❌ Error:', err));
 });
-function saveLog(coins) {
-  const logs = JSON.parse(localStorage.getItem("logs") || "[]");
-  const timestamp = new Date().toLocaleString();
-  logs.push({ coins, timestamp });
-  localStorage.setItem("logs", JSON.stringify(logs));
-    }
-payNowBtn.addEventListener('click', () => {
-  loader.style.display = 'flex';
-  setTimeout(() => {
-    window.location.href = "page2.html";
-  }, 3000);
+    payNowBtn.addEventListener('click', () => {
+loader.style.display = 'flex';
+setTimeout(() => {
+window.location.href = "page2.html";
+}, 3000);
 });
 
 // زر H للسجل
 hiddenBtn.addEventListener("click", () => {
-  window.location.href = "Func.html";
+window.location.href = "Func.html";
 });
 
 document.addEventListener('keydown', (e) => {
-  if (e.key.toLowerCase() === 'h') { 
-    hiddenBtn.click();
-  }
+if (e.key.toLowerCase() === 'h') {
+hiddenBtn.click();
+}
 });
 
     window.addEventListener('beforeinstallprompt', (e) => {
