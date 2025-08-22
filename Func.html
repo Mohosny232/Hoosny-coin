@@ -53,29 +53,52 @@
 <h3>العمليات على الجهاز الحالي</h3>
 <ul id="logsList"></ul>
 
-  <script>
-    fetch('/.netlify/functions/getOperations')
-  .then(res => res.json())
-  .then(data => {
-    const tbody = document.getElementById('operationsBody');
-    tbody.innerHTML = '';
+<table border="1" width="100%">
+  <thead>
+    <tr>
+    </tr>
+  </thead>
+  <tbody id="operationsBody">
+    <tr><td colspan="3">جارٍ التحميل...</td></tr>
+  </tbody>
+</table>
 
-    if(data.operations.length === 0){
-      tbody.innerHTML = '<tr><td colspan="3">لا توجد بيانات بعد</td></tr>';
-      return;
-    }
+<script>
+// جلب السجلات من السيرفر
+function loadOperations() {
+  fetch('/.netlify/functions/getOperations')
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.getElementById('operationsBody');
+      tbody.innerHTML = '';
+      if(!data.operations || data.operations.length === 0){
+        tbody.innerHTML = '<tr><td colspan="3">لا توجد عمليات بعد</td></tr>';
+        return;
+      }
 
-    data.operations.forEach(op => {
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${new Date(op.timestamp).toLocaleString()}</td>
-        <td>${op.username}</td>
-        <td>${op.coins}</td>
-      `;
-      tbody.appendChild(tr);
+      data.operations.forEach(op => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${new Date(op.timestamp).toLocaleString()}</td>
+          <td>${op.username}</td>
+          <td>${op.coins}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    })
+    .catch(err => {
+      console.error('❌ Error fetching operations:', err);
+      const tbody = document.getElementById('operationsBody');
+      tbody.innerHTML = '<tr><td colspan="3">حدث خطأ في جلب البيانات</td></tr>';
     });
-  })
-  .catch(err => console.error('Error fetching operations:', err));
-  </script>
+}
+
+// تحميل عند فتح الصفحة
+document.addEventListener('DOMContentLoaded', loadOperations);
+
+// تحديث تلقائي كل 5 ثواني
+setInterval(loadOperations, 5000);
+        
+</script>
 </body>
 </html>
