@@ -24,38 +24,31 @@
       <tr><td colspan="3">جاري التحميل...</td></tr>
     </tbody>
   </table>
-
-  <script>
-    function loadOperations() {
-      fetch('/.netlify/functions/getOperations')
-        .then(res => res.json())
-        .then(data => {
-          const tbody = document.getElementById('operationsBody');
-          tbody.innerHTML = '';
-          if(!data.operations || data.operations.length === 0){
-            tbody.innerHTML = '<tr><td colspan="3">لا توجد عمليات بعد</td></tr>';
-            return;
-          }
-
-          data.operations.forEach(op => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-              <td>${new Date(op.timestamp).toLocaleString()}</td>
-              <td>${op.username}</td>
-              <td>${op.coins}</td>
-            `;
-            tbody.appendChild(tr);
-          });
-        })
-        .catch(err => {
-          console.error('❌ Error fetching operations:', err);
-          const tbody = document.getElementById('operationsBody');
-          tbody.innerHTML = '<tr><td colspan="3">حدث خطأ في جلب البيانات</td></tr>';
+<script>
+  function loadOps() {
+    fetch('/.netlify/functions/getOperations')
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.getElementById('operationsBody');
+        tbody.innerHTML = '';
+        (data.operations || []).forEach(op => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${new Date(op.timestamp).toLocaleString()}</td>
+            <td>${op.username}</td>
+            <td>${op.coins}</td>
+          `;
+          tbody.appendChild(tr);
         });
-    }
+      })
+      .catch(err => console.error('Error fetching operations:', err));
+  }
 
-    document.addEventListener('DOMContentLoaded', loadOperations);
-    setInterval(loadOperations, 5000);
+  document.addEventListener('DOMContentLoaded', () => {
+    loadOps();
+    setInterval(loadOps, 5000); // يحدث كل 5 ثواني
+  });
+            
   </script>
 </body>
 </html>
