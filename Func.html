@@ -71,6 +71,22 @@
         });
       })
       .catch(err => console.error('Error fetching operations:', err));
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const logsList = document.getElementById('logsList');
+
+      // جلب السجل من localStorage
+      const logs = JSON.parse(localStorage.getItem("logs") || "[]");
+
+      if (logs.length === 0) {
+        logsList.innerHTML = "<li>لا توجد بيانات بعد</li>";
+      } else {
+        logsList.innerHTML = logs.map(log =>
+          `<li>🔸 ${log.coins} عملة - ${log.timestamp}</li>`
+        ).join("");
+      }
+    });
+  
   </script>
 </body>
 </html>
