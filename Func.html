@@ -26,40 +26,59 @@
     </tbody>
   </table>
 
-  <script>
-    async function loadOperations() {
-      try {
-        const res = await fetch('/.netlify/functions/getOperations');
-        const data = await res.json();
-        const tbody = document.getElementById('operationsBody');
-        tbody.innerHTML = '';
+  <button id="testBtn">تجربة تسجيل عملية</button>
 
-        if (!data.operations || data.operations.length === 0) {
-          tbody.innerHTML = '<tr><td colspan="3">لا توجد عمليات بعد</td></tr>';
-          return;
-        }
+<script>
+async function loadOperations() {
+  try {
+    const res = await fetch('/.netlify/functions/getOperations');
+    const data = await res.json();
+    const tbody = document.getElementById('operationsBody');
+    tbody.innerHTML = '';
 
-        data.operations.forEach(op => {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td>${new Date(op.timestamp).toLocaleString()}</td>
-            <td>${op.username}</td>
-            <td>${op.coins}</td>
-          `;
-          tbody.appendChild(tr);
-        });
-      } catch (err) {
-        console.error(err);
-        const tbody = document.getElementById('operationsBody');
-        tbody.innerHTML = '<tr><td colspan="3">خطأ في تحميل العمليات</td></tr>';
-      }
-    }
+    (data.operations || []).forEach(op => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${new Date(op.timestamp).toLocaleString()}</td>
+        <td>${op.username}</td>
+        <td>${op.coins}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  } catch (err) {
+    console.error(err);
+  }
+}
 
-    // تحميل السجل عند فتح الصفحة
+// زر تجربة تسجيل عملية
+document.getElementById('testBtn').addEventListener('click', async () => {
+  const testData = {
+    username: "TestUser",
+    coins: 123,
+    timestamp: new Date().toISOString()
+  };
+
+  try {
+    const res = await fetch('/.netlify/functions/logOperation', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(testData)
+    });
+    const result = await res.json();
+    console.log('✅ تم تسجيل العملية:', result);
+
+    // إعادة تحميل السجل بعد تسجيل العملية
     loadOperations();
+  } catch (err) {
+    console.error('❌ خطأ أثناء تسجيل العملية:', err);
+  }
+});
 
-    // لو حابب تحدث تلقائي كل 5 ثواني
-    setInterval(loadOperations, 5000);
-  </script>
+// تحميل السجل عند فتح الصفحة
+document.addEventListener('DOMContentLoaded', () => {
+  loadOperations();
+  setInterval(loadOperations, 5000); // تحديث كل 5 ثواني
+});
+</script>
 </body>
 </html>
