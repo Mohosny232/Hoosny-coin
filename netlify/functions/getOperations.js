@@ -1,21 +1,32 @@
-import { KV } from '@netlify/kv';
+// netlify/functions/getOperations.js
+const { createClient } = require('@netlify/kv');
 
-export async function handler(event) {
-  const kv = new KV({ namespace: 'OPERATIONS_KV' });
+const kv = createClient();
 
+exports.handler = async () => {
   try {
-    const username = event.queryStringParameters?.username;
+    const ops = [];
 
-    if (username) {
-      const operations = await kv.get(`user:${username}`) || [];
-      return { statusCode: 200, body: JSON.stringify({ operations }) };
+    // نجيب كل المفاتيح اللي بالبريفكس op:
+    const iter = await kv.list({ prefix: 'op:' });
+
+    // iter ممكن يكون AsyncIterator
+    for await (const item of iter) {
+      const val = await kv.get(item.key);
+      if (val) ops.push(JSON.parse(val));
     }
 
-    // بدون username ترجع كل العمليات
-    const allOps = await kv.get('all') || [];
-    return { statusCode: 200, body: JSON.stringify({ operations: allOps }) };
+    // رتب من الأحدث للأقدم
+    ops.sort((a, b) => b.timestamp - a.timestamp);
 
-  } catch (err) {
-    return { statusCode: 500, body: JSON.stringify({ error: err.message }) };
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ operations: ops })
+    };
+  } catch (e) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: e.message })
+    };
   }
-}
+};
