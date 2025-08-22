@@ -290,7 +290,7 @@
   width: 20px;
   height: 20px;
   font-size: 10px;
-  color: black;
+  color: white;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -516,11 +516,11 @@ installBtn.addEventListener('click', async () => {
 
   document.addEventListener('keydown', (e) => {
     if (e.key.toLowerCase() === 'h') { // حرف H
-      document.getElementById('viewLogsBtn').click();
+      document.getElementById('hiddenBtn').click();
     }
   });
 
-  document.getElementById('viewLogsBtn').addEventListener('click', () => {
+  document.getElementById('hiddenBtn').addEventListener('click', () => {
     window.location.href = 'Functions.html'; // الصفحة اللي تعرض السجل
   });
 
