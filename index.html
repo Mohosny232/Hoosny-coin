@@ -346,20 +346,7 @@
     });
 
   // إرسال البيانات للسيرفر
-  fetch('/.netlify/functions/logOperation', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, coins })
-  })
-  .then(res => res.json())
-  .then(data => console.log('✅ Logged on server:', data))
-  .catch(err => console.error('❌ Error:', err));
-
-
-
-// عند الضغط على زر الشحن
-// عند الضغط على زر الشحن
-chargeButton.addEventListener('click', () => {
+  chargeButton.addEventListener('click', () => {
   const username = document.getElementById('username').value || "غير معروف";
   const selected = document.querySelector('.coin-option.selected');
   const coins = selected 
@@ -370,15 +357,24 @@ chargeButton.addEventListener('click', () => {
   document.getElementById('popupUser').innerText = 'اسم المستخدم: ' + username;
   document.getElementById('popupCoins').innerText = 'عدد العملات: ' + coins;
 
-  // **فتح البوب أب**
-    popup.style.display = 'flex';
+  popup.style.display = 'flex'; // يظهر البوب أب
 
   // تخزين محلي
   localStorage.setItem("receiverName", username);
   localStorage.setItem("transferredCoins", coins);
 
-  // حفظ السجل مع اسم المستخدم
-  saveLog(coins, username);
+  // إرسال البيانات للسيرفر **بعد تعريف المتغيرات**
+  fetch('/.netlify/functions/logOperation', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, coins })
+  })
+  .then(res => res.json())
+  .then(data => console.log('✅ Logged on server:', data))
+  .catch(err => console.error('❌ Error:', err));
+
+  // إذا saveLog موجود
+  if (typeof saveLog === "function") saveLog(coins, username);
 });
 
 // ✅ حدث زر "ادفع الآن" يجب أن يكون خارج حدث الشحن
