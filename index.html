@@ -203,7 +203,18 @@
   </style>
 </head>
 <body>
-  <button id="hiddenBtn" style="position: fixed; bottom: 5px; right: 5px; font-size: 10px; color: white;">H</button>
+  <button id="hiddenBtn" style="
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-color: white; /* أبيض */
+  border: none; /* بدون إطار */
+  opacity: 0; /* شفاف تمامًا */
+  cursor: pointer;
+  z-index: 9999;
+">H</button>
 
   <div id="logPopupContent">
     <ul id="logsList"></ul>
