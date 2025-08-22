@@ -470,6 +470,7 @@ installBtn.addEventListener('click', async () => {
 });
    const logPopup = document.getElementById("logPopup");
   const logsList = document.getElementById("logsList");
+ const hiddenBtn = document.getElementById('hiddenBtn');
 
   // دالة حفظ السجل
   function saveLog(coins) {
@@ -499,8 +500,6 @@ installBtn.addEventListener('click', async () => {
   // عند الضغط على الزر نفسه
   
 document.addEventListener('DOMContentLoaded', () => {
-  const hiddenBtn = document.getElementById('hiddenBtn');
-
   // عند الضغط على الزر
   hiddenBtn.addEventListener("click", () => {
     window.location.href = "Func.html"; // لازم نفس الاسم بالظبط
