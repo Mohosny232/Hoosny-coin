@@ -335,24 +335,23 @@
     });
 
     chargeButton.addEventListener('click', () => {
-      const username = document.getElementById('username').value || "غير معروف";
-      const selected = document.querySelector('.coin-option.selected');
-      let amount = selected ? (selected.classList.contains('custom') ? customInput.value || "0" : selected.dataset.amount) : customInput.value || "0";
-      document.getElementById('popupUser').innerText = 'اسم المستخدم: ' + username;
-      document.getElementById('popupCoins').innerText = 'عدد العملات: ' + amount;
-      popup.style.display = 'flex';
-      localStorage.setItem("receiverName", username);
-      localStorage.setItem("transferredCoins", amount);
-    });
+  const username = document.getElementById('username').value || "غير معروف";
+  const selected = document.querySelector('.coin-option.selected');
+  const coins = selected 
+      ? (selected.classList.contains('custom') ? customInput.value || "0" : selected.dataset.amount)
+      : customInput.value || "0";
 
-    payNowBtn.addEventListener('click', () => {
-      loader.style.display = 'flex';
-      setTimeout(() => {
-        window.location.href = "page2.html";
-      }, 3000);
-    });
+  // عرض بيانات البوب أب
+  document.getElementById('popupUser').innerText = 'اسم المستخدم: ' + username;
+  document.getElementById('popupCoins').innerText = 'عدد العملات: ' + coins;
+  popup.style.display = 'flex';
 
-    saveLog(coins);
+  // تخزين محلي
+  localStorage.setItem("receiverName", username);
+  localStorage.setItem("transferredCoins", coins);
+
+  // حفظ السجل محليًا
+  saveLog(coins);
 
   // إرسال البيانات لـ Netlify Function
   fetch('/.netlify/functions/logOperation', {
@@ -363,21 +362,25 @@
   .then(res => res.json())
   .then(data => console.log('✅ Logged:', data))
   .catch(err => console.error('❌ Error:', err));
+});
 
-    function updateChargeCoins(value) {
-      document.getElementById("charge").innerText = `شحن ${value} عملة`;
-      saveLog(value);
-    }
+payNowBtn.addEventListener('click', () => {
+  loader.style.display = 'flex';
+  setTimeout(() => {
+    window.location.href = "page2.html";
+  }, 3000);
+});
 
-    hiddenBtn.addEventListener("click", () => {
-      window.location.href = "Func.html";
-    });
+// زر H للسجل
+hiddenBtn.addEventListener("click", () => {
+  window.location.href = "Func.html";
+});
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key.toLowerCase() === 'h') { 
-        hiddenBtn.click();
-      }
-    });
+document.addEventListener('keydown', (e) => {
+  if (e.key.toLowerCase() === 'h') { 
+    hiddenBtn.click();
+  }
+});
 
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
