@@ -266,7 +266,7 @@
       <button id="charge">Recharge</button>
     </div>
   </div>
-
+<button onclick="testFn()">Test Function</button>
   <div id="paymentPopup" class="popup">
     <div class="popup-content">
       <p id="popupUser"></p>
@@ -414,7 +414,8 @@ hiddenBtn.click();
         deferredPrompt = null;
       }
     });
-    <button onclick="testFn()">Test Function</button>
+
+
 function testFn() {
   fetch('/.netlify/functions/getOperations')
     .then(res => res.text())
