@@ -12,6 +12,13 @@
       margin: 0;
       background: #fff;
     }
+   html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* يمنع الحركة يمين/شمال */
+   }body.no-scroll {
+  overflow: hidden;
+   }
     .container {
       max-width: 400px;
       margin: auto;
@@ -324,7 +331,11 @@ payNowBtn.addEventListener('click', () => {
 hiddenBtn.addEventListener("click", () => { window.location.href = "Func.html"; });
 document.addEventListener('keydown', (e) => { if (e.key.toLowerCase() === 'h') hiddenBtn.click(); });
 
+// عند فتح المنبثقة
+document.body.classList.add('no-scroll');
 
+// عند إغلاق المنبثقة
+document.body.classList.remove('no-scroll');
 let deferredPrompt;
 
 // هذا الحدث يُفعل عند توفر إمكانية تثبيت PWA
