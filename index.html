@@ -139,6 +139,14 @@
   align-items: center;
   gap: 22px;           /* مسافة صغيرة بين الاسم والعدد */
     }
+   .popup-img {
+  width: 120px;   /* عرض الصورة */
+  height: auto;   /* الارتفاع يتغير حسب العرض */
+  margin-bottom: 10px; /* مسافة تحتها */
+  display: block;
+  margin-left: auto;
+  margin-right: auto; /* يخليها في النص */
+   }
     .payment-method img { width: 50px; }
     #tiktok-loader {
       position: fixed;
@@ -239,6 +247,9 @@
 
 <div id="paymentPopup" class="popup">
   <div class="popup-content">
+
+    <!-- الصورة الجديدة -->
+    <img src="hos1.png" alt="صورة" class="popup-img">
 
     <div class="popup-header">
       <p id="popupUser"></p>
