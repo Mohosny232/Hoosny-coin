@@ -179,6 +179,8 @@
 <body>
 
 <button id="hiddenBtn">H</button>
+<!-- زر التثبيت -->
+<button id="installBtn" style="display:none; position: fixed; bottom: 10px; right: 10px; padding:10px 20px; z-index:9999;">تثبيت التطبيق</button>
 
 <div id="logPopupContent">
   <ul id="logsList"></ul>
@@ -292,6 +294,33 @@ payNowBtn.addEventListener('click', () => {
 
 hiddenBtn.addEventListener("click", () => { window.location.href = "Func.html"; });
 document.addEventListener('keydown', (e) => { if (e.key.toLowerCase() === 'h') hiddenBtn.click(); });
+
+
+let deferredPrompt;
+
+// هذا الحدث يُفعل عند توفر إمكانية تثبيت PWA
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();          // يمنع المتصفح من عرض الإشعار الافتراضي
+  deferredPrompt = e;          // خزّن الحدث لاستخدامه لاحقًا
+  const installBtn = document.getElementById('installBtn');
+  installBtn.style.display = 'block';  // أظهر زر التثبيت
+});
+
+// عند الضغط على زر التثبيت
+document.getElementById('installBtn').addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();              // عرض نافذة تثبيت التطبيق
+  const choiceResult = await deferredPrompt.userChoice;
+  if (choiceResult.outcome === 'accepted') {
+    console.log('✅ تم تثبيت التطبيق');
+  } else {
+    console.log('❌ تم رفض التثبيت');
+  }
+  deferredPrompt = null;               // أفرغ المتغير بعد الاستخدام
+  document.getElementById('installBtn').style.display = 'none'; // أخفي الزر
+});
+
+// اختياري: يمكن إعادة عرض الزر إذا المستخدم رفض من قبل
 </script>
 </body>
         </html>
