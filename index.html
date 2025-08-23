@@ -108,7 +108,13 @@
   height: 260px;   /* الطول هنا */
   max-height: 90%; /* أقصى طول بالنسبة للشاشة */
   overflow-y: auto; /* عشان لو المحتوى زاد يظهر سكرول */
+  display: flex;        /* ترتيب داخلي */
+  flex-direction: column; /* العناصر تبقى تحت بعض */
+  justify-content: space-between; /* توزيع المسافة بين العناصر */
+  align-items: center;  /* كل العناصر تتوسّط أفقياً */
+  gap: 15px;            /* مسافة ثابتة بين العناصر */
 }
+
     .payment-method {
       display: flex;
       align-items: center;
