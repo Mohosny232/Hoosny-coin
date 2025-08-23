@@ -213,6 +213,30 @@
   margin-bottom: 10px;    /* مسافة بينها وبين الزر */
   margin-left: 10px;      /* مسافة بسيطة من الحافة */
     }
+    #payNow.pay-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 12px;
+  background: #ff2d55;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center; /* النص + الصورة في النص */
+  gap: 8px; /* مسافة صغيرة بينهم */
+}
+
+#payNow .btn-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: inline-block;
+}
     #logsList { margin: 0; padding: 0; list-style: none; }
     button:hover { opacity: 0.9; }
   </style>
@@ -278,11 +302,10 @@
     </div>
     
      -->
-  <img src="hos2.png" alt="صورة 2" class="popup-small-img">
-
-  <!-- زر الدفع -->
-  <button id="payNow">ادفع الآن</button>
-  </div>
+<button id="payNow" class="pay-btn">
+  <span>ادفع الآن</span>
+  <img src="hos2.png" alt="icon" class="btn-icon" />
+</button>
 
 
 
