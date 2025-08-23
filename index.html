@@ -213,29 +213,25 @@
   margin-bottom: 10px;    /* مسافة بينها وبين الزر */
   margin-left: 10px;      /* مسافة بسيطة من الحافة */
     }
-    #payNow.pay-btn {
-      width: 100%;
-       padding: 14px;
-      margin-top: 25px;
-      background: #ff2d55;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center; /* النص + الصورة في النص */
-  gap: 8px; /* مسافة صغيرة بينهم */
+    #payNow .btn-icon {
+  width: 120px;      /* كبر أو صغر الحجم براحتك */
+  height: auto;      /* الطول يتناسب مع العرض */
+  display: block;
+  margin: 0 auto 20px auto; /* تسيب مسافة تحتها قبل الزر */
 }
 
-#payNow .btn-icon {
-  width: 100px;
-  height: 100px;
-  object-fit: contain;
-  display: inline-block;
-}
+#payNow.pay-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 0;       /* خلي الزر ثابت تحت الصورة مباشرة */
+  background: #ff2d55;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}             
     #logsList { margin: 0; padding: 0; list-style: none; }
     button:hover { opacity: 0.9; }
   </style>
