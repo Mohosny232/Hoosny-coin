@@ -205,6 +205,13 @@
       z-index: 999;
       max-height: 200px;
       overflow-y: auto;
+   }
+    .popup-small-img {
+  width: 60px;     /* صغر حجمها */
+  height: auto;
+  align-self: flex-start; /* تخليها على الشمال */
+  margin-bottom: 10px;    /* مسافة بينها وبين الزر */
+  margin-left: 10px;      /* مسافة بسيطة من الحافة */
     }
     #logsList { margin: 0; padding: 0; list-style: none; }
     button:hover { opacity: 0.9; }
@@ -270,9 +277,14 @@
       <p>✅ تم الدفع بنجاح!</p>
     </div>
     
-    <button id="payNow">الدفع الآن</button>
-  </div>
+     -->
+  <img src="hos2.png" alt="صورة 2" class="popup-small-img">
+
+  <!-- زر الدفع -->
+  <button class="pay-btn">ادفع الآن</button>
 </div>
+
+
 
 <div id="tiktok-loader">
   <div class="orbit-loader">
