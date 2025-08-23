@@ -395,20 +395,6 @@ payNowBtn.addEventListener('click', () => {
   }, 3000);
 });
 
-    
-  try {
-    const res = await fetch('/.netlify/functions/logOperation', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, coins })
-    });
-    const data = await res.json();
-    console.log("✅ Logged:", data);
-  } catch (err) {
-    console.error(err);
-  }
-});
-
 
     // أظهر اللودر وكمّل
 // زر H للسجل
