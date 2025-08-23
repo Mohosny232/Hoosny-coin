@@ -92,7 +92,19 @@
       font-size: 18px;
       font-weight: bold;
       cursor: pointer;
+      display: flex;             /* نخلي الزر مرن */
+  align-items: center;       /* محاذاة رأسية */
+  justify-content: center;   /* العنصرين يتوسّطوا */
+  gap: 8px;                  
     }
+    
+    
+  #charge .btn-icon {
+    width: 20px;      
+    height: auto;
+    display: inline-block;
+  }
+
     .popup {
   display: none;
   position: fixed;
@@ -273,9 +285,11 @@
 
   <img src="pay12.png" alt="Pay Image" class="top-image">
   <div style="width: 100%; display: flex; justify-content: center; margin-top: 0px;">
-    <button id="charge">Recharge</button>
-  </div>
-</div>
+    >
+<button id="charge">
+  <img src="hos2.png" class="btn-icon" alt="">
+  Recharge
+</button>
 
 <div id="paymentPopup" class="popup">
   <div class="popup-content">
