@@ -109,12 +109,12 @@
 /* دي المنبثقة نفسها */
 .popup-content {
   background: #fff;
-  padding: 20px;
+  padding: 0;
   border-radius: 12px;
   width: 70%;      /* عرض المنبثقة */
   height: 260px;   /* الطول هنا */
   max-height: 90%; /* أقصى طول بالنسبة للشاشة */
-  overflow-y: auto; /* عشان لو المحتوى زاد يظهر سكرول */
+  overflow-y: hidden; /* عشان لو المحتوى زاد يظهر سكرول */
   display: flex;        /* ترتيب داخلي */
   flex-direction: column; /* العناصر تبقى تحت بعض */
   justify-content: center;      /* كل العناصر في منتصف الطول *//* توزيع المسافة بين العناصر */
@@ -139,13 +139,14 @@
   align-items: center;
   gap: 10px;           /* مسافة صغيرة بين الاسم والعدد */
     }
-   .popup-img {
-  width: 100%;   /* عرض الصورة */
-  height: auto;   /* الارتفاع يتغير حسب العرض */
-  margin: 0px; /* مسافة تحتها */
-  display: block; /* يخليها في النص */
-  margin: 0 auto;
-   }
+   
+.popup-img {
+  width: 100%;     /* نفس عرض البوب */
+  height: auto;
+  display: block;
+  border-radius: 12px 12px 0 0; /* نفس حواف البوب من فوق */
+}
+
     .payment-method img { width: 50px; }
     #tiktok-loader {
       position: fixed;
