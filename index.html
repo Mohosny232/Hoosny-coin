@@ -93,20 +93,21 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.6); /* الخلفية السودا */
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
-/* هنا البوكس الداخلي اللي بيتحكم في الحجم */
+/* دي المنبثقة نفسها */
 .popup-content {
   background: #fff;
   padding: 20px;
   border-radius: 12px;
-  width: 325px;   /* 👈 عرض البوب */
-  min-height: 200px; /* 👈 الطول */
-  text-align: center;
+  width: 70%;      /* عرض المنبثقة */
+  height: 400px;   /* الطول هنا */
+  max-height: 90%; /* أقصى طول بالنسبة للشاشة */
+  overflow-y: auto; /* عشان لو المحتوى زاد يظهر سكرول */
 }
     .payment-method {
       display: flex;
