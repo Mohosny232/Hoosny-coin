@@ -339,13 +339,14 @@
     }
 
     customInput.addEventListener('input', (e) => {
-      selectCustom();
-      const value = parseInt(e.target.value) || 0;
-      chargeButton.innerText = `شحن ${value} عملة`;
-      const price = (value * 3 / 17000).toFixed(2);
-      document.getElementById('customPrice').textContent = value > 0 ? `${price} $` : '';
-    });
-
+  selectCustom();
+  const value = parseInt(e.target.value) || 0;
+  chargeButton.innerText = `شحن ${value} عملة`;
+  const price = (value * 3 / 17000).toFixed(2);
+  const customPrice = document.getElementById('customPrice');
+  customPrice.textContent = value > 0 ? `${price} $` : '';
+  customPrice.style.color = "gray"; // ✅ السعر لونه رمادي
+});      
     document.getElementById('username').addEventListener('input', () => {
       typeSound.currentTime = 0;
       typeSound.play();
