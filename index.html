@@ -125,6 +125,13 @@
       gap: 10px;
       margin: 0px 0;
     }
+    .popup-header {
+  margin-top: 20px;   /* المسافة من فوق */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;           /* مسافة صغيرة بين الاسم والعدد */
+    }
     .payment-method img { width: 80px; }
     #tiktok-loader {
       position: fixed;
@@ -225,8 +232,13 @@
 
 <div id="paymentPopup" class="popup">
   <div class="popup-content">
-    <p id="popupUser"></p>
-    <p id="popupCoins"></p>
+
+    <div class="popup-header">
+      <p id="popupUser"></p>
+      <p id="popupCoins"></p>
+    </div>
+
+    <!-- طريقة الدفع -->
     
     <!-- طريقة الدفع -->
     <div class="payment-method">
