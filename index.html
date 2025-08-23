@@ -213,17 +213,10 @@
   margin-bottom: 10px;    /* مسافة بينها وبين الزر */
   margin-left: 10px;      /* مسافة بسيطة من الحافة */
     }
-    #payNow .btn-icon {
-  width: 120px;      /* كبر أو صغر الحجم براحتك */
-  height: auto;      /* الطول يتناسب مع العرض */
-  display: block;
-  margin: 0 auto 20px auto; /* تسيب مسافة تحتها قبل الزر */
-}
-
-#payNow.pay-btn {
-  width: 100%;
+  #payNow {
+  width: 100%;              /* عرض الزر */
   padding: 14px;
-  margin-top: 0;       /* خلي الزر ثابت تحت الصورة مباشرة */
+  margin-top: 0;
   background: #ff2d55;
   color: white;
   border: none;
@@ -231,7 +224,19 @@
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
-}             
+
+  display: flex;             /* نخلي الزر مرن */
+  align-items: center;       /* محاذاة رأسية */
+  justify-content: center;   /* العنصرين يتوسّطوا */
+  gap: 8px;                  /* مسافة بين الصورة والنص */
+}
+
+#payNow .btn-icon {
+  width: 22px;       /* حجم الصورة داخل الزر */
+  height: auto;
+  display: inline-block;
+}
+   
     #logsList { margin: 0; padding: 0; list-style: none; }
     button:hover { opacity: 0.9; }
   </style>
