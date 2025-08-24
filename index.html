@@ -102,14 +102,13 @@
 }
 
 #buttonLoader {
-  display: none;              /* افتراضيًا مخفي */
+  display: none;              /* مخفي افتراضي */
   width: 20px;                /* الحجم */
   height: 20px;
-  border: 2px solid rgba(255,255,255,0.4); /* الحدود الشفافة */
-  border-top: 2px solid #fff;              /* الجزء الأبيض اللي بيلف */
-  border-radius: 50%;         /* دايرة */
-  animation: spin 0.8s linear infinite; /* أسرع زي TikTok */
-  margin: auto;               /* يتوسّط */
+  border-radius: 50%;         /* دايرة كاملة */
+  background: conic-gradient(#fff 0deg, #fff 90deg, transparent 90deg); 
+  animation: spin 0.8s linear infinite;
+  margin: auto;
 }
 
 @keyframes spin {
