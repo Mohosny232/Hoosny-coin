@@ -19,13 +19,23 @@
    }body.no-scroll {
   overflow: hidden;
    }
-    .container {
+    body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center; /* يوسّط بالعرض */
+  align-items: flex-start; /* يخليها فوق */
+  min-height: 100vh; /* يخلي الجسم ياخد طول الشاشة */
+}
+
+.container {
   width: 270px;
-  max-width: 100%;
-  margin: 40px auto 0 auto; /* هترفعها لفوق 40px وتخليها في النص */
   padding: 20px;
-  text-align: center; /* يظبط المحتوى جوة النص */
-    }
+  margin-top: 40px; /* تتحرك من فوق شوية */
+  background: #f0f0f0; /* لون تجريبي عشان يبان */
+  border-radius: 8px;
+  text-align: center;
+}
     h1 {
       text-align: center;
       font-weight: 700;
