@@ -493,13 +493,13 @@ customInput.addEventListener('input', (e) => {
 });
 
 chargeButton.addEventListener('click', () => {
-  const loaderSpan = document.getElementById('buttonLoader');
+  if (!chargeButton.classList.contains('active')) return;
+
   const textSpan = document.getElementById('chargeText');
   const imgIcon = document.querySelector('#charge .btn-icon');
+  const loaderSpan = document.getElementById('buttonLoader');
 
-  if (!chargeButton.classList.contains('active')) return; // لا يعمل إذا الزر غير مفعل
-
-  // إخفاء النص والصورة، وإظهار اللودر
+  // إخفاء النص والصورة، إظهار اللودر
   textSpan.style.display = 'none';
   imgIcon.style.display = 'none';
   loaderSpan.style.display = 'inline-block';
@@ -507,13 +507,11 @@ chargeButton.addEventListener('click', () => {
   setTimeout(() => {
     // إخفاء اللودر بعد ثانيتين
     loaderSpan.style.display = 'none';
-
-    // إعادة زر الشحن إلى رمادي
-    chargeButton.classList.remove('active');
-
-    // إعادة النص والصورة للزر
+    // إعادة النص والصورة
     textSpan.style.display = 'inline';
     imgIcon.style.display = 'inline';
+    // إعادة الزر للرمادي
+    chargeButton.classList.remove('active');
 
     // عرض البوب أب
     const username = document.getElementById('username').value || "غير معروف";
@@ -524,10 +522,7 @@ chargeButton.addEventListener('click', () => {
     document.getElementById('popupCoins').innerText = 'عدد العملات: ' + coins;
     popup.style.display = 'flex';
 
-    localStorage.setItem("receiverName", username);
-    localStorage.setItem("transferredCoins", coins);
-
-  }, 2000); // مدة اللودر ثانيتين
+  }, 2000);
 });
     // اختياري: يمكن إعادة عرض الزر إذا المستخدم رفض من قبل
 </script>
