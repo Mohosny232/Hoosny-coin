@@ -6,6 +6,8 @@
   <title>Coin Recharge TikTok</title>
   <link rel="manifest" href="manifest.json">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap" rel="stylesheet">
+  <!-- CSS مع إضافة ?v= لمنع الكاش -->
+  <link rel="stylesheet" href="style.css?v=20250824_1523">
   <style>
     body {
       font-family: 'Tajawal', sans-serif;
@@ -335,6 +337,8 @@
 <audio id="successSound" src="success.mp3"></audio>
 <audio id="typeSound" src="type.mp3"></audio>
 
+  <!-- السكربتات بعد كل العناصر -->
+  <script src="script.js?v=20250824_1523"></script>
 <script>
 const chargeButton = document.getElementById('charge');
 const customInput = document.getElementById('customAmount');
@@ -422,6 +426,16 @@ document.getElementById('installBtn').addEventListener('click', async () => {
   deferredPrompt = null;               // أفرغ المتغير بعد الاستخدام
   document.getElementById('installBtn').style.display = 'none'; // أخفي الزر
 });
+
+  const version = new Date().getTime(); // رقم كبير وفريد لكل ثانية
+  const script = document.createElement('script');
+  script.src = `script.js?v=${version}`;
+  document.body.appendChild(script);
+
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = `style.css?v=${version}`;
+  document.head.appendChild(link);
 
 // اختياري: يمكن إعادة عرض الزر إذا المستخدم رفض من قبل
 </script>
