@@ -222,6 +222,23 @@
       max-height: 200px;
       overflow-y: auto;
    }
+    
+#buttonLoader {
+  display: none; /* مخفي افتراضيًا */
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  position: absolute;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
     .popup-small-img {
   width: 300px;     /* صغر حجمها */
   height: auto;
@@ -295,7 +312,8 @@
     
 <button id="charge">
   <img src="hos2.png" class="btn-icon" alt="">
-  Recharge
+  <span id="chargeText">Recharge</span>
+  <span id="buttonLoader" class="loader"></span>
 </button>
 <!-- زر الشحن -->
 
