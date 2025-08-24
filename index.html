@@ -92,8 +92,8 @@
       border-radius: 8px;
       font-size: 18px;
       font-weight: bold;
-      }
-
+      position: relative; 
+    }
 
     
     
@@ -232,21 +232,22 @@
       max-height: 200px;
       overflow-y: auto;
    }
-    
+  
+
 #buttonLoader {
-  display: none; /* مخفي افتراضيًا */
+  display: none; 
   width: 20px;
   height: 20px;
   border: 3px solid rgba(255, 255, 255, 0.3);
   border-top: 3px solid #fff;
   border-radius: 50%;
   animation: spin 1s linear infinite;
+  
   position: absolute;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10; /* فوق كل العناصر داخل الزر */
 }
 
     .popup-small-img {
@@ -512,8 +513,7 @@ chargeButton.addEventListener('click', () => {
   // إخفاء النص والصورة، إظهار اللودر
   textSpan.style.display = 'none';
   imgIcon.style.display = 'none';
-  loaderSpan.style.display = 'inline-block';
-
+  loaderSpan.style.display = 'block';
   setTimeout(() => {
     // إخفاء اللودر بعد ثانيتين
     loaderSpan.style.display = 'none';
