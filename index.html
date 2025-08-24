@@ -389,24 +389,27 @@ function selectCustom() {
 }
 
 /// حدث خانة المخصص
+function updateChargeText(price) {
+  document.getElementById('chargeText').textContent = `Recharge ${price} USD`;
+}
+
+// عند إدخال قيمة مخصصة
 customInput.addEventListener('input', (e) => {
   selectCustom();
   const value = parseInt(e.target.value) || 0;
   const price = (value * 3 / 17000).toFixed(2);
-  chargeButton.innerHTML = `<img src="hos2.png" class="btn-icon" style="width:20px; height:auto;"> Recharge ${price} USD`;
+  updateChargeText(price);
   document.getElementById('customPrice').textContent = value > 0 ? `${price} USD` : '';
 });
 
-  
-   
-// حدث الخيارات الغير مخصصة
+// عند اختيار عملة عادية
 document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
   option.addEventListener('click', () => {
     document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
     option.classList.add('selected');
     const value = parseInt(option.dataset.amount);
     const price = (value * 3 / 17000).toFixed(2);
-    chargeButton.innerHTML = `<img src="hos2.png" class="btn-icon" style="width:20px; height:auto;"> Recharge ${price} USD`;
+    updateChargeText(price);
   });
 });
 
