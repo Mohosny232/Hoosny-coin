@@ -34,13 +34,18 @@ body {
   width: 330px;
   padding: 14px;
   position: relative; /* أو absolute */
-  left: 14px;        /* تحرك الخانة 50px يمين */
+  left: 7px;        /* تحرك الخانة 50px يمين */
   top: 0px;         /* تحركها شوية لفوق */
-  background: #f9f9f9;
-  border-radius: 7px;
 }
     
-
+h1 {
+  position: relative;  /* عشان نقدر نحرك العنصر بدون ما يتحرك باقي الصفحة */
+  left: 14px;          /* يحرك الـ h1 يمين 20px */
+  top: 0px;          /* يحرك الـ h1 فوق 10px */
+  text-align: center;  /* يخليه في النص بالنسبة لمحتوى الـ h1 */
+  color: red;          /* لونه أحمر */
+  font-size: 26px;     /* حجم الخط */
+}
 
     .tiktok { color: red; }
     #username {
