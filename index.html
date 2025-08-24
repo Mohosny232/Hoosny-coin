@@ -133,11 +133,13 @@ body {
 }
 
 #charge .btn-icon {
-  width: 20px;      
+  width: 20px;
   height: auto;
-  display: none; 
-  margin-bottom: 1px;
-  left: 10px; 
+  display: none; /* تظهر لما الزر أحمر */
+  position: absolute; /* مهم للتحريك */
+  top: 50%;         /* في منتصف ارتفاع الزر */
+  right: 10px;      /* على اليمين */
+  transform: translateY(-50%); /* توسيط عمودي للصورة */
 }
   
 
