@@ -481,21 +481,7 @@ document.getElementById('installBtn').addEventListener('click', async () => {
   }
   deferredPrompt = null;               // أفرغ المتغير بعد الاستخدام
   document.getElementById('installBtn').style.display = 'none'; // أخفي الزر
-});
-
-  
-  
-  window.onload = function() {
-    const timestamp = new Date().getTime();
-    const script = document.createElement('script');
-    script.src = `script.js?v=${timestamp}`;
-    document.head.appendChild(script);
-
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = `style.css?v=${timestamp}`;
-    document.head.appendChild(link);
-  };
+}); 
 function updateChargeCoins(amount) {
   const chargeButton = document.getElementById('charge');
   if (amount > 0) {
