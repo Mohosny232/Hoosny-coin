@@ -448,6 +448,43 @@ document.getElementById('installBtn').addEventListener('click', async () => {
     document.head.appendChild(link);
   };
 
+    function updateChargeCoins(amount) {
+  const chargeButton = document.getElementById('charge');
+  if (amount > 0) {
+    chargeButton.classList.add('active'); // تفعيل الزر
+  } else {
+    chargeButton.classList.remove('active'); // إبقاءه رمادي
+  }
+}
+
+// عند اختيار أي خيار عملة
+document.querySelectorAll('.coin-option').forEach(option => {
+  option.addEventListener('click', () => {
+    document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
+    option.classList.add('selected');
+
+    const amount = option.classList.contains('custom') ? parseInt(customInput.value) || 0 : parseInt(option.dataset.amount);
+    updateChargeCoins(amount);
+  });
+});
+
+// عند إدخال قيمة مخصصة
+customInput.addEventListener('input', (e) => {
+  selectCustom();
+  const value = parseInt(e.target.value) || 0;
+  updateChargeCoins(value);
+});
+
+// بعد الضغط على زر الشحن وظهور البوب أب، يرجع الزر رمادي
+chargeButton.addEventListener('click', () => {
+  if (!chargeButton.classList.contains('active')) return; // لا يعمل إذا الزر غير مفعل
+
+  // ظهور البوب أب
+  popup.style.display = 'flex';
+
+  // إعادة زر الشحن إلى رمادي
+  chargeButton.classList.remove('active');
+});
 // اختياري: يمكن إعادة عرض الزر إذا المستخدم رفض من قبل
 </script>
 </body>
