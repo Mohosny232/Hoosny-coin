@@ -250,8 +250,11 @@
     height: auto;
   }
 
-    #logsList { margin: 0; padding: 0; list-style: none; }
-    button:hover { opacity: 0.9; }
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
   </style>
 </head>
 <body>
@@ -290,6 +293,7 @@
   <img src="hos2.png" class="btn-icon" alt="">
   Recharge
 </button>
+<!-- زر الشحن -->
 
 <div id="paymentPopup" class="popup">
   <div class="popup-content">
@@ -360,6 +364,18 @@ customInput.addEventListener('input', (e) => {
   document.getElementById('customPrice').textContent = value > 0 ? `${price} USD` : '';
 });
 
+  // إظهار loader داخل الزر
+  const loaderSpan = document.getElementById('buttonLoader');
+  const textSpan = document.getElementById('chargeText');
+  loaderSpan.style.display = 'inline-block';
+  textSpan.style.display = 'none';
+
+  // بعد ثانيتين، إخفاء loader وفتح البوب أب
+  setTimeout(() => {
+    loaderSpan.style.display = 'none';
+    textSpan.style.display = 'inline';
+    
+   
 // حدث الخيارات الغير مخصصة
 document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
   option.addEventListener('click', () => {
