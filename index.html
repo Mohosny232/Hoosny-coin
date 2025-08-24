@@ -270,7 +270,7 @@
 
   <div class="coins">
     <div class="coin-option" data-amount="30"><img src="coin.png" class="coin-img" alt="coin">30<small>$0.01</small></div>
-    <div class="coin-option" data-amount="350"><img src="coin.png" class="coin-img" alt="coin">350<small>$0.06</small></div>
+    <div class="coin-option" data-amount="350"><img src="coin.png" class="coin-img" alt="coin">350<small>$0.07</small></div>
     <div class="coin-option" data-amount="700"><img src="coin.png" class="coin-img" alt="coin">700<small>$0.12</small></div>
     <div class="coin-option" data-amount="1400"><img src="coin.png" class="coin-img" alt="coin">1,400<small>$0.25</small></div>
     <div class="coin-option" data-amount="3500"><img src="coin.png" class="coin-img" alt="coin">3,500<small>$0.62</small></div>
@@ -425,16 +425,18 @@ document.getElementById('installBtn').addEventListener('click', async () => {
 });
 
   
-  const timestamp = new Date().getTime();
   
-  const script = document.createElement('script');
-  script.src = `script.js?v=${timestamp}`;
-  document.head.appendChild(script);
+  window.onload = function() {
+    const timestamp = new Date().getTime();
+    const script = document.createElement('script');
+    script.src = `script.js?v=${timestamp}`;
+    document.head.appendChild(script);
 
-  const link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.href = `style.css?v=${timestamp}`;
-  document.head.appendChild(link);
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = `style.css?v=${timestamp}`;
+    document.head.appendChild(link);
+  };
 
 // اختياري: يمكن إعادة عرض الزر إذا المستخدم رفض من قبل
 </script>
