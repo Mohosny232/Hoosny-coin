@@ -102,16 +102,17 @@
 }
 
 #buttonLoader {
-  display: none; /* مخفي افتراضي */
-  width: 20px;
-  height: 20px;
+  display: block; /* علشان يبان */
+  width: 15px;
+  height: 15px;
   border-radius: 50%; 
-  border: 3px solid #fff;     /* خط أبيض */
-  border-top-color: transparent; /* نخلي جزء مقطوع */
+  background: conic-gradient(
+    #fff 0deg 30deg,       /* الجزء الأبيض (30 درجة بس) */
+    transparent 30deg 360deg  /* الباقي شفاف */
+  );
   animation: spin 0.8s linear infinite;
   margin: auto;
-  }
-    
+}
 
 @keyframes spin {
   0%   { transform: rotate(0deg); }
