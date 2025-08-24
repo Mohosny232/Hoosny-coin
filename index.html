@@ -235,29 +235,19 @@
   
 
 #buttonLoader {
-  display: none;
-  position: absolute;
-  inset: 0; /* يغطي الزر كله */
-  border-radius: 8px;
-  background: rgba(200, 200, 200, 0.8); /* نفس شكل الزر */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#buttonLoader::after {
-  content: "";
-  width: 24px;
-  height: 24px;
-  border: 3px solid rgba(255,255,255,0.3);
-  border-top: 3px solid #fff;
+  display: none; 
+  width: 16px;                /* حجم أصغر */
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid #fff;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-}
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  position: absolute;
+  top: 30%;                   /* أعلى من منتصف الزر */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;                /* فوق النص والصورة داخل الزر */
 }
 
 
