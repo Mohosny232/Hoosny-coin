@@ -7,10 +7,21 @@
   <link rel="manifest" href="manifest.json">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap" rel="stylesheet">
   <style>
-   body {
+   html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: #fff;
   display: flex;
-  justify-content: center; /* في النص بالعرض */
-  align-items: flex-start; /* يبدأ من فوق */
+  flex-direction: column;      /* ترتيب العناصر فوق بعض */
+  align-items: center;         /* في النص بالعرض */
+  justify-content: flex-start; /* تبدأ من فوق */
+  gap: 10px;                   /* مسافة بسيطة بين العناصر */
+  padding-top: 40px;           /* المسافة اللي عايزها فوق */
 }
 
 .container {
@@ -18,11 +29,6 @@
   padding: 20px;
   margin: 10px auto 0; /* تقريبا صفر من فوق */
 }
-    html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-    }
 
 
     .tiktok { color: red; }
