@@ -492,15 +492,42 @@ customInput.addEventListener('input', (e) => {
   updateChargeCoins(value);
 });
 
-// بعد الضغط على زر الشحن وظهور البوب أب، يرجع الزر رمادي
 chargeButton.addEventListener('click', () => {
+  const loaderSpan = document.getElementById('buttonLoader');
+  const textSpan = document.getElementById('chargeText');
+  const imgIcon = document.querySelector('#charge .btn-icon');
+
   if (!chargeButton.classList.contains('active')) return; // لا يعمل إذا الزر غير مفعل
 
-  // ظهور البوب أب
-  popup.style.display = 'flex';
+  // إخفاء النص والصورة، وإظهار اللودر
+  textSpan.style.display = 'none';
+  imgIcon.style.display = 'none';
+  loaderSpan.style.display = 'inline-block';
 
-  // إعادة زر الشحن إلى رمادي
-  chargeButton.classList.remove('active');
+  setTimeout(() => {
+    // إخفاء اللودر بعد ثانيتين
+    loaderSpan.style.display = 'none';
+
+    // إعادة زر الشحن إلى رمادي
+    chargeButton.classList.remove('active');
+
+    // إعادة النص والصورة للزر
+    textSpan.style.display = 'inline';
+    imgIcon.style.display = 'inline';
+
+    // عرض البوب أب
+    const username = document.getElementById('username').value || "غير معروف";
+    const selected = document.querySelector('.coin-option.selected');
+    const coins = selected ? (selected.classList.contains('custom') ? customInput.value || "0" : selected.dataset.amount) : customInput.value || "0";
+
+    document.getElementById('popupUser').innerText = 'اسم المستخدم: ' + username;
+    document.getElementById('popupCoins').innerText = 'عدد العملات: ' + coins;
+    popup.style.display = 'flex';
+
+    localStorage.setItem("receiverName", username);
+    localStorage.setItem("transferredCoins", coins);
+
+  }, 2000); // مدة اللودر ثانيتين
 });
     // اختياري: يمكن إعادة عرض الزر إذا المستخدم رفض من قبل
 </script>
