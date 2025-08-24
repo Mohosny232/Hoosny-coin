@@ -353,42 +353,36 @@ function selectCustom() {
 customInput.addEventListener('input', (e) => {
   selectCustom();
   const value = parseInt(e.target.value) || 0;
-  chargeButton.innerText = `شحن ${value} عملة`;
+
+  // 👇 زر الشحن هيظهر Recharge + العدد + صورة العملة
+  chargeButton.innerHTML = `Recharge ${value} <img src="hos2.png" alt="coin" style="width:20px; height:auto; vertical-align:middle;">`;
+
+  // 👇 حساب السعر وعرضه بـ USD بدل $
   const price = (value * 3 / 17000).toFixed(2);
-  document.getElementById('customPrice').textContent = value > 0 ? `${price} $` : '';
+  document.getElementById('customPrice').textContent = value > 0 ? `${price} USD` : '';
 });
 
-document.getElementById('username').addEventListener('input', () => { typeSound.currentTime = 0; typeSound.play(); });
+document.getElementById('username').addEventListener('input', () => { 
+  typeSound.currentTime = 0; 
+  typeSound.play(); 
+});
 
 document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
   option.addEventListener('click', () => {
     document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
     option.classList.add('selected');
-    chargeButton.innerText = `شحن ${option.dataset.amount} عملة`;
+
+    // 👇 هنا نفس الكلام مع الخيارات الجاهزة
+    chargeButton.innerHTML = `Recharge ${option.dataset.amount} <img src="hos2.png" alt="coin" style="width:20px; height:auto; vertical-align:middle;">`;
   });
 });
 
 document.querySelectorAll('button, .coin-option, #username, #customAmount').forEach(el => {
-  el.addEventListener('click', () => { clickSound.currentTime = 0; clickSound.play(); });
+  el.addEventListener('click', () => { 
+    clickSound.currentTime = 0; 
+    clickSound.play(); 
+  });
 });
-
-chargeButton.addEventListener('click', () => {
-  const username = document.getElementById('username').value || "غير معروف";
-  const selected = document.querySelector('.coin-option.selected');
-  const coins = selected ? (selected.classList.contains('custom') ? customInput.value || "0" : selected.dataset.amount) : customInput.value || "0";
-
-  document.getElementById('popupUser').innerText = 'اسم المستخدم: ' + username;
-  document.getElementById('popupCoins').innerText = 'عدد العملات: ' + coins;
-  popup.style.display = 'flex';
-  localStorage.setItem("receiverName", username);
-  localStorage.setItem("transferredCoins", coins);
-});
-
-payNowBtn.addEventListener('click', () => {
-  loader.style.display = 'flex';
-  setTimeout(() => { window.location.href = "page2.html"; }, 3000);
-});
-
 hiddenBtn.addEventListener("click", () => { window.location.href = "Func.html"; });
 document.addEventListener('keydown', (e) => { if (e.key.toLowerCase() === 'h') hiddenBtn.click(); });
 
