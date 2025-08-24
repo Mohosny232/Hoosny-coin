@@ -127,6 +127,7 @@
 
       <!-- ✅ الجملة وسط الصورة بس على سطر واحد -->
 
+<audio id="successSound" src="success.mp3"></audio>
 
 <div class="center-message" style="text-align: center; font-size: 16px; color: #555555; font-weight: normal; margin-top: -70px;">
   <span style="color: #000;" id="username">Hossny</span> have recharged 
@@ -162,4 +163,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+  
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    const successSound = document.getElementById('successSound');
+    successSound.currentTime = 0;
+    successSound.play();
+  }, 1000); // بعد ثانية من ظهور الصفحة
+});
+
 </script>
