@@ -101,18 +101,17 @@
   justify-content: center;
 }
 
-#buttonLoader {
-  display: block; /* مؤقت عشان يبان */
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: conic-gradient(
-    #fff 0deg 340deg,      /* أبيض من أول 0 لحد 340 */
-    transparent 340deg 360deg  /* شفاف من 340 لحد 360 */
-  );
+  #buttonLoader {
+   display: none; /* مخفي افتراضي */
+  width: 15px;
+  height: 15px;
+  border-radius: 50%; 
+  border: 3px solid #fff;     /* خط أبيض */
+  border-top-color: transparent; /* نخلي جزء مقطوع */
   animation: spin 0.8s linear infinite;
   margin: auto;
-}
+  }
+    
 
 @keyframes spin {
   0%   { transform: rotate(0deg); }
