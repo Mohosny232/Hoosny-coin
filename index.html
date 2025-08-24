@@ -424,7 +424,7 @@ chargeButton.addEventListener('click', () => {
 
   document.getElementById('popupUser').innerText = 'اسم المستخدم: ' + username;
   document.getElementById('popupCoins').innerText = 'عدد العملات: ' + coins;
-  popup.style.display = 'flex';
+
   localStorage.setItem("receiverName", username);
   localStorage.setItem("transferredCoins", coins);
 });
