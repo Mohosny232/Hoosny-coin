@@ -85,20 +85,24 @@
       width: 100%;
       padding: 14px;
       margin-top: 25px;
-      background: #ff2d55;
+      background: rgba(200, 200, 200, 0.5); /* اللون الرمادي الشفاف الافتراضي */
+      cursor: not-allowed;
       color: white;
       border: none;
       border-radius: 8px;
       font-size: 18px;
       font-weight: bold;
-      cursor: pointer;
-      display: flex;             /* نخلي الزر مرن */
-  align-items: center;       /* محاذاة رأسية */
-  justify-content: center;   /* العنصرين يتوسّطوا */
-  gap: 8px;                  
-    }
+      }
+
+
     
     
+#charge.active {
+  background: #ff2d55; /* اللون الأصلي عند الاختيار */
+  cursor: pointer;
+}
+
+
   #charge .btn-icon {
     width: 20px;      
     height: auto;
