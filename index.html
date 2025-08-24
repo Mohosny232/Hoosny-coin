@@ -81,44 +81,57 @@
       font-weight: bold;
       margin-top: 6px;
     }
+    
     #charge, #payNow {
-      width: 100%;
-      padding: 14px;
-      margin-top: 25px;
-      background: rgba(200, 200, 200, 0.5); /* اللون الرمادي الشفاف الافتراضي */
-      cursor: not-allowed;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 18px;
-      font-weight: bold;
-      position: relative; 
-    }
+  width: 100%;
+  padding: 14px;
+  margin-top: 25px;
+  background: rgba(200, 200, 200, 0.5); /* اللون الرمادي الشفاف الافتراضي */
+  cursor: not-allowed;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  position: relative;
 
-    
-    
+  /* ده اللي هيخلي أي حاجة جوه الزر تبقى في النص */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#buttonLoader {
+  display: none; /* افتراضيًا مخفي */
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-top: 3px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 #charge.active {
   background: #ff2d55; /* اللون الأصلي عند الاختيار */
   cursor: pointer;
 }
 
-
-  #charge .btn-icon {
-    width: 20px;      
-    height: auto;
-    display: inline-block;
-   display: none; 
+#charge .btn-icon {
+  width: 20px;      
+  height: auto;
+  display: none; 
   margin-bottom: -4px;
-  }
-    
-    
-    
-
+}
 
 #charge.active .btn-icon {
   display: inline-block; /* تظهر لما الزر أحمر */
 }
-
+    
     .popup {
   display: none;
   position: fixed;
@@ -233,26 +246,6 @@
       overflow-y: auto;
    }
   
-
-
-#buttonLoader {
-  display: none; /* افتراضيًا مخفي */
-  width: 18px;
-  height: 18px;
-  border: 3px solid rgba(255,255,255,0.3);
-  border-top: 3px solid #fff;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-
-@keyframes spin {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-
-
 
     .popup-small-img {
   width: 300px;     /* صغر حجمها */
