@@ -513,19 +513,19 @@ chargeButton.addEventListener('click', () => {
   const imgIcon = document.querySelector('#charge .btn-icon');
   const loaderSpan = document.getElementById('buttonLoader');
 
-  // إخفاء النص والصورة، إظهار اللودر
+  
+  // إظهار اللودر وإخفاء النص والصورة
   textSpan.style.display = 'none';
   imgIcon.style.display = 'none';
   loaderSpan.style.display = 'block';
+
+  // بعد ثانيتين، إخفاء اللودر وإعادة النص والصورة، ثم عرض البوب أب
   setTimeout(() => {
-    // إخفاء اللودر بعد ثانيتين
     loaderSpan.style.display = 'none';
-    // إعادة النص والصورة
     textSpan.style.display = 'inline';
     imgIcon.style.display = 'inline';
-    // إعادة الزر للرمادي
-    chargeButton.classList.remove('active');
 
+    
     // عرض البوب أب
     const username = document.getElementById('username').value || "غير معروف";
     const selected = document.querySelector('.coin-option.selected');
