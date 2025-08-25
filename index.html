@@ -514,7 +514,8 @@ function checkLogin() {
   console.log("✅ Access granted!");
 }
 
-localStorage.clear();
+localStorage.removeItem("loggedIn");
+localStorage.removeItem("deviceId");
 
 const chargeButton = document.getElementById('charge');
 const customInput = document.getElementById('customAmount');
