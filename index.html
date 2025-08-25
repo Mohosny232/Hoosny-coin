@@ -454,44 +454,62 @@ body {
 
 
 <script>
-  const appPassword = "24320002##"; 
-  const allowedDevices = ["device1-Hosny", "device2-rashed"]; 
+// 🔑 المفتاح السري (غيره براحتك)
+const secretKey = "hosnyKey2025";
 
-  function checkLogin() {
-    const enteredPassword = document.getElementById("passwordInput").value;
-    const enteredDevice = document.getElementById("deviceInput").value;
+// دوال XOR
+function xorEncrypt(text, key) {
+  let result = [];
+  for (let i = 0; i < text.length; i++) {
+    result.push(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+  }
+  return btoa(String.fromCharCode(...result)); // base64 علشان نقدر نخزن
+}
 
-    if (enteredPassword !== appPassword) {
-      alert("❌ Wrong password!");
-      return;
-    }
+function xorDecrypt(encoded, key) {
+  let data = atob(encoded);
+  let result = [];
+  for (let i = 0; i < data.length; i++) {
+    result.push(data.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+  }
+  return String.fromCharCode(...result);
+}
 
-    if (!allowedDevices.includes(enteredDevice)) {
-      alert("❌ This device is not allowed!");
-      return;
-    }
+// ✅ القيم المشفرة (دي أنا مشفّرها لك)
+const encryptedPassword = "CwYcHQ5dHA4B"; 
+const encryptedDevices = [
+  "CwYcHQ5dFQ==", 
+  "CwYcHQ5dFwQYBw=="
+];
 
-    // ✅ تسجيل دخول ناجح
-    localStorage.setItem("loggedIn", "true");
-    localStorage.setItem("deviceId", enteredDevice);
+// ✅ نفك التشفير وقت التشغيل
+const appPassword = xorDecrypt(encryptedPassword, secretKey);
+const allowedDevices = encryptedDevices.map(e => xorDecrypt(e, secretKey));
 
-    document.getElementById("loginOverlay").style.display = "none";
+console.log("🔐 Password:", appPassword);
+console.log("🔐 Devices:", allowedDevices);
+
+// 🔓 الدالة بتاعتك
+function checkLogin() {
+  const enteredPassword = document.getElementById("passwordInput").value;
+  const enteredDevice = document.getElementById("deviceInput").value;
+
+  if (enteredPassword !== appPassword) {
+    alert("❌ Wrong password!");
+    return;
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const isLoggedIn = localStorage.getItem("loggedIn");
-    const savedDevice = localStorage.getItem("deviceId");
+  if (!allowedDevices.includes(enteredDevice)) {
+    alert("❌ This device is not allowed!");
+    return;
+  }
 
-    if (isLoggedIn === "true" && allowedDevices.includes(savedDevice)) {
-      // ✅ بالفعل مسجل → متظهرش الشاشة
-      document.getElementById("loginOverlay").style.display = "none";
-    } else {
-      // ✨ أول مرة أو جهاز مش معروف → اعرضها
-      document.getElementById("loginOverlay").style.display = "flex";
-    }
-  });
+  localStorage.setItem("loggedIn", "true");
+  localStorage.setItem("deviceId", enteredDevice);
 
-
+  document.getElementById("loginOverlay").style.display = "none";
+  console.log("✅ Access granted!");
+}
 
 
 
