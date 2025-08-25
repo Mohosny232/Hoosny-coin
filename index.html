@@ -348,7 +348,7 @@ body {
       <p id="popupUser"></p>
       <p id="popupCoins"></p>
     <div class="payment-method">
-      <span>payment method:2432******</span>
+      <span>payment method:******2432</span>
       <img src="visa.png" alt="Visa">
     </div>
 
@@ -527,8 +527,8 @@ chargeButton.addEventListener('click', () => {
     const selected = document.querySelector('.coin-option.selected');
     const coins = selected ? (selected.classList.contains('custom') ? customInput.value || "0" : selected.dataset.amount) : customInput.value || "0";
 
-    document.getElementById('popupUser').innerText = 'اسم المستخدم: ' + username;
-    document.getElementById('popupCoins').innerText = 'عدد العملات: ' + coins;
+    document.getElementById('popupUser').innerText = 'Username: ' + username;
+    document.getElementById('popupCoins').innerText = 'Coins: ' + coins;
     popup.style.display = 'flex';
 
   }, 2000);
