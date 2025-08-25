@@ -460,12 +460,6 @@ body {
     const enteredDevice = document.getElementById("deviceInput").value;
 
     
-  function checkAccess() {
-    const isLoggedIn = localStorage.getItem("loggedIn"); // هل دخل قبل كدا؟
-    if (isLoggedIn === "true") {
-      return; // خلاص دخل قبل كدا ✅
-    }
-
     if (enteredPassword !== appPassword) {
       alert("❌ Wrong password!");
       return;
@@ -476,14 +470,31 @@ body {
       return;
     }
 
-    // ✅ حفظ الجلسة وتخطي تسجيل الدخول
-    sessionStorage.setItem("enteredPassword", enteredPassword);
+    
+    localStorage.setItem("loggedIn", "true");
     localStorage.setItem("deviceId", enteredDevice);
 
     document.getElementById("loginOverlay").style.display = "none";
     console.log("✅ Access granted!");
   }
 
+
+
+  // 🔍 هنا دالة checkAccess
+  function checkAccess() {
+    const isLoggedIn = localStorage.getItem("loggedIn");
+    const savedDevice = localStorage.getItem("deviceId");
+
+    if (isLoggedIn === "true" && allowedDevices.includes(savedDevice)) {
+      document.getElementById("loginOverlay").style.display = "none";
+      console.log("⏩ Already logged in");
+    }
+  }
+
+  // ✅ استدعاء checkAccess عند تحميل الصفحة
+  window.onload = () => {
+    checkAccess();
+  }
   // ✅ لو سبق وسجل دخول صح → يخفي شاشة تسجيل الدخول
   window.onload = () => {
     const savedPass = sessionStorage.getItem("enteredPassword");
