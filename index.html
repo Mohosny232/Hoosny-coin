@@ -452,9 +452,10 @@ body {
   <!-- السكربتات بعد كل العناصر -->
  
 
+
 <script>
-  const appPassword = "2432002##"; // كلمة السر
-  const allowedDevices = ["device1-Hosny", "device2-rashed"]; // الأجهزة المسموحة
+  const appPassword = "2432002##"; 
+  const allowedDevices = ["device1-Hosny", "device2-rashed"]; 
 
   function checkLogin() {
     const enteredPassword = document.getElementById("passwordInput").value;
@@ -470,28 +471,26 @@ body {
       return;
     }
 
-    // ✅ أول تسجيل دخول ناجح → نخزن الحالة في localStorage
+    // ✅ تسجيل دخول ناجح
     localStorage.setItem("loggedIn", "true");
     localStorage.setItem("deviceId", enteredDevice);
 
     document.getElementById("loginOverlay").style.display = "none";
-    console.log("✅ Access granted!");
   }
 
-  // ✅ عند تحميل الصفحة
-  window.onload = () => {
+  document.addEventListener("DOMContentLoaded", () => {
     const isLoggedIn = localStorage.getItem("loggedIn");
     const savedDevice = localStorage.getItem("deviceId");
 
-    // لو دخل قبل كده → متظهرش شاشة تسجيل الدخول
     if (isLoggedIn === "true" && allowedDevices.includes(savedDevice)) {
+      // ✅ بالفعل مسجل → متظهرش الشاشة
       document.getElementById("loginOverlay").style.display = "none";
-      console.log("⏩ Already logged in");
     } else {
-      // ✨ أول مرة → خليه يظهر
+      // ✨ أول مرة أو جهاز مش معروف → اعرضها
       document.getElementById("loginOverlay").style.display = "flex";
     }
-  }
+  });
+
 
 
 
