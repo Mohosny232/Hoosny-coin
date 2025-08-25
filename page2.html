@@ -203,13 +203,16 @@ const notif = document.getElementById("notif");
 notif.innerText = notifText;
 
 // عرض الإشعار
+// عرض الإشعار
 setTimeout(() => {
   notif.style.top = "20px"; // يظهر من فوق
+  notif.style.opacity = "1"; // ✅ يخلي الإشعار باين
 }, 500);
 
 // إخفاء الإشعار بعد 4 ثواني
 setTimeout(() => {
   notif.style.top = "-100px";
+  notif.style.opacity = "0"; // ✅ يرجع يختفي تدريجي
 }, 4500);
 
 </script>
