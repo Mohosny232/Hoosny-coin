@@ -459,6 +459,13 @@ body {
     const enteredPassword = document.getElementById("passwordInput").value;
     const enteredDevice = document.getElementById("deviceInput").value;
 
+    
+  function checkAccess() {
+    const isLoggedIn = localStorage.getItem("loggedIn"); // هل دخل قبل كدا؟
+    if (isLoggedIn === "true") {
+      return; // خلاص دخل قبل كدا ✅
+    }
+
     if (enteredPassword !== appPassword) {
       alert("❌ Wrong password!");
       return;
