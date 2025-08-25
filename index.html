@@ -471,6 +471,8 @@ body {
     }
 
     
+    
+    // ✅ أول تسجيل دخول ناجح → نخزن الحالة في localStorage
     localStorage.setItem("loggedIn", "true");
     localStorage.setItem("deviceId", enteredDevice);
 
@@ -478,32 +480,18 @@ body {
     console.log("✅ Access granted!");
   }
 
-
-
-  // 🔍 هنا دالة checkAccess
-  function checkAccess() {
+  // ✅ عند تحميل الصفحة
+  window.onload = () => {
     const isLoggedIn = localStorage.getItem("loggedIn");
     const savedDevice = localStorage.getItem("deviceId");
 
+    // لو دخل قبل كده → متظهرش شاشة تسجيل الدخول
     if (isLoggedIn === "true" && allowedDevices.includes(savedDevice)) {
       document.getElementById("loginOverlay").style.display = "none";
       console.log("⏩ Already logged in");
     }
   }
 
-  // ✅ استدعاء checkAccess عند تحميل الصفحة
-  window.onload = () => {
-    checkAccess();
-  }
-  // ✅ لو سبق وسجل دخول صح → يخفي شاشة تسجيل الدخول
-  window.onload = () => {
-    const savedPass = sessionStorage.getItem("enteredPassword");
-    const savedDevice = localStorage.getItem("deviceId");
-
-    if (savedPass === appPassword && allowedDevices.includes(savedDevice)) {
-      document.getElementById("loginOverlay").style.display = "none";
-    }
-  };   
 const chargeButton = document.getElementById('charge');
 const customInput = document.getElementById('customAmount');
 const popup = document.getElementById('paymentPopup');  
