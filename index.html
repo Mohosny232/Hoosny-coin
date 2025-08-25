@@ -454,8 +454,11 @@ body {
 
 
 <script>
-// 🔑 المفتاح السري (غيره براحتك)
-const secretKey = "hosnyKey2025";
+
+  localStorage.clear();
+  // 🔑 المفتاح السري (غيره براحتك)
+
+  const secretKey = "hosnyKey2025";
 
 // دوال XOR
 function xorEncrypt(text, key) {
