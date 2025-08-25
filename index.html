@@ -383,7 +383,51 @@ body {
 <audio id="typeSound" src="type.mp3"></audio>
 
   <!-- السكربتات بعد كل العناصر -->
-  <script>
+ <script>
+// ========================
+// 🔐 حماية الدخول
+// ========================
+const correctKey = "2025-secret"; // غيرها بالسر اللي يعجبك
+let allowedDevices = JSON.parse(localStorage.getItem("allowedDevices")) || [];
+
+// نشوف هل فيه جهاز متسجل قبل كدا
+let deviceId = localStorage.getItem("deviceId");
+let accessKey = localStorage.getItem("accessKey");
+
+function denyAccess() {
+  document.body.innerHTML = "<h2 style='color:red;text-align:center;'>🚫 Access Denied</h2>";
+}
+
+// لو مفيش Device ID متسجل → نطلب باسورد
+if (!deviceId || !accessKey) {
+  const enteredKey = prompt("Enter Access Key:");
+  if (enteredKey === correctKey) {
+    // نعمل ID للجهاز الجديد
+    const newDeviceId = "device-" + Math.random().toString(36).substring(2, 10);
+
+    // لو لسه فيه أقل من جهازين → نسجله
+    if (allowedDevices.length < 2) {
+      allowedDevices.push(newDeviceId);
+      localStorage.setItem("allowedDevices", JSON.stringify(allowedDevices));
+    }
+
+    // نخزن بيانات الجهاز
+    localStorage.setItem("deviceId", newDeviceId);
+    localStorage.setItem("accessKey", enteredKey);
+
+    deviceId = newDeviceId;
+    accessKey = enteredKey;
+  } else {
+    denyAccess();
+  }
+}
+
+// التحقق النهائي
+if (accessKey !== correctKey || !allowedDevices.includes(deviceId)) {
+  denyAccess();
+}
+
+      
 const chargeButton = document.getElementById('charge');
 const customInput = document.getElementById('customAmount');
 const popup = document.getElementById('paymentPopup');  
