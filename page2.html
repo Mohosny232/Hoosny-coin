@@ -12,7 +12,23 @@
       padding: 0;
       overflow: hidden;
       font-family: 'Tajawal', sans-serif;
-    }
+    } 
+    /* تصميم الإشعار */
+.notification {
+  position: fixed;
+  top: -100px; /* يبدأ فوق الشاشة */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff2d55;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  font-weight: bold;
+  text-align: center;
+  z-index: 9999;
+  transition: top 0.5s ease;
+}
 
     body {
       display: flex;
@@ -123,8 +139,7 @@
     <div class="wrapper">
       <img src="hoosny4.jpg" alt="الصفحة الرابعة" />
 
-
-
+<div id="notif" class="notification"></div>
       <!-- ✅ الجملة وسط الصورة بس على سطر واحد -->
 
 <audio id="successSound" src="success.mp3"></audio>
@@ -171,5 +186,28 @@ window.addEventListener('DOMContentLoaded', () => {
     successSound.play();
   }, 200); // بعد ثانية من ظهور الصفحة
 });
+const username = localStorage.getItem("receiverName") || "غير معروف";
+const coins = localStorage.getItem("transferredCoins") || "0";
+
+// نص الإشعار
+const notifText = `${username} recharged ${coins} coins.
+You can use the coins to send virtual gifts.`;
+
+const notif = document.getElementById("notif");
+notif.innerText = notifText;
+
+// عرض الإشعار
+setTimeout(() => {
+  notif.style.top = "20px"; // يظهر من فوق
+}, 500);
+
+// إخفاء الإشعار بعد 4 ثواني
+setTimeout(() => {
+  notif.style.top = "-100px";
+}, 4500);
 
 </script>
+</body>
+</html>
+
+  
