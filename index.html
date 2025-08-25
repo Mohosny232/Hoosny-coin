@@ -519,7 +519,11 @@ body {
     if (isLoggedIn === "true" && allowedDevices.includes(savedDevice)) {
       document.getElementById("loginOverlay").style.display = "none";
       console.log("⏩ Already logged in");
+  
     }
+    document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("loginBtn").addEventListener("click", checkLogin);
+});
   
 const chargeButton = document.getElementById('charge');
 const customInput = document.getElementById('customAmount');
