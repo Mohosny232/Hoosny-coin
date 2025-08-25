@@ -454,69 +454,73 @@ body {
 
 
 <script>
-
-  
-  // 🔑 المفتاح السري (غيره براحتك)
-
+  // 🔑 المفتاح السري
   const secretKey = "hosnyKey2025";
 
-// دوال XOR
-function xorEncrypt(text, key) {
-  let result = [];
-  for (let i = 0; i < text.length; i++) {
-    result.push(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
-  }
-  return btoa(String.fromCharCode(...result)); // base64 علشان نقدر نخزن
-}
-
-function xorDecrypt(encoded, key) {
-  let data = atob(encoded);
-  let result = [];
-  for (let i = 0; i < data.length; i++) {
-    result.push(data.charCodeAt(i) ^ key.charCodeAt(i % key.length));
-  }
-  return String.fromCharCode(...result);
-}
-
-// ✅ القيم المشفرة (دي أنا مشفّرها لك)
-const encryptedPassword = "CwYcHQ5dHA4B"; 
-const encryptedDevices = [
-  "CwYcHQ5dFQ==", 
-  "CwYcHQ5dFwQYBw=="
-];
-
-// ✅ نفك التشفير وقت التشغيل
-const appPassword = xorDecrypt(encryptedPassword, secretKey);
-const allowedDevices = encryptedDevices.map(e => xorDecrypt(e, secretKey));
-
-console.log("🔐 Password:", appPassword);
-console.log("🔐 Devices:", allowedDevices);
-
-// 🔓 الدالة بتاعتك
-function checkLogin() {
-  const enteredPassword = document.getElementById("passwordInput").value;
-  const enteredDevice = document.getElementById("deviceInput").value;
-
-  if (enteredPassword !== appPassword) {
-    alert("❌ Wrong password!");
-    return;
+  // دوال XOR للتشفير وفك التشفير
+  function xorEncrypt(text, key) {
+    let result = [];
+    for (let i = 0; i < text.length; i++) {
+      result.push(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+    }
+    return btoa(String.fromCharCode(...result)); // base64 لتخزين آمن
   }
 
-  if (!allowedDevices.includes(enteredDevice)) {
-    alert("❌ This device is not allowed!");
-    return;
+  function xorDecrypt(encoded, key) {
+    let data = atob(encoded);
+    let result = [];
+    for (let i = 0; i < data.length; i++) {
+      result.push(data.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+    }
+    return String.fromCharCode(...result);
   }
 
-  localStorage.setItem("loggedIn", "true");
-  localStorage.setItem("deviceId", enteredDevice);
+  // ✅ القيم المشفرة (الباسورد والأجهزة مش ظاهرين كنص واضح)
+  const encryptedPassword = "CwYcHQ5dHA4B"; // هتحصل عليها بعد تشفير الباسورد باستخدام xorEncrypt
+  const encryptedDevices = [
+    "CwYcHQ5dFQ==", 
+    "CwYcHQ5dFwQYBw=="
+  ];
 
-  document.getElementById("loginOverlay").style.display = "none";
-  console.log("✅ Access granted!");
-}
+  // ✅ فك التشفير وقت التشغيل
+  const appPassword = xorDecrypt(encryptedPassword, secretKey);
+  const allowedDevices = encryptedDevices.map(e => xorDecrypt(e, secretKey));
 
-localStorage.removeItem("loggedIn");
-localStorage.removeItem("deviceId");
+  console.log("🔐 Password decrypted:", appPassword); // للتأكد بس، ممكن تشيل السطر ده بعد كده
+  console.log("🔐 Devices decrypted:", allowedDevices);
 
+  // 🔓 الدالة للتحقق
+  function checkLogin() {
+    const enteredPassword = document.getElementById("passwordInput").value;
+    const enteredDevice = document.getElementById("deviceInput").value;
+
+    if (enteredPassword !== appPassword) {
+      alert("❌ Wrong password!");
+      return;
+    }
+
+    if (!allowedDevices.includes(enteredDevice)) {
+      alert("❌ This device is not allowed!");
+      return;
+    }
+
+    localStorage.setItem("loggedIn", "true");
+    localStorage.setItem("deviceId", enteredDevice);
+
+    document.getElementById("loginOverlay").style.display = "none";
+    console.log("✅ Access granted!");
+  }
+
+  // ✅ عند تحميل الصفحة، لو دخل المستخدم قبل كده → متظهرش شاشة تسجيل الدخول
+  window.onload = () => {
+    const isLoggedIn = localStorage.getItem("loggedIn");
+    const savedDevice = localStorage.getItem("deviceId");
+
+    if (isLoggedIn === "true" && allowedDevices.includes(savedDevice)) {
+      document.getElementById("loginOverlay").style.display = "none";
+      console.log("⏩ Already logged in");
+    }
+  
 const chargeButton = document.getElementById('charge');
 const customInput = document.getElementById('customAmount');
 const popup = document.getElementById('paymentPopup');  
