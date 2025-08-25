@@ -409,7 +409,7 @@ customInput.addEventListener('input', (e) => {
   const value = parseInt(e.target.value) || 0;
   const price = (value * 3 / 17000).toFixed(2);
   updateChargeText(price);
-  document.getElementById('customPrice').textContent = value > 0 ? `${price} USD` : '';
+  document.getElementById('customPrice').textContent = value > 0 ? `${price} $` : '';
 });
 
 // عند اختيار عملة عادية
