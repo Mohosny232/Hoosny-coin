@@ -451,15 +451,15 @@ body {
 
   <!-- السكربتات بعد كل العناصر -->
  
-   <script>
-  const appPassword = "2432002##"; // غير الباسورد
-  const allowedDevices = ["device1-Hosny", "device2-rashed"];
+
+<script>
+  const appPassword = "2432002##"; // كلمة السر
+  const allowedDevices = ["device1-Hosny", "device2-rashed"]; // الأجهزة المسموحة
 
   function checkLogin() {
     const enteredPassword = document.getElementById("passwordInput").value;
     const enteredDevice = document.getElementById("deviceInput").value;
 
-    
     if (enteredPassword !== appPassword) {
       alert("❌ Wrong password!");
       return;
@@ -470,8 +470,6 @@ body {
       return;
     }
 
-    
-    
     // ✅ أول تسجيل دخول ناجح → نخزن الحالة في localStorage
     localStorage.setItem("loggedIn", "true");
     localStorage.setItem("deviceId", enteredDevice);
@@ -489,8 +487,14 @@ body {
     if (isLoggedIn === "true" && allowedDevices.includes(savedDevice)) {
       document.getElementById("loginOverlay").style.display = "none";
       console.log("⏩ Already logged in");
+    } else {
+      // ✨ أول مرة → خليه يظهر
+      document.getElementById("loginOverlay").style.display = "flex";
     }
   }
+
+
+
 
 const chargeButton = document.getElementById('charge');
 const customInput = document.getElementById('customAmount');
