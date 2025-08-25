@@ -196,13 +196,15 @@ window.addEventListener('DOMContentLoaded', () => {
 const username = localStorage.getItem("receiverName") || "غير معروف";
 const coins = localStorage.getItem("transferredCoins") || "0";
 
-// نص الإشعار
-const notifText = `${username} recharged ${coins} coins.
-You can use the coins to send virtual gifts.`;
+// نستخدم innerHTML عشان ننسق الاسم والكوينز
+const notifText = `
+  <span class="username">${username}</span> recharged 
+  <span class="coins">${coins}</span> coins.<br>
+  You can use the coins to send virtual gifts.
+`;
 
 const notif = document.getElementById("notif");
-notif.innerText = notifText;
-
+notif.innerHTML = notifText;
 // عرض الإشعار
 // عرض الإشعار
 setTimeout(() => {
