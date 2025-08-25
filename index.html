@@ -477,12 +477,12 @@ function xorDecrypt(encoded, key) {
 }
 
 // ✅ القيم المشفرة
-const encryptedPassword = "CwYcHQ5dHA4B"; 
+// ✅ القيم المشفرة اللي مولدها من encrypt.html
+const encryptedPassword = "f01gV1NCV1do"; 
 const encryptedDevices = [
-  "CwYcHQ5dFQ==", 
-  "CwYcHQ5dFwQYBw=="
+  "KRwlDAAXVFkDCgojAA==", 
+  "KRwlDAAXV1k5BAolHDc="
 ];
-
 // ✅ فك التشفير وقت التشغيل
 const appPassword = xorDecrypt(encryptedPassword, secretKey);
 const allowedDevices = encryptedDevices.map(e => xorDecrypt(e, secretKey));
