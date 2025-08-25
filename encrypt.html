@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Encrypt Tool</title>
+</head>
+<body>
+  <h2>🔑 أداة توليد القيم المشفرة</h2>
+  <pre id="output"></pre>
+
+  <script>
+    const secretKey = "MySecretKey"; // لازم يكون نفس المفتاح في الكود الأساسي
+
+    // دوال XOR
+    function xorEncrypt(text, key) {
+      let result = [];
+      for (let i = 0; i < text.length; i++) {
+        result.push(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+      }
+      return btoa(String.fromCharCode(...result));
+    }
+
+    // هنا اكتب البيانات الأصلية اللي عايزها
+    const myPassword = "2432002##"; // الباسورد اللي عايزه
+    const devices = ["device1-Hosny", "device2-rashed"]; // الأجهزة المسموحة
+
+    // نولّد القيم المشفرة
+    const encryptedPassword = xorEncrypt(myPassword, secretKey);
+    const encryptedDevices = devices.map(d => xorEncrypt(d, secretKey));
+
+    // نعرض النتيجة على الشاشة
+    document.getElementById("output").textContent =
+      "Encrypted Password: " + encryptedPassword + "\n" +
+      "Encrypted Devices: " + JSON.stringify(encryptedDevices);
+  </script>
+</body>
+</html>
