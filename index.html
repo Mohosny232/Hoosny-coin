@@ -530,15 +530,22 @@ const docSnap = await getDoc(docRef);
   }
 
   
+  
   // ✅ كل حاجة صح
   localStorage.setItem("loggedIn", "true");  // نخزن حالة الدخول
   localStorage.setItem("userId", userId);    // نخزن اسم المستخدم
+  document.getElementById('loginOverlay').style.display = 'none';
+  document.getElementById("mainContent").style.display = "block";
+}
+
 // تحقق من حالة الدخول عند تحميل الصفحة
 window.addEventListener('load', () => {
   if (localStorage.getItem("loggedIn") === "true") {
     document.getElementById('loginOverlay').style.display = 'none';
     document.getElementById("mainContent").style.display = "block";
   }
+});
+
 
 document.getElementById("loginBtn").addEventListener("click", checkLogin);
 
