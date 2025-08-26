@@ -518,14 +518,7 @@ if (!allowedDevices.includes(savedDevice)) {
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("loginBtn").addEventListener("click", checkLogin);
 
-    // ✅ لو الجهاز اللي موجود مش في allowedDevices → اجبره على تسجيل الدخول
-    if (!allowedDevices.includes(savedDevice)) {
-      localStorage.removeItem("loggedIn");
-      localStorage.removeItem("deviceId");
-      document.getElementById("loginOverlay").style.display = "block";
-      console.log("⚠️ Device not allowed → Login required");
-      return;
-    }
+    
 
   // ✅ التحقق لو دخل قبل كده → إخفاء overlay
   const isLoggedIn = localStorage.getItem("loggedIn");
