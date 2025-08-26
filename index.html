@@ -457,95 +457,66 @@ body {
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
-<script>
-// 🔑 Firebase config
-const firebaseConfig = {
-  apiKey: "AIzaSyD0ErbW4GMP2EFIbp6fEUaHwowXr-O3Tiw",
-  authDomain: "hosny87-edb64.firebaseapp.com",
-  projectId: "hosny87-edb64",
-  storageBucket: "hosny87-edb64.firebasestorage.app",
-  messagingSenderId: "390181932130",
-  appId: "1:390181932130:web:307629cd4408514f61d53b",
-  measurementId: "G-5HXSPP373X"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
 
-// 🔑 مفتاح XOR + الدوال
-const secretKey = "MySecretKey";
-function xorEncrypt(text, key) {
-  let result = [];
-  for (let i = 0; i < text.length; i++) {
-    result.push(text.charCodeAt(i) ^ key.charCodeAt(i % key.length));
-  }
-  return btoa(String.fromCharCode(...result));
-}
-function xorDecrypt(encoded, key) {
-  let data = atob(encoded);
-  let result = [];
-  for (let i = 0; i < data.length; i++) {
-    result.push(data.charCodeAt(i) ^ key.charCodeAt(i % key.length));
-  }
-  return String.fromCharCode(...result);
-}
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// ✅ القيم المشفرة
-const encryptedPassword = "f01gV1NCV1do"; 
-const encryptedDevices = [
-  "KRwlDAAXVFkDCgojAA==", // Hosny
-  "KRwlDAAXV1k5BAolHDc=" // rashed
-];
-const appPassword = xorDecrypt(encryptedPassword, secretKey);
-const allowedDevices = encryptedDevices.map(e => xorDecrypt(e, secretKey));
+    // ✅ Config بتاعك
+    const firebaseConfig = {
+      apiKey: "AIzaSyD0ErbW4GMP2EFIbp6fEUaHwowXr-O3Tiw",
+      authDomain: "hosny87-edb64.firebaseapp.com",
+      projectId: "hosny87-edb64",
+      storageBucket: "hosny87-edb64.firebasestorage.app",
+      messagingSenderId: "390181932130",
+      appId: "1:390181932130:web:ab7f516e685327fb61d53b",
+      measurementId: "G-JHWXJRG82L"
+    };
 
-async function checkLogin() {
-  const enteredPassword = document.getElementById("passwordInput").value;
-  const enteredDevice = document.getElementById("deviceInput").value;
+    // ✅ Connect Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-  console.log("enteredPassword:", enteredPassword);
-  console.log("appPassword:", appPassword);
-  console.log("enteredDevice:", enteredDevice);
-  console.log("allowedDevices:", allowedDevices);
+    // ✅ Login Function
+    async function checkLogin() {
+      const enteredPassword = document.getElementById("passwordInput").value.trim();
+      const enteredDevice = document.getElementById("deviceInput").value.trim();
 
-  // 📌 Firestore check (مثال بسيط لو عايز تتأكد ان الجهاز موجود في DB)
-  const docRef = db.collection("devices").doc(enteredDevice);
-  const docSnap = await docRef.get();
+      // بنجيب document اسمه login جوا users
+      const docRef = doc(db, "users", "login");
+      const docSnap = await getDoc(docRef);
 
-  if (!docSnap.exists) {
-    console.log("❌ السبب: docSnap مش موجود في Firestore");
-    alert("❌ This device is not allowed!");
-    return;
-  }
+      if (!docSnap.exists()) {
+        alert("❌ Document not found in Firestore!");
+        return;
+      }
 
-  if (enteredPassword !== appPassword) {
-    console.log("❌ السبب: الباسورد غلط");
-    alert("❌ Wrong password!");
-    return;
-  }
+      const data = docSnap.data();
+      const appPassword = data.password;
+      const allowedDevices = data.devices || [];
 
-  if (!allowedDevices.includes(enteredDevice)) {
-    console.log("❌ السبب: الجهاز مش موجود في allowedDevices");
-    alert("❌ This device is not allowed!");
-    return;
-  }
+      console.log("Firestore Data:", data);
 
-  localStorage.setItem("loggedIn", "true");
-  localStorage.setItem("deviceId", enteredDevice);
-  document.getElementById("loginOverlay").style.display = "none";
-  console.log("✅ Access granted!");
-}
+      if (enteredPassword !== appPassword) {
+        alert("❌ Wrong password!");
+        return;
+      }
 
-// ✅ ربط الزر
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("loginBtn").addEventListener("click", checkLogin);
+      if (!allowedDevices.includes(enteredDevice)) {
+        alert("❌ Device not allowed!");
+        return;
+      }
 
-  const isLoggedIn = localStorage.getItem("loggedIn");
-  const savedDevice = localStorage.getItem("deviceId");
-  if (isLoggedIn === "true" && allowedDevices.includes(savedDevice)) {
-    document.getElementById("loginOverlay").style.display = "none";
-    console.log("⏩ Already logged in");
-  }
-});
+      // ✅ Success
+      localStorage.setItem("loggedIn", "true");
+      localStorage.setItem("deviceId", enteredDevice);
+      document.getElementById("loginOverlay").style.display = "none";
+      alert("✅ Access granted!");
+    }
+
+    // ربط الزر
+    document.getElementById("loginBtn").addEventListener("click", checkLogin);
+  
 
 // يمسح كل القيم القديمة
 const chargeButton = document.getElementById('charge');
