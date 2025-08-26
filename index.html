@@ -455,72 +455,65 @@ body {
 
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-  import { getFirestore, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-  // 🔥 Config بتاعك
-  const firebaseConfig = {
-    apiKey: "AIzaSyD0ErbW4GMP2EFIbp6fEUaHwowXr-O3Tiw",
-    authDomain: "hosny87-edb64.firebaseapp.com",
-    projectId: "hosny87-edb64",
-    storageBucket: "hosny87-edb64.firebasestorage.app",
-    messagingSenderId: "390181932130",
-    appId: "1:390181932130:web:ab7f516e685327fb61d53b",
-    measurementId: "G-JHWXJRG82L"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyD0ErbW4GMP2EFIbp6fEUaHwowXr-O3Tiw",
+  authDomain: "hosny87-edb64.firebaseapp.com",
+  projectId: "hosny87-edb64",
+  storageBucket: "hosny87-edb64.firebasestorage.app",
+  messagingSenderId: "390181932130",
+  appId: "1:390181932130:web:ab7f516e685327fb61d53b",
+  measurementId: "G-JHWXJRG82L"
+};
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-  // 🖐️ بصمة الجهاز
-  function getFingerprint() {
-    return btoa(navigator.userAgent + screen.width + screen.height + screen.colorDepth);
+// ✅ بصمة الجهاز (ممكن تزودها بعناصر تانية زي IP أو UUID عشان تبقى أقوى)
+function getDeviceFingerprint() {
+  return btoa(navigator.userAgent + navigator.language + screen.width + screen.height);
+}
+
+async function checkLogin() {
+  const enteredPassword = document.getElementById("passwordInput").value.trim();
+  const fingerprint = getDeviceFingerprint();
+
+  const docRef = doc(db, "users", "login");
+  const docSnap = await getDoc(docRef);
+
+  if (!docSnap.exists()) {
+    alert("❌ No login data found!");
+    return;
   }
 
-  async function checkLogin() {
-    const enteredId = document.getElementById("deviceInput").value.trim();
-    const enteredPassword = document.getElementById("passwordInput").value;
-    const fingerprint = getFingerprint();
+  const data = docSnap.data();
+  const appPassword = data.password;
+  const registeredDevice = data.deviceFingerprint || null;
 
-    if (!enteredId) {
-      alert("⚠️ اكتب اسم المستخدم");
-      return;
-    }
-
-    const docRef = doc(db, "devices", enteredId);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      const data = docSnap.data();
-
-      if (data.password !== enteredPassword) {
-        alert("❌ الباسورد غلط!");
-        return;
-      }
-
-      if (!data.fingerprint) {
-        // أول مرة نسجل الجهاز
-        await updateDoc(docRef, { fingerprint });
-        alert("✅ First login, device registered!");
-        localStorage.setItem("loggedIn", "true");
-        localStorage.setItem("deviceId", enteredId);
-      } else if (data.fingerprint === fingerprint) {
-        alert("✅ Access granted!");
-        localStorage.setItem("loggedIn", "true");
-        localStorage.setItem("deviceId", enteredId);
-      } else {
-        alert("❌ ID ده متسجل على جهاز تاني بالفعل!");
-      }
-    } else {
-      alert("❌ المستخدم مش موجود في Firestore!");
-    }
+  if (enteredPassword !== appPassword) {
+    alert("❌ Wrong password!");
+    return;
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("loginBtn").addEventListener("click", checkLogin);
-  });
+  if (!registeredDevice) {
+    // أول جهاز يدخل → نخزن بصمته
+    await updateDoc(docRef, { deviceFingerprint: fingerprint });
+    alert("✅ First device registered!");
+    return;
+  }
 
-  
+  if (fingerprint !== registeredDevice) {
+    alert("❌ This account is already used on another device!");
+    return;
+  }
+
+  // ✅ نجاح
+  alert("✅ Access granted!");
+}
+
+document.getElementById("loginBtn").addEventListener("click", checkLogin);
 
 // يمسح كل القيم القديمة
 const chargeButton = document.getElementById('charge');
