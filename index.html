@@ -467,6 +467,7 @@ body.loaded #loginOverlay {
 
 
 
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
@@ -484,26 +485,25 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// ✅ بصمة الجهاز (fingerprint)
 function getDeviceFingerprint() {
   return btoa(navigator.userAgent + navigator.language + screen.width + screen.height);
 }
 
 async function checkLogin() {
+  const userId = document.getElementById("deviceInput").value.trim();
   const enteredPassword = document.getElementById("passwordInput").value.trim();
   const fingerprint = getDeviceFingerprint();
 
-  if (!enteredPassword) {
-    alert("⚠️ لازم تكتب الباسورد!");
+  if (!userId || !enteredPassword) {
+    alert("⚠️ لازم تكتب الـ ID والباسورد!");
     return;
   }
 
-  // 👇 هنا بنجيب document اسمه "login"
-  const docRef = doc(db, "users", "login");
+  const docRef = doc(db, "users", userId);
   const docSnap = await getDoc(docRef);
 
   if (!docSnap.exists()) {
-    alert("❌ مفيش مستند اسمه login!");
+    alert("❌ مفيش يوزر بالـ ID ده!");
     return;
   }
 
@@ -517,24 +517,23 @@ async function checkLogin() {
   }
 
   if (!registeredDevice) {
-    // أول مرة → نسجل بصمة الجهاز
     await updateDoc(docRef, { deviceFingerprint: fingerprint });
     alert("✅ أول جهاز دخل و اتسجل خلاص!");
-    return;
-  }
-
-  if (fingerprint !== registeredDevice) {
+  } else if (fingerprint !== registeredDevice) {
     alert("❌ الحساب مستخدم على جهاز تاني!");
     return;
   }
 
-  // ✅ لو كل حاجة صح
+  // ✅ كل حاجة صح
   alert("✅ Access granted!");
-    document.getElementById('loginOverlay').style.display = 'flex';
+  document.getElementById('loginOverlay').style.display = 'none';
   document.getElementById("mainContent").style.display = "block";
 }
 
 document.getElementById("loginBtn").addEventListener("click", checkLogin);
+
+
+    
 
 
   // يمسح كل القيم القديمة
