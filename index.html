@@ -510,15 +510,12 @@ async function checkLogin() {
   }
 
   // ✅ نجاح
-  alert("✅ Access granted!");
+alert("✅ Access granted!");
+
+// ✅ Success → شيل شاشة اللوجين واظهر المحتوى
+document.getElementById("loginOverlay").style.display = "none";
+document.getElementById("mainContent").style.display = "block";
 }
-
-document.getElementById("loginBtn").addEventListener("click", checkLogin);
-
-      // ✅ Success → شيل شاشة اللوجين واظهر المحتوى
-      document.getElementById("loginOverlay").style.display = "none";
-      document.getElementById("mainContent").style.display = "block";
-    }
 
 // يمسح كل القيم القديمة
 const chargeButton = document.getElementById('charge');
