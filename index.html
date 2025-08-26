@@ -477,14 +477,21 @@ function getDeviceFingerprint() {
 }
 
 async function checkLogin() {
+  const userId = document.getElementById("usernameInput").value.trim(); // 👈 ID من الخانة
   const enteredPassword = document.getElementById("passwordInput").value.trim();
   const fingerprint = getDeviceFingerprint();
 
-  const docRef = doc(db, "users", "login");
+  if (!userId || !enteredPassword) {
+    alert("⚠️ لازم تكتب الـ ID والباسورد!");
+    return;
+  }
+
+  // 👇 بدل "login" خليها userId اللي انت دخلته
+  const docRef = doc(db, "users", userId);
   const docSnap = await getDoc(docRef);
 
   if (!docSnap.exists()) {
-    alert("❌ No login data found!");
+    alert("❌ مفيش يوزر بالـ ID ده!");
     return;
   }
 
@@ -493,7 +500,7 @@ async function checkLogin() {
   const registeredDevice = data.deviceFingerprint || null;
 
   if (enteredPassword !== appPassword) {
-    alert("❌ Wrong password!");
+    alert("❌ الباسورد غلط!");
     return;
   }
 
@@ -505,16 +512,14 @@ async function checkLogin() {
   }
 
   if (fingerprint !== registeredDevice) {
-    alert("❌ This account is already used on another device!");
+    alert("❌ الأكونت مستخدم على جهاز تاني!");
     return;
   }
 
-  // ✅ نجاح
-alert("✅ Access granted!");
-
-// ✅ Success → شيل شاشة اللوجين واظهر المحتوى
-document.getElementById("loginOverlay").style.display = "none";
-document.getElementById("mainContent").style.display = "block";
+  // ✅ نجاح → افتح المحتوى
+  alert("✅ Access granted!");
+  document.getElementById("loginOverlay").style.display = "none";
+  document.getElementById("mainContent").style.display = "block";
 }
 document.getElementById("loginBtn").addEventListener("click", checkLogin);
 // يمسح كل القيم القديمة
