@@ -503,6 +503,14 @@ async function checkLogin() {
   const enteredPassword = document.getElementById("passwordInput").value;
   const enteredDevice = document.getElementById("deviceInput").value;
 
+  const docRef = doc(db, "devices", enteredDevice); // "devices" اسم الكولكشن و enteredDevice هو ID المستند
+  const docSnap = await getDoc(docRef);
+
+  if (!docSnap.exists()) {
+    alert("❌ This device is not allowed!");
+    return;
+  }
+
   if (enteredPassword !== appPassword) {
     alert("❌ Wrong password!");
     return;
