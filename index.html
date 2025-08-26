@@ -35,7 +35,7 @@ body {
     
 /* خلفية سوداء شفافة للـ overlay */
 #loginOverlay {
-  position: none;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -382,10 +382,14 @@ body.loaded #loginOverlay {
 <div id="loginOverlay">
   <div id="loginBox">
     <h2>🔐 Secure Login</h2>
-    <input type="password" id="passwordInput" placeholder="Enter Password" />
     <input type="text" id="deviceInput" placeholder="Enter Device ID" />
-    <button id="loginBtn">Login</button>  
+    <input type="password" id="passwordInput" placeholder="Enter Password" />
+    <button id="loginBtn">Login</button>
   </div>
+</div>
+
+<div id="mainContent" style="display:none;">
+  <!-- محتوى التطبيق بعد تسجيل الدخول -->
 </div>
   <!-- كل محتوى التطبيق بعد الدخول -->
 </div>
