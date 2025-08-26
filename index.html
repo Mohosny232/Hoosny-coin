@@ -490,7 +490,7 @@ async function checkLogin() {
   }
 
   // 👇 بدل "login" خليها userId اللي انت دخلته
-  const docRef = doc(db, "users", userId);
+  const docRef = doc(db, "users", login);
   const docSnap = await getDoc(docRef);
 
   if (!docSnap.exists()) {
