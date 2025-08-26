@@ -514,20 +514,20 @@ async function checkLogin() {
     return;
   }
 
+  
   if (fingerprint !== registeredDevice) {
     alert("❌ الأكونت مستخدم على جهاز تاني!");
     return;
   }
 
-  console.log("User data:", docSnap.data());  // 👈 شوف هيجيب إيه
+  // ✅ لو كل حاجة صح
+  alert("✅ Access granted!");
+  document.getElementById("loginOverlay").style.display = "none";
+  document.getElementById("mainContent").style.display = "block";
 }
 
-  
-  alert("✅ Access granted!");
-document.getElementById("loginOverlay").style.display = "none";
-document.getElementById("logPopupContent").style.display = "block";
-
 document.getElementById("loginBtn").addEventListener("click", checkLogin);
+
 
   // يمسح كل القيم القديمة
 const chargeButton = document.getElementById('charge');
