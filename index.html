@@ -476,7 +476,7 @@ function getDeviceFingerprint() {
 }
 
 async function checkLogin() {
-  const userId = document.getElementById("usernameInput").value.trim(); // 👈 ID من الخانة
+  const userId = document.getElementById("deviceInput").value.trim(); // 👈 ID من الخانة
   const enteredPassword = document.getElementById("passwordInput").value.trim();
   const fingerprint = getDeviceFingerprint();
 
