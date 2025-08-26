@@ -504,13 +504,13 @@ async function checkLogin() {
     return;
   }
 
-  const docRef = doc(db, "users", login);
-  const docSnap = await getDoc(docRef);
+const docRef = doc(db, "users", userId);  
+const docSnap = await getDoc(docRef);
 
   if (!docSnap.exists()) {
     alert("❌ مفيش يوزر بالـ ID ده!");
     return;
-  }
+}
 
   const data = docSnap.data();
   const appPassword = data.password;
