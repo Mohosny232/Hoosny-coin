@@ -454,68 +454,72 @@ body {
 
 
 
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getFirestore, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
+  // 🔥 Config بتاعك
+  const firebaseConfig = {
+    apiKey: "AIzaSyD0ErbW4GMP2EFIbp6fEUaHwowXr-O3Tiw",
+    authDomain: "hosny87-edb64.firebaseapp.com",
+    projectId: "hosny87-edb64",
+    storageBucket: "hosny87-edb64.firebasestorage.app",
+    messagingSenderId: "390181932130",
+    appId: "1:390181932130:web:ab7f516e685327fb61d53b",
+    measurementId: "G-JHWXJRG82L"
+  };
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
-    // ✅ Config بتاعك
-    const firebaseConfig = {
-      apiKey: "AIzaSyD0ErbW4GMP2EFIbp6fEUaHwowXr-O3Tiw",
-      authDomain: "hosny87-edb64.firebaseapp.com",
-      projectId: "hosny87-edb64",
-      storageBucket: "hosny87-edb64.firebasestorage.app",
-      messagingSenderId: "390181932130",
-      appId: "1:390181932130:web:ab7f516e685327fb61d53b",
-      measurementId: "G-JHWXJRG82L"
-    };
+  // 🖐️ بصمة الجهاز
+  function getFingerprint() {
+    return btoa(navigator.userAgent + screen.width + screen.height + screen.colorDepth);
+  }
 
-    // ✅ Connect Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+  async function checkLogin() {
+    const enteredId = document.getElementById("deviceInput").value.trim();
+    const enteredPassword = document.getElementById("passwordInput").value;
+    const fingerprint = getFingerprint();
 
-    // ✅ Login Function
-    async function checkLogin() {
-      const enteredPassword = document.getElementById("passwordInput").value.trim();
-      const enteredDevice = document.getElementById("deviceInput").value.trim();
-
-      // بنجيب document اسمه login جوا users
-      const docRef = doc(db, "users", "login");
-      const docSnap = await getDoc(docRef);
-
-      if (!docSnap.exists()) {
-        alert("❌ Document not found in Firestore!");
-        return;
-      }
-
-      const data = docSnap.data();
-      const appPassword = data.password;
-      const allowedDevices = data.devices || [];
-
-      console.log("Firestore Data:", data);
-
-      if (enteredPassword !== appPassword) {
-        alert("❌ Wrong password!");
-        return;
-      }
-
-      if (!allowedDevices.includes(enteredDevice)) {
-        alert("❌ Device not allowed!");
-        return;
-      }
-
-      // ✅ Success
-      localStorage.setItem("loggedIn", "true");
-      localStorage.setItem("deviceId", enteredDevice);
-      document.getElementById("loginOverlay").style.display = "none";
-      alert("✅ Access granted!");
+    if (!enteredId) {
+      alert("⚠️ اكتب اسم المستخدم");
+      return;
     }
 
-    // ربط الزر
+    const docRef = doc(db, "devices", enteredId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+
+      if (data.password !== enteredPassword) {
+        alert("❌ الباسورد غلط!");
+        return;
+      }
+
+      if (!data.fingerprint) {
+        // أول مرة نسجل الجهاز
+        await updateDoc(docRef, { fingerprint });
+        alert("✅ First login, device registered!");
+        localStorage.setItem("loggedIn", "true");
+        localStorage.setItem("deviceId", enteredId);
+      } else if (data.fingerprint === fingerprint) {
+        alert("✅ Access granted!");
+        localStorage.setItem("loggedIn", "true");
+        localStorage.setItem("deviceId", enteredId);
+      } else {
+        alert("❌ ID ده متسجل على جهاز تاني بالفعل!");
+      }
+    } else {
+      alert("❌ المستخدم مش موجود في Firestore!");
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("loginBtn").addEventListener("click", checkLogin);
+  });
+
   
 
 // يمسح كل القيم القديمة
