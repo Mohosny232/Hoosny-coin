@@ -10,26 +10,22 @@
    html, body {
   margin: 0;
   padding: 0;
-  background: #fff;   /* 👈 خلفية بيضاء */
+  background: #fff;   /* خلفية بيضاء */
   font-family: 'Tajawal', sans-serif;
-  min-height: 100vh; /* يخلي الطول على قد الشاشة */
+  min-height: 100vh; /* الطول على قد الشاشة */
   overflow-x: hidden; /* يمنع التمدد عرضياً */
 }
 
 body {
-  font-family: 'Tajawal', sans-serif;
-  background: #fff;
   display: flex;
-  flex-direction: column;      /* ترتيب العناصر فوق بعض */
-  align-items: center;         /* في النص بالعرض */
-  justify-content: flex-start; /* تبدأ من فوق */
-  gap: 10px;                   /* مسافة بسيطة بين العناصر */
-  body {
-  padding-top: 80px; /* 👈 هي اللي هتزق المحتوى تحت */
- transform: translateY(-50px); /* 👈 تحرك الصفحة 30px لفوق */
-  }/*
-  تتحرك لفوق */
- }  
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  /* التحكم في موقع الصفحة */
+  padding-top: 80px;       /* تحريك المحتوى لتحت */
+  transform: translateY(-70px); /* تحريك الصفحة لفوق */
+}
 #mainContent,
 #loginOverlay {
   margin-top: -10px; /* 👈 دي اللي هتزود مسافة من فوق */
