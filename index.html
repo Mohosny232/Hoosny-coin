@@ -503,29 +503,28 @@ async function checkLogin() {
   const enteredPassword = document.getElementById("passwordInput").value;
   const enteredDevice = document.getElementById("deviceInput").value;
 
-  if (enteredPassword !== appPassword) {
-    alert("❌ Wrong password!");
-    return;
-  }
+  console.log("enteredPassword:", enteredPassword);
+console.log("appPassword:", appPassword);
+console.log("enteredDevice:", enteredDevice);
+console.log("allowedDevices:", allowedDevices);
 
-  const docRef = doc(db, "devices", enteredDevice);
-  const docSnap = await getDoc(docRef);
+if (!docSnap.exists()) {
+  console.log("❌ السبب: docSnap مش موجود في Firestore");
+  alert("❌ This device is not allowed!");
+  return;
+}
 
-  if (!docSnap.exists()) {
-    alert("❌ This device is not allowed!");
-    return;
-  }
+if (enteredPassword !== appPassword) {
+  console.log("❌ السبب: الباسورد غلط");
+  alert("❌ Wrong password!");
+  return;
+}
 
-  const data = docSnap.data();
-  if (data.assignedDevice && data.assignedDevice !== enteredDevice) {
-    alert("❌ This ID is already used on another device!");
-    return;
-  }
-
-  // حفظ الجهاز المرتبط بالـ ID إذا لم يكن موجود
-  if (!data.assignedDevice) {
-    await setDoc(docRef, { assignedDevice: enteredDevice }, { merge: true });
-  }
+if (!allowedDevices.includes(enteredDevice)) {
+  console.log("❌ السبب: الجهاز مش موجود في allowedDevices");
+  alert("❌ This device is not allowed!");
+  return;
+}
 
   localStorage.setItem("loggedIn", "true");
   localStorage.setItem("deviceId", enteredDevice);
