@@ -12,11 +12,17 @@
   padding: 0;
   background: #fff;   /* خلفية بيضاء */
   font-family: 'Tajawal', sans-serif;
-  min-height: 100vh; /* الطول على قد الشاشة */
+  height: 100%; /* الطول على قد الشاشة */
   overflow-x: hidden; /* يمنع التمدد عرضياً */
 }
-
-body {
+/* الحاوية الرئيسية للمحتوى */
+#mainContent, .container {
+  position: absolute;      /* نخليها تتوضع بشكل ثابت داخل body */
+  top: 50px;               /* المسافة من فوق، عدلي الرقم على راحتك */
+  left: 50%;               /* توسيط أفقي */
+  transform: translateX(-50%); /* لتثبيت المنتصف بالعرض */
+}
+    body {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,7 +31,9 @@ body {
   /* التحكم في موقع الصفحة */
   padding-top: 80px;       /* تحريك المحتوى لتحت */
   transform: translateY(-70px); /* تحريك الصفحة لفوق */
-}
+   position: relative;
+    }
+    
 #mainContent,
 #loginOverlay {
   margin-top: -10px; /* 👈 دي اللي هتزود مسافة من فوق */
@@ -97,11 +105,11 @@ body.loaded #loginOverlay {
     to {opacity: 1; transform: scale(1);}
   }
 .container {
-  width: 330px;
+  width: 320px;
   padding: 14px;
   position: relative; /* أو absolute */
   left: 0px;        /* تحرك الخانة 50px يمين */
-  top: -10px;         /* تحركها شوية لفوق */
+  top: 20px;         /* تحركها شوية لفوق */
 }
     
     .tiktok { color: red; }
