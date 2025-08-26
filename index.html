@@ -62,7 +62,14 @@ body {
     font-size: 20px;
     color: #333;
   }
+#loginOverlay {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
 
+body.loaded #loginOverlay {
+  opacity: 1;
+  }
   #loginBox input {
     width: 90%;
     padding: 12px;
@@ -679,6 +686,9 @@ chargeButton.addEventListener('click', () => {
     popup.style.display = 'flex';
 
   }, 2000);
+});
+  window.addEventListener('load', () => {
+  document.body.classList.add('loaded');
 });
     // اختياري: يمكن إعادة عرض الزر إذا المستخدم رفض من قبل
 </script>
