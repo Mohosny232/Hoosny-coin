@@ -529,11 +529,16 @@ const docSnap = await getDoc(docRef);
     return;
   }
 
+  
   // ✅ كل حاجة صح
-  alert("✅ Access granted!");
-  document.getElementById('loginOverlay').style.display = 'none';
-  document.getElementById("mainContent").style.display = "block";
-}
+  localStorage.setItem("loggedIn", "true");  // نخزن حالة الدخول
+  localStorage.setItem("userId", userId);    // نخزن اسم المستخدم
+// تحقق من حالة الدخول عند تحميل الصفحة
+window.addEventListener('load', () => {
+  if (localStorage.getItem("loggedIn") === "true") {
+    document.getElementById('loginOverlay').style.display = 'none';
+    document.getElementById("mainContent").style.display = "block";
+  }
 
 document.getElementById("loginBtn").addEventListener("click", checkLogin);
 
