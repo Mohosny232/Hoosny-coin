@@ -498,10 +498,12 @@ function checkLogin() {
     return;
   }
 
-  if (!allowedDevices.includes(enteredDevice)) {
-    alert("❌ This device is not allowed!");
-    return;
-  }
+  const savedDevice = localStorage.getItem("deviceId");
+if (!allowedDevices.includes(savedDevice)) {
+  document.getElementById("loginOverlay").style.display = "block"; // يرجع صفحة الوجن
+  alert("❌ This device is not allowed!");
+  return;
+}
 
   // ✅ حفظ حالة الدخول في localStorage
   localStorage.setItem("loggedIn", "true");
