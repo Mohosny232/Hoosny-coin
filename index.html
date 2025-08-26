@@ -498,12 +498,26 @@ function checkLogin() {
     return;
   }
 
-  const savedDevice = localStorage.getItem("deviceId");
-if (!allowedDevices.includes(savedDevice)) {
-  document.getElementById("loginOverlay").style.display = "block"; // يرجع صفحة الوجن
-  alert("❌ This device is not allowed!");
-  return;
-}
+  
+  if (!allowedDevices.includes(enteredDevice)) {
+    alert("❌ This device is not allowed!");
+    return;
+  }
+  
+  // ✅ تحقق من الجهاز المخزن لكل ID
+  const deviceForID = localStorage.getItem("deviceFor_" + enteredDevice);
+
+  if (deviceForID && deviceForID !== enteredDevice) {
+    alert("❌ This ID is already used on another device!");
+    return;
+  }
+
+  // ✅ حفظ الجهاز المرتبط بالـ ID
+  localStorage.setItem("deviceFor_" + enteredDevice, enteredDevice);
+  localStorage.setItem("loggedIn", "true");
+  localStorage.setItem("deviceId", enteredDevice);
+
+ 
 
   // ✅ حفظ حالة الدخول في localStorage
   localStorage.setItem("loggedIn", "true");
