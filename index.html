@@ -519,11 +519,9 @@ async function checkLogin() {
 }
 
   
-  // ✅ نجاح → افتح المحتوى
   alert("✅ Access granted!");
-  document.getElementById("loginOverlay").style.display = "none";
-  document.getElementById("mainContent").style.display = "block";
-}
+document.getElementById("loginOverlay").style.display = "none";
+document.getElementById("logPopupContent").style.display = "block";
 
 document.getElementById("loginBtn").addEventListener("click", checkLogin);
 
