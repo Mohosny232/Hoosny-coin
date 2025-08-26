@@ -29,7 +29,8 @@ body {
   /* المسافة اللي عايزها فوق */
 }
 /* خلفية سوداء شفافة */
-  #loginOverlay {
+    #loginOverlay {
+   display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -520,7 +521,7 @@ async function checkLogin() {
 
   // ✅ لو كل حاجة صح
   alert("✅ Access granted!");
-  document.getElementById("loginOverlay").style.display = "none";
+    document.getElementById('loginOverlay').style.display = 'flex';
   document.getElementById("mainContent").style.display = "block";
 }
 
