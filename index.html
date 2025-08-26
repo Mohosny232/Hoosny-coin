@@ -7,13 +7,13 @@
   <link rel="manifest" href="manifest.json">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap" rel="stylesheet">
   <style>
-   html, body {
+html, body {
   margin: 0;
   padding: 0;
-     /* خلفية بيضاء */
-  font-family: 'Tajawal', sans-serif;
-  height: 100%; /* الطول على قد الشاشة */
-  overflow-x: hidden; /* يمنع التمدد عرضياً */
+  background: #fff; /* خلفية بيضاء */
+  min-height: 100vh; /* أو height: 100vh */
+  overflow-x: hidden;
+  overflow-y: hidden; /* يمنع النزول تحت */
 }
 /* الحاوية الرئيسية للمحتوى */
 
@@ -22,11 +22,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  gap: 10px;
-  /* التحكم في موقع الصفحة */
-  padding-top: 20px;       /* تحريك المحتوى لتحت */
-  transform: translateY(-70px); /* تحريك الصفحة لفوق */
-   position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
     }
     
 
