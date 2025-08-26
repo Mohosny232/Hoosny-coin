@@ -519,13 +519,15 @@ async function checkLogin() {
   console.log("User data:", docSnap.data());  // 👈 شوف هيجيب إيه
 }
 
+  
   // ✅ نجاح → افتح المحتوى
   alert("✅ Access granted!");
   document.getElementById("loginOverlay").style.display = "none";
   document.getElementById("mainContent").style.display = "block";
+}
 
-document.getElementById("loginBtn").addEventListener("click", checkLogin)
-  }
+document.getElementById("loginBtn").addEventListener("click", checkLogin);
+
   // يمسح كل القيم القديمة
 const chargeButton = document.getElementById('charge');
 const customInput = document.getElementById('customAmount');
