@@ -503,7 +503,12 @@ async function checkLogin() {
   const enteredPassword = document.getElementById("passwordInput").value;
   const enteredDevice = document.getElementById("deviceInput").value;
 
-  const docRef = doc(db, "devices", enteredDevice); // "devices" اسم الكولكشن و enteredDevice هو ID المستند
+  if (enteredPassword !== appPassword) {
+    alert("❌ Wrong password!");
+    return;
+  }
+
+  const docRef = doc(db, "devices", enteredDevice);
   const docSnap = await getDoc(docRef);
 
   if (!docSnap.exists()) {
@@ -511,34 +516,19 @@ async function checkLogin() {
     return;
   }
 
-  if (enteredPassword !== appPassword) {
-    alert("❌ Wrong password!");
+  const data = docSnap.data();
+  if (data.assignedDevice && data.assignedDevice !== enteredDevice) {
+    alert("❌ This ID is already used on another device!");
     return;
   }
 
-  if (!allowedDevices.includes(enteredDevice)) {
-    alert("❌ This device is not allowed!");
-    return;
+  // حفظ الجهاز المرتبط بالـ ID إذا لم يكن موجود
+  if (!data.assignedDevice) {
+    await setDoc(docRef, { assignedDevice: enteredDevice }, { merge: true });
   }
 
-  const deviceRef = doc(db, "devices", enteredDevice);
-  const deviceSnap = await getDoc(deviceRef);
-
-  if (deviceSnap.exists()) {
-    const data = deviceSnap.data();
-    if (data.assignedDevice && data.assignedDevice !== enteredDevice) {
-      alert("❌ This ID is already used on another device!");
-      return;
-    }
-  }
-
-  // ✅ حفظ الجهاز في Firestore
-  await setDoc(deviceRef, { assignedDevice: enteredDevice });
-
-  // ✅ حفظ حالة الدخول محليًا
   localStorage.setItem("loggedIn", "true");
   localStorage.setItem("deviceId", enteredDevice);
-
   document.getElementById("loginOverlay").style.display = "none";
   console.log("✅ Access granted!");
 }
