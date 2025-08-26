@@ -479,9 +479,10 @@ function xorDecrypt(encoded, key) {
 // ✅ القيم المشفرة
 // ✅ القيم المشفرة اللي مولدها من encrypt.html
 const encryptedPassword = "f01gV1NCV1do"; 
-const encryptedDevices = [
-  "KRwlDAAXVFkDCgojAA==", 
-  "="
+// ✅ IDs مشفرة
+  const encryptedDevices = [
+    "KRwlDAAXVFkDCgojAA==", // device1-Hosny
+    "KRwlDAAXV1k5BAolHDc="  // device2-rashed
 ];
 // ✅ فك التشفير وقت التشغيل
 const appPassword = xorDecrypt(encryptedPassword, secretKey);
