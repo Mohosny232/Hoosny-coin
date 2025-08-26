@@ -459,7 +459,7 @@ body {
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD0ErbW4GMP2EFIbp6fEUaHwowXr-O3Tiw",
@@ -474,27 +474,26 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// ✅ بصمة الجهاز (ممكن تزودها بعناصر تانية زي IP أو UUID عشان تبقى أقوى)
+// ✅ بصمة الجهاز (fingerprint)
 function getDeviceFingerprint() {
   return btoa(navigator.userAgent + navigator.language + screen.width + screen.height);
 }
 
 async function checkLogin() {
-  const userId = document.getElementById("deviceInput").value.trim(); // 👈 ID من الخانة
   const enteredPassword = document.getElementById("passwordInput").value.trim();
   const fingerprint = getDeviceFingerprint();
 
-  if (!userId || !enteredPassword) {
-    alert("⚠️ لازم تكتب الـ ID والباسورد!");
+  if (!enteredPassword) {
+    alert("⚠️ لازم تكتب الباسورد!");
     return;
   }
 
-  // 👇 بدل "login" خليها userId اللي انت دخلته
-  const docRef = doc(db, "users", login);
+  // 👇 هنا بنجيب document اسمه "login"
+  const docRef = doc(db, "users", "login");
   const docSnap = await getDoc(docRef);
 
   if (!docSnap.exists()) {
-    alert("❌ مفيش يوزر بالـ ID ده!");
+    alert("❌ مفيش مستند اسمه login!");
     return;
   }
 
@@ -508,15 +507,14 @@ async function checkLogin() {
   }
 
   if (!registeredDevice) {
-    // أول جهاز يدخل → نخزن بصمته
+    // أول مرة → نسجل بصمة الجهاز
     await updateDoc(docRef, { deviceFingerprint: fingerprint });
-    alert("✅ First device registered!");
+    alert("✅ أول جهاز دخل و اتسجل خلاص!");
     return;
   }
 
-  
   if (fingerprint !== registeredDevice) {
-    alert("❌ الأكونت مستخدم على جهاز تاني!");
+    alert("❌ الحساب مستخدم على جهاز تاني!");
     return;
   }
 
