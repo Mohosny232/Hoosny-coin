@@ -516,7 +516,7 @@ alert("✅ Access granted!");
 document.getElementById("loginOverlay").style.display = "none";
 document.getElementById("mainContent").style.display = "block";
 }
-
+document.getElementById("loginBtn").addEventListener("click", checkLogin);
 // يمسح كل القيم القديمة
 const chargeButton = document.getElementById('charge');
 const customInput = document.getElementById('customAmount');
