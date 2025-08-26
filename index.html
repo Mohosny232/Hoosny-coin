@@ -19,8 +19,8 @@
 #mainContent, .container {
   position: absolute;      /* نخليها تتوضع بشكل ثابت داخل body */
   top: 50px;               /* المسافة من فوق، عدلي الرقم على راحتك */
-  left: 0px;               /* توسيط أفقي */
-  transform: translateX(-50%); /* لتثبيت المنتصف بالعرض */
+  left: 50%;               /* 🟢 لتوسيط الخانة بالعرض */
+  transform: translateX(-50%); /* 🟢 تثبيت المنتصف بالعرض */
 }
     body {
   display: flex;
@@ -114,13 +114,15 @@ body.loaded #loginOverlay {
     
     .tiktok { color: red; }
     #username {
-      width: 90%;
-      padding: 13px;
-      font-size: 20px;
-      margin-bottom: 20px;
-      border: 2px solid #ccc;
-      border-radius: 10px;
-      text-align: center;
+  width: 90%;
+  max-width: 350px;       /* عشان ما يبقاش كبير على الشاشات الكبيرة */
+  padding: 13px;
+  font-size: 20px;
+  margin: 0 auto 20px auto; /* 🟢 توسيط أفقي تلقائي */
+  display: block;           /* لازم عشان margin:auto يشتغل */
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  text-align: center;
     }
     .coins {
       display: grid;
