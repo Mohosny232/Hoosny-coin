@@ -608,14 +608,14 @@ window.addEventListener('DOMContentLoaded', () => {
       clickSound.play(); 
     });
   });
-  // زر الشحن
-  // زر الشحن
-chargeButton.addEventListener('click', () => {
-  if (!chargeButton.classList.contains('active')) return;
 
-  const textSpan = document.getElementById('chargeText');
-  const imgIcon = document.querySelector('#charge .btn-icon');
-  const loaderSpan = document.getElementById('buttonLoader');
+  // زر الشحن
+  chargeButton.addEventListener('click', () => {
+    if (!chargeButton.classList.contains('active')) return;
+
+    const textSpan = document.getElementById('chargeText');
+    const imgIcon = document.querySelector('#charge .btn-icon');
+    const loaderSpan = document.getElementById('buttonLoader');
 
     setTimeout(() => {
       loaderSpan.style.display = 'none';
@@ -633,6 +633,8 @@ chargeButton.addEventListener('click', () => {
       popup.style.display = 'flex';
     }, 2000);
   });
+
+}); // ✅ قفلنا DOMContentLoaded
 
   // زر الدفع الآن
   payNowBtn.addEventListener('click', () => {
