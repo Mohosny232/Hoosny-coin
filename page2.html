@@ -173,16 +173,11 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  // جلب البيانات المخزنة من الصفحة الأولى
   const username = localStorage.getItem("receiverName") || "غير معروف";
   const coins = localStorage.getItem("transferredCoins") || "0";
 
-  // تحديث القيم في الصفحة
-  const usernameEl = document.getElementById("savedUsername");
-  const coinAmountEl = document.getElementById("savedCoins");
-
-  if (usernameEl) usernameEl.textContent = username;
-  if (coinAmountEl) coinAmountEl.textContent = coins;
+  document.getElementById("savedUsername").textContent = username;
+  document.getElementById("savedCoins").textContent = coins;
 });
 
 
