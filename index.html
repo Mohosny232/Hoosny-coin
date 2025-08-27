@@ -297,6 +297,18 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
 
+  
+  function saveData() {
+    const username = document.getElementById("username").value;
+    const coins = document.getElementById("coins").value;
+
+    // نحفظ في localStorage
+    localStorage.setItem("username", username);
+    localStorage.setItem("coins", coins);
+
+    // نروح على page2
+
+
   document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
     option.addEventListener('click', () => {
       document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
@@ -336,9 +348,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const coins = selected 
         ? (selected.classList.contains('custom') ? customInput.value || "0" : selected.dataset.amount) 
          : customInput.value || "0";
-      const username = localStorage.getItem("username");
-      const coins = localStorage.getItem("coins");
-
+      
       document.getElementById('popupUser').innerText = 'Username: ' + username;
       document.getElementById('popupCoins').innerText = 'Coins: ' + coins;
       popup.style.display = 'flex';
