@@ -370,8 +370,9 @@ body.loaded #loginOverlay {
   </style>
 </head>
 <body>
-<button id="retryLogin">إعادة المحاولة</button>
-<button id="hiddenBtn">H</button>
+<!-- زر إعادة المحاولة -->
+<button id="retryLogin" style="display:none;">إعادة المحاولة</button>
+
 <!-- زر التثبيت -->
 <button id="installBtn" style="display:none; position: fixed; bottom: 10px; right: 10px; padding:10px 20px; z-index:9999;">تثبيت التطبيق</button>
 
@@ -550,10 +551,12 @@ window.addEventListener('load', () => {
 
 
 document.getElementById("loginBtn").addEventListener("click", checkLogin);
-document.getElementById("retryLogin").addEventListener("click", () => {
+// بعد تعريف دالة checkLogin() وكل الـ addEventListener للـ loginBtn
+const retryBtn = document.getElementById("retryLogin");
+retryBtn.addEventListener("click", () => {
     checkLogin(); // تعيد محاولة تسجيل الدخول
-
-    
+    retryBtn.style.display = "none"; // تخفي الزر بعد الضغط عليه
+});    
 
 
   // يمسح كل القيم القديمة
