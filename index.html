@@ -588,9 +588,26 @@ customInput.addEventListener('input', (e) => {
 
 // اختيار عملة عادية
 document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
+// اختيار عملة عادية
+document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
   option.addEventListener('click', () => {
+    // إزالة التحديد من كل العملات
     document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
+    // تحديد العملة المختارة
     option.classList.add('selected');
+
+    // عند اختيار أي خيار عملة
+    let amount = parseInt(option.dataset.amount);
+    updateCharge(amount);
+  });
+});
+
+// عند إدخال قيمة مخصصة
+customInput.addEventListener('input', (e) => {
+  selectCustom();
+  const value = parseInt(e.target.value) || 0;
+  updateCharge(value);
+});
 
     const value = parseInt(option.dataset.amount);
     const price = (value * 3 / 17000).toFixed(2);
@@ -641,6 +658,27 @@ payNowBtn.addEventListener('click', () => {
   loader.style.display = 'flex';
   setTimeout(() => { window.location.href = "page2.html"; }, 3000);
 });
+// عند الضغط على زر التثبيت
+document.getElementById('installBtn').addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();              // عرض نافذة تثبيت التطبيق
+  const choiceResult = await deferredPrompt.userChoice;
+  if (choiceResult.outcome === 'accepted') {
+    console.log('✅ تم تثبيت التطبيق');
+  } else {
+    console.log('❌ تم رفض التثبيت');
+  }
+  deferredPrompt = null;               // أفرغ المتغير بعد الاستخدام
+  document.getElementById('installBtn').style.display = 'none'; // أخفي الزر
+}); 
+function updateChargeCoins(amount) {
+  const chargeButton = document.getElementById('charge');
+  if (amount > 0) {
+    chargeButton.classList.add('active'); // تفعيل الزر
+  } else {
+    chargeButton.classList.remove('active'); // إبقاءه رمادي
+  }
+}
 
  </script>
  </body>
