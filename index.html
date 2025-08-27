@@ -469,10 +469,6 @@ body.loaded #loginOverlay {
 
   <!-- السكربتات بعد كل العناصر -->
  
-
-
-
-
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
@@ -504,43 +500,37 @@ async function checkLogin() {
     return;
   }
 
-const docRef = doc(db, "users", userId);  
-const docSnap = await getDoc(docRef);
+  const docRef = doc(db, "users", userId);  
+  const docSnap = await getDoc(docRef);
 
   if (!docSnap.exists()) {
     alert("❌ مفيش يوزر بالـ ID ده!");
     return;
-}
+  }
 
   const data = docSnap.data();
   const appPassword = data.password;
-  const registeredDevice = data.deviceFingerprint || null;
+  const registeredDevices = data.devices || [];
 
   if (enteredPassword !== appPassword) {
     alert("❌ الباسورد غلط!");
     return;
   }
 
-  const registeredDevices = data.devices || []; // مصفوفة الأجهزة المسجلة
-
-if (!registeredDevices.includes(fingerprint)) {
-    // لو الجهاز جديد
-    registeredDevices.push(fingerprint); // ضيف الجهاز للمصفوفة
+  if (!registeredDevices.includes(fingerprint)) {
+    registeredDevices.push(fingerprint);
     await updateDoc(docRef, { devices: registeredDevices });
     alert("✅ جهاز جديد تم تسجيله!");
-} else {
+  } else {
     alert("✅ تم الدخول على جهاز مسجل مسبقًا!");
   }
-  
-  
-  // ✅ كل حاجة صح
-  localStorage.setItem("loggedIn", "true");  // نخزن حالة الدخول
-  localStorage.setItem("userId", userId);    // نخزن اسم المستخدم
+
+  localStorage.setItem("loggedIn", "true");
+  localStorage.setItem("userId", userId);
   document.getElementById('loginOverlay').style.display = 'none';
   document.getElementById("mainContent").style.display = "block";
 }
 
-// تحقق من حالة الدخول عند تحميل الصفحة
 window.addEventListener('load', () => {
   if (localStorage.getItem("loggedIn") === "true") {
     document.getElementById('loginOverlay').style.display = 'none';
@@ -548,12 +538,7 @@ window.addEventListener('load', () => {
   }
 });
 
-
 document.getElementById("loginBtn").addEventListener("click", checkLogin);
-
-
-
-  // يمسح كل القيم القديمة
 
 window.addEventListener('DOMContentLoaded', () => {
   const chargeButton = document.getElementById('charge');
@@ -578,7 +563,6 @@ window.addEventListener('DOMContentLoaded', () => {
     else chargeButton.classList.remove('active');
   }
 
-  // عند إدخال قيمة مخصصة
   customInput.addEventListener('input', (e) => {
     selectCustom();
     const value = parseInt(e.target.value) || 0;
@@ -588,7 +572,6 @@ window.addEventListener('DOMContentLoaded', () => {
     updateChargeCoins(value);
   });
 
-  // عند اختيار عملة عادية
   document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
     option.addEventListener('click', () => {
       document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
@@ -601,7 +584,6 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // أصوات الضغط
   document.querySelectorAll('button, .coin-option, #username, #customAmount').forEach(el => {
     el.addEventListener('click', () => { 
       clickSound.currentTime = 0; 
@@ -609,13 +591,16 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // زر الشحن
   chargeButton.addEventListener('click', () => {
     if (!chargeButton.classList.contains('active')) return;
 
     const textSpan = document.getElementById('chargeText');
     const imgIcon = document.querySelector('#charge .btn-icon');
     const loaderSpan = document.getElementById('buttonLoader');
+
+    loaderSpan.style.display = 'block';
+    textSpan.style.display = 'none';
+    imgIcon.style.display = 'none';
 
     setTimeout(() => {
       loaderSpan.style.display = 'none';
@@ -634,15 +619,13 @@ window.addEventListener('DOMContentLoaded', () => {
     }, 2000);
   });
 
-}); // ✅ قفلنا DOMContentLoaded
-
   // زر الدفع الآن
   payNowBtn.addEventListener('click', () => {
     loader.style.display = 'flex';
     setTimeout(() => { window.location.href = "page2.html"; }, 3000);
   });
 
-  // تثبيت PWA
+  // PWA
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
@@ -652,13 +635,12 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('installBtn').addEventListener('click', async () => {
     if (!deferredPrompt) return;
     deferredPrompt.prompt();
-    const choiceResult = await deferredPrompt.userChoice;
+    await deferredPrompt.userChoice;
     deferredPrompt = null;
     document.getElementById('installBtn').style.display = 'none';
   });
 });
-
- </script>
+</script>
  </body>
 </html>     
   
