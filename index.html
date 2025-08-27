@@ -298,19 +298,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
   
-  function saveData() {
-  // نقرأ من الخانات اللي في الصفحة
-  const username = document.getElementById("usernameInput").value || "غير معروف";
-  const coins = document.getElementById("coinsInput").value || "0";
-
-  // نخزن في localStorage
+function saveData() {
+  const username = document.getElementById("username").value || "غير معروف";
   localStorage.setItem("receiverName", username);
-  localStorage.setItem("transferredCoins", coins);
 
-  // بعد التخزين نروح للصفحة التانية
+  // لو مفيش كوينز محفوظة من الاختيارات
+  if (!localStorage.getItem("transferredCoins")) {
+    const custom = document.getElementById("customAmount").value;
+    localStorage.setItem("transferredCoins", custom || "0");
+  }
+
+  // بعد الحفظ نروح للصفحة التانية
   window.location.href = "page2.html";
   }
-    // نروح على page2
 
 
   document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
