@@ -27,6 +27,9 @@ body {
   font-weight: bold;
 }
 
+#mainContent {
+  display: none; /* نخفي المحتوى لحد ما نحسب الدخول */
+}
 /* Login overlay */
 #loginOverlay {
   position: fixed;
@@ -251,10 +254,13 @@ async function checkLogin() {
 
 window.addEventListener('load', () => {
   if (localStorage.getItem("loggedIn") === "true") {
-    document.getElementById('loginOverlay').style.display = 'block';
-    document.getElementById("mainContent").style.display = "block";
-  }
-});
+        document.getElementById('loginOverlay').style.display = 'none'; // نخفي الـ overlay
+      document.getElementById("mainContent").style.display = "block"; // نعرض المحتوى
+    } else {
+      document.getElementById('loginOverlay').style.display = 'block'; // نعرض صفحة الدخول
+    }
+  });
+
 
 document.getElementById("loginBtn").addEventListener("click", checkLogin);
 
