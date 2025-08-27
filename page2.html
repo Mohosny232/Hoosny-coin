@@ -70,18 +70,20 @@
     }
     
     #back-button {
-      position: fixed;
-      bottom: 80px;
-      left: 40px;
-      width: 85%;
-      background-color: red;
-      color: white;
-      font-size: 18px;
-      border: none;
-      padding: 15px 0;
-      cursor: pointer;
-      z-index: 9999;
-    }
+  position: fixed;
+  bottom: 80px;
+  left: 50%;              /* يبدأ من النص */
+  transform: translateX(-50%); /* يوازن نفسه */
+  width: 85%;
+  background-color: red;
+  color: white;
+  font-size: 18px;
+  border: none;
+  padding: 15px 0;
+  cursor: pointer;
+  z-index: 9999;
+  border-radius: 8px; /* شكل أحلى */
+}
   
   </style>
 </head>
