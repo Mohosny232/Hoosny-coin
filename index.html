@@ -442,7 +442,6 @@ body.loaded #loginOverlay {
     
     <!-- طريقة الدفع -->
       <!-- زر إعادة المحاولة -->
-<button id="retryLogin" style="display:none;">إعادة المحاولة</button>
     <!-- نجاح العملية -->
     <div id="successSection">
       <img src="success.png" alt="نجاح">
@@ -551,12 +550,7 @@ window.addEventListener('load', () => {
 
 
 document.getElementById("loginBtn").addEventListener("click", checkLogin);
-// بعد تعريف دالة checkLogin() وكل الـ addEventListener للـ loginBtn
-const retryBtn = document.getElementById("retryLogin");
-retryBtn.addEventListener("click", () => {
-    checkLogin(); // تعيد محاولة تسجيل الدخول
-    retryBtn.style.display = "none"; // تخفي الزر بعد الضغط عليه
-});    
+
 
 
   // يمسح كل القيم القديمة
