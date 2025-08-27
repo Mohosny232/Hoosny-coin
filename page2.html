@@ -59,20 +59,20 @@
       border-radius: 12px;
     }
 
-    #b.wrapper img {
-  width: auto;       /* 👈 الحجم الأصلي للصورة */
-  height: auto;      /* 👈 الطول الأصلي */
-  max-width: 100%;   /* 👈 لو الشاشة أصغر من الصورة متتعداش العرض */
-  max-height: 100%;  /* 👈 نفس الكلام للطول */
-  object-fit: contain; 
-  position: relative; /* 👈 مش Absolute عشان متفردش */
-  z-index: 0;
+    .wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
     }
-    ack-button {
+    back-button {
       position: fixed;
       bottom: 80px;
       left: 0;
-      width: 100%;
+      width: 90%;
       background-color: red;
       color: white;
       font-size: 18px;
