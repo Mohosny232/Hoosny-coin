@@ -299,12 +299,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
   
   function saveData() {
-    const username = document.getElementById("username").value;
-    const coins = document.getElementById("coins").value;
-
+    const username = localStorage.getItem("receiverName") || "غير معروف";
+    const coins = localStorage.getItem("transferredCoins") || "0";
     // نحفظ في localStorage
-    localStorage.setItem("username", username);
-    localStorage.setItem("coins", coins);
+// عند إدخال أو عند الضغط على زر
+localStorage.setItem("receiverName", username);  
+localStorage.setItem("transferredCoins", coins);
 }
     // نروح على page2
 
