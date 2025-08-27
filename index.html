@@ -592,8 +592,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   chargeButton.addEventListener('click', () => {
-    if (!chargeButton.classList.contains('active')) return;
-
+    
     const textSpan = document.getElementById('chargeText');
     const imgIcon = document.querySelector('#charge .btn-icon');
     const loaderSpan = document.getElementById('buttonLoader');
