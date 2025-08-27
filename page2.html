@@ -71,9 +71,9 @@
     
     #back-button {
   position: fixed;
-  bottom: 70px;
-  left: 0;              /* يبدأ من النص */
-  transform: translateX(-50%); /* يوازن نفسه */
+  bottom: 70px;              /* المسافة من تحت */
+  left: 50%;                 /* يخليه يبدأ من نص الشاشة */
+  transform: translateX(-50%); /* يوسّطه بالعرض */
   width: 85%;
   background-color: red;
   color: white;
@@ -82,7 +82,7 @@
   padding: 15px 0;
   cursor: pointer;
   z-index: 9999;
-  border-radius: 8px; /* شكل أحلى */
+  border-radius: 8px;
 }
   
   </style>
