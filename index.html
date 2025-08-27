@@ -191,75 +191,72 @@ body {
 <audio id="typeSound" src="type.mp3"></audio>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyD0ErbW4GMP2EFIbp6fEUaHwowXr-O3Tiw",
-  authDomain: "hosny87-edb64.firebaseapp.com",
-  projectId: "hosny87-edb64",
-  storageBucket: "hosny87-edb64.firebasestorage.app",
-  messagingSenderId: "390181932130",
-  appId: "1:390181932130:web:ab7f516e685327fb61d53b",
-  measurementId: "G-JHWXJRG82L"
-};
+  const firebaseConfig = {
+    // بيانات مشروعك من Firebase
+  };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
-function getDeviceFingerprint() {
-  return btoa(navigator.userAgent + navigator.language + screen.width + screen.height);
-}
+  // ✅ تسجيل الدخول
+  async function checkLogin() {
+    const userId = document.getElementById("username").value;
+    const enteredPassword = document.getElementById("password").value;
 
-async function checkLogin() {
-  const userId = document.getElementById("deviceInput").value.trim();
-  const enteredPassword = document.getElementById("passwordInput").value.trim();
-  const fingerprint = getDeviceFingerprint();
+    const docRef = doc(db, "users", userId);
+    const docSnap = await getDoc(docRef);
 
-  if (!userId || !enteredPassword) {
-    alert("⚠️ لازم تكتب الـ ID والباسورد!");
-    return;
-  }
+    if (docSnap.exists()) {
+      const correctPassword = docSnap.data().password;
 
-  const docRef = doc(db, "users", userId);  
-  const docSnap = await getDoc(docRef);
+      if (enteredPassword === correctPassword) {
+        // تخزين البيانات
+        localStorage.setItem("loggedIn", "true");
+        localStorage.setItem("userId", userId);
+        localStorage.setItem("password", enteredPassword); // 👈 نخزن الباسورد اللي دخل بيه
 
-  if (!docSnap.exists()) {
-    alert("❌ مفيش يوزر بالـ ID ده!");
-    return;
-  }
-
-  const data = docSnap.data();
-  const appPassword = data.password;
-  const registeredDevices = data.devices || [];
-
-  if (enteredPassword !== appPassword) {
-    alert("❌ الباسورد غلط!");
-    return;
-  }
-
-  if (!registeredDevices.includes(fingerprint)) {
-    registeredDevices.push(fingerprint);
-    await updateDoc(docRef, { devices: registeredDevices });
-    alert("✅ جهاز جديد تم تسجيله!");
-  } else {
-    alert("✅ تم الدخول على جهاز مسجل مسبقًا!");
-  }
-
-  localStorage.setItem("loggedIn", "true");
-  localStorage.setItem("userId", userId);
-  document.getElementById('loginOverlay').style.display = 'none';
-  document.getElementById("mainContent").style.display = "block";
-}
-
-window.addEventListener('load', () => {
-  if (localStorage.getItem("loggedIn") === "true") {
-        document.getElementById('loginOverlay').style.display = 'none'; // نخفي الـ overlay
-      document.getElementById("mainContent").style.display = "block"; // نعرض المحتوى
+        document.getElementById('loginOverlay').style.display = 'none';
+        document.getElementById("mainContent").style.display = "block";
+      } else {
+        alert("❌ كلمة المرور غلط");
+      }
     } else {
-      document.getElementById('loginOverlay').style.display = 'block'; // نعرض صفحة الدخول
+      alert("❌ المستخدم مش موجود");
     }
+  }
+
+  document.getElementById("loginBtn").addEventListener("click", checkLogin);
+
+  // ✅ التحقق عند الـ refresh
+  window.addEventListener('load', async () => {
+    const loggedIn = localStorage.getItem("loggedIn");
+    const userId = localStorage.getItem("userId");
+    const savedPassword = localStorage.getItem("password");
+
+    if (loggedIn === "true" && userId && savedPassword) {
+      const docRef = doc(db, "users", userId);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const currentPassword = docSnap.data().password;
+
+        if (currentPassword === savedPassword) {
+          // ✅ لسه الباسورد صح
+          document.getElementById('loginOverlay').style.display = 'none';
+          document.getElementById("mainContent").style.display = "block";
+          return;
+        }
+      }
+    }
+
+    // ❌ لو الباسورد اتغير أو المستخدم مش موجود → يرجعه للـ login
+    document.getElementById('loginOverlay').style.display = 'block';
+    document.getElementById("mainContent").style.display = "none";
   });
+   
 
 
 document.getElementById("loginBtn").addEventListener("click", checkLogin);
