@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -10,15 +11,12 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: #fff; /* خلفية بيضاء */
-  min-height: 100vh; /* أو height: 100vh */
+  background: #fff;
+  min-height: 100vh;
   overflow-x: hidden;
- overflow-y: hidden; /* يمنع النزول تحت */
-  }
-    
-/* الحاوية الرئيسية للمحتوى */
-
-    body {
+  overflow-y: hidden;
+}
+body {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,23 +24,20 @@ html, body {
   min-height: 100vh;
   overflow-x: hidden;
   font-family: 'Tajawal', sans-serif;
-  font-weight: bold; /* يخلي كل النصوص Bold */
+  font-weight: bold;
+}
 
-    }
-    
-
-  /* خلفية سوداء شفافة للـ overlay */
+/* Login overlay */
 #loginOverlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0; width: 100%; height: 100%;
   background: rgba(0,0,0,0.8);
-  display: flex;            /* نخلي المحتوى flex */
-  align-items: center;      /* توسيط عمودي */
-  justify-content: center;  /* توسيط أفقي */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 99999;
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
 }
 
 /* صندوق تسجيل الدخول */
@@ -55,330 +50,64 @@ html, body {
   text-align: center;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
-  #loginBox h2 {
-    margin-bottom: 15px;
-    font-size: 20px;
-    color: #333;
-  }
-#loginOverlay {
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
+#loginBox h2 { margin-bottom: 15px; font-size: 20px; color: #333; }
+#loginBox input { width: 90%; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid #ccc; font-size: 16px; }
+#loginBox button { background: #007bff; color: #fff; border: none; padding: 12px; width: 100%; border-radius: 8px; font-size: 16px; cursor: pointer; margin-top: 10px; }
+#loginBox button:hover { background: #0056b3; }
+
+.container { position: relative; margin-top: 10vh; left: 44%; transform: translateX(-50%); max-width: 330px; }
+.tiktok { color: red; }
+#username { width: 95%; max-width: 350px; padding: 13px; font-size: 20px; margin: 0 auto 20px auto; display: block; border: 2px solid #ccc; border-radius: 10px; text-align: center; }
+
+.coins { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.coin-option { background: #f2f2f2; padding: 15px; border-radius: 12px; text-align: center; cursor: pointer; font-weight: 700; transition: 0.2s; font-size: 18px; position: relative; }
+.coin-option.selected { border: 2px solid #ff2d55; background-color: #fff0f4; }
+.coin-option small { display: block; margin-top: 6px; font-size: 13px; color: #777; font-weight: normal; }
+.coin-option .coin-img { width: 32px; vertical-align: middle; margin-right: 4px; }
+.custom-input { width: 80%; font-size: 16px; padding: 6px; border: none; background: transparent; text-align: center; font-weight: bold; margin-top: 6px; }
+
+#charge, #payNow {
+  width: 90%; padding: 15px; margin-top: 19px; background: rgba(200,200,200,0.5); cursor: not-allowed; color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; position: relative; display:flex; align-items:center; justify-content:center;
 }
+#buttonLoader { display:none; width:15px; height:15px; border-radius:50%; border:3px solid #fff; border-top-color:transparent; animation: spin 0.8s linear infinite; margin:auto; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+#charge.active { background: #ff2d55; cursor: pointer; }
+#charge .btn-icon { width:20px; height:auto; display:none; position:absolute; top:48%; right:60px; transform:translateY(-50%); }
+#charge.active .btn-icon { display:inline-block; }
 
-body.loaded #loginOverlay {
-  opacity: 1;
-  }
-  #loginBox input {
-    width: 90%;
-    padding: 12px;
-    margin: 8px 0;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-  }
+.popup { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:1000; }
+.popup-content { background:#fff; border-radius:12px; width:85%; height:280px; max-height:90%; overflow-y:hidden; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:0; }
+.popup-content * { margin:0; padding:0; }
+.payment-method { display:flex; align-items:center; justify-content:center; gap:10px; margin:0; }
+.popup-header { margin-top:30px; display:flex; flex-direction:column; align-items:center; gap:10px; }
+.popup-img { width:100%; border-radius:12px 12px 0 0; }
+.payment-method img { width:50px; }
 
-  #loginBox button {
-    background: #007bff;
-    color: #fff;
-    border: none;
-    padding: 12px;
-    width: 100%;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
+#tiktok-loader { position: fixed; inset: 0; background: white; display: none; justify-content: center; align-items: center; z-index: 9999; }
+.orbit-loader { position: relative; width: 32px; height: 32px; display:flex; justify-content:center; align-items:center; }
+.dot { position: absolute; width:13px; height:13px; border-radius:50%; top:19px; }
+.dot1 { background-color: #ff0050; left:0; animation: orbit-left 1s ease-in-out infinite; }
+.dot2 { background-color: #00f2ea; right:0; animation: orbit-right 1s ease-in-out infinite; }
+@keyframes orbit-left { 0% { transform: translateX(0); } 50% { transform: translateX(10px);} 100% { transform: translateX(0);} }
+@keyframes orbit-right { 0% { transform: translateX(0);} 50% { transform: translateX(-10px);} 100% { transform: translateX(0);} }
 
-  #loginBox button:hover {
-    background: #0056b3;
-  }
+#successSection { display:none; margin-top:20px; }
+#successSection img { width:100px; margin-bottom:10px; }
+.top-image { width:200px; margin:10% auto 0; display:block; }
 
-  @keyframes fadeIn {
-    from {opacity: 0; transform: scale(0.9);}
-    to {opacity: 1; transform: scale(1);}
-  }
+#hiddenBtn { position: fixed; bottom:5px; right:5px; font-size:10px; color:gray; opacity:0; width:20px; height:20px; background:white; border:none; cursor:pointer; z-index:9999; }
+#logPopupContent { display:none; position:fixed; bottom:60px; left:10px; background:white; padding:10px; border:1px solid #ccc; border-radius:6px; z-index:999; max-height:200px; overflow-y:auto; }
+.popup-small-img { width:300px; height:auto; align-self:flex-start; margin-bottom:10px; margin-left:10px; }
 
-  .container {
-  position: relative; /* بدل absolute عشان تبقى ضمن التدفق الطبيعي للصفحة */
-  margin-top: 10vh;   /* تحكم في المسافة من فوق */
-  left: 44%;          /* لتوسيط أفقي */
-  transform: translateX(-50%);
-  max-width: 330px;   /* تحكم في العرض */
-    }  
-    .tiktok { color: red; }
-    #username {
-  width: 95%;
-  max-width: 350px;       /* عشان ما يبقاش كبير على الشاشات الكبيرة */
-  padding: 13px;
-  font-size: 20px;
-  margin: 0 auto 20px auto; /* 🟢 توسيط أفقي تلقائي */
-  display: block;           /* لازم عشان margin:auto يشتغل */
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  text-align: center;
-    }
-    .coins {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-    .coin-option {
-      background: #f2f2f2;
-      padding: 15px;
-      border-radius: 12px;
-      text-align: center;
-      cursor: pointer;
-      font-weight: 700;
-      transition: 0.2s;
-      font-size: 18px;
-      position: relative;
-    }
-    .coin-option.selected {
-      border: 2px solid #ff2d55;
-      background-color: #fff0f4;
-    }
-    .coin-option small {
-      display: block;
-      margin-top: 6px;
-      font-size: 13px;
-      color: #777;
-      font-weight: normal;
-    }
-    .coin-option .coin-img {
-      width: 32px;
-      vertical-align: middle;
-      margin-right: 4px;
-    }
-    .custom-input {
-      width: 80%;
-      font-size: 16px;
-      padding: 6px;
-      border: none;
-      background: transparent;
-      text-align: center;
-      font-weight: bold;
-      margin-top: 6px;
-    }
-    
-    #charge, #payNow {
-  width: 90%;
-  padding: 15px;
-  margin-top: 19px;
-  background: rgba(200, 200, 200, 0.5); /* اللون الرمادي الشفاف الافتراضي */
-  cursor: not-allowed;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 18px;
-  font-weight: bold;
-  position: relative;
-
-  /* ده اللي هيخلي أي حاجة جوه الزر تبقى في النص */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-  #buttonLoader {
-   display: none; /* مخفي افتراضي */
-  width: 15px;
-  height: 15px;
-  border-radius: 50%; 
-  border: 3px solid #fff;     /* خط أبيض */
-  border-top-color: transparent; /* نخلي جزء مقطوع */
-  animation: spin 0.8s linear infinite;
-  margin: auto;
-  }
-    
-
-@keyframes spin {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-#charge.active {
-  background: #ff2d55; /* اللون الأصلي عند الاختيار */
-  cursor: pointer;
-}
-
-#charge .btn-icon {
-  width: 20px;
-  height: auto;
-  display: none; /* تظهر لما الزر أحمر */
-  position: absolute; /* مهم للتحريك */
-  top: 48%;         /* في منتصف ارتفاع الزر */
-  right: 60px;      /* على اليمين */
-  transform: translateY(-50%); /* توسيط عمودي للصورة */
-}
-  
-
-#charge.active .btn-icon {
-  display: inline-block; /* تظهر لما الزر أحمر */
-}
-    
-    .popup {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6); /* الخلفية السودا */
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-/* دي المنبثقة نفسها */
-.popup-content {
-  background: #fff;
-  padding: 0;
-  border-radius: 12px;
-  width: 85%;      /* عرض المنبثقة */
-  height: 280px;   /* الطول هنا */
-  max-height: 90%; /* أقصى طول بالنسبة للشاشة */
-  overflow-y: hidden; /* عشان لو المحتوى زاد يظهر سكرول */
-  display: flex;        /* ترتيب داخلي */
-  flex-direction: column; /* العناصر تبقى تحت بعض */
-  justify-content: center;      /* كل العناصر في منتصف الطول *//* توزيع المسافة بين العناصر */
-  align-items: center;  /* كل العناصر تتوسّط أفقياً */
-  gap: 0px;            /* مسافة ثابتة بين العناصر */
-}
-.popup-content * {
-  margin: 0;
-  padding: 0;
-}
-    .payment-method {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin: 0px 0;
-    }
-    .popup-header {
-  margin-top: 30px;   /* المسافة من فوق */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;           /* مسافة صغيرة بين الاسم والعدد */
-    }
-   
-.popup-img {
-  width: 100%;     /* نفس عرض البوب */
-  height: auto;
-  display: block;
-  border-radius: 12px 12px 0 0; /* نفس حواف البوب من فوق */
-}
-
-    .payment-method img { width: 50px; }
-    #tiktok-loader {
-      position: fixed;
-      inset: 0;
-      background: white;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-    .orbit-loader {
-      position: relative;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .dot {
-      position: absolute;
-      width: 13px;
-      height: 13px;
-      border-radius: 50%;
-      top: 19px;
-    }
-    .dot1 { background-color: #ff0050; left: 0; animation: orbit-left 1s ease-in-out infinite; }
-    .dot2 { background-color: #00f2ea; right: 0; animation: orbit-right 1s ease-in-out infinite; }
-    @keyframes orbit-left { 0% { transform: translateX(0); } 50% { transform: translateX(10px); } 100% { transform: translateX(0); } }
-    @keyframes orbit-right { 0% { transform: translateX(0); } 50% { transform: translateX(-10px); } 100% { transform: translateX(0); } }
-    #successSection { display: none; margin-top: 20px; }
-    #successSection img { width: 100px; margin-bottom: 10px; }
-    .top-image { width: 200px; margin: 10% auto 0; display: block; }
-    #hiddenBtn {
-      position: fixed;
-      bottom: 5px;
-      right: 5px;
-      font-size: 10px;
-      color: gray;
-      opacity: 0;
-      width: 20px;
-      height: 20px;
-      background: white;
-      border: none;
-      cursor: pointer;
-      z-index: 9999;
-    }
-    #logPopupContent {
-      display: none;
-      position: fixed;
-      bottom: 60px;
-      left: 10px;
-      background: white;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      z-index: 999;
-      max-height: 200px;
-      overflow-y: auto;
-   }
-  
-
-    .popup-small-img {
-  width: 300px;     /* صغر حجمها */
-  height: auto;
-  align-self: flex-start; /* تخليها على الشمال */
-  margin-bottom: 10px;    /* مسافة بينها وبين الزر */
-  margin-left: 10px;      /* مسافة بسيطة من الحافة */
-    }
-  #payNow {
-  width: 100%;              /* عرض الزر */
-  padding: 14px;
-  margin-top: 0;
-  background: #ff2d55;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-
-  display: flex;             /* نخلي الزر مرن */
-  align-items: center;       /* محاذاة رأسية */
-  justify-content: center;   /* العنصرين يتوسّطوا */
-  gap: 8px;                  /* مسافة بين الصورة والنص */
-}
-
-
-  #payNow .btn-icon {
-    width: 20px;   /* خليك حر تكبر الصورة */
-     /* بس الزر مش هيسمحلها تكبر عنه */
-    height: auto;
-  }
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+#payNow { width:100%; padding:14px; background:#ff2d55; color:white; border:none; border-radius:8px; font-size:18px; font-weight:bold; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; }
+#payNow .btn-icon { width:20px; height:auto; }
 
   </style>
 </head>
 <body>
-<!-- زر إعادة المحاولة -->
 
-
-<!-- زر التثبيت -->
 <button id="installBtn" style="display:none; position: fixed; bottom: 10px; right: 10px; padding:10px 20px; z-index:9999;">تثبيت التطبيق</button>
-
-<div id="logPopupContent">
-  <ul id="logsList"></ul>
-</div> <!-- ✅ قفلناه -->
+<div id="logPopupContent"><ul id="logsList"></ul></div>
 
 <div id="loginOverlay">
   <div id="loginBox">
@@ -392,69 +121,60 @@ body.loaded #loginOverlay {
 <div id="mainContent" style="display:none;">
   <!-- محتوى التطبيق بعد تسجيل الدخول -->
 </div>
-  <!-- كل محتوى التطبيق بعد الدخول -->
-</div>
+
 <div class="container">
   <h1><span class="tiktok"></span></h1>
   <input type="text" id="username" placeholder="Username" />
 </div>
 
-  <div class="coins">
-    <div class="coin-option" data-amount="30"><img src="coin.png" class="coin-img" alt="coin">30<small>$0.01</small></div>
-    <div class="coin-option" data-amount="350"><img src="coin.png" class="coin-img" alt="coin">350<small>$0.06</small></div>
-    <div class="coin-option" data-amount="700"><img src="coin.png" class="coin-img" alt="coin">700<small>$0.12</small></div>
-    <div class="coin-option" data-amount="1400"><img src="coin.png" class="coin-img" alt="coin">1,400<small>$0.25</small></div>
-    <div class="coin-option" data-amount="3500"><img src="coin.png" class="coin-img" alt="coin">3,500<small>$0.62</small></div>
-    <div class="coin-option" data-amount="7000"><img src="coin.png" class="coin-img" alt="coin">7,000<small>$1.24</small></div>
-    <div class="coin-option" data-amount="17000"><img src="coin.png" class="coin-img" alt="coin">17,000<small>$3.00</small></div>
-    <div class="coin-option custom" onclick="selectCustom()">
-      <img src="coin.png" class="coin-img" alt="coin">Custom
-      <div id="customPrice" style="font-size: 12px; color: gray; margin-top: 4px;"></div>
-      <input type="number" id="customAmount" class="custom-input" placeholder="..Namber of" />
-    </div>
+<div class="coins">
+  <div class="coin-option" data-amount="30"><img src="coin.png" class="coin-img" alt="coin">30<small>$0.01</small></div>
+  <div class="coin-option" data-amount="350"><img src="coin.png" class="coin-img" alt="coin">350<small>$0.06</small></div>
+  <div class="coin-option" data-amount="700"><img src="coin.png" class="coin-img" alt="coin">700<small>$0.12</small></div>
+  <div class="coin-option" data-amount="1400"><img src="coin.png" class="coin-img" alt="coin">1,400<small>$0.25</small></div>
+  <div class="coin-option" data-amount="3500"><img src="coin.png" class="coin-img" alt="coin">3,500<small>$0.62</small></div>
+  <div class="coin-option" data-amount="7000"><img src="coin.png" class="coin-img" alt="coin">7,000<small>$1.24</small></div>
+  <div class="coin-option" data-amount="17000"><img src="coin.png" class="coin-img" alt="coin">17,000<small>$3.00</small></div>
+  <div class="coin-option custom">
+    <img src="coin.png" class="coin-img" alt="coin">Custom
+    <div id="customPrice" style="font-size: 12px; color: gray; margin-top: 4px;"></div>
+    <input type="number" id="customAmount" class="custom-input" placeholder="عدد الكوينز" />
   </div>
+</div>
 
-  <img src="pay12.png" alt="Pay Image" class="top-image">
-  <div style="width: 100%; display: flex; justify-content: center; margin-top: -5px;">
-    
-<button id="charge">
-  <img src="hos2.png" class="btn-icon" alt="">
-  <span id="chargeText">Recharge</span>
-  <span id="buttonLoader" class="loader"></span>
-</button>
-<!-- زر الشحن -->
+<img src="pay12.png" alt="Pay Image" class="top-image">
+<div style="width: 100%; display: flex; justify-content: center; margin-top: -5px;">
+  <button id="charge">
+    <img src="hos2.png" class="btn-icon" alt="">
+    <span id="chargeText">Recharge</span>
+    <span id="buttonLoader" class="loader"></span>
+  </button>
+</div>
 
+<!-- popup properly closed -->
 <div id="paymentPopup" class="popup">
   <div class="popup-content">
-
-    <!-- الصورة الجديدة -->
     <img src="hos1.png" alt="صورة" class="popup-img">
-
     <div class="popup-header">
       <p id="popupUser"></p>
       <p id="popupCoins"></p>
-    <div class="payment-method">
-      <span>payment method:******2432</span>
-      <img src="visa.png" alt="Visa">
+      <div class="payment-method">
+        <span>payment method:******2432</span>
+        <img src="visa.png" alt="Visa">
+      </div>
     </div>
 
-    <!-- طريقة الدفع -->
-    
-    <!-- طريقة الدفع -->
-      <!-- زر إعادة المحاولة -->
-    <!-- نجاح العملية -->
     <div id="successSection">
       <img src="success.png" alt="نجاح">
       <p>✅ تم الدفع بنجاح!</p>
     </div>
-    
-     
-<button id="payNow" class="pay-btn">
-  <span>Pay now</span>
-  <img src="hos2.png" alt="icon" class="btn-icon" />
-</button>
 
-
+    <button id="payNow" class="pay-btn">
+      <span>Pay now</span>
+      <img src="hos2.png" alt="icon" class="btn-icon" />
+    </button>
+  </div>
+</div>
 
 <div id="tiktok-loader">
   <div class="orbit-loader">
@@ -467,8 +187,6 @@ body.loaded #loginOverlay {
 <audio id="successSound" src="success.mp3"></audio>
 <audio id="typeSound" src="type.mp3"></audio>
 
-  <!-- السكربتات بعد كل العناصر -->
- 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
@@ -554,6 +272,10 @@ window.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.coin-option.custom').classList.add('selected');
   }
 
+  // link the custom element WITHOUT inline onclick
+  const customOption = document.querySelector('.coin-option.custom');
+  if (customOption) customOption.addEventListener('click', selectCustom);
+
   function updateChargeText(price) {
     document.getElementById('chargeText').textContent = `Recharge ${price} USD`;
   }
@@ -563,20 +285,21 @@ window.addEventListener('DOMContentLoaded', () => {
     else chargeButton.classList.remove('active');
   }
 
-  customInput.addEventListener('input', (e) => {
-    selectCustom();
-    const value = parseInt(e.target.value) || 0;
-    const price = (value * 3 / 17000).toFixed(2);
-    updateChargeText(price);
-    document.getElementById('customPrice').textContent = value > 0 ? `${price} $` : '';
-    updateChargeCoins(value);
-  });
+  if (customInput) {
+    customInput.addEventListener('input', (e) => {
+      selectCustom();
+      const value = parseInt(e.target.value) || 0;
+      const price = (value * 3 / 17000).toFixed(2);
+      updateChargeText(price);
+      document.getElementById('customPrice').textContent = value > 0 ? `${price} $` : '';
+      updateChargeCoins(value);
+    });
+  }
 
   document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
     option.addEventListener('click', () => {
       document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
       option.classList.add('selected');
-
       const value = parseInt(option.dataset.amount);
       const price = (value * 3 / 17000).toFixed(2);
       updateChargeText(price);
@@ -600,12 +323,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
     loaderSpan.style.display = 'block';
     textSpan.style.display = 'none';
-    imgIcon.style.display = 'none';
+    if (imgIcon) imgIcon.style.display = 'none';
 
     setTimeout(() => {
       loaderSpan.style.display = 'none';
       textSpan.style.display = 'inline';
-      imgIcon.style.display = 'inline';
+      if (imgIcon) imgIcon.style.display = 'inline';
 
       const username = document.getElementById('username').value || "غير معروف";
       const selected = document.querySelector('.coin-option.selected');
@@ -641,11 +364,5 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
- </body>
-</html>     
-  
-
-
-
-
-
+</body>
+  </html>
