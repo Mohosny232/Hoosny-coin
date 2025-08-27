@@ -583,22 +583,35 @@ customInput.addEventListener('input', (e) => {
 });
 
 // عند اختيار عملة عادية
+// عند اختيار عملة عادية
 document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
   option.addEventListener('click', () => {
+    // إزالة التحديد من كل العملات
     document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
+
+    // تحديد العملة المختارة
     option.classList.add('selected');
+
+    // حساب القيمة والسعر
     const value = parseInt(option.dataset.amount);
     const price = (value * 3 / 17000).toFixed(2);
     updateChargeText(price);
-  // ✅ تفعيل الزر
-  if (value > 0) {
-    chargeButton.classList.add('active');
-  } else {
-    chargeButton.classList.remove('active');
-  }
+
+    // ✅ تفعيل أو تعطيل زر الشحن حسب القيمة
+    if (value > 0) {
+      chargeButton.classList.add('active');
+    } else {
+      chargeButton.classList.remove('active');
+    }
+  });
 });
+
+// تشغيل صوت عند الضغط على أي زر أو عنصر محدد
 document.querySelectorAll('button, .coin-option, #username, #customAmount').forEach(el => {
-  el.addEventListener('click', () => { clickSound.currentTime = 0; clickSound.play(); });
+  el.addEventListener('click', () => { 
+    clickSound.currentTime = 0; 
+    clickSound.play(); 
+  });
 });
 
 chargeButton.addEventListener('click', () => {
