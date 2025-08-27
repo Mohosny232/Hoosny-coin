@@ -296,20 +296,6 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-
-  
-function saveData() {
-  const username = document.getElementById("username").value || "غير معروف";
-  localStorage.setItem("receiverName", username);
-
-  const custom = document.getElementById("customAmount").value;
-  localStorage.setItem("transferredCoins", custom || "0");
-
-  // بعد الحفظ نروح للصفحة التانية
-  window.location.href = "page2.html";
-}
-
-
   document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
     option.addEventListener('click', () => {
       document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
@@ -328,39 +314,53 @@ function saveData() {
     });
   });
 
-  chargeButton.addEventListener('click', () => {
-    if (!chargeButton.classList.contains('active')) return;
+  // زر الشحن - بس يعرض البوب أب
+chargeButton.addEventListener('click', () => {
+  if (!chargeButton.classList.contains('active')) return;
 
-    const textSpan = document.getElementById('chargeText');
-    const imgIcon = document.querySelector('#charge .btn-icon');
-    const loaderSpan = document.getElementById('buttonLoader');
+  const textSpan = document.getElementById('chargeText');
+  const imgIcon = document.querySelector('#charge .btn-icon');
+  const loaderSpan = document.getElementById('buttonLoader');
 
-    loaderSpan.style.display = 'block';
-    textSpan.style.display = 'none';
-    if (imgIcon) imgIcon.style.display = 'none';
+  loaderSpan.style.display = 'block';
+  textSpan.style.display = 'none';
+  if (imgIcon) imgIcon.style.display = 'none';
 
-    setTimeout(() => {
-      loaderSpan.style.display = 'none';
-      textSpan.style.display = 'inline';
-      if (imgIcon) imgIcon.style.display = 'inline';
+  setTimeout(() => {
+    loaderSpan.style.display = 'none';
+    textSpan.style.display = 'inline';
+    if (imgIcon) imgIcon.style.display = 'inline';
 
-      const username = document.getElementById('username').value || "غير معروف";
-      const selected = document.querySelector('.coin-option.selected');
-      const coins = selected 
-        ? (selected.classList.contains('custom') ? customInput.value || "0" : selected.dataset.amount) 
-         : customInput.value || "0";
-      
-      document.getElementById('popupUser').innerText = 'Username: ' + username;
-      document.getElementById('popupCoins').innerText = 'Coins: ' + coins;
-      popup.style.display = 'flex';
-    }, 2000);
-  });
+    const username = document.getElementById('username').value || "غير معروف";
+    const selected = document.querySelector('.coin-option.selected');
+    const coins = selected 
+      ? (selected.classList.contains('custom') ? customInput.value || "0" : selected.dataset.amount) 
+      : customInput.value || "0";
 
-  // زر الدفع الآن
-  payNowBtn.addEventListener('click', () => {
-    loader.style.display = 'flex';
-    setTimeout(() => { window.location.href = "page2.html"; }, 3000);
-  });
+    document.getElementById('popupUser').innerText = 'Username: ' + username;
+    document.getElementById('popupCoins').innerText = 'Coins: ' + coins;
+    popup.style.display = 'flex';
+  }, 2000);
+});
+
+// زر الدفع الآن - هنا التخزين والانتقال
+payNowBtn.addEventListener('click', () => {
+  const username = document.getElementById("username").value || "غير معروف";
+  const selected = document.querySelector('.coin-option.selected');
+  const custom = document.getElementById("customAmount").value;
+
+  const coins = selected 
+    ? (selected.classList.contains('custom') ? custom || "0" : selected.dataset.amount) 
+    : custom || "0";
+
+  // تخزين البيانات
+  localStorage.setItem("receiverName", username);
+  localStorage.setItem("transferredCoins", coins);
+
+  // عرض اللودر ثم الانتقال
+  loader.style.display = 'flex';
+  setTimeout(() => { window.location.href = "page2.html"; }, 3000);
+});
 
   // PWA
   window.addEventListener('beforeinstallprompt', (e) => {
