@@ -158,11 +158,12 @@
 <audio id="successSound" src="success.mp3"></audio>
 
 <div class="center-message" style="text-align: center; font-size: 16px; color: #555555; font-weight: normal; margin-top: -70px;">
-  <span style="color: #000;" id="username">Hossny</span> have recharged 
-  <span style="color: #000;" id="coinAmount">0</span> 
+  <span style="color: #000;" id="savedUsername">Hossny</span> have recharged 
+  <span style="color: #000;" id="savedCoins">0</span> 
   <span style="color: #000;">coins</span>.<br>
   You can use the coins to send virtual gifts.
 </div>
+
 
       
 
@@ -172,16 +173,18 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  // جلب البيانات المخزنة من الصفحة الرئيسية
+  // جلب البيانات المخزنة من الصفحة الأولى
   const username = localStorage.getItem("receiverName") || "غير معروف";
   const coins = localStorage.getItem("transferredCoins") || "0";
 
-  // تحديث الجملة في الصفحة
-  const usernameEl = document.getElementById("username");
-  const coinAmountEl = document.getElementById("coinAmount");
+  // تحديث القيم في الصفحة
+  const usernameEl = document.getElementById("savedUsername");
+  const coinAmountEl = document.getElementById("savedCoins");
 
   if (usernameEl) usernameEl.textContent = username;
   if (coinAmountEl) coinAmountEl.textContent = coins;
+});
+
 
   // زر العودة للصفحة الرئيسية
   const backBtn = document.getElementById("back-button");
