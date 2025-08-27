@@ -576,7 +576,7 @@ function updateChargeCoins(amount) {
   else chargeButton.classList.remove('active');
 }
 
-// إدخال قيمة مخصصة
+// عند إدخال قيمة مخصصة
 customInput.addEventListener('input', (e) => {
   selectCustom();
   const value = parseInt(e.target.value) || 0;
@@ -586,9 +586,7 @@ customInput.addEventListener('input', (e) => {
   updateChargeCoins(value);
 });
 
-// اختيار عملة عادية
-document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
-// اختيار عملة عادية
+// عند اختيار عملة عادية
 document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
   option.addEventListener('click', () => {
     // إزالة التحديد من كل العملات
@@ -596,19 +594,7 @@ document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
     // تحديد العملة المختارة
     option.classList.add('selected');
 
-    // عند اختيار أي خيار عملة
-    let amount = parseInt(option.dataset.amount);
-    updateCharge(amount);
-  });
-});
-
-// عند إدخال قيمة مخصصة
-customInput.addEventListener('input', (e) => {
-  selectCustom();
-  const value = parseInt(e.target.value) || 0;
-  updateCharge(value);
-});
-
+    // تحديث السعر والزر
     const value = parseInt(option.dataset.amount);
     const price = (value * 3 / 17000).toFixed(2);
     updateChargeText(price);
