@@ -203,30 +203,30 @@ body {
 
   // ✅ تسجيل الدخول
   async function checkLogin() {
-    const userId = document.getElementById("username").value;
-    const enteredPassword = document.getElementById("password").value;
+  const userId = document.getElementById("deviceInput").value.trim();
+  const enteredPassword = document.getElementById("passwordInput").value.trim();
 
-    const docRef = doc(db, "users", userId);
-    const docSnap = await getDoc(docRef);
+  const docRef = doc(db, "users", userId);
+  const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-      const correctPassword = docSnap.data().password;
+  if (docSnap.exists()) {
+    const correctPassword = docSnap.data().password;
 
-      if (enteredPassword === correctPassword) {
-        // تخزين البيانات
-        localStorage.setItem("loggedIn", "true");
-        localStorage.setItem("userId", userId);
-        localStorage.setItem("password", enteredPassword); // 👈 نخزن الباسورد اللي دخل بيه
+    if (enteredPassword === correctPassword) {
+      // تخزين البيانات
+      localStorage.setItem("loggedIn", "true");
+      localStorage.setItem("userId", userId);
+      localStorage.setItem("password", enteredPassword);
 
-        document.getElementById('loginOverlay').style.display = 'none';
-        document.getElementById("mainContent").style.display = "block";
-      } else {
-        alert("❌ كلمة المرور غلط");
-      }
+      document.getElementById('loginOverlay').style.display = 'none';
+      document.getElementById("mainContent").style.display = "block";
     } else {
-      alert("❌ المستخدم مش موجود");
+      alert("❌ كلمة المرور غلط");
     }
+  } else {
+    alert("❌ المستخدم مش موجود");
   }
+}
 
   
   // ✅ التحقق عند الـ refresh
