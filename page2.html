@@ -12,56 +12,34 @@
       padding: 0;
       overflow: hidden;
       font-family: 'Tajawal', sans-serif;
-    } 
-    
-/* تصميم الإشعار */
-.notification {
-  position: fixed;
-  top: -80px; /* يبدأ فوق الشاشة */
-  left: 50%;
-  transform: translateX(-50%);
-  background: #fff; /* خلفية بيضاء */
-  color: #333;
-  padding: 12px 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  font-size: 19px;
-  font-weight: 500;
-  text-align: center;
-  z-index: 9999;
-  min-width: 250px;
-  max-width: 90%;
-  transition: top 0.5s ease, opacity 0.5s ease;
-  opacity: 0;
-  width: 86%;              /* ✅ ياخد عرض الشاشة */
-}
-.notification .username,
-.notification .coins {
-  font-weight: 700;   /* غامق */
-  color: #000;        /* أسود واضح */
-  font-size: 16px;    /* أكبر شوية */
-}
-
-
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
     }
 
-    #page-container {
-      transform: scale(0.96);
-      transform-origin: top center;
-      transition: transform 0.5s ease, opacity 0.5s ease;
-      opacity: 1;
-      width: 100%;
-      height: 100%;
+    /* تصميم الإشعار */
+    .notification {
+      position: fixed;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      color: #333;
+      padding: 12px 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      font-size: 19px;
+      font-weight: 500;
+      text-align: center;
+      z-index: 9999;
+      min-width: 250px;
+      max-width: 90%;
+      transition: top 0.5s ease, opacity 0.5s ease;
+      opacity: 0;
+      width: 86%;
     }
-
-    .wrapper {
-      position: relative;
-      width: 100%;
-      height: 100%;
+    .notification .username,
+    .notification .coins {
+      font-weight: 700;
+      color: #000;
+      font-size: 16px;
     }
 
     .wrapper img {
@@ -74,42 +52,6 @@
       z-index: 0;
     }
 
-    .amount-display {
-      position: absolute;
-      top: 18%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 50px;
-      font-weight: 700;
-      color: black;
-      background-color: white;
-      padding: 10px 20px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      z-index: 2;
-    }
-
-    .currency-label {
-      font-size: 16px;
-      margin-right: 3px;
-      position: relative;
-      top: 5px;
-    }
-
-    .info-box {
-      position: fixed;
-      top: 283px;
-      right: 23px;
-      font-size: 14px;
-      color: #000;
-      font-weight: 550;
-      text-align: right;
-      line-height: 3.3;
-      z-index: 9999;
-    }
-
     .center-message {
       position: absolute;
       top: 50%;
@@ -117,9 +59,8 @@
       transform: translate(-50%, -50%);
       font-size: 16px;
       color: #888;
-      font-weight: normal;
       text-align: center;
-      white-space: nowrap; /* ✅ تمنع التكسير للسطر */
+      white-space: nowrap;
       z-index: 5;
       background-color: rgba(255, 255, 255, 0.7);
       padding: 10px 20px;
@@ -136,94 +77,71 @@
       font-size: 18px;
       border: none;
       padding: 15px 0;
-      border-radius: 0;
       cursor: pointer;
       z-index: 9999;
-    }
-
-    .slide-out-left {
-      transform: translateX(-100%);
-      opacity: 0;
     }
   </style>
 </head>
 <body>
-  <div id="page-container">
-    <div class="wrapper">
-      <img src="hoosny4.jpg" alt="الصفحة الرابعة" />
+  <div class="wrapper">
+    <img src="hoosny4.jpg" alt="الصفحة الرابعة" />
 
-<div id="notif" class="notification"></div>
-      <!-- ✅ الجملة وسط الصورة بس على سطر واحد -->
+    <div id="notif" class="notification"></div>
 
-<audio id="successSound" src="success.mp3"></audio>
+    <audio id="successSound" src="success.mp3"></audio>
 
-<div class="center-message" style="text-align: center; font-size: 16px; color: #555555; font-weight: normal; margin-top: -70px;">
-  <span style="color: #000;" id="savedUsername"></span> have recharged 
-  <span style="color: #000;" id="savedCoins">0</span> 
-  <span style="color: #000;">coins</span>.<br>
-  You can use the coins to send virtual gifts.
-</div>
-
-
-      
-
-      <!-- ✅ الزر أسفل الشاشة بكامل العرض -->
-      <button id="back-button">Back</button>
+    <div class="center-message">
+      <span id="savedUsername" style="color:#000;"></span> have recharged 
+      <span id="savedCoins" style="color:#000;">0</span> 
+      <span style="color:#000;">coins</span>.<br>
+      You can use the coins to send virtual gifts.
     </div>
+
+    <button id="back-button">Back</button>
+  </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
+  // ✅ جلب البيانات من localStorage
   const username = localStorage.getItem("receiverName") || "غير معروف";
   const coins = localStorage.getItem("transferredCoins") || "0";
 
+  // ✅ عرضهم في النص الأوسط
   document.getElementById("savedUsername").textContent = username;
   document.getElementById("savedCoins").textContent = coins;
-});
 
+  // ✅ عرضهم في الإشعار العلوي
+  const notifText = `
+    <span class="username">${username}</span> recharged 
+    <span class="coins">${coins}</span> coins.<br>
+    You can use the coins to send virtual gifts.
+  `;
+  const notif = document.getElementById("notif");
+  notif.innerHTML = notifText;
 
-  // زر العودة للصفحة الرئيسية
-  const backBtn = document.getElementById("back-button");
-  if (backBtn) {
-    backBtn.addEventListener("click", () => {
-      window.location.href = "index.html";
-    });
-  }
-});
-  
-window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    notif.style.top = "20px";
+    notif.style.opacity = "1";
+  }, 500);
+
+  setTimeout(() => {
+    notif.style.top = "-100px";
+    notif.style.opacity = "0";
+  }, 4500);
+
+  // ✅ تشغيل صوت النجاح
   setTimeout(() => {
     const successSound = document.getElementById('successSound');
     successSound.currentTime = 0;
     successSound.play();
-  }, 200); // بعد ثانية من ظهور الصفحة
+  }, 200);
+
+  // ✅ زر الرجوع
+  document.getElementById("back-button").addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
 });
-const username = localStorage.getItem("receiverName") || "غير معروف";
-const coins = localStorage.getItem("transferredCoins") || "0";
-
-// نستخدم innerHTML عشان ننسق الاسم والكوينز
-const notifText = `
-  <span class="username">${username}</span> recharged 
-  <span class="coins">${coins}</span> coins.<br>
-  You can use the coins to send virtual gifts.
-`;
-
-const notif = document.getElementById("notif");
-notif.innerHTML = notifText;
-// عرض الإشعار
-// عرض الإشعار
-setTimeout(() => {
-  notif.style.top = "20px"; // يظهر من فوق
-  notif.style.opacity = "1"; // ✅ يخلي الإشعار باين
-}, 500);
-
-// إخفاء الإشعار بعد 4 ثواني
-setTimeout(() => {
-  notif.style.top = "-100px";
-  notif.style.opacity = "0"; // ✅ يرجع يختفي تدريجي
-}, 4500);
-
 </script>
 </body>
 </html>
-
   
