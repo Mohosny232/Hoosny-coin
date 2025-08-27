@@ -302,15 +302,12 @@ function saveData() {
   const username = document.getElementById("username").value || "غير معروف";
   localStorage.setItem("receiverName", username);
 
-  // لو مفيش كوينز محفوظة من الاختيارات
-  if (!localStorage.getItem("transferredCoins")) {
-    const custom = document.getElementById("customAmount").value;
-    localStorage.setItem("transferredCoins", custom || "0");
-  }
+  const custom = document.getElementById("customAmount").value;
+  localStorage.setItem("transferredCoins", custom || "0");
 
   // بعد الحفظ نروح للصفحة التانية
   window.location.href = "page2.html";
-  }
+}
 
 
   document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
