@@ -609,16 +609,13 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   });
   // زر الشحن
-  chargeButton.addEventListener('click', () => {
-    if (!chargeButton.classList.contains('active')) return;
+  // زر الشحن
+chargeButton.addEventListener('click', () => {
+  if (!chargeButton.classList.contains('active')) return;
 
-    const textSpan = document.getElementById('chargeText');
-    const imgIcon = document.querySelector('#charge .btn-icon');
-    const loaderSpan = document.getElementById('buttonLoader');
-
-    textSpan.style.display = 'none';
-    imgIcon.style.display = 'none';
-    loaderSpan.style.display = 'block';
+  const textSpan = document.getElementById('chargeText');
+  const imgIcon = document.querySelector('#charge .btn-icon');
+  const loaderSpan = document.getElementById('buttonLoader');
 
     setTimeout(() => {
       loaderSpan.style.display = 'none';
