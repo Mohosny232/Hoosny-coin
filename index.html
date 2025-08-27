@@ -590,9 +590,13 @@ document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
     const value = parseInt(option.dataset.amount);
     const price = (value * 3 / 17000).toFixed(2);
     updateChargeText(price);
-  });
+  // ✅ تفعيل الزر
+  if (value > 0) {
+    chargeButton.classList.add('active');
+  } else {
+    chargeButton.classList.remove('active');
+  }
 });
-
 document.querySelectorAll('button, .coin-option, #username, #customAmount').forEach(el => {
   el.addEventListener('click', () => { clickSound.currentTime = 0; clickSound.play(); });
 });
@@ -671,6 +675,7 @@ customInput.addEventListener('input', (e) => {
   const value = parseInt(e.target.value) || 0;
   updateChargeCoins(value);
 });
+  
 
 chargeButton.addEventListener('click', () => {
   if (!chargeButton.classList.contains('active')) return;
