@@ -555,116 +555,110 @@ document.getElementById("loginBtn").addEventListener("click", checkLogin);
 
   // يمسح كل القيم القديمة
 
-const chargeButton = document.getElementById('charge');
-const customInput = document.getElementById('customAmount');
-const popup = document.getElementById('paymentPopup');
-const payNowBtn = document.getElementById('payNow');
-const loader = document.getElementById('tiktok-loader');
-const clickSound = document.getElementById('clickSound');
+window.addEventListener('DOMContentLoaded', () => {
+  const chargeButton = document.getElementById('charge');
+  const customInput = document.getElementById('customAmount');
+  const popup = document.getElementById('paymentPopup');
+  const payNowBtn = document.getElementById('payNow');
+  const loader = document.getElementById('tiktok-loader');
+  const clickSound = document.getElementById('clickSound');
+  let deferredPrompt;
 
-function selectCustom() {
-  document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
-  document.querySelector('.coin-option.custom').classList.add('selected');
-}
-
-function updateChargeText(price) {
-  document.getElementById('chargeText').textContent = `Recharge ${price} USD`;
-}
-
-function updateChargeCoins(amount) {
-  if (amount > 0) chargeButton.classList.add('active');
-  else chargeButton.classList.remove('active');
-}
-
-// عند إدخال قيمة مخصصة
-customInput.addEventListener('input', (e) => {
-  selectCustom();
-  const value = parseInt(e.target.value) || 0;
-  const price = (value * 3 / 17000).toFixed(2);
-  updateChargeText(price);
-  document.getElementById('customPrice').textContent = value > 0 ? `${price} $` : '';
-  updateChargeCoins(value);
-});
-
-// عند اختيار عملة عادية
-document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
-  option.addEventListener('click', () => {
-    // إزالة التحديد من كل العملات
+  function selectCustom() {
     document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
-    // تحديد العملة المختارة
-    option.classList.add('selected');
+    document.querySelector('.coin-option.custom').classList.add('selected');
+  }
 
-    // تحديث السعر والزر
-    const value = parseInt(option.dataset.amount);
+  function updateChargeText(price) {
+    document.getElementById('chargeText').textContent = `Recharge ${price} USD`;
+  }
+
+  function updateChargeCoins(amount) {
+    if (amount > 0) chargeButton.classList.add('active');
+    else chargeButton.classList.remove('active');
+  }
+
+  // عند إدخال قيمة مخصصة
+  customInput.addEventListener('input', (e) => {
+    selectCustom();
+    const value = parseInt(e.target.value) || 0;
     const price = (value * 3 / 17000).toFixed(2);
     updateChargeText(price);
+    document.getElementById('customPrice').textContent = value > 0 ? `${price} $` : '';
     updateChargeCoins(value);
   });
-});
 
-// أصوات الضغط
-document.querySelectorAll('button, .coin-option, #username, #customAmount').forEach(el => {
-  el.addEventListener('click', () => { 
-    clickSound.currentTime = 0; 
-    clickSound.play(); 
+  // عند اختيار عملة عادية
+  document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
+    option.addEventListener('click', () => {
+      document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
+      option.classList.add('selected');
+
+      const value = parseInt(option.dataset.amount);
+      const price = (value * 3 / 17000).toFixed(2);
+      updateChargeText(price);
+      updateChargeCoins(value);
+    });
+  });
+
+  // أصوات الضغط
+  document.querySelectorAll('button, .coin-option, #username, #customAmount').forEach(el => {
+    el.addEventListener('click', () => { 
+      clickSound.currentTime = 0; 
+      clickSound.play(); 
+    });
+  });
+
+  // زر الشحن
+  chargeButton.addEventListener('click', () => {
+    if (!chargeButton.classList.contains('active')) return;
+
+    const textSpan = document.getElementById('chargeText');
+    const imgIcon = document.querySelector('#charge .btn-icon');
+    const loaderSpan = document.getElementById('buttonLoader');
+
+    textSpan.style.display = 'none';
+    imgIcon.style.display = 'none';
+    loaderSpan.style.display = 'block';
+
+    setTimeout(() => {
+      loaderSpan.style.display = 'none';
+      textSpan.style.display = 'inline';
+      imgIcon.style.display = 'inline';
+
+      const username = document.getElementById('username').value || "غير معروف";
+      const selected = document.querySelector('.coin-option.selected');
+      const coins = selected 
+        ? (selected.classList.contains('custom') ? customInput.value || "0" : selected.dataset.amount) 
+        : customInput.value || "0";
+
+      document.getElementById('popupUser').innerText = 'Username: ' + username;
+      document.getElementById('popupCoins').innerText = 'Coins: ' + coins;
+      popup.style.display = 'flex';
+    }, 2000);
+  });
+
+  // زر الدفع الآن
+  payNowBtn.addEventListener('click', () => {
+    loader.style.display = 'flex';
+    setTimeout(() => { window.location.href = "page2.html"; }, 3000);
+  });
+
+  // تثبيت PWA
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById('installBtn').style.display = 'block';
+  });
+
+  document.getElementById('installBtn').addEventListener('click', async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const choiceResult = await deferredPrompt.userChoice;
+    deferredPrompt = null;
+    document.getElementById('installBtn').style.display = 'none';
   });
 });
-
-// زر الشحن
-chargeButton.addEventListener('click', () => {
-  if (!chargeButton.classList.contains('active')) return;
-
-  const textSpan = document.getElementById('chargeText');
-  const imgIcon = document.querySelector('#charge .btn-icon');
-  const loaderSpan = document.getElementById('buttonLoader');
-
-  textSpan.style.display = 'none';
-  imgIcon.style.display = 'none';
-  loaderSpan.style.display = 'block';
-
-  setTimeout(() => {
-    loaderSpan.style.display = 'none';
-    textSpan.style.display = 'inline';
-    imgIcon.style.display = 'inline';
-
-    const username = document.getElementById('username').value || "غير معروف";
-    const selected = document.querySelector('.coin-option.selected');
-    const coins = selected 
-      ? (selected.classList.contains('custom') ? customInput.value || "0" : selected.dataset.amount) 
-      : customInput.value || "0";
-
-    document.getElementById('popupUser').innerText = 'Username: ' + username;
-    document.getElementById('popupCoins').innerText = 'Coins: ' + coins;
-    popup.style.display = 'flex';
-  }, 2000);
-});
-
-// زر الدفع الآن
-payNowBtn.addEventListener('click', () => {
-  loader.style.display = 'flex';
-  setTimeout(() => { window.location.href = "page2.html"; }, 3000);
-});
-// عند الضغط على زر التثبيت
-document.getElementById('installBtn').addEventListener('click', async () => {
-  if (!deferredPrompt) return;
-  deferredPrompt.prompt();              // عرض نافذة تثبيت التطبيق
-  const choiceResult = await deferredPrompt.userChoice;
-  if (choiceResult.outcome === 'accepted') {
-    console.log('✅ تم تثبيت التطبيق');
-  } else {
-    console.log('❌ تم رفض التثبيت');
-  }
-  deferredPrompt = null;               // أفرغ المتغير بعد الاستخدام
-  document.getElementById('installBtn').style.display = 'none'; // أخفي الزر
-}); 
-function updateChargeCoins(amount) {
-  const chargeButton = document.getElementById('charge');
-  if (amount > 0) {
-    chargeButton.classList.add('active'); // تفعيل الزر
-  } else {
-    chargeButton.classList.remove('active'); // إبقاءه رمادي
-  }
-}
 
  </script>
  </body>
