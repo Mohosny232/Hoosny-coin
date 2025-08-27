@@ -521,14 +521,16 @@ const docSnap = await getDoc(docRef);
     return;
   }
 
-  if (!registeredDevice) {
-    await updateDoc(docRef, { deviceFingerprint: fingerprint });
-    alert("✅ أول جهاز دخل و اتسجل خلاص!");
-  } else if (fingerprint !== registeredDevice) {
-    alert("❌ الحساب مستخدم على جهاز تاني!");
-    return;
-  }
+  const registeredDevices = data.devices || []; // مصفوفة الأجهزة المسجلة
 
+if (!registeredDevices.includes(fingerprint)) {
+    // لو الجهاز جديد
+    registeredDevices.push(fingerprint); // ضيف الجهاز للمصفوفة
+    await updateDoc(docRef, { devices: registeredDevices });
+    alert("✅ جهاز جديد تم تسجيله!");
+} else {
+    alert("✅ تم الدخول على جهاز مسجل مسبقًا!");
+  }
   
   
   // ✅ كل حاجة صح
