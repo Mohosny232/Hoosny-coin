@@ -249,12 +249,14 @@ async function checkLogin() {
       }
     } catch(e) { console.error(e); }
   }
-
+window.addEventListener('DOMContentLoaded', () => {
+  const loginBtn = document.getElementById("loginBtn");
+  loginBtn.addEventListener("click", checkLogin);
+});
   // لو مش متسجل دخول، خلي overlay ظاهر
   document.getElementById('loginOverlay').style.display = 'flex';
   document.getElementById("mainContent").style.display = 'none';
 })();
-document.getElementById("loginBtn").addEventListener("click", checkLogin);
 
 
   window.addEventListener('DOMContentLoaded', () => {
