@@ -27,7 +27,8 @@ body {
   font-weight: bold;
 }
 
-  /* الخانة الخاصة (3500) */
+  
+  /* الخانة الخاصة (3500) كبداية */
   .coin-option.special {
     border: 2px solid #ff2d55;
     background-color: #fff0f4;
@@ -43,6 +44,16 @@ body {
     font-size: 12px;
     padding: 2px 6px;
     border-radius: 6px;
+  }
+
+  /* لما تتحول رمادي */
+  .coin-option.special.gray {
+    border: 2px solid #aaa;
+    background: #e0e0e0;
+  }
+
+  .coin-option.special.gray::before {
+    background: #aaa;
   }
 
 
@@ -411,6 +422,30 @@ payNowBtn.addEventListener('click', () => {
     document.getElementById('installBtn').style.display = 'none';
   });
 });
+  
+  const options = document.querySelectorAll(".coin-option");
+  const special = document.querySelector(".coin-option.special");
+
+  options.forEach(opt => {
+    opt.addEventListener("click", () => {
+      options.forEach(o => o.classList.remove("selected"));
+
+      // لو اختار غير خانة 3500
+      if (opt !== special) {
+        special.classList.add("gray");  // تتحول رمادي
+        special.classList.remove("selected");
+        special.classList.remove("special-active");
+      } else {
+        // رجعها نشطة تاني
+        special.classList.remove("gray");
+        special.classList.add("selected");
+      }
+
+      opt.classList.add("selected");
+    });
+  });
+
+
 </script>
 </body>
   </html>
