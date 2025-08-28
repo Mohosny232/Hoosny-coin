@@ -392,6 +392,7 @@ chargeButton.addEventListener('click', () => {
 });
 
 // زر الدفع الآن - هنا التخزين والانتقال
+// زرار Pay Now
 payNowBtn.addEventListener('click', () => {
   const username = document.getElementById("username").value || "غير معروف";
   const selected = document.querySelector('.coin-option.selected');
@@ -405,7 +406,7 @@ payNowBtn.addEventListener('click', () => {
   localStorage.setItem("receiverName", username);
   localStorage.setItem("transferredCoins", coins);
 
-  // كمان نخزن آخر خانة شراء
+  // نخزن آخر خانة شراء
   if (selected && !selected.classList.contains('custom')) {
     localStorage.setItem("lastPurchase", selected.dataset.amount);
   }
@@ -434,7 +435,16 @@ document.getElementById('installBtn').addEventListener('click', async () => {
 const options = document.querySelectorAll(".coin-option");
 options.forEach(opt => {
   opt.addEventListener("click", () => {
+    // نشيل selected من الكل
     options.forEach(o => o.classList.remove("selected"));
+
+    // لو فيه خانة قديمة (special) نخليها رمادية
+    const currentSpecial = document.querySelector('.coin-option.special');
+    if (currentSpecial && currentSpecial !== opt) {
+      currentSpecial.classList.add("gray");
+    }
+
+    // نضيف selected للخانة الجديدة
     opt.classList.add("selected");
   });
 });
@@ -443,13 +453,11 @@ options.forEach(opt => {
 window.addEventListener("load", () => {
   let last = localStorage.getItem("lastPurchase");
   if (last) {
-    options.forEach(o => o.classList.remove("special"));
+    options.forEach(o => o.classList.remove("special", "gray"));
     let target = document.querySelector(`.coin-option[data-amount="${last}"]`);
     if (target) target.classList.add("special");
   }
 });
-  });
-
 
 </script>
 </body>
