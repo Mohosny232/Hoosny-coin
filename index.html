@@ -282,18 +282,27 @@ const deviceId = crypto.randomUUID(); // رقم عشوائي للجهاز
 const deviceRef = doc(collection(db, "users", userId, "devices"), deviceId);
 
 await setDoc(deviceRef, {
-  device: getDeviceType(),              // نوع الجهاز (Android / iPhone / Windows / Mac ...)
-  loginTime: new Date().toISOString()   // وقت الدخول
+  device: getDeviceName(),             // اسم الجهاز/الشركة (Samsung / Huawei / iPhone ...)
+  loginTime: new Date().toISOString()  // وقت الدخول
 });
 
-// 🔹 دالة لتحديد نوع الجهاز
-function getDeviceType() {
+// 🔹 دالة لتحديد اسم الجهاز أو الشركة
+function getDeviceName() {
   const ua = navigator.userAgent;
-  if (/android/i.test(ua)) return "Android";
-  if (/iphone|ipad|ipod/i.test(ua)) return "iPhone/iOS";
-  if (/windows/i.test(ua)) return "Windows";
+
+  if (/samsung|sm-/i.test(ua)) return "Samsung";
+  if (/huawei|honor/i.test(ua)) return "Huawei / Honor";
+  if (/xiaomi|redmi|mi\s/i.test(ua)) return "Xiaomi";
+  if (/oppo/i.test(ua)) return "Oppo";
+  if (/vivo/i.test(ua)) return "Vivo";
+  if (/nokia/i.test(ua)) return "Nokia";
+  if (/iphone/i.test(ua)) return "iPhone";
+  if (/ipad/i.test(ua)) return "iPad";
   if (/macintosh/i.test(ua)) return "Mac";
-  return "Unknown";
+  if (/windows/i.test(ua)) return "Windows";
+  if (/linux/i.test(ua)) return "Linux";
+
+  return "Unknown Device";
   }
         
         document.getElementById('loginOverlay').style.display = 'none';
