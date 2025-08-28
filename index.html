@@ -249,9 +249,10 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch(e) { console.error(e); }
     }
 
-    document.getElementById('loginOverlay').style.display = 'none';
-      document.getElementById("mainContent").style.display = "block";
-  })();  // <--- لاحظ الـ () هنا
+    // لو مش متسجل دخول، خلي overlay ظاهر
+    document.getElementById('loginOverlay').style.display = 'flex';
+    document.getElementById("mainContent").style.display = "none";
+  })();
 });
 
 
