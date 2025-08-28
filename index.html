@@ -230,7 +230,10 @@ async function checkLogin() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById("loginBtn").addEventListener("click", checkLogin);
+ document.getElementById("loginBtn").addEventListener("click", checkLogin);
+
+  console.log("Login button clicked");
+console.log("userId:", userId, "enteredPassword:", enteredPassword);
 
   (async () => {
     const loggedIn = localStorage.getItem("loggedIn");
