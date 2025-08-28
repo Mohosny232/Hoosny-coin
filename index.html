@@ -232,10 +232,9 @@ async function checkLogin() {
     alert("❌ خطأ في الاتصال بـ Firestore");
   }
 }
+document.getElementById("loginBtn").addEventListener("click", checkLogin);
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById("loginBtn").addEventListener("click", checkLogin);
-
+  
   (async () => {
     const loggedIn = localStorage.getItem("loggedIn");
     const userId = localStorage.getItem("userId");
@@ -252,7 +251,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       } catch(e) { console.error(e); }
     }
-
+   
+    
     // لو مش متسجل دخول، خلي overlay ظاهر
     document.getElementById('loginOverlay').style.display = 'flex';
     document.getElementById("mainContent").style.display = 'none';
