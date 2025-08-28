@@ -235,9 +235,14 @@ body {
 <audio id="successSound" src="success.mp3"></audio>
 <audio id="typeSound" src="type.mp3"></audio>
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { 
+  initializeApp 
+} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { 
+  getFirestore, doc, getDoc, setDoc, collection 
+} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
+// 🔹 إعداد Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyD0ErbW4GMP2EFIbp6fEUaHwowXr-O3Tiw",
   authDomain: "hosny87-edb64.firebaseapp.com",
@@ -250,6 +255,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// 🔹 تسجيل الدخول
 async function checkLogin() {
   const userId = document.getElementById("deviceInput").value.trim();
   const enteredPassword = document.getElementById("passwordInput").value.trim();
@@ -266,9 +272,19 @@ async function checkLogin() {
     if (docSnap.exists()) {
       const correctPassword = docSnap.data().password;
       if (enteredPassword === correctPassword) {
+        // ✅ نجاح تسجيل الدخول
         localStorage.setItem("loggedIn", "true");
         localStorage.setItem("userId", userId);
         localStorage.setItem("password", enteredPassword);
+
+        // 🔹 سجل الجهاز في Firestore
+        const deviceId = crypto.randomUUID(); // رقم عشوائي للجهاز
+        const deviceRef = doc(collection(db, "users", userId, "devices"), deviceId);
+        await setDoc(deviceRef, {
+          device: navigator.userAgent,
+          loginTime: new Date().toISOString()
+        });
+
         document.getElementById('loginOverlay').style.display = 'none';
         document.getElementById("mainContent").style.display = "block";
         alert("✅ تم تسجيل الدخول بنجاح");
@@ -284,17 +300,11 @@ async function checkLogin() {
   }
 }
 
-// ربط الزر مباشرة
-
-// التحقق من تسجيل الدخول السابق
-
-// كل شيء يبدأ بعد تحميل الصفحة
+// 🔹 عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', async () => {
-  // ربط الزر
   const loginBtn = document.getElementById("loginBtn");
   loginBtn.addEventListener("click", checkLogin);
 
-  // التحقق من تسجيل الدخول السابق
   const loggedIn = localStorage.getItem("loggedIn");
   const userId = localStorage.getItem("userId");
   const savedPassword = localStorage.getItem("password");
@@ -315,6 +325,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('loginOverlay').style.display = 'flex';
   document.getElementById("mainContent").style.display = 'none';
 });
+
 
 
 
