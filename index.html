@@ -232,7 +232,6 @@ async function checkLogin() {
 }
 
 // ربط الزر مباشرة
-document.getElementById("loginBtn").addEventListener("click", checkLogin);
 
 // التحقق من تسجيل الدخول السابق
 (async () => {
@@ -256,6 +255,7 @@ document.getElementById("loginBtn").addEventListener("click", checkLogin);
   document.getElementById('loginOverlay').style.display = 'flex';
   document.getElementById("mainContent").style.display = 'none';
 })();
+document.getElementById("loginBtn").addEventListener("click", checkLogin);
 
 
   window.addEventListener('DOMContentLoaded', () => {
