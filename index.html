@@ -189,72 +189,7 @@ body {
 <audio id="clickSound" src="click.mp3"></audio>
 <audio id="successSound" src="success.mp3"></audio>
 <audio id="typeSound" src="type.mp3"></audio>
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
-
-const firebaseConfig = {
-  // بيانات مشروعك من Firebase
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-async function checkLogin() {
-  const userId = document.getElementById("deviceInput").value.trim();
-  const enteredPassword = document.getElementById("passwordInput").value.trim();
-
-  if (!userId || !enteredPassword) { alert("⚠️ اكتب ID وكلمة المرور"); return; }
-
-  try {
-    const docRef = doc(db, "users", userId);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      const correctPassword = docSnap.data().password;
-      if (enteredPassword === correctPassword) {
-        localStorage.setItem("loggedIn", "true");
-        localStorage.setItem("userId", userId);
-        localStorage.setItem("password", enteredPassword);
-        document.getElementById('loginOverlay').style.display = 'none';
-        document.getElementById("mainContent").style.display = "block";
-      } else {
-        alert("❌ كلمة المرور غلط");
-      }
-    } else {
-      alert("❌ المستخدم مش موجود");
-    }
-  } catch (e) {
-    console.error(e);
-    alert("❌ خطأ في الاتصال بـ Firestore");
-  }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById("loginBtn").addEventListener("click", checkLogin);
-
-  (async () => {
-    const loggedIn = localStorage.getItem("loggedIn");
-    const userId = localStorage.getItem("userId");
-    const savedPassword = localStorage.getItem("password");
-
-    if (loggedIn === "true" && userId && savedPassword) {
-      try {
-        const docRef = doc(db, "users", userId);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists() && docSnap.data().password === savedPassword) {
-          document.getElementById('loginOverlay').style.display = 'none';
-          document.getElementById("mainContent").style.display = "block";
-          return;
-        }
-      } catch(e) { console.error(e); }
-    }
-
-    document.getElementById('loginOverlay').style.display = 'block';
-      document.getElementById("mainContent").style.display = "none";
-  })();  // <--- لاحظ الـ () هنا
-});
-
+<script
 window.addEventListener('DOMContentLoaded', () => {
   const chargeButton = document.getElementById('charge');
   const customInput = document.getElementById('customAmount');
