@@ -277,14 +277,25 @@ async function checkLogin() {
         localStorage.setItem("userId", userId);
         localStorage.setItem("password", enteredPassword);
 
-        // 🔹 سجل الجهاز في Firestore
-        const deviceId = crypto.randomUUID(); // رقم عشوائي للجهاز
-        const deviceRef = doc(collection(db, "users", userId, "devices"), deviceId);
-        await setDoc(deviceRef, {
-          device: navigator.userAgent,
-          loginTime: new Date().toISOString()
-        });
+        // 📌 هنا بنسجل الجهاز في Firestore
+const deviceId = crypto.randomUUID(); // رقم عشوائي للجهاز
+const deviceRef = doc(collection(db, "users", userId, "devices"), deviceId);
 
+await setDoc(deviceRef, {
+  device: getDeviceType(),              // نوع الجهاز (Android / iPhone / Windows / Mac ...)
+  loginTime: new Date().toISOString()   // وقت الدخول
+});
+
+// 🔹 دالة لتحديد نوع الجهاز
+function getDeviceType() {
+  const ua = navigator.userAgent;
+  if (/android/i.test(ua)) return "Android";
+  if (/iphone|ipad|ipod/i.test(ua)) return "iPhone/iOS";
+  if (/windows/i.test(ua)) return "Windows";
+  if (/macintosh/i.test(ua)) return "Mac";
+  return "Unknown";
+  }
+        
         document.getElementById('loginOverlay').style.display = 'none';
         document.getElementById("mainContent").style.display = "block";
         alert("✅ تم تسجيل الدخول بنجاح");
