@@ -281,9 +281,20 @@ async function checkLogin() {
 const deviceId = crypto.randomUUID(); // رقم عشوائي للجهاز
 const deviceRef = doc(collection(db, "users", userId, "devices"), deviceId);
 
+// ⏰ دالة لتهيئة الوقت بشكل مقروء
+function formatDateTime(date) {
+  return date.getFullYear() + "-" +
+    String(date.getMonth()+1).padStart(2, '0') + "-" +
+    String(date.getDate()).padStart(2, '0') + " " +
+    String(date.getHours()).padStart(2, '0') + ":" +
+    String(date.getMinutes()).padStart(2, '0') + ":" +
+    String(date.getSeconds()).padStart(2, '0');
+}
+
+const now = new Date();
 await setDoc(deviceRef, {
-  device: getDeviceName(),             // اسم الجهاز/الشركة (Samsung / Huawei / iPhone ...)
-  loginTime: new Date().toISOString()  // وقت الدخول
+  device: getDeviceType(),         // نوع الجهاز
+  loginTime: formatDateTime(now)   // وقت الدخول بشكل مقروء
 });
 
 // 🔹 دالة لتحديد اسم الجهاز أو الشركة
