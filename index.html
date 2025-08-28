@@ -203,7 +203,13 @@ async function checkLogin() {
   const userId = document.getElementById("deviceInput").value.trim();
   const enteredPassword = document.getElementById("passwordInput").value.trim();
 
-  if (!userId || !enteredPassword) { alert("⚠️ اكتب ID وكلمة المرور"); return; }
+  console.log("Login button clicked");
+  console.log("userId:", userId, "enteredPassword:", enteredPassword);
+
+  if (!userId || !enteredPassword) { 
+    alert("⚠️ اكتب ID وكلمة المرور"); 
+    return; 
+  }
 
   try {
     const docRef = doc(db, "users", userId);
@@ -217,6 +223,7 @@ async function checkLogin() {
         localStorage.setItem("password", enteredPassword);
         document.getElementById('loginOverlay').style.display = 'none';
         document.getElementById("mainContent").style.display = "block";
+        alert("✅ تم تسجيل الدخول بنجاح");
       } else {
         alert("❌ كلمة المرور غلط");
       }
@@ -230,10 +237,7 @@ async function checkLogin() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
- document.getElementById("loginBtn").addEventListener("click", checkLogin);
-
-  console.log("Login button clicked");
-console.log("userId:", userId, "enteredPassword:", enteredPassword);
+  document.getElementById("loginBtn").addEventListener("click", checkLogin);
 
   (async () => {
     const loggedIn = localStorage.getItem("loggedIn");
@@ -254,7 +258,7 @@ console.log("userId:", userId, "enteredPassword:", enteredPassword);
 
     // لو مش متسجل دخول، خلي overlay ظاهر
     document.getElementById('loginOverlay').style.display = 'flex';
-    document.getElementById("mainContent").style.display = "none";
+    document.getElementById("mainContent").style.display = 'none';
   })();
 });
 
