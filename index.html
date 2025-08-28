@@ -203,9 +203,6 @@ async function checkLogin() {
   const userId = document.getElementById("deviceInput").value.trim();
   const enteredPassword = document.getElementById("passwordInput").value.trim();
 
-  console.log("Login button clicked");
-  console.log("userId:", userId, "enteredPassword:", enteredPassword);
-
   if (!userId || !enteredPassword) { 
     alert("⚠️ اكتب ID وكلمة المرور"); 
     return; 
