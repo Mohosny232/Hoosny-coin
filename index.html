@@ -278,43 +278,47 @@ async function checkLogin() {
         localStorage.setItem("password", enteredPassword);
 
         // 📌 هنا بنسجل الجهاز في Firestore
-const deviceId = crypto.randomUUID(); // رقم عشوائي للجهاز
-const deviceRef = doc(collection(db, "users", userId, "devices"), deviceId);
 
-// ⏰ دالة لتهيئة الوقت بشكل مقروء
-function formatDateTime(date) {
-  return date.getFullYear() + "-" +
-    String(date.getMonth()+1).padStart(2, '0') + "-" +
-    String(date.getDate()).padStart(2, '0') + " " +
-    String(date.getHours()).padStart(2, '0') + ":" +
-    String(date.getMinutes()).padStart(2, '0') + ":" +
-    String(date.getSeconds()).padStart(2, '0');
-}
+        // 📌 تسجيل الجهاز في Firestore
+        const deviceId = crypto.randomUUID(); // رقم عشوائي للجهاز
+        const deviceRef = doc(collection(db, "users", userId, "devices"), deviceId);
 
-const now = new Date();
-await setDoc(deviceRef, {
-  device: getDeviceType(),         // نوع الجهاز
-  loginTime: formatDateTime(now)   // وقت الدخول بشكل مقروء
-});
+        // ⏰ دالة لتهيئة الوقت بشكل مقروء
+        function formatDateTime(date) {
+          return date.getFullYear() + "-" +
+            String(date.getMonth()+1).padStart(2, '0') + "-" +
+            String(date.getDate()).padStart(2, '0') + " " +
+            String(date.getHours()).padStart(2, '0') + ":" +
+            String(date.getMinutes()).padStart(2, '0') + ":" +
+            String(date.getSeconds()).padStart(2, '0');
+        }
 
-// 🔹 دالة لتحديد اسم الجهاز أو الشركة
-function getDeviceName() {
-  const ua = navigator.userAgent;
+        const now = new Date();
+        await setDoc(deviceRef, {
+          device: getDeviceName(),        // 👈 اسم الشركة (Samsung, Huawei, iPhone ...)
+          loginTime: formatDateTime(now)  // وقت الدخول
+        });
 
-  if (/samsung|sm-/i.test(ua)) return "Samsung";
-  if (/huawei|honor/i.test(ua)) return "Huawei / Honor";
-  if (/xiaomi|redmi|mi\s/i.test(ua)) return "Xiaomi";
-  if (/oppo/i.test(ua)) return "Oppo";
-  if (/vivo/i.test(ua)) return "Vivo";
-  if (/nokia/i.test(ua)) return "Nokia";
-  if (/iphone/i.test(ua)) return "iPhone";
-  if (/ipad/i.test(ua)) return "iPad";
-  if (/macintosh/i.test(ua)) return "Mac";
-  if (/windows/i.test(ua)) return "Windows";
-  if (/linux/i.test(ua)) return "Linux";
+        // 🔹 دالة لتحديد اسم الجهاز أو الشركة
+        function getDeviceName() {
+          const ua = navigator.userAgent;
 
-  return "Unknown Device";
-  }
+          if (/samsung|sm-/i.test(ua)) return "Samsung";
+          if (/huawei|honor/i.test(ua)) return "Huawei / Honor";
+          if (/xiaomi|redmi|mi\s/i.test(ua)) return "Xiaomi";
+          if (/oppo/i.test(ua)) return "Oppo";
+          if (/vivo/i.test(ua)) return "Vivo";
+          if (/nokia/i.test(ua)) return "Nokia";
+          if (/iphone/i.test(ua)) return "iPhone";
+          if (/ipad/i.test(ua)) return "iPad";
+          if (/macintosh/i.test(ua)) return "Mac";
+          if (/windows/i.test(ua)) return "Windows";
+          if (/linux/i.test(ua)) return "Linux";
+
+          return "Unknown Device";
+        }
+        
+       
         
         document.getElementById('loginOverlay').style.display = 'none';
         document.getElementById("mainContent").style.display = "block";
