@@ -71,6 +71,14 @@ body {
   bottom: 80px;
   right: 18px;
 }
+.coins-box {
+  display: flex;
+  align-items: center;
+  gap: 2px;          /* مسافة صغيرة بين الصورة والكلمة */
+  position: relative;
+  top: -20px;        /* ارفع لفوق */
+}
+
 
 /* Login overlay */
 /* نخفي كل حاجة لد ما JS يقرر */
@@ -551,8 +559,8 @@ document.getElementById('popupUser').innerHTML = `
 
 // هنا هنضيف الصورة مع الكلمة Coins
 document.getElementById('popupCoins').innerHTML = `
-  <div style="display:flex;align-items:center;gap:1px; position:relative; top:-23px;">
-    <img src="coin.png" alt="coin" style="width:32px;height:32px;">
+  <div class="coins-box">
+    <img src="coin.png" alt="coin" class="coin-img">
     <span>Coins: ${coins}</span>
   </div>
 `;
