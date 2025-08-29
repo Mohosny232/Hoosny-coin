@@ -71,18 +71,23 @@ body {
   bottom: 80px;
   right: 18px;
 }
-#popupCoins .coins-box {
-  position: relative;
-  top: -13px; /* ارفع لفوق */
+#popupCoins {
   display: flex;
   align-items: center;
-  gap: 1px;
+  gap: 4px;
 }
 
-.coin-img {
+#popupCoins .coin-img {
   width: 32px;
   height: 32px;
-  top: -10px;
+  position: relative;
+  top: -3px; /* ارفع الصورة شويه لتكون في منتصف النص */
+}
+
+#popupCoins .coins-box {
+  display: flex;
+  align-items: center;  /* الصورة جنب الكلمة */
+  gap: 4px;
 }
     
 
