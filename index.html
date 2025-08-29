@@ -146,12 +146,13 @@ body {
   max-height: 90%;
   overflow-y: hidden;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 0;
+  flex-direction: column;     /* 🔥 صف عمودي */
+  justify-content: flex-start;/* يبدأ من فوق مش من النص */
+  align-items: center;        /* توسيط أفقي بس */
+  gap: 10px;
   transform: translateY(100%);
   transition: transform 0.4s ease;
+  padding-top: 15px;          /* مسافة صغيرة فوق */
 }
 
 .popup.show .popup-content {
@@ -172,13 +173,10 @@ body {
 #tiktok-loader {
   width: 100%;
   display: flex;
-  justify-content: center;   /* يخليه في النص أفقياً */
-  align-items: flex-start;   /* يخليه فوق */
-  padding-top: 15px;         /* مسافة من فوق */
-  margin-bottom: 20px;
-  background: transparent; 
-  position: relative;
-  z-index: 2;
+  justify-content: center;   /* في النص أفقياً */
+  align-items: flex-start;   /* فوق */
+  padding-top: 10px;
+  margin-bottom: 15px;
 }
 .orbit-loader {
   position: relative;
