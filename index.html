@@ -172,13 +172,13 @@ body {
 #tiktok-loader {
   width: 100%;
   display: flex;
-  justify-content: center;   /* يخلّيه في النص أفقياً */
-  align-items: flex-start;   /* ✅ يخليه فوق */
-  padding-top: 10px;         /* مسافة بسيطة من فوق */
-  margin-bottom: 20px;       /* مسافة بين اللودر والتفاصيل */
+  justify-content: center;   /* يخليه في النص أفقياً */
+  align-items: flex-start;   /* يخليه فوق */
+  padding-top: 15px;         /* مسافة من فوق */
+  margin-bottom: 20px;
   background: transparent; 
-  position: relative;        /* يفضل جوه البوب */
-  z-index: 1;
+  position: relative;
+  z-index: 2;
 }
 .orbit-loader {
   position: relative;
@@ -543,24 +543,21 @@ chargeButton.addEventListener('click', () => {
     document.getElementById('popupCoins').innerText = 'Coins: ' + coins;
 
     // ✅ فتح البوب
-    popup.classList.add("show");
+// اول مرة لما البوب يفتح
+popup.classList.add("show");
 
-    // أول حاجة: اظهر لودر التيكتوك
-    const popupLoader = document.getElementById("tiktok-loader");
-    const popupDetails = document.getElementById("popupDetails");
+const popupLoader = document.getElementById("tiktok-loader");
+const popupDetails = document.getElementById("popupDetails");
 
-    popupLoader.style.display = "flex";
-    popupDetails.style.display = "none";
+popupLoader.style.display = "flex";   // يظهر اللودر فوق
+popupDetails.style.display = "none";  // يخفي التفاصيل
 
-    // بعد ثانية اخفي اللودر واظهر التفاصيل
-    setTimeout(() => {
-      popupLoader.style.display = "none";
-      popupDetails.style.display = "block";
-    }, 2000);
+setTimeout(() => {
+  popupLoader.style.display = "none";  // يخفي اللودر
+  popupDetails.style.display = "block"; // يظهر التفاصيل
+}, 2000);
 
-  }, 2000);
-});
-// زر الدفع الآن - هنا التخزين والانتقال
+
 // زرار Pay Now
 payNowBtn.addEventListener('click', () => {
   const username = document.getElementById("username").value || "غير معروف";
@@ -575,14 +572,18 @@ payNowBtn.addEventListener('click', () => {
   localStorage.setItem("receiverName", username);
   localStorage.setItem("transferredCoins", coins);
 
-  // نخزن آخر خانة شراء
   if (selected && !selected.classList.contains('custom')) {
     localStorage.setItem("lastPurchase", selected.dataset.amount);
   }
 
-  // عرض اللودر ثم الانتقال
-  loader.style.display = 'flex';
-  setTimeout(() => { window.location.href = "page2.html"; }, 3000);
+  // 👇 هنا التغيير:
+  // لما يضغط Pay Now → اخفي التفاصيل واظهر اللودر اللي فوق
+  popupDetails.style.display = "none";
+  popupLoader.style.display = "flex";
+
+  setTimeout(() => {
+    window.location.href = "page2.html";
+  }, 2000);
 });
 
 // PWA
