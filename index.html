@@ -72,10 +72,11 @@ body {
   right: 18px;
 }
 .coins-box {
-
-  gap: 1px;          /* مسافة صغيرة بين الصورة والكلمة */
-  
-  top: -13px;        /* ارفع لفوق */
+  position: relative; /* مهم */
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  top: -10px; /* ارفع لفوق حسب الحاجة */
 }
 
 .coin-img {
@@ -555,7 +556,7 @@ chargeButton.addEventListener('click', () => {
 
     
 document.getElementById('popupUser').innerHTML = `
-  <div style="margin-bottom:15px; font-weight:bold;">
+  <div style="margin-bottom:10px; font-weight:bold;">
     Username: ${username}
   </div>
 `;
