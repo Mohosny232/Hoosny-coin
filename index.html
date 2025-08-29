@@ -170,14 +170,18 @@ body {
 .popup-img { width:100%; border-radius:12px 12px 0 0; }
 .payment-method img { width:50px; }
 
+
 #tiktok-loader {
-  width: 100%;
+  position: absolute;
+  top: 10px;   /* المسافة من فوق */
+  left: 50%;
+  transform: translateX(-50%); /* يخليه في النص بالعرض */
   display: flex;
-  justify-content: center;   /* في النص أفقياً */
-  align-items: flex-start;   /* فوق */
-  padding-top: 3px;
-  margin-bottom: 7px;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
 }
+
 .orbit-loader {
   position: relative;
   width: 32px;
