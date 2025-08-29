@@ -543,11 +543,15 @@ chargeButton.addEventListener('click', () => {
       : (customInput.value || "0");
 
     
-document.getElementById('popupUser').innerText = 'Username: ' + username;
+document.getElementById('popupUser').innerHTML = `
+  <div style="margin-bottom:15px; font-weight:bold;">
+    Username: ${username}
+  </div>
+`;
 
 // هنا هنضيف الصورة مع الكلمة Coins
 document.getElementById('popupCoins').innerHTML = `
-  <span style="display:flex;align-items:center;gap:10px; margin-top:-20px;">
+  <span style="display:flex;align-items:center;gap:6px; margin-top:-20px;">
     <img src="coin.png" alt="coin" style="width:32px;height:32px;">
     Coins: ${coins}
   </span>
