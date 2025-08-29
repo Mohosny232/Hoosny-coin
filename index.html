@@ -517,6 +517,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   // زر الشحن - بس يعرض البوب أب
+// ===== فتح البوب وإظهار اللودر أول مرة =====
 chargeButton.addEventListener('click', () => {
   if (!chargeButton.classList.contains('active')) return;
 
@@ -535,51 +536,53 @@ chargeButton.addEventListener('click', () => {
 
     const username = document.getElementById('username').value || "غير معروف";
     const selected = document.querySelector('.coin-option.selected');
-    const coins = selected 
-      ? (selected.classList.contains('custom') ? customInput.value || "0" : selected.dataset.amount) 
-      : customInput.value || "0";
+    const coins = selected
+      ? (selected.classList.contains('custom') ? (customInput.value || "0") : selected.dataset.amount)
+      : (customInput.value || "0");
 
     document.getElementById('popupUser').innerText = 'Username: ' + username;
     document.getElementById('popupCoins').innerText = 'Coins: ' + coins;
 
-    // ✅ فتح البوب
-// اول مرة لما البوب يفتح
-popup.classList.add("show");
+    // افتح البوب
+    const popup = document.getElementById('paymentPopup');
+    popup.classList.add('show');
 
-const popupLoader = document.getElementById("tiktok-loader");
-const popupDetails = document.getElementById("popupDetails");
+    // لودر فوق + اخفاء التفاصيل
+    const popupLoader = document.getElementById('tiktok-loader');
+    const popupDetails = document.getElementById('popupDetails');
+    popupLoader.style.display = 'flex';
+    popupDetails.style.display = 'none';
 
-popupLoader.style.display = "flex";   // يظهر اللودر فوق
-popupDetails.style.display = "none";  // يخفي التفاصيل
+    // بعد ثانيتين اعرض التفاصيل
+    setTimeout(() => {
+      popupLoader.style.display = 'none';
+      popupDetails.style.display = 'block';
+    }, 2000);
+  }, 2000);
+});
 
-setTimeout(() => {
-  popupLoader.style.display = "none";  // يخفي اللودر
-  popupDetails.style.display = "block"; // يظهر التفاصيل
-}, 2000);
-
-
-// زرار Pay Now
+// ===== زر Pay Now (برا زر الشحن) =====
 payNowBtn.addEventListener('click', () => {
   const username = document.getElementById("username").value || "غير معروف";
   const selected = document.querySelector('.coin-option.selected');
   const custom = document.getElementById("customAmount").value;
 
   const coins = selected 
-    ? (selected.classList.contains('custom') ? custom || "0" : selected.dataset.amount) 
-    : custom || "0";
+    ? (selected.classList.contains('custom') ? (custom || "0") : selected.dataset.amount) 
+    : (custom || "0");
 
-  // تخزين البيانات
+  // تخزين
   localStorage.setItem("receiverName", username);
   localStorage.setItem("transferredCoins", coins);
-
   if (selected && !selected.classList.contains('custom')) {
     localStorage.setItem("lastPurchase", selected.dataset.amount);
   }
 
-  // 👇 هنا التغيير:
-  // لما يضغط Pay Now → اخفي التفاصيل واظهر اللودر اللي فوق
-  popupDetails.style.display = "none";
-  popupLoader.style.display = "flex";
+  // اخفي التفاصيل واظهر نفس لودر البوب فوق
+  const popupLoader = document.getElementById('tiktok-loader');
+  const popupDetails = document.getElementById('popupDetails');
+  popupDetails.style.display = 'none';
+  popupLoader.style.display = 'flex';
 
   setTimeout(() => {
     window.location.href = "page2.html";
