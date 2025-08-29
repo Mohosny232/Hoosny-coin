@@ -121,8 +121,33 @@ body {
 #charge .btn-icon { width:20px; height:auto; display:none; position:absolute; top:48%; right:60px; transform:translateY(-50%); }
 #charge.active .btn-icon { display:inline-block; }
 
-.popup { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:1000; }
-.popup-content { background:#fff; border-radius:12px; width:85%; height:280px; max-height:90%; overflow-y:hidden; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:0; }
+
+.popup-content {
+  background: #fff;
+  border-radius: 16px 16px 0 0;
+  width: 100%;
+  max-width: 400px;
+  height: 280px;
+  max-height: 90%;
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+}
+
+.popup.show .popup-content {
+  transform: translateY(0); /* تطلع لفوق */
+}
+    
+/* العناصر الداخلية اللي هتظهر بعد اللودر */
+#popupDetails {
+  display: none;
+}
+  
 .popup-content * { margin:0; padding:0; }
 .payment-method { display:flex; align-items:center; justify-content:center; gap:10px; margin:0; }
 .popup-header { margin-top:30px; display:flex; flex-direction:column; align-items:center; gap:10px; }
@@ -203,15 +228,32 @@ body {
 <!-- popup properly closed -->
 <div id="paymentPopup" class="popup">
   <div class="popup-content">
-    <img src="hos1.png" alt="صورة" class="popup-img">
-    <div class="popup-header">
-      <p id="popupUser"></p>
-      <p id="popupCoins"></p>
-      <div class="payment-method">
-        <span>payment method:******2432</span>
-        <img src="visa.png" alt="Visa">
+    
+    <!-- 🔹 اللودر -->
+    <div id="tiktok-loader">
+      <div class="orbit-loader">
+        <div class="dot dot1"></div>
+        <div class="dot dot2"></div>
       </div>
     </div>
+
+    <!-- 🔹 التفاصيل اللي هتظهر بعد اللودر -->
+    <div id="popupDetails">
+      <img src="hos1.png" alt="صورة" class="popup-img">
+
+      <div class="popup-header">
+        <p id="popupUser"></p>
+        <p id="popupCoins"></p>
+
+        <div class="payment-method">
+          <span>payment method: ******2432</span>
+          <img src="visa.png" alt="Visa">
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
 
     <div id="successSection">
       <img src="success.png" alt="نجاح">
@@ -445,10 +487,25 @@ chargeButton.addEventListener('click', () => {
 
     document.getElementById('popupUser').innerText = 'Username: ' + username;
     document.getElementById('popupCoins').innerText = 'Coins: ' + coins;
-    popup.style.display = 'flex';
+
+    // ✅ فتح البوب
+    popup.classList.add("show");
+
+    // أول حاجة: اظهر لودر التيكتوك
+    const popupLoader = document.getElementById("tiktok-loader");
+    const popupDetails = document.getElementById("popupDetails");
+
+    popupLoader.style.display = "flex";
+    popupDetails.style.display = "none";
+
+    // بعد ثانية اخفي اللودر واظهر التفاصيل
+    setTimeout(() => {
+      popupLoader.style.display = "none";
+      popupDetails.style.display = "block";
+    }, 2000);
+
   }, 2000);
 });
-
 // زر الدفع الآن - هنا التخزين والانتقال
 // زرار Pay Now
 payNowBtn.addEventListener('click', () => {
