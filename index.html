@@ -172,11 +172,12 @@ body {
 #tiktok-loader {
   width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center; 
-  margin-bottom: 20px;   /* مسافة بين اللودر والباقي */
+  justify-content: center;   /* يخلّيه في النص أفقياً */
+  align-items: flex-start;   /* ✅ يخليه فوق */
+  padding-top: 10px;         /* مسافة بسيطة من فوق */
+  margin-bottom: 20px;       /* مسافة بين اللودر والتفاصيل */
   background: transparent; 
-  position: relative;   /* جوه البوب */
+  position: relative;        /* يفضل جوه البوب */
   z-index: 1;
 }
 .orbit-loader {
