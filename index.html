@@ -290,14 +290,17 @@ body {
 .total-row {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  width: 92%;
+  align-items: flex-end;   /* 👈 ينزل النص لتحت */
+  width: 90%;
   margin: 0 auto 8px auto;  
   font-size: 16px;
   font-weight: bold;
   color: #000;
   flex-direction: row-reverse;
-  margin-top: 14px;  /* 👈 نزول النص لتحت */
+}
+
+.total-row span {
+  margin-top: 7px;   /* 👈 ينزل النص لتحت عن مكانه */
 }
 /* الجزء اللي فوق (Total + المبلغ) */
 
