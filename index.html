@@ -276,7 +276,38 @@ body {
 #logPopupContent { display:none; position:fixed; bottom:60px; left:10px; background:white; padding:10px; border:1px solid #ccc; border-radius:6px; z-index:999; max-height:200px; overflow-y:auto; }
 .popup-small-img { width:300px; height:auto; align-self:flex-start; margin-bottom:10px; margin-left:10px; }
 
-#payNow { width:92%; padding:14px; background:#ff2d55; color:white; border:none; border-radius:8px; font-size:18px; font-weight:bold; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;  margin-top: 34%;  /* 👈 هيخلي الزر ينزل تحت */
+#payNow {
+  width:92%;
+  padding:14px;
+  background:#ff2d55;
+  color:white;
+  border:none;
+  border-radius:8px;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;   /* 👈 يخلي المحتوى فوق بعض */
+  align-items:center;
+  gap:6px;
+  margin-top:34%;
+}
+
+/* الجزء اللي فوق (Total + المبلغ) */
+#payNow .pay-info {
+  display:flex;
+  justify-content:space-between;
+  width:100%;
+  font-size:14px;
+  font-weight:normal;
+  padding:0 4px;
+}
+
+/* الجزء الأساسي (Pay now + الأيقونة) */
+#payNow .pay-main {
+  display:flex;
+  align-items:center;
+  gap:8px;
 }
 
 #payNow .btn-icon { width:20px; height:auto; }
@@ -384,18 +415,16 @@ body {
         </div>
 
         <!-- الصف فوق الزر -->
-<div class="total-row">
-  <span class="total-label">Total</span>
-  <span class="total-amount" id="totalAmount">$0.00</span>
-</div>
-
-<!-- زر الدفع -->
 <button id="payNow" class="pay-btn">
-  <span id="payNowText">Pay now</span>
-  <img src="hos2.png" alt="icon" class="btn-icon" />
-</button>
+  <div class="pay-info">
+    <span class="total-text">Total</span>
+    <span id="totalAmount">$0.00</span>
   </div>
-</div>
+  <div class="pay-main">
+    <span>Pay now</span>
+    <img src="hos2.png" alt="icon" class="btn-icon" />
+  </div>
+</button>
         
       </div>
     </div>
