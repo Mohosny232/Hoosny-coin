@@ -212,11 +212,11 @@ body {
 }
                      
 .total-row {
-  width: 80%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 auto 10px auto; /* مسافة بينه وبين الزر */
+  width: 92%;
+  margin: 10px auto;    /* فوق الزر بشويه */
   font-size: 16px;
   font-weight: bold;
   color: #333;
@@ -277,7 +277,7 @@ body {
 .popup-small-img { width:300px; height:auto; align-self:flex-start; margin-bottom:10px; margin-left:10px; }
 
 #payNow {
-  width:92%;
+  width:70%;
   padding:14px;
   background:#ff2d55;
   color:white;
@@ -294,21 +294,6 @@ body {
 }
 
 /* الجزء اللي فوق (Total + المبلغ) */
-#payNow .pay-info {
-  display:flex;
-  justify-content:space-between;
-  width:100%;
-  font-size:14px;
-  font-weight:normal;
-  padding:0 4px;
-}
-
-/* الجزء الأساسي (Pay now + الأيقونة) */
-#payNow .pay-main {
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
 
 #payNow .btn-icon { width:20px; height:auto; }
 
@@ -415,15 +400,16 @@ body {
         </div>
 
         <!-- الصف فوق الزر -->
+<!-- النص اللي فوق الزر -->
+<div class="total-row">
+  <span class="total-text">Total</span>
+  <span id="totalAmount">$0.00</span>
+</div>
+
+<!-- زرار الدفع -->
 <button id="payNow" class="pay-btn">
-  <div class="pay-info">
-    <span class="total-text">Total</span>
-    <span id="totalAmount">$0.00</span>
-  </div>
-  <div class="pay-main">
-    <span>Pay now</span>
-    <img src="hos2.png" alt="icon" class="btn-icon" />
-  </div>
+  <span>Pay now</span>
+  <img src="hos2.png" alt="icon" class="btn-icon" />
 </button>
         
       </div>
