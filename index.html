@@ -268,7 +268,7 @@ body {
 .popup-small-img { width:300px; height:auto; align-self:flex-start; margin-bottom:10px; margin-left:10px; }
 
 #payNow {
-  width: 80%;
+  width: 90%;
   padding: 14px;
   background: #ff2d55;
   color: white;
@@ -283,6 +283,8 @@ body {
   align-items: center;   /* يخليهم في نفس السطر */
   justify-content: center;  /* يخليهم في النص */
   gap: 6px;   /* مسافة صغيرة بين الكلمة والصورة */
+
+  flex-direction: row-reverse; /* 👈 يخلي الصورة يمين */
 }
 
 .total-row {
@@ -290,10 +292,12 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 92%;
-  margin: 0 auto 8px auto;  /* 👈 بدل 10px خليه 8px تحت بس */
+  margin: 0 auto 8px auto;  
   font-size: 16px;
   font-weight: bold;
   color: #000;
+
+  margin-top: 6px;  /* 👈 نزول النص لتحت */
 }
 /* الجزء اللي فوق (Total + المبلغ) */
 
