@@ -277,38 +277,33 @@ body {
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
-  
-  /* المهم هنا */
-  display: flex;  
-  align-items: center;   /* يخليهم في نفس السطر */
-  justify-content: center;  /* يخليهم في النص */
-  /* مسافة صغيرة بين الكلمة والصورة */
-  flex-direction: row-reverse; /* 👈 يخلي الصورة يمين */
-  gap: 6px  /* 👈 مسافة صغيرة بس فوق الزر */
- 
+
+  display: flex;
+  align-items: center;   
+  justify-content: center;  
+  flex-direction: row-reverse; /* 👈 الصورة تيجي يمين */
+  gap: 6px;  
+
+  margin: 0 auto;   /* 👈 يخلي الزر في النص */
 }
 
 .total-row {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;   /* 👈 ينزل النص لتحت */
   width: 85%;
-  margin: 0 auto 8px auto;  
+  margin: 0 auto 8px auto;  /* 👈 دي اللي تخلي النصوص في النص */
   font-size: 16px;
   font-weight: bold;
   color: #000;
   flex-direction: row-reverse;
-  
- /* 👈 دي المسافة بين النصوص والزر */
 }
-
 
 .checkout-box {
   width: 90%;
   margin: 0 auto;
   display: flex;
   flex-direction: column; /* 👈 النص فوق والزر تحت */
-  gap: 4px; /* 👈 المسافة بين النص والزر (زود أو قلل) */
+  gap: 0px; /* 👈 المسافة بين النص والزر (زود أو قلل) */
 }
     
 
