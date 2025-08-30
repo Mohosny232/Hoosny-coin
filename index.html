@@ -211,7 +211,16 @@ body {
   letter-spacing: 3px;
 }
                      
-
+.total-row {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto 10px auto; /* مسافة بينه وبين الزر */
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
 
 #tiktok-loader {
   position: absolute;
@@ -374,13 +383,17 @@ body {
   <span class="card-number">2432*** *** *** *** </span>
         </div>
 
-        <!-- زرار الدفع -->
-        <button id="payNow" class="pay-btn">
-          <span>Pay now</span>
-          <img src="hos2.png" alt="icon" class="btn-icon" />
-        </button>
-      </div>
-    </div>
+        <!-- الصف فوق الزر -->
+<div class="total-row">
+  <span class="total-label">Total</span>
+  <span class="total-amount" id="totalAmount">$0.00</span>
+</div>
+
+<!-- زر الدفع -->
+<button id="payNow" class="pay-btn">
+  <span id="payNowText">Pay now</span>
+  <img src="hos2.png" alt="icon" class="btn-icon" />
+</button>
   </div>
 </div>
         
@@ -610,7 +623,14 @@ chargeButton.addEventListener('click', () => {
     const coins = selected
       ? (selected.classList.contains('custom') ? (customInput.value || "0") : selected.dataset.amount)
       : (customInput.value || "0");
+// بعد ما نحسب السعر من زر الشحن
+const price = selected ? selected.dataset.price : 0;
 
+// خزنه في localStorage
+localStorage.setItem("selectedPrice", price);
+
+// وحدثه في البوب
+document.getElementById("totalAmount").textContent = `$${price}`;
     
 document.getElementById('popupUser').innerHTML = `
   <div style="margin-bottom:16px; font-weight:bold;">
