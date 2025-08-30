@@ -302,6 +302,14 @@ body {
  /* 👈 دي المسافة بين النصوص والزر */
 }
 
+
+.checkout-box {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column; /* 👈 النص فوق والزر تحت */
+  gap: 4px; /* 👈 المسافة بين النص والزر (زود أو قلل) */
+}
     
 
 .total-row span {
@@ -415,16 +423,21 @@ body {
 
         <!-- الصف فوق الزر -->
 <!-- النص اللي فوق الزر -->
-<div class="total-row">
-  <span class="total-text">Total</span>
-  <span id="totalAmount">$0.00</span>
-</div>
+<div class="checkout-box">
 
-<!-- زرار الدفع -->
-<button id="payNow" class="pay-btn">
-  <span>Pay now</span>
-  <img src="hos2.png" alt="icon" class="btn-icon" />
-</button>
+  <!-- الصف بتاع Total -->
+  <div class="total-row">
+    <span class="total-text">Total</span>
+    <span id="totalAmount">$0.00</span>
+  </div>
+
+  <!-- زرار الدفع -->
+  <button id="payNow" class="pay-btn">
+    <span>Pay now</span>
+    <img src="hos2.png" alt="icon" class="btn-icon" />
+  </button>
+
+</div>
         
       </div>
     </div>
