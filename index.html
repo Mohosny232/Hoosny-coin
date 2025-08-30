@@ -276,7 +276,7 @@ body {
 #logPopupContent { display:none; position:fixed; bottom:60px; left:10px; background:white; padding:10px; border:1px solid #ccc; border-radius:6px; z-index:999; max-height:200px; overflow-y:auto; }
 .popup-small-img { width:300px; height:auto; align-self:flex-start; margin-bottom:10px; margin-left:10px; }
 
-#payNow { width:80%; padding:14px; background:#ff2d55; color:white; border:none; border-radius:8px; font-size:18px; font-weight:bold; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;  margin-top: 34%;  /* 👈 هيخلي الزر ينزل تحت */
+#payNow { width:70%; padding:14px; background:#ff2d55; color:white; border:none; border-radius:8px; font-size:18px; font-weight:bold; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;  margin-top: 34%;  /* 👈 هيخلي الزر ينزل تحت */
 }
 
 #payNow .btn-icon { width:20px; height:auto; }
@@ -624,14 +624,28 @@ chargeButton.addEventListener('click', () => {
       ? (selected.classList.contains('custom') ? (customInput.value || "0") : selected.dataset.amount)
       : (customInput.value || "0");
 // بعد ما نحسب السعر من زر الشحن
-const price = selected ? selected.dataset.price : 0;
+let price;
+
+if (selected) {
+  if (selected.classList.contains("custom")) {
+    // لو اختار خانة المخصص
+    const customAmount = document.getElementById("customAmount").value || 0;
+    // 👇 هنا بقى تحدد ازاي تحسب السعر
+    // مثال: كل 30 عملة = 0.01$
+    price = (customAmount / 30 * 0.01).toFixed(2);
+  } else {
+    // لو اختار أي خانة عادية
+    price = selected.querySelector("small")?.textContent.replace("$","") || 0;
+  }
+} else {
+  price = 0;
+}
 
 // خزنه في localStorage
 localStorage.setItem("selectedPrice", price);
 
 // وحدثه في البوب
-document.getElementById("totalAmount").textContent = `$${price}`;
-    
+document.getElementById("totalAmount").textContent = `$${price}`;    
 document.getElementById('popupUser').innerHTML = `
   <div style="margin-bottom:16px; font-weight:bold;">
     Username: ${username}
