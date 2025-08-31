@@ -190,15 +190,17 @@ body {
 
 
 .payment-method {
-  display: flex;             /* يحط الصورة والرقم جنب بعض */
-  align-items: center;       /* يوسّطهم عمودي */
-  justify-content: flex-start;
-  gap: 10px;                 /* مسافة بين الصورة والرقم */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* الصورة على اليمين أو اليسار حسب flex-direction */
+  gap: 10px;                  /* المسافة بين الصورة والرقم */
+  width: auto;                 /* ما نخليش الحاوية كبيرة */
+  margin: 0;
 }
 
 
 .card-img {
-  width: 60%;
+  width: 20%;
   display: block;
 }
 
