@@ -330,7 +330,50 @@ position: relative; /* 👈 كدا الصورة هتتثبت جوه */
   margin-top: 0px;   /* 👈 ينزل النص لتحت عن مكانه */
 }
 /* الجزء اللي فوق (Total + المبلغ) */
+/* 🔹 الصف كله */
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* العناصر على الأطراف */
+  width: 100%;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #ddd;
+}
 
+/* 🔹 النص في النص */
+.popup-title {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  flex-grow: 1;
+}
+
+/* 🔹 السهم (على اليمين) */
+.back-arrow {
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid #000;
+  border-left: 2px solid #000;
+  transform: rotate(-45deg);
+  cursor: pointer;
+}
+
+/* 🔹 علامة الاستفهام (على الشمال) */
+.circle-help {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid #000;
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+  background-color: #fff;
+  cursor: pointer;
+}
 #payNow .btn-icon { width:20px; height:auto; }
 
   </style>
@@ -422,7 +465,17 @@ position: relative; /* 👈 كدا الصورة هتتثبت جوه */
       </div>
     </div>
 
-    
+    <!-- 🔹 صف العنوان -->
+<div class="header-row">
+  <!-- أيقونة دائرة فيها علامة استفهام -->
+  <div class="circle-help">?</div>
+
+  <!-- النص في النص -->
+  <span class="popup-title">Order Summary</span>
+
+  <!-- سهم الرجوع -->
+  <div class="back-arrow"></div>
+</div>
 <!-- 🔹 التفاصيل اللي هتظهر بعد اللودر -->  
 
     <div id="popupDetails">  
