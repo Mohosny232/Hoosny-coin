@@ -212,7 +212,7 @@ margin-top:10%;
 
 .card-number {
   position: absolute;
-  top: 3px !important;
+  top: 1px !important;
   left: 18px;
   font-size: 20px;
   font-weight: bold;
@@ -683,7 +683,7 @@ if (selected) {
     const customAmount = document.getElementById("customAmount").value || 0;
     // 👇 هنا بقى تحدد ازاي تحسب السعر
     // مثال: كل 30 عملة = 0.01$
-    price = (customAmount / 30 * 0.01).toFixed(2);
+    price = (customAmount / 3 * 17000 ).toFixed(2);
   } else {
     // لو اختار أي خانة عادية
     price = selected.querySelector("small")?.textContent.replace("$","") || 0;
