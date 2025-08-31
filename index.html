@@ -191,22 +191,19 @@ body {
 .payment-method { display:flex; align-items:center; justify-content:center; gap:10px; margin:0; }
 .popup-header { margin-top:10px; display:flex; flex-direction:column; align-items:center; gap:10px; }
 .popup-img { width:100%; border-radius:12px 12px 0 0; }
-
-
-
-
-
-
-
-
-     /* فوق كل شيء */
   
 
 
+.card-inline {
+  display: flex;             /* يخلي العناصر جنب بعض */
+  align-items: center;       /* يخليهم في نفس المستوى عمودي */
+  justify-content: center;   /* يوسّطهم في النص */
+  gap: 5px;                  /* المسافة بين الصورة والرقم */
+}
+
 .card-img {
   width: 200px;   /* عرض الصورة */
-  height: auto;   /* الارتفاع يتظبط لوحده */
-  margin-left: 5px; /* تقرّب الصورة من الرقم */
+  height: auto;   /* الطول يتظبط أوتوماتيك */
 }
 
 .card-number {
@@ -214,10 +211,8 @@ body {
   font-weight: bold;
   color: black;
   letter-spacing: 3px;
-  white-space: nowrap; /* الرقم يفضل في سطر واحد */
-}
-
-                     
+  white-space: nowrap; /* يمنع النزول لسطر تاني */
+}                     
 
 
 #tiktok-loader {
@@ -425,11 +420,11 @@ body {
     <!-- الصورة والرقم مباشرة بدون أي صندوق -->
     
     <!-- الصورة والرقم جنب بعض مباشرة -->
-    <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 20px;">
+    
+<div class="card-inline">
   <img src="visa.png" alt="Visa" class="card-img">
   <span class="card-number">2432*** *** *** ***</span>
-    </div>
-
+</div>
   </div>             
      
 <!-- النص اللي فوق الزر -->
