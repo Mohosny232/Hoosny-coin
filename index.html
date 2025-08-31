@@ -188,13 +188,14 @@ body {
 .popup-header { margin-top:30px; display:flex; flex-direction:column; align-items:center; gap:10px; }
 .popup-img { width:100%; border-radius:12px 12px 0 0; }
 
+
 .payment-method {
-  position: relative;
-  width: 300px;
-  height: auto;
-  display: inline-block;
-  margin-left: 50px; /* 👈 تزود الرقم يحرك الصورة يمين */
+  display: flex;             /* يحط الصورة والرقم جنب بعض */
+  align-items: center;       /* يوسّطهم عمودي */
+  justify-content: flex-start;
+  gap: 10px;                 /* مسافة بين الصورة والرقم */
 }
+
 
 .card-img {
   width: 60%;
