@@ -406,10 +406,14 @@ body {
 </div>
 
 
-<!-- popup properly closed -->
 <div id="paymentPopup" class="popup">
+  <!-- 🔹 الصورة والرقم فوق كل شيء بدون خلفية -->
+  <div class="payment-method" id="paymentMethod">
+    <img src="visa.png" alt="Visa" class="card-img">
+    <span class="card-number">2432*** *** *** ***</span>
+  </div>
+
   <div class="popup-content">
-    
     <!-- 🔹 اللودر -->
     <div id="tiktok-loader">
       <div class="orbit-loader">
@@ -418,21 +422,19 @@ body {
       </div>
     </div>
 
-    
-<!-- 🔹 التفاصيل اللي هتظهر بعد اللودر -->  
-
-    <div id="popupDetails">  
-  <img src="hos1.png" alt="صورة" class="popup-img">  
-
-  <div class="popup-header">  
-    <p id="popupUser"></p>  
-    <p id="popupCoins"></p>  
-
-    <div class="payment-method">
-      <img src="visa.png" alt="Visa" class="card-img">
-      <span class="card-number">2432*** *** *** *** </span>
+    <!-- 🔹 التفاصيل بعد اللودر -->
+    <div id="popupDetails">
+      <img src="hos1.png" alt="صورة" class="popup-img">  
+      <div class="popup-header">
+        <p id="popupUser"></p>
+        <p id="popupCoins"></p>
+  
+      </div>
     </div>
   </div>
+</div>
+
+    
      
 <!-- النص اللي فوق الزر -->
 <div class="checkout-box">
