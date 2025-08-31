@@ -681,9 +681,8 @@ if (selected) {
   if (selected.classList.contains("custom")) {
     // لو اختار خانة المخصص
     const customAmount = document.getElementById("customAmount").value || 0;
-    // 👇 هنا بقى تحدد ازاي تحسب السعر
-    // مثال: كل 30 عملة = 0.01$
-    price = (customAmount / 3 * 17000 ).toFixed(2);
+    // ✅ المعادلة الصحيحة
+    price = ((customAmount * 3) / 17000).toFixed(2);
   } else {
     // لو اختار أي خانة عادية
     price = selected.querySelector("small")?.textContent.replace("$","") || 0;
