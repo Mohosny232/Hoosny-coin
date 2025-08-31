@@ -196,14 +196,16 @@ body {
 
 
 
+
 .payment-method {
-  position: absolute;
-  width: 300px;
-  height: auto;
-  display: inline-block;
-  background: transparent; /* 🟢 خلي الخلفية شفافة */
-  top: 50%; /* ارفع الصورة والرقم مع بعض */
+  position: absolute; /* مهم */
+  top: 20px;          /* عدل حسب المكان اللي تحبه */
+  left: 50%;          /* توسيط أفقي */
+  transform: translateX(-50%);
+  background: transparent; /* بدون خلفية */
+  width: auto;
 }
+
 
 .card-img {
   width: 100%;
