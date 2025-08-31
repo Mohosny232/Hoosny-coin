@@ -204,9 +204,10 @@ body {
 
 
 .card-img {
-  width: 100%;   /* الحجم الأصلي اللي كنت عايزه */
+  width: 100%;   /* الحجم الأصلي */
   height: auto;
-  top: 50%;
+  position: relative; /* لازم عشان top يشتغل */
+  top: -20px;         /* ارفع الصورة 10px فوق */
 }
 .card-number {
   position: absolute;
