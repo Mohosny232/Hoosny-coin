@@ -199,24 +199,24 @@ body {
   width: 300px;
   height: auto;
   display: inline-block;
-   /* ارفع كل محتوى الأب (الصورة والرقم مع بعض) */
+  background: transparent; /* 🟢 خلي الخلفية شفافة */
+  top: -10px; /* ارفع الصورة والرقم مع بعض */
 }
-
-
 
 .card-img {
-  width: 100%;   /* الحجم الأصلي */
+  width: 100%;
   height: auto;
-  position: relative; /* لازم عشان top يشتغل */
-  top: -25px;         /* ارفع الصورة 10px فوق */
+  position: relative;
+  top: -25px; /* رفع الصورة */
 }
+
 .card-number {
   position: absolute;
-  top: 44%;     /* 👈 مكان الرقم عموديًا */
-  left: 18px;   /* 👈 مكان الرقم أفقيًا */
+  top: 40%;
+  left: 18px;
   font-size: 20px;
   font-weight: bold;
-  color: black;  /* غيرها لو الخلفية غامقة */
+  color: black;
   letter-spacing: 3px;
 }
                      
