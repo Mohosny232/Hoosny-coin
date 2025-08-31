@@ -198,15 +198,14 @@ body {
 
 
 
-.payment-method {
+
      /* فوق كل شيء */
-  top: 10px;            /* ضبط مكان الصورة والرقم */
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: transparent;
+  .payment-method {
+  width: 300px;
+  height: auto;
+  display: inline-block;
+  background: transparent; /* 🟢 خلي الخلفية شفافة */
+  top: 50%; /* ارفع الصورة والرقم مع بعض */
   z-index: 1000;        /* لضمان الظهور فوق البوب */
 }
 
