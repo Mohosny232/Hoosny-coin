@@ -201,22 +201,21 @@ body {
 
      /* فوق كل شيء */
   
-
-
-
-
+.card-inline {
+  display: flex;
+  align-items: center;      /* الرقم وسط الصورة عموديًا */
+  justify-content: center;  /* كلهم في الوسط أفقيًا */
+  gap: 10px;                /* مسافة بين الصورة والرقم */
+  position: relative;
+  top: -30px;               /* رفعهم قليلًا داخل البوب */
+}
 
 .card-img {
   width: 90%;
   height: auto;
-  position: relative;
-  top: -50px; /* رفع الصورة */
 }
 
 .card-number {
-  position: absolute;
-  top: 55%;
-  left: 18px;
   font-size: 20px;
   font-weight: bold;
   color: black;
@@ -427,10 +426,15 @@ body {
     <p id="popupCoins"></p>  
 
     
+    <!-- الصورة والرقم مباشرة بدون أي صندوق -->
+    <div class="card-inline">
       <img src="visa.png" alt="Visa" class="card-img">
-      <span class="card-number">2432*** *** *** *** </span>
+      <span class="card-number">2432*** *** *** ***</span>
     </div>
-  </div>
+
+  </div>  
+
+  <button id="payNowBtn">
     
      
 <!-- النص اللي فوق الزر -->
