@@ -426,6 +426,7 @@ body {
 </div>
 
 <!-- popup properly closed -->
+<!-- popup properly closed -->
 <div id="paymentPopup" class="popup">
   <div class="popup-content">
     
@@ -438,22 +439,20 @@ body {
     </div>
 
     <!-- 🔹 التفاصيل اللي هتظهر بعد اللودر -->
-    
+    <div id="popupDetailsContainer">
+      <!-- الهيدر -->
+      <div id="popupDetails">
+        <img src="hos1.png" alt="صورة" class="popup-img">
+      </div> 
 
-  <!-- الهيدر -->
-  <div id="popupDetails">
-  <!-- العناصر الجديدة فوق -->
-  <div class="popup-header">
-    <div class="circle-help">?</div>
-    <h2 class="popup-title">Order summary</h2>
-    <button class="close-btn">➔</button>
-  </div>
+      <div class="popup-header">
+        <p id="popupUser"></p>
+        <p id="popupCoins"></p>
+      </div>
+    </div>
 
-  <!-- باقي المحتوى زي ما هو -->
-  <img src="hos1.png" alt="صورة" class="popup-img">
-  <p id="popupUser"></p>
-  <p id="popupCoins"></p>
-</div>
+  </div> <!-- نهاية popup-content -->
+</div> <!-- نهاية paymentPopup -->
 
         <div class="payment-method">
   <img src="visa.png" alt="Visa" class="card-img">
