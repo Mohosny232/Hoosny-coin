@@ -186,7 +186,7 @@ body {
 }
   
 .popup-content * { margin:0; padding:0;
-  background: transparent; /* مهم عشان كل العناصر تبان فوق الخلفية فقط */
+  /* مهم عشان كل العناصر تبان فوق الخلفية فقط */
                   }
 .payment-method { display:flex; align-items:center; justify-content:center; gap:10px; margin:0; }
 .popup-header { margin-top:10px; display:flex; flex-direction:column; align-items:center; gap:10px; }
@@ -198,12 +198,12 @@ body {
 
 
 .payment-method {
-  position: absolute; /* مهم */
-  top: 20px;          /* عدل حسب المكان اللي تحبه */
-  left: 50%;          /* توسيط أفقي */
-  transform: translateX(-50%);
-  background: transparent; /* بدون خلفية */
-  width: auto;
+  position: absolute;
+  width: 300px;
+  height: auto;
+  display: inline-block;
+  background: transparent; /* 🟢 خلي الخلفية شفافة */
+  top: 80px; /* ارفع الصورة والرقم مع بعض */
 }
 
 
