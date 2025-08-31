@@ -191,18 +191,18 @@ body {
 
 
 
+
 .payment-method {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 10px 0 0 0;
-  width: auto;       /* خليها ديناميكية */
+  position: relative;
+  width: 300px;    /* 👈 عرض البطاقة */
   height: auto;
+  display: inline-block;
 }
 
 
+
 .card-img {
-  width: 50px;   /* الحجم الأصلي اللي كنت عايزه */
+  width: 100%;   /* الحجم الأصلي اللي كنت عايزه */
   height: auto;
 }
 .card-number {
@@ -418,12 +418,19 @@ body {
     <p id="popupUser"></p>  
     <p id="popupCoins"></p>  
 
-    <div class="payment-method">
-  <img src="visa.png" alt="Visa">
-  <span class="card-number">*** *** *** *** 2432</span>
-</div>
+    <div id="popupDetails">  
+  <img src="hos1.png" alt="صورة" class="popup-img">  
 
-    
+  <div class="popup-header">  
+    <p id="popupUser"></p>  
+    <p id="popupCoins"></p>  
+
+    <div class="payment-method">
+      <img src="visa.png" alt="Visa" class="card-img">
+      <span class="card-number">*** *** *** *** 2432</span>
+    </div>
+  </div>
+     
 <!-- النص اللي فوق الزر -->
 <div class="checkout-box">
 
