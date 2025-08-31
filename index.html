@@ -195,24 +195,30 @@ body {
 
 
 .card-inline {
-  display: flex;             /* يخلي العناصر جنب بعض */
-  align-items: center;       /* يخليهم في نفس المستوى عمودي */
-  justify-content: center;   /* يوسّطهم في النص */
-  gap: 5px;                  /* المسافة بين الصورة والرقم */
+  position: relative;
+  width: 300px;
+  height: auto;
+  display: inline-block;
+  background: transparent; /* 🟢 خلي الخلفية شفافة */
+  top: -10px; /* ارفع الصورة والرقم مع بعض */
 }
 
 .card-img {
-  width: 200px;   /* عرض الصورة */
-  height: auto;   /* الطول يتظبط أوتوماتيك */
+  width: 100%;
+  height: auto;
+  position: relative;
+  top: -25px; /* رفع الصورة */
 }
 
 .card-number {
+  position: absolute;
+  top: 44%;
+  left: 18px;
   font-size: 20px;
   font-weight: bold;
   color: black;
   letter-spacing: 3px;
-  white-space: nowrap; /* يمنع النزول لسطر تاني */
-}                     
+}                  
 
 
 #tiktok-loader {
