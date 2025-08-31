@@ -202,12 +202,12 @@ body {
      /* فوق كل شيء */
   
 .payment-method {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: transparent; /* خلي الخلفية شفافة */
-  margin-top: -60px;       /* ارفع الصورة والرقم بدون absolute */
-  z-index: 10;             /* تظهر فوق الكوين */
+  width: 300px;
+  height: auto;
+  display: inline-block;
+  background: transparent; /* 🟢 خلي الخلفية شفافة */
+  top: 30px; /* ارفع الصورة والرقم مع بعض */
+  z-index: 1000;        /* لضمان الظهور فوق البوب */
 }
 
 
@@ -222,7 +222,7 @@ body {
 
 .card-number {
   position: absolute;
-  top: 60%;
+  top: 55%;
   left: 18px;
   font-size: 20px;
   font-weight: bold;
