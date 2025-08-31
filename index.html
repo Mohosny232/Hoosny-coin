@@ -314,40 +314,37 @@ body {
 /* الجزء اللي فوق (Total + المبلغ) */
 .popup-header {
   display: flex;
+  flex-direction: row;        
+  align-items: center; 
   justify-content: space-between;
-  align-items: center;
-  padding: 12px 16px;
-  border-bottom: 1px solid #ddd;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 15px; /* مسافة من أطراف البوب */
 }
 
 .circle-help {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #f0f0f0;
-  color: #333;
+  border: 2px solid #000;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  font-size: 16px;
 }
 
 .popup-title {
+  flex: 1;
+  text-align: center;
   font-size: 18px;
   font-weight: bold;
-  margin: 0;
-  text-align: center;
-  flex: 1; /* يخلي النص في النص بين العناصر */
 }
 
 .close-btn {
   background: none;
   border: none;
-  font-size: 22px;
-  font-weight: bold;
+  font-size: 20px;
   cursor: pointer;
-  transform: rotate(180deg); /* يخلي السهم لليسار */
 }
 #payNow .btn-icon { width:20px; height:auto; }
 
@@ -444,21 +441,16 @@ body {
     <div id="popupDetails">
 
   <!-- الهيدر -->
+  <div id="popupDetails">
+  <!-- العناصر الجديدة فوق -->
   <div class="popup-header">
-    <!-- الدائرة بعلامة الاستفهام -->
     <div class="circle-help">?</div>
-
-    <!-- النص في النص -->
     <h2 class="popup-title">Order summary</h2>
-
-    <!-- السهم للخروج -->
     <button class="close-btn">➔</button>
   </div>
 
-  <!-- الصورة -->
+  <!-- باقي المحتوى زي ما هو -->
   <img src="hos1.png" alt="صورة" class="popup-img">
-
-  <!-- باقي المحتوى -->
   <p id="popupUser"></p>
   <p id="popupCoins"></p>
 </div>
