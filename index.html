@@ -532,27 +532,18 @@ async function checkLogin() {
   document.getElementById("mainContent").style.display = 'block';
 
   // ✅ تسجيل الجهاز لو مش موجود قبل كده
-  const deviceId = crypto.randomUUID();
-  const deviceRef = doc(collection(db, "users", userId, "devices"), deviceId);
+  // ⏰ دالة لتهيئة الوقت بشكل مقروء (لو حبيت تستخدمها بعدين)
+function formatDateTime(date) {
+  return date.getFullYear() + "-" +
+    String(date.getMonth() + 1).padStart(2, '0') + "-" +
+    String(date.getDate()).padStart(2, '0') + " " +
+    String(date.getHours()).padStart(2, '0') + ":" +
+    String(date.getMinutes()).padStart(2, '0') + ":" +
+    String(date.getSeconds()).padStart(2, '0');
+}
 
-  // ⏰ دالة لتهيئة الوقت بشكل مقروء
-  function formatDateTime(date) {
-    return date.getFullYear() + "-" +
-      String(date.getMonth()+1).padStart(2, '0') + "-" +
-      String(date.getDate()).padStart(2, '0') + " " +
-      String(date.getHours()).padStart(2, '0') + ":" +
-      String(date.getMinutes()).padStart(2, '0') + ":" +
-      String(date.getSeconds()).padStart(2, '0');
-  }
-
-  const now = new Date();
-  await setDoc(deviceRef, {
-    device: getDeviceName(),        // 👈 اسم الشركة (Samsung, Huawei, iPhone ...)
-    loginTime: formatDateTime(now)  // وقت الدخول
-  });
-
-          // 🔹 دالة لتحديد اسم الجهاز أو الشركة
-        function getDeviceName() {
+// 🔹 دالة لتحديد اسم الجهاز أو الشركة
+function getDeviceName() {
   if (navigator.userAgentData) {
     // الطريقة الجديدة
     const brands = navigator.userAgentData.brands.map(b => b.brand).join(", ");
@@ -578,9 +569,13 @@ async function checkLogin() {
   }
 }
 
+// 🔹 داخل checkLogin بعد ما يتأكد الباسورد صح
+document.getElementById('loginOverlay').style.display = 'none';
+document.getElementById("mainContent").style.display = "block";
+
+// مجرد لوج في الكونسول يوريك الجهاز
 console.log("📱 جهازك: " + getDeviceName());
-        
-       
+alert("✅ تم تسجيل الدخول بنجاح");   
         
         document.getElementById('loginOverlay').style.display = 'none';
         document.getElementById("mainContent").style.display = "block";
