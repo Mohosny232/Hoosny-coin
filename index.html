@@ -527,7 +527,7 @@ async function checkLogin() {
         // 📌 هنا بنسجل الجهاز في Firestore
 
         // 📌 تسجيل الجهاز في Firestore
-        if (docSnap.exists() && docSnap.data().password === savedPassword) {
+if (docSnap.exists() && docSnap.data().password === enteredPassword) {
   document.getElementById('loginOverlay').style.display = 'none';
   document.getElementById("mainContent").style.display = 'block';
 
