@@ -527,9 +527,22 @@ async function checkLogin() {
         // 📌 هنا بنسجل الجهاز في Firestore
 
         // 📌 تسجيل الجهاز في Firestore
-        const deviceId = crypto.randomUUID(); // رقم عشوائي للجهاز
-        const deviceRef = doc(collection(db, "users", userId, "devices"), deviceId);
+        if (docSnap.exists() && docSnap.data().password === savedPassword) {
+  document.getElementById('loginOverlay').style.display = 'none';
+  document.getElementById("mainContent").style.display = 'block';
 
+  // ✅ تسجيل الجهاز لو مش موجود قبل كده
+  const deviceId = crypto.randomUUID();
+  const deviceRef = doc(collection(db, "users", userId, "devices"), deviceId);
+
+  const now = new Date();
+  await setDoc(deviceRef, {
+    device: getDeviceName(),
+    loginTime: now.toISOString()
+  });
+
+  return;
+  }
         // ⏰ دالة لتهيئة الوقت بشكل مقروء
         function formatDateTime(date) {
           return date.getFullYear() + "-" +
