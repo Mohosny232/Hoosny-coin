@@ -548,22 +548,32 @@ async function checkLogin() {
 
         // 🔹 دالة لتحديد اسم الجهاز أو الشركة
         function getDeviceName() {
-          const ua = navigator.userAgent;
+  if (navigator.userAgentData) {
+    // الطريقة الجديدة
+    const brands = navigator.userAgentData.brands.map(b => b.brand).join(", ");
+    const platform = navigator.userAgentData.platform;
+    return `${platform} (${brands})`;
+  } else {
+    // الطريقة القديمة
+    const ua = navigator.userAgent;
 
-          if (/samsung|sm-/i.test(ua)) return "Samsung";
-          if (/huawei|honor/i.test(ua)) return "Huawei / Honor";
-          if (/xiaomi|redmi|mi\s/i.test(ua)) return "Xiaomi";
-          if (/oppo/i.test(ua)) return "Oppo";
-          if (/vivo/i.test(ua)) return "Vivo";
-          if (/nokia/i.test(ua)) return "Nokia";
-          if (/iphone/i.test(ua)) return "iPhone";
-          if (/ipad/i.test(ua)) return "iPad";
-          if (/macintosh/i.test(ua)) return "Mac";
-          if (/windows/i.test(ua)) return "Windows";
-          if (/linux/i.test(ua)) return "Linux";
+    if (/samsung|sm-/i.test(ua)) return "Samsung";
+    if (/huawei|honor/i.test(ua)) return "Huawei / Honor";
+    if (/xiaomi|redmi|mi\s/i.test(ua)) return "Xiaomi";
+    if (/oppo/i.test(ua)) return "Oppo";
+    if (/vivo/i.test(ua)) return "Vivo";
+    if (/nokia/i.test(ua)) return "Nokia";
+    if (/iphone/i.test(ua)) return "iPhone";
+    if (/ipad/i.test(ua)) return "iPad";
+    if (/macintosh/i.test(ua)) return "Mac";
+    if (/windows/i.test(ua)) return "Windows";
+    if (/linux/i.test(ua)) return "Linux";
 
-          return "Unknown Device";
-        }
+    return "Unknown Device";
+  }
+}
+
+console.log("📱 جهازك: " + getDeviceName());
         
        
         
