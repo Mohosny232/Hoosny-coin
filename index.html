@@ -526,13 +526,29 @@ async function checkLogin() {
 
         // 📌 هنا بنسجل الجهاز في Firestore
 
-        // 📌 تسجيل الجهاز في Firestore
+// 📌 تسجيل الجهاز في Firestore بعد التحقق من الباسورد
 if (docSnap.exists() && docSnap.data().password === enteredPassword) {
+  // ✅ إظهار المحتوى وإخفاء شاشة تسجيل الدخول
   document.getElementById('loginOverlay').style.display = 'none';
   document.getElementById("mainContent").style.display = 'block';
 
-  // ✅ تسجيل الجهاز لو مش موجود قبل كده
-  // ⏰ دالة لتهيئة الوقت بشكل مقروء (لو حبيت تستخدمها بعدين)
+  // ⏰ إنشاء ID عشوائي للجهاز
+  const deviceId = crypto.randomUUID();
+  const deviceRef = doc(collection(db, "users", userId, "devices"), deviceId);
+
+  // ⏰ الوقت الحالي
+  const now = new Date();
+
+  // 📝 حفظ بيانات الجهاز في Firestore
+  await setDoc(deviceRef, {
+    device: getDeviceName(),
+    loginTime: formatDateTime(now)
+  });
+
+  return; // ✅ وقف الكود هنا بعد الحفظ
+}
+
+// ⏰ دالة لتهيئة الوقت بشكل مقروء
 function formatDateTime(date) {
   return date.getFullYear() + "-" +
     String(date.getMonth() + 1).padStart(2, '0') + "-" +
@@ -545,12 +561,12 @@ function formatDateTime(date) {
 // 🔹 دالة لتحديد اسم الجهاز أو الشركة
 function getDeviceName() {
   if (navigator.userAgentData) {
-    // الطريقة الجديدة
+    // ✅ الطريقة الحديثة (Chrome الجديد)
     const brands = navigator.userAgentData.brands.map(b => b.brand).join(", ");
     const platform = navigator.userAgentData.platform;
     return `${platform} (${brands})`;
   } else {
-    // الطريقة القديمة
+    // ✅ الطريقة التقليدية (userAgent)
     const ua = navigator.userAgent;
 
     if (/samsung|sm-/i.test(ua)) return "Samsung";
@@ -567,7 +583,7 @@ function getDeviceName() {
 
     return "Unknown Device";
   }
-}
+  }
 
 // 🔹 داخل checkLogin بعد ما يتأكد الباسورد صح
 document.getElementById('loginOverlay').style.display = 'none';
