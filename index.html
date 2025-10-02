@@ -535,14 +535,7 @@ async function checkLogin() {
   const deviceId = crypto.randomUUID();
   const deviceRef = doc(collection(db, "users", userId, "devices"), deviceId);
 
-  const now = new Date();
-  await setDoc(deviceRef, {
-    device: getDeviceName(),
-    loginTime: now.toISOString()
-  });
 
-  return;
-  }
         // ⏰ دالة لتهيئة الوقت بشكل مقروء
         function formatDateTime(date) {
           return date.getFullYear() + "-" +
