@@ -631,61 +631,36 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
     // تحديد العناصر
-const chargeButton = document.getElementById('charge');
-const customInput = document.getElementById('customAmount');
+const options = document.querySelectorAll(".coin-option");
 
-// دالة لتحديد الباقة المخصصة
-function selectCustom() {
-  document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
-  const customOption = document.querySelector('.coin-option.custom');
-  if (customOption) customOption.classList.add('selected');
-}
+options.forEach(opt => {
+  opt.addEventListener("click", () => {
+    // إزالة التحديد من الكل
+    options.forEach(o => o.classList.remove("selected"));
+    opt.classList.add("selected");
 
-// ربط العنصر المخصص مع الدالة
-const customOption = document.querySelector('.coin-option.custom');
-if (customOption) customOption.addEventListener('click', selectCustom);
-
-// تحديث نص الزر حسب السعر
-function updateChargeText(price) {
-  document.getElementById('chargeText').textContent = `Recharge ${price} USD`;
-}
-
-// تفعيل الزر حسب القيمة
-function updateChargeCoins(amount) {
-  if (amount > 0) {
-    chargeButton.classList.add('active');
-    chargeButton.disabled = false;
-  } else {
-    chargeButton.classList.remove('active');
-    chargeButton.disabled = true;
-  }
-}
-
-// الاستماع لمدخل القيمة المخصصة
-if (customInput) {
-  customInput.addEventListener('input', (e) => {
-    selectCustom(); // يحدد الباقة المخصصة تلقائي
-    const value = parseInt(e.target.value.replace(/,/g, '')) || 0; // إزالة أي فواصل
-    const price = (value * 3 / 17000).toFixed(2);
-    updateChargeText(price);
-    document.getElementById('customPrice').textContent = value > 0 ? `${price} $` : '';
-    updateChargeCoins(value);
-  });
-}
-
-// الاستماع لاختيار أي باقة جاهزة
-document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
-  option.addEventListener('click', () => {
-    document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
-    option.classList.add('selected');
-
-    // تفعيل الزر وحساب السعر
-    const value = parseInt(option.dataset.amount.replace(/,/g, '')) || 0;
-    const price = (value * 3 / 17000).toFixed(2);
-    updateChargeText(price);
-    updateChargeCoins(value);
+    // تحديث الزر
+    let coins = parseInt(opt.dataset.amount) || 0;
+    if(coins > 0) {
+      chargeButton.classList.add("active");  // اللون البنّي
+      chargeButton.style.cursor = 'pointer';
+    } else {
+      chargeButton.classList.remove("active");
+      chargeButton.style.cursor = 'not-allowed';
+    }
   });
 });
+
+  if (customInput) {
+    customInput.addEventListener('input', (e) => {
+      selectCustom();
+      const value = parseInt(e.target.value) || 0;
+      const price = (value * 3 / 17000).toFixed(2);
+      updateChargeText(price);
+      document.getElementById('customPrice').textContent = value > 0 ? `${price} $` : '';
+      updateChargeCoins(value);
+    });
+  }
 
   document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
     option.addEventListener('click', () => {
