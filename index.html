@@ -31,71 +31,55 @@ body {
   font-weight: bold;
 }
 
-  
+ .bundles-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  padding: 15px;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.bundle {
+  background: rgba(255,255,255,0.85);
+  border-radius: 14px;
+  padding: 15px 5px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.bundle:hover,
+.bundle.active {
+  transform: scale(1.05);
+  border: 2px solid #a855f7;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.bundle h2 {
+  margin: 5px 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.bundle .price {
+  color: #666;
+  margin-top: -5px;
+  margin-bottom: 5px;
+}
+
+.bundle span {
+  font-size: 13px;
+  color: #333;
+}
+
+.coin-icon {
+  width: 40px;
+  margin-bottom: 5px;
+} 
   /* الخانة الخاصة (3500) كبداية */
-  .coin-option.special {
-    border: 2px solid #ff2d55;
-    background-color: #fff0f4;
-  }
 
-  .coin-option.special::before {
-    content: "آخر عملية شراء";
-    position: absolute;
-    width: 83%;
-    bottom: 66px;
-    right: 18px;
-    background: #ff2d55;
-    color: #fff;
-    font-size: 12px;
-    padding: 2px 6px;
-   border-radius: 12px 0 12px 0;
-  }
-  
-  
-
-  /* لما تتحول رمادي */
-  .coin-option.special.gray {
-    border: 2px solid transparent;
-   background: #f2f2f2;
-  }
-
-  .coin-option.special.gray::before {
-    background: #aaa;
-  }
-
-
-/* ضبط خاص للخانة 17000 */
-.coin-option[data-amount="17000"].special::before {
-  width: 83% !important;
-   bottom: 80px !important;
-   right: 18px !important;
-}
-
-.coin-option[data-amount="17000"].special.gray::before {
-  bottom: 80px;
-  right: 18px;
-}
-#popupCoins {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-#popupCoins .coin-img {
-  width: 32px;
-  height: 32px;
-  position: relative;
-  top: -3px; /* ارفع الصورة شويه لتكون في منتصف النص */
-}
-
-#popupCoins .coins-box {
-  display: flex;
-  align-items: center;  /* الصورة جنب الكلمة */
-  gap: 4px;
-  margin-top: 15px; /* نزّل العنصر شوية تحت */
-
-}
-    
 
 /* Login overlay */
 /* نخفي كل حاجة لد ما JS يقرر */
@@ -358,53 +342,50 @@ position: relative; /* 👈 كدا الصورة هتتثبت جوه */
   <!-- محتوى التطبيق بعد تسجيل الدخول -->
 </div>
 
-<div class="container">
-  <h1><span class="tiktok"></span></h1>
-  <input type="text" id="username" placeholder="Username" />
-</div>
-<div class="coins">
-  <div class="coin-option" data-amount="30">
-    <img src="coin.png" class="coin-img" alt="coin">
-    30
-    <small>$0.01</small>
+<div class="bundles-container">
+
+  <div class="bundle">
+    <img src="coin-new.png" class="coin-icon">
+    <h2>88</h2>
+    <p class="price">$1.01</p>
+    <span>Quick Charge</span>
   </div>
-  <div class="coin-option" data-amount="350">
-    <img src="coin.png" class="coin-img" alt="coin">
-    350
-    <small>$0.06</small>
+
+  <div class="bundle">
+    <img src="coin-new.png" class="coin-icon">
+    <h2>498</h2>
+    <p class="price">$5.68</p>
+    <span>Flash Charge</span>
   </div>
-  <div class="coin-option" data-amount="700">
-    <img src="coin.png" class="coin-img" alt="coin">
-    700
-    <small>$0.12</small>
+
+  <div class="bundle">
+    <img src="coin-new.png" class="coin-icon">
+    <h2>998</h2>
+    <p class="price">$11.38</p>
+    <span>Silver Charge</span>
   </div>
-  <div class="coin-option" data-amount="1400">
-    <img src="coin.png" class="coin-img" alt="coin">
-    1,400
-    <small>$0.25</small>
+
+  <div class="bundle">
+    <img src="coin-new.png" class="coin-icon">
+    <h2>1,998</h2>
+    <p class="price">$22.78</p>
+    <span>Gold Charge</span>
   </div>
-  <!-- الخانة الخاصة -->
-  <div class="coin-option special" data-amount="3500">
-    <img src="coin.png" class="coin-img" alt="coin">
-    3,500
-    <small>$0.62</small>
+
+  <div class="bundle">
+    <img src="coin-new.png" class="coin-icon">
+    <h2>4,998</h2>
+    <p class="price">$56.98</p>
+    <span>Power Charge</span>
   </div>
-  <div class="coin-option" data-amount="7000">
-    <img src="coin.png" class="coin-img" alt="coin">
-    7,000
-    <small>$1.24</small>
+
+  <div class="bundle">
+    <img src="coin-new.png" class="coin-icon">
+    <h2>10,998</h2>
+    <p class="price">$125.38</p>
+    <span>Premium Bundle</span>
   </div>
-  <div class="coin-option" data-amount="17000">
-    <img src="coin.png" class="coin-img" alt="coin">
-    17,000
-    <small>$3.00</small>
-  </div>
-  <!-- خانة custom -->
-  <div class="coin-option custom">
-    Custom
-    <div id="customPrice" style="font-size: 12px; color: gray; margin-top: 4px;"></div>
-    <input type="number" id="customAmount" class="custom-input" placeholder="..Number of " />
-  </div>
+
 </div>
 
 <img src="pay12.png" alt="Pay Image" class="top-image">
