@@ -344,48 +344,46 @@ position: relative; /* 👈 كدا الصورة هتتثبت جوه */
 
 <div class="bundles-container">
 
-  <div class="bundle">
-    <img src="coin-new.png" class="coin-icon">
-    <h2>88</h2>
-    <p class="price">$1.01</p>
-    <span>Quick Charge</span>
-  </div>
+<div class="bundle" data-amount="88">
+  <img src="coin-new.png" class="coin-icon">
+  <h2>88</h2>
+  <p class="price">$1.01</p>
+  <span>Quick Charge</span>
+</div>
 
-  <div class="bundle">
-    <img src="coin-new.png" class="coin-icon">
-    <h2>498</h2>
-    <p class="price">$5.68</p>
-    <span>Flash Charge</span>
-  </div>
+<div class="bundle" data-amount="498">
+  <img src="coin-new.png" class="coin-icon">
+  <h2>498</h2>
+  <p class="price">$5.68</p>
+  <span>Flash Charge</span>
+</div>
 
-  <div class="bundle">
-    <img src="coin-new.png" class="coin-icon">
-    <h2>998</h2>
-    <p class="price">$11.38</p>
-    <span>Silver Charge</span>
-  </div>
+<div class="bundle" data-amount="998">
+  <img src="coin-new.png" class="coin-icon">
+  <h2>998</h2>
+  <p class="price">$11.38</p>
+  <span>Silver Charge</span>
+</div>
 
-  <div class="bundle">
-    <img src="coin-new.png" class="coin-icon">
-    <h2>1,998</h2>
-    <p class="price">$22.78</p>
-    <span>Gold Charge</span>
-  </div>
+<div class="bundle" data-amount="1998">
+  <img src="coin-new.png" class="coin-icon">
+  <h2>1,998</h2>
+  <p class="price">$22.78</p>
+  <span>Gold Charge</span>
+</div>
 
-  <div class="bundle">
-    <img src="coin-new.png" class="coin-icon">
-    <h2>4,998</h2>
-    <p class="price">$56.98</p>
-    <span>Power Charge</span>
-  </div>
+<div class="bundle" data-amount="4998">
+  <img src="coin-new.png" class="coin-icon">
+  <h2>4,998</h2>
+  <p class="price">$56.98</p>
+  <span>Power Charge</span>
+</div>
 
-  <div class="bundle">
-    <img src="coin-new.png" class="coin-icon">
-    <h2>10,998</h2>
-    <p class="price">$125.38</p>
-    <span>Premium Bundle</span>
-  </div>
-
+<div class="bundle" data-amount="10998">
+  <img src="coin-new.png" class="coin-icon">
+  <h2>10,998</h2>
+  <p class="price">$125.38</p>
+  <span>Premium Bundle</span>
 </div>
 
 <img src="pay12.png" alt="Pay Image" class="top-image">
@@ -631,34 +629,63 @@ document.addEventListener('DOMContentLoaded', async () => {
   const clickSound = document.getElementById('clickSound');
   let deferredPrompt;
 
-  function selectCustom() {
-    document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
-    document.querySelector('.coin-option.custom').classList.add('selected');
-  }
 
-  // link the custom element WITHOUT inline onclick
+    // تحديد العناصر
+const chargeButton = document.getElementById('charge');
+const customInput = document.getElementById('customAmount');
+
+// دالة لتحديد الباقة المخصصة
+function selectCustom() {
+  document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
   const customOption = document.querySelector('.coin-option.custom');
-  if (customOption) customOption.addEventListener('click', selectCustom);
+  if (customOption) customOption.classList.add('selected');
+}
 
-  function updateChargeText(price) {
-    document.getElementById('chargeText').textContent = `Recharge ${price} USD`;
-  }
+// ربط العنصر المخصص مع الدالة
+const customOption = document.querySelector('.coin-option.custom');
+if (customOption) customOption.addEventListener('click', selectCustom);
 
-  function updateChargeCoins(amount) {
-    if (amount > 0) chargeButton.classList.add('active');
-    else chargeButton.classList.remove('active');
-  }
+// تحديث نص الزر حسب السعر
+function updateChargeText(price) {
+  document.getElementById('chargeText').textContent = `Recharge ${price} USD`;
+}
 
-  if (customInput) {
-    customInput.addEventListener('input', (e) => {
-      selectCustom();
-      const value = parseInt(e.target.value) || 0;
-      const price = (value * 3 / 17000).toFixed(2);
-      updateChargeText(price);
-      document.getElementById('customPrice').textContent = value > 0 ? `${price} $` : '';
-      updateChargeCoins(value);
-    });
+// تفعيل الزر حسب القيمة
+function updateChargeCoins(amount) {
+  if (amount > 0) {
+    chargeButton.classList.add('active');
+    chargeButton.disabled = false;
+  } else {
+    chargeButton.classList.remove('active');
+    chargeButton.disabled = true;
   }
+}
+
+// الاستماع لمدخل القيمة المخصصة
+if (customInput) {
+  customInput.addEventListener('input', (e) => {
+    selectCustom(); // يحدد الباقة المخصصة تلقائي
+    const value = parseInt(e.target.value.replace(/,/g, '')) || 0; // إزالة أي فواصل
+    const price = (value * 3 / 17000).toFixed(2);
+    updateChargeText(price);
+    document.getElementById('customPrice').textContent = value > 0 ? `${price} $` : '';
+    updateChargeCoins(value);
+  });
+}
+
+// الاستماع لاختيار أي باقة جاهزة
+document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
+  option.addEventListener('click', () => {
+    document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));
+    option.classList.add('selected');
+
+    // تفعيل الزر وحساب السعر
+    const value = parseInt(option.dataset.amount.replace(/,/g, '')) || 0;
+    const price = (value * 3 / 17000).toFixed(2);
+    updateChargeText(price);
+    updateChargeCoins(value);
+  });
+});
 
   document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {
     option.addEventListener('click', () => {
