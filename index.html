@@ -1,109 +1,104 @@
-
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <title>Coin Recharge TikTok</title>
-  <link rel="manifest" href="manifest.json">
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap" rel="stylesheet">
-  <style>
-html, body {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  background-image: url('hosny11.jpg');   /* اسم الصورة */
-  background-size: cover;                 /* يخلي الصورة تملى الشاشة */
-  background-position: center;             /* في النص */
-  background-repeat: no-repeat;            /* ما تتكررش */
-  background-attachment: fixed;            /* ثابتة وقت التمرير */
-}
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  overflow-x: hidden;
-  font-family: 'Tajawal', sans-serif;
-  font-weight: bold;
-}
-
- .bundles-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  padding: 15px;
-  width: 100%;
-  margin-top: 65%;
+<!DOCTYPE html>  <html lang="ar" dir="rtl">  
+<head>  
+  <meta charset="UTF-8" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+  <title>Coin Recharge TikTok</title>  
+  <link rel="manifest" href="manifest.json">  
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap" rel="stylesheet">  
+  <style>  
+html, body {  
+  margin: 0;  
+  padding: 0;  
+  min-height: 100vh;  
+  overflow-x: hidden;  
+  overflow-y: hidden;  
+  background-image: url('hosny11.jpg');   /* اسم الصورة */  
+  background-size: cover;                 /* يخلي الصورة تملى الشاشة */  
+  background-position: center;             /* في النص */  
+  background-repeat: no-repeat;            /* ما تتكررش */  
+  background-attachment: fixed;            /* ثابتة وقت التمرير */  
+}  
+body {  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: flex-start;  
+  min-height: 100vh;  
+  overflow-x: hidden;  
+  font-family: 'Tajawal', sans-serif;  
+  font-weight: bold;  
+}  .bundles-container {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 15px;
+padding: 15px;
+width: 100%;
+margin-top: 65%;
 }
 
 .bundle {
-  background: rgba(255,255,255,0.85);
-  border-radius: 14px;
-  padding: 15px 5px;
-  text-align: center;
-  cursor: pointer;
-  transition: 0.3s;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+background: rgba(255,255,255,0.85);
+border-radius: 14px;
+padding: 15px 5px;
+text-align: center;
+cursor: pointer;
+transition: 0.3s;
+box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .bundle:hover,
 .bundle.active {
-  transform: scale(1.05);
-  border: 2px solid #a855f7;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+transform: scale(1.05);
+border: 2px solid #a855f7;
+box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 }
 
 .bundle h2 {
-  margin: 5px 0;
-  font-size: 24px;
-  font-weight: bold;
+margin: 5px 0;
+font-size: 24px;
+font-weight: bold;
 }
 
 .bundle .price {
-  color: #666;
-  margin-top: -5px;
-  margin-bottom: 5px;
+color: #666;
+margin-top: -5px;
+margin-bottom: 5px;
 }
 
 .bundle span {
-  font-size: 13px;
-  color: #333;
+font-size: 13px;
+color: #333;
 }
 
 .coin-icon {
-  width: 40px;
-  margin-bottom: 5px;
-} 
-  /* الخانة الخاصة (3500) كبداية */
+width: 40px;
+margin-bottom: 5px;
+}
+/* الخانة الخاصة (3500) كبداية */
 
-
-/* Login overlay */
-/* نخفي كل حاجة لد ما JS يقرر */
+/* Login overlay /
+/ نخفي كل حاجة لد ما JS يقرر */
 #loginOverlay {
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.8);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 99999;
-  opacity: 1;
-  transition: opacity 0.2s ease-in-out;
+position: fixed;
+top: 0; left: 0; width: 100%; height: 100%;
+background: rgba(0,0,0,0.8);
+display: none;
+align-items: center;
+justify-content: center;
+z-index: 99999;
+opacity: 1;
+transition: opacity 0.2s ease-in-out;
 }
 
 /* صندوق تسجيل الدخول */
 #loginBox {
-  background: #fff;
-  padding: 25px;
-  border-radius: 16px;
-  width: 90%;
-  max-width: 350px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+background: #fff;
+padding: 25px;
+border-radius: 16px;
+width: 90%;
+max-width: 350px;
+text-align: center;
+box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 #loginBox h2 { margin-bottom: 15px; font-size: 20px; color: #333; }
 #loginBox input { width: 90%; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid #ccc; font-size: 16px; }
@@ -115,145 +110,142 @@ body {
 #username { width: 95%; max-width: 350px; padding: 13px; font-size: 20px; margin: 0 auto 10px auto; display: block; border: 2px solid #ccc; border-radius: 10px; text-align: center; }
 
 .coins { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-.coin-option { background: #f2f2f2; padding: 15px; border-radius: 12px; text-align: center; cursor: pointer; font-weight: 700; transition: 0.2s; font-size: 18px; position: relative; flex: 1 1 120px;} 
+.coin-option { background: #f2f2f2; padding: 15px; border-radius: 12px; text-align: center; cursor: pointer; font-weight: 700; transition: 0.2s; font-size: 18px; position: relative; flex: 1 1 120px;}
 .coin-option.selected { border: 2px solid #ff2d55; background-color: #fff0f4; }
 .coin-option small { display: block; margin-top: 6px; font-size: 13px; color: #777; font-weight: normal; }
 .coin-option .coin-img { width: 32px; vertical-align: middle; margin-right: 4px; }
 .custom-input { width: 80%; font-size: 16px; padding: 6px; border: none; background: transparent; text-align: center; font-weight: bold; margin-top: 6px; }
 
 #charge, #payNow {
-  width: 95%; padding: 15px; margin-top: 10px; background: rgba(200,200,200,0.5); cursor: not-allowed; color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; position: relative; display:flex; align-items:center; justify-content:center;
+width: 95%; padding: 15px; margin-top: 10px; background: rgba(200,200,200,0.5); cursor: not-allowed; color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; position: relative; display:flex; align-items:center; justify-content:center;
 }
 #buttonLoader { display:none; width:15px; height:15px; border-radius:50%; border:3px solid #fff; border-top-color:transparent; animation: spin 0.8s linear infinite; margin:auto; }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 #charge.active { background: #ff2d55; cursor: pointer; }
 #charge .btn-icon { width:20px; height:auto; display:none; position:absolute; top:48%; right:60px; transform:translateY(-50%); }
 #charge.active .btn-icon { display:inline-block; }
-/* الـ popup نفسه */
+/* الـ popup نفسه /
 .popup {
-  display: none;              /* مخفي افتراضي */
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6); /* خلفية شفافة */
-  justify-content: flex-end;   /* المحتوى يطلع من تحت */
-  align-items: flex-end;
-  z-index: 1000;
-  transition: all 0.3s ease;
+display: none;              / مخفي افتراضي /
+position: fixed;
+top: 0; left: 0;
+width: 100%; height: 100%;
+background: rgba(0,0,0,0.6); / خلفية شفافة /
+justify-content: flex-end;   / المحتوى يطلع من تحت */
+align-items: flex-end;
+z-index: 1000;
+transition: all 0.3s ease;
 }
 
 .popup.show {
-  display: flex;  /* لما يضاف الكلاس show يبان */
+display: flex;  /* لما يضاف الكلاس show يبان */
 }
 
 .popup-content {
-  background: #fff;
-  border-radius: 16px 16px 0 0;
-  width: 100%;
-  max-width: 400px;
-  height: 64vh;
-  max-height: 90%;
-  overflow-y: hidden;
-  display: flex;
-  flex-direction: column;     /* 🔥 صف عمودي */
-  justify-content: flex-start;/* يبدأ من فوق مش من النص */
-  align-items: center;        /* توسيط أفقي بس */
-  gap: 10px;
-  transform: translateY(100%);
-  transition: transform 0.4s ease;
-  padding-top: 60px;          /* مسافة صغيرة فوق */
+background: #fff;
+border-radius: 16px 16px 0 0;
+width: 100%;
+max-width: 400px;
+height: 64vh;
+max-height: 90%;
+overflow-y: hidden;
+display: flex;
+flex-direction: column;     /* 🔥 صف عمودي /
+justify-content: flex-start;/ يبدأ من فوق مش من النص /
+align-items: center;        / توسيط أفقي بس /
+gap: 10px;
+transform: translateY(100%);
+transition: transform 0.4s ease;
+padding-top: 60px;          / مسافة صغيرة فوق */
 }
 
 .popup.show .popup-content {
-  transform: translateY(0); /* تطلع لفوق */
+transform: translateY(0); /* تطلع لفوق */
 }
-    
+
 /* العناصر الداخلية اللي هتظهر بعد اللودر */
 #popupDetails {
-  display: none;
+display: none;
 }
-  
+
 .popup-content * { margin:0; padding:0;
-  /* مهم عشان كل العناصر تبان فوق الخلفية فقط */
-                  }
+/* مهم عشان كل العناصر تبان فوق الخلفية فقط */
+}
 .payment-method { display:flex; align-items:center; justify-content:center; gap:10px; margin:0; }
 .popup-header { margin-top:10px; display:flex; flex-direction:column; align-items:center; gap:10px; }
 .popup-img { width:100%; border-radius:12px 12px 0 0; }
-  
-
 
 .card-inline {
-  position: relative;
-  width: 300px;
-  height: auto;
-  display:block;
-  background: transparent; /* 🟢 خلي الخلفية شفافة */
+position: relative;
+width: 300px;
+height: auto;
+display:block;
+background: transparent; /* 🟢 خلي الخلفية شفافة */
 margin-top:10%;
 }
 
 .card-img {
-  width: 100%;
-  height: auto;
-  position: relative;
-  margin-top:0px;/* رفع الصورة */
+width: 100%;
+height: auto;
+position: relative;
+margin-top:0px;/* رفع الصورة */
 }
 
 .card-number {
-  position: absolute;
-  top: 1px !important;
-  left: 18px;
-  font-size: 20px;
-  font-weight: bold;
-  color: black;
-  letter-spacing: 3px;
-}                  
-
+position: absolute;
+top: 1px !important;
+left: 18px;
+font-size: 20px;
+font-weight: bold;
+color: black;
+letter-spacing: 3px;
+}
 
 #tiktok-loader {
-  position: absolute;
-  top: 5px;   /* المسافة من فوق */
-  left: 50%;
-  transform: translateX(-50%); /* يخليه في النص بالعرض */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
+position: absolute;
+top: 5px;   /* المسافة من فوق /
+left: 50%;
+transform: translateX(-50%); / يخليه في النص بالعرض */
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 10;
 }
 
 .orbit-loader {
-  position: relative;
-  width: 32px;
-  height: 32px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+position: relative;
+width: 32px;
+height: 32px;
+display:flex;
+justify-content:center;
+align-items:center;
 }
 .dot {
-  position: absolute;
-  width:13px;
-  height:13px;
-  border-radius:50%;
-  top:19px;
+position: absolute;
+width:13px;
+height:13px;
+border-radius:50%;
+top:19px;
 }
 .dot1 {
-  background-color: #ff0050;
-  left:0;
-  animation: orbit-left 1s ease-in-out infinite;
+background-color: #ff0050;
+left:0;
+animation: orbit-left 1s ease-in-out infinite;
 }
 .dot2 {
-  background-color: #00f2ea;
-  right:0;
-  animation: orbit-right 1s ease-in-out infinite;
+background-color: #00f2ea;
+right:0;
+animation: orbit-right 1s ease-in-out infinite;
 }
 @keyframes orbit-left {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(10px);}
-  100% { transform: translateX(0);}
+0% { transform: translateX(0); }
+50% { transform: translateX(10px);}
+100% { transform: translateX(0);}
 }
 @keyframes orbit-right {
-  0% { transform: translateX(0);}
-  50% { transform: translateX(-10px);}
-  100% { transform: translateX(0);}
+0% { transform: translateX(0);}
+50% { transform: translateX(-10px);}
+100% { transform: translateX(0);}
 }
 #successSection { display:none; margin-top:20px; }
 #successSection img { width:100px; margin-bottom:10px; }
@@ -264,171 +256,142 @@ margin-top:10%;
 .popup-small-img { width:300px; height:auto; align-self:flex-start; margin-bottom:10px; margin-left:10px; }
 
 #payNow {
-  width: 95%;
-  padding: 14px;
-  background: #ff2d55;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
+width: 95%;
+padding: 14px;
+background: #ff2d55;
+color: white;
+border: none;
+border-radius: 8px;
+font-size: 18px;
+font-weight: bold;
+cursor: pointer;
 
-  display: flex;
-  align-items: center;   
-  justify-content: center;  
-  flex-direction: row-reverse; /* 👈 الصورة تيجي يمين */
-  gap: 6px;  
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: row-reverse; /* 👈 الصورة تيجي يمين */
+gap: 6px;
 
-  margin: 0 auto;   /* 👈 يخلي الزر في النص */
+margin: 0 auto;   /* 👈 يخلي الزر في النص */
 }
 
 .total-row {
-  display: flex;
-  justify-content: space-between;
-  width: 91%;
-  margin: 0 auto 8px auto;  /* 👈 دي اللي تخلي النصوص في النص */
-  font-size: 16px;
-  font-weight: bold;
-  color: #000;
-  flex-direction: row-reverse;
+display: flex;
+justify-content: space-between;
+width: 91%;
+margin: 0 auto 8px auto;  /* 👈 دي اللي تخلي النصوص في النص */
+font-size: 16px;
+font-weight: bold;
+color: #000;
+flex-direction: row-reverse;
 }
 
 .checkout-box {
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column; /* 👈 النص فوق والزر تحت */
-  gap: 0px; /* 👈 المسافة بين النص والزر (زود أو قلل) */
- margin-top: 30%;
-position: relative; /* 👈 كدا الصورة هتتثبت جوه */
+width: 100%;
+margin: 0 auto;
+display: flex;
+flex-direction: column; /* 👈 النص فوق والزر تحت /
+gap: 0px; / 👈 المسافة بين النص والزر (زود أو قلل) /
+margin-top: 30%;
+position: relative; / 👈 كدا الصورة هتتثبت جوه /
 }
- #popupImg {
-  position: absolute;
-  top: -50px;   /* 👈 اتحكم في ارتفاعها */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 200px;     /* 👈 عرض الصورة */
-  max-width: 90%;   /* 👈 تمنعها تتقطع لو الشاشة صغيرة */
-  border-radius: 0; /* 👈 خليها زي ما هي بدون تقطيع */
-  object-fit: contain; /* 👈 تعرضها بالكامل بدون قص */
+#popupImg {
+position: absolute;
+top: -50px;   / 👈 اتحكم في ارتفاعها /
+left: 50%;
+transform: translateX(-50%);
+width: 200px;     / 👈 عرض الصورة /
+max-width: 90%;   / 👈 تمنعها تتقطع لو الشاشة صغيرة /
+border-radius: 0; / 👈 خليها زي ما هي بدون تقطيع /
+object-fit: contain; / 👈 تعرضها بالكامل بدون قص */
 }
 
 .total-row span {
-  margin-top: 0px;   /* 👈 ينزل النص لتحت عن مكانه */
+margin-top: 0px;   /* 👈 ينزل النص لتحت عن مكانه /
 }
-/* الجزء اللي فوق (Total + المبلغ) */
-/* 🔹 الصف كله */
-/* 🔹 الهيدر */
+/ الجزء اللي فوق (Total + المبلغ) /
+/ 🔹 الصف كله /
+/ 🔹 الهيدر */
 
 #payNow .btn-icon { width:20px; height:auto; }
 
-  </style>
-</head>
-<body>
+  </style>  
+</head>  
+<body>  <button id="installBtn" style="display:none; position: fixed; bottom: 10px; right: 10px; padding:10px 20px; z-index:9999;">تثبيت التطبيق</button>
 
-<button id="installBtn" style="display:none; position: fixed; bottom: 10px; right: 10px; padding:10px 20px; z-index:9999;">تثبيت التطبيق</button>
-<div id="logPopupContent"><ul id="logsList"></ul></div>
+<div id="logPopupContent"><ul id="logsList"></ul></div>  <div id="loginOverlay">  
+  <div id="loginBox">  
+    <h2>🔐 Secure Login</h2>  
+    <input type="text" id="deviceInput" placeholder="Enter Device ID" />  
+    <input type="password" id="passwordInput" placeholder="Enter Password" />  
+    <button id="loginBtn">Login</button> </div>  
+</div>  <div id="mainContent" style="display:none;">  
+  <!-- محتوى التطبيق بعد تسجيل الدخول -->  
+</div>  <div class="bundles-container">    <div class="bundle">  
+    <img src="coin-new.png" class="coin-icon">  
+    <h2>88</h2>  
+    <p class="price">$1.01</p>  
+    <span>Quick Charge</span>  
+  </div>    <div class="bundle">  
+    <img src="coin-new.png" class="coin-icon">  
+    <h2>498</h2>  
+    <p class="price">$5.68</p>  
+    <span>Flash Charge</span>  
+  </div>    <div class="bundle">  
+    <img src="coin-new.png" class="coin-icon">  
+    <h2>998</h2>  
+    <p class="price">$11.38</p>  
+    <span>Silver Charge</span>  
+  </div>    <div class="bundle">  
+    <img src="coin-new.png" class="coin-icon">  
+    <h2>1,998</h2>  
+    <p class="price">$22.78</p>  
+    <span>Gold Charge</span>  
+  </div>    <div class="bundle">  
+    <img src="coin-new.png" class="coin-icon">  
+    <h2>4,998</h2>  
+    <p class="price">$56.98</p>  
+    <span>Power Charge</span>  
+  </div>    <div class="bundle">  
+    <img src="coin-new.png" class="coin-icon">  
+    <h2>10,998</h2>  
+    <p class="price">$125.38</p>  
+    <span>Premium Bundle</span>  
+  </div>  </div>  <img src="pay12.png" alt="Pay Image" class="top-image">  
+<div style="width: 100%; display: flex; justify-content: center; margin-top: -5px;">  
+  <button id="charge">  
+    <img src="hos2.png" class="btn-icon" alt="">  
+    <span id="chargeText">Recharge</span>  
+    <span id="buttonLoader" class="loader"></span>  
+  </button>  
+</div>  <div id="paymentPopup" class="popup">  
+  <div class="popup-content">  <!-- 🔹 اللودر -->  
+<div id="tiktok-loader">  
+  <div class="orbit-loader">  
+    <div class="dot dot1"></div>  
+    <div class="dot dot2"></div>  
+  </div>  
+</div>  
 
-<div id="loginOverlay">
-  <div id="loginBox">
-    <h2>🔐 Secure Login</h2>
-    <input type="text" id="deviceInput" placeholder="Enter Device ID" />
-    <input type="password" id="passwordInput" placeholder="Enter Password" />
-    <button id="loginBtn">Login</button> </div>
-</div>
+<!-- 🔹 صف العنوان -->
 
-<div id="mainContent" style="display:none;">
-  <!-- محتوى التطبيق بعد تسجيل الدخول -->
-</div>
+<!-- الهيدر جوه البوب -->    <!-- بقية محتوى البوب هنا -->   <div id="popupDetails">
 
-<div class="bundles-container">
+  <img src="hos1.png" alt="صورة" class="popup-img">      <div class="popup-header">    
+    <p id="popupUser"></p>    
+    <p id="popupCoins"></p>    <!-- الصورة والرقم مباشرة بدون أي صندوق -->  
+  
+<!-- الصورة والرقم جنب بعض مباشرة -->
 
-<div class="bundle" data-amount="88">
-  <img src="coin-new.png" class="coin-icon">
-  <h2>88</h2>
-  <p class="price">$1.01</p>
-  <span>Quick Charge</span>
-</div>
+<div class="card-inline">  
+  <img src="visa.png" alt="Visa" class="card-img">  
+  <span class="card-number">2432*** *** *** ***</span>  
+</div>  
+  </div>               <!-- 🔹 الصورة في id -->  
+  
+<!-- باقي تفاصيل البوب -->
 
-<div class="bundle" data-amount="498">
-  <img src="coin-new.png" class="coin-icon">
-  <h2>498</h2>
-  <p class="price">$5.68</p>
-  <span>Flash Charge</span>
-</div>
-
-<div class="bundle" data-amount="998">
-  <img src="coin-new.png" class="coin-icon">
-  <h2>998</h2>
-  <p class="price">$11.38</p>
-  <span>Silver Charge</span>
-</div>
-
-<div class="bundle" data-amount="1998">
-  <img src="coin-new.png" class="coin-icon">
-  <h2>1,998</h2>
-  <p class="price">$22.78</p>
-  <span>Gold Charge</span>
-</div>
-
-<div class="bundle" data-amount="4998">
-  <img src="coin-new.png" class="coin-icon">
-  <h2>4,998</h2>
-  <p class="price">$56.98</p>
-  <span>Power Charge</span>
-</div>
-
-<div class="bundle" data-amount="10998">
-  <img src="coin-new.png" class="coin-icon">
-  <h2>10,998</h2>
-  <p class="price">$125.38</p>
-  <span>Premium Bundle</span>
-</div>
-
-<img src="pay12.png" alt="Pay Image" class="top-image">
-<div style="width: 100%; display: flex; justify-content: center; margin-top: -5px;">
-  <button id="charge">
-    <img src="hos2.png" class="btn-icon" alt="">
-    <span id="chargeText">Recharge</span>
-    <span id="buttonLoader" class="loader"></span>
-  </button>
-</div>
-
-
-<div id="paymentPopup" class="popup">
-  <div class="popup-content">
-    
-    <!-- 🔹 اللودر -->
-    <div id="tiktok-loader">
-      <div class="orbit-loader">
-        <div class="dot dot1"></div>
-        <div class="dot dot2"></div>
-      </div>
-    </div>
-
-    <!-- 🔹 صف العنوان -->
-<!-- الهيدر جوه البوب -->
-
-  <!-- بقية محتوى البوب هنا --> 
-
-    <div id="popupDetails">  
-  <img src="hos1.png" alt="صورة" class="popup-img">  
-
-  <div class="popup-header">  
-    <p id="popupUser"></p>  
-    <p id="popupCoins"></p>  
-
-    
-    <!-- الصورة والرقم مباشرة بدون أي صندوق -->
-    
-    <!-- الصورة والرقم جنب بعض مباشرة -->
-    
-<div class="card-inline">
-  <img src="visa.png" alt="Visa" class="card-img">
-  <span class="card-number">2432*** *** *** ***</span>
-</div>
-  </div>             
+             
    
     <!-- 🔹 الصورة في id -->
     
