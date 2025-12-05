@@ -355,10 +355,28 @@ flex-direction: row-reverse;
   color: #000;
   z-index: 1001; /* فوق اللودر */
 }
+  .popup-back {
+    position: absolute;
+    top: 15px;           /* المسافة من أعلى البوب */
+    right: 15px;         /* نخليه على اليمين */
+    background: none;    /* بدون خلفية */
+    border: none;        /* بدون حدود */
+    color: #000;         /* السهم أسود */
+    font-size: 24px;     /* حجم السهم */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.popup-back:hover {
+    color: #ff2d55;      /* تأثير عند المرور اختياري */
+}
     .popup-close {
     position: absolute;
     top: 15px;
-    right: 15px;           /* لو عايز الشمال بدلها left */
+    left: 15px;           /* لو عايز الشمال بدلها left */
     width: 20px;
     height: 20px;
     background-color: #fff;   /* خلفية الدائرة أبيض */
@@ -454,11 +472,11 @@ flex-direction: row-reverse;
  
 <div id="paymentPopup" class="popup">
   <div class="popup-content">
-    <button id="closePopup" class="popup-close">×</button>
+    <button id="closePopup" class="popup-close">?</button>
     
     <!-- العنوان الجديد -->
     <h2 class="popup-title">Order summary</h2>
-
+   <button id="backBtn" class="popup-back">→</button>
   
     <!-- اللودر -->
     <div id="tiktok-loader">
