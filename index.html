@@ -342,7 +342,9 @@ flex-direction: row-reverse;
     width: 100%;
     z-index: 999;
     }
-    
+    #closePopup:hover {
+    color: #ff2d55;
+    }
 #payNow .btn-icon { width:20px; height:auto; }
 
   </style>  
@@ -416,6 +418,18 @@ flex-direction: row-reverse;
     <span id="buttonLoader" class="loader"></span>  
   </button>  
 </div> 
+ <button id="closePopup" style="
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+    z-index: 1010;
+">×</button>
   <div id="paymentPopup" class="popup">
 
   <div class="popup-content">
@@ -834,7 +848,10 @@ window.addEventListener("load", () => {
   }  
 });  
 });  
-  
+  const closeBtn = document.getElementById('closePopup');
+closeBtn.addEventListener('click', () => {
+    popup.classList.remove('show');  // يخفّي البوب
+});
 
   // هنا باقي أكوادك...
 </script> 
