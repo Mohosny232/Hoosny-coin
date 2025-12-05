@@ -850,41 +850,60 @@ document.getElementById('installBtn').addEventListener('click', async () => {
   document.getElementById('installBtn').style.display = 'none';  
 });  
   
-const options = document.querySelectorAll(".coin-option");
+  // 🔹 اختيار كل الخانات
+  const options = document.querySelectorAll(".coin-option");
 
-options.forEach(opt => {
-  opt.addEventListener("click", () => {
-    // 1️⃣ نشيل selected من الكل
-    options.forEach(o => o.classList.remove("selected"));
+  options.forEach(opt => {
+    opt.addEventListener("click", () => {
+      // 1️⃣ نشيل selected من الكل
+      options.forEach(o => o.classList.remove("selected"));
 
-    // 2️⃣ نرجع كل خانة special لحالتها gray إذا مش مختارة
-    options.forEach(o => {
-      if (o.classList.contains("special")) {
-        o.classList.add("gray");
+      // 2️⃣ نرجع كل خانة special لحالتها gray إذا مش مختارة
+      options.forEach(o => {
+        if (o.classList.contains("special")) {
+          o.classList.add("gray");
+        }
+      });
+
+      // 3️⃣ نضيف selected للخانة اللي اضغطت عليها
+      opt.classList.add("selected");
+
+      // 4️⃣ لو الخانة اللي اضغطت عليها special، نشيل عنها gray
+      if (opt.classList.contains("special")) {
+        opt.classList.remove("gray");
       }
+
+      // 5️⃣ حفظ آخر عملية شراء
+      const amount = opt.getAttribute("data-amount");
+      if (amount) localStorage.setItem("lastPurchase", amount);
+    });
+  });
+
+  // 🔹 عند تحميل الصفحة نرجع آخر عملية شراء
+  const last = localStorage.getItem("lastPurchase");
+  if (last) {
+    options.forEach(o => {
+      o.classList.remove("selected", "gray");
+      if (o.classList.contains("special")) o.classList.add("gray");
     });
 
-    // 3️⃣ نضيف selected للخانة اللي اضغطت عليها
-    opt.classList.add("selected");
-
-    // 4️⃣ لو الخانة اللي اضغطت عليها special، نشيل عنها gray
-    if (opt.classList.contains("special")) {
-      opt.classList.remove("gray");
+    const target = document.querySelector(`.coin-option[data-amount="${last}"]`);
+    if (target) {
+      target.classList.add("selected");
+      if (target.classList.contains("special")) target.classList.remove("gray");
     }
+  }
 
-    // 5️⃣ حفظ آخر عملية شراء
-    const amount = opt.getAttribute("data-amount");
-    if (amount) localStorage.setItem("lastPurchase", amount);
-  });
+  // 🔹 زر إغلاق البوب
+  const closeBtn = document.getElementById('closePopup');
+  const popup = document.getElementById('paymentPopup');
+
+  if (closeBtn && popup) {
+    closeBtn.addEventListener('click', () => {
+      popup.classList.remove('show'); // يخفي البوب والظل
+    });
+  }
 });
- const closeBtn = document.getElementById('closePopup');
-const popup = document.getElementById('paymentPopup');
-
-closeBtn.addEventListener('click', () => {
-    popup.classList.remove('show'); // يخفي البوب والظل
-});
-
-  // هنا باقي أكوادك...
 </script> 
 </body>  
   </html>
