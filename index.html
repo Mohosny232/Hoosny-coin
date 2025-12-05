@@ -860,18 +860,26 @@ function selectOption(opt) {
   // نشيل selected من الكل
   options.forEach(o => o.classList.remove("selected"));
 
-  // كل special مش مختارة تصبح رمادية
+  // نشيل special من كل الخانات عشان الجملة تتنقل صح
+  options.forEach(o => o.classList.remove("special"));
+
+  // كل special قديمة كانت مختارة قبل كده ترجع gray
   options.forEach(o => {
-    if (o.classList.contains("special") && o !== opt) {
+    if (o.classList.contains("gray") && o !== opt) {
       o.classList.add("gray");
     }
   });
 
   // نضيف selected للخانة الجديدة
+  opt.addEventListener
+
   opt.classList.add("selected");
 
-  // لو الخانة المختارة special، نشيل عنها gray
-  if (opt.classList.contains("special")) {
+  // نخلي الخانة اللي اضغطت عليها هي آخر عملية شراء
+  opt.classList.add("special");   // ← الجملة هتظهر هنا
+
+  // لو كانت special قبل كده وGray نشيل الرمادي
+  if (opt.classList.contains("gray")) {
     opt.classList.remove("gray");
   }
 
