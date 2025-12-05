@@ -343,25 +343,25 @@ flex-direction: row-reverse;
     z-index: 999;
     }
     .popup-close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
+    position: absolute;          /* ثابت داخل البوب */
+    top: 15px;                   /* بعيد عن الأعلى شوية */
+    right: 15px;                 /* أو بدلها left: 15px; لو عاوزه الشمال */
     width: 32px;
     height: 32px;
-    background: rgba(0,0,0,0.6);
-    color: #fff;
+    background: rgba(0,0,0,0.6); /* لون خلفية داكن شفاف */
+    color: #fff;                 /* لون الحرف × أبيض */
     border: none;
-    border-radius: 50%;
+    border-radius: 50%;          /* يخليه دائري */
     font-size: 20px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1050;
+    /* z-index غير ضروري هنا طالما داخل popup-content */
 }
 
 .popup-close:hover {
-    background: rgba(0,0,0,0.85);
+    background: rgba(0,0,0,0.85); /* داكن أكثر عند المرور */
 }
 #payNow .btn-icon { width:20px; height:auto; }
 
@@ -437,19 +437,19 @@ flex-direction: row-reverse;
   </button>  
 </div> 
  
-  <div id="paymentPopup" class="popup">
-
+<div id="paymentPopup" class="popup">
   <div class="popup-content">
     <button id="closePopup" class="popup-close">×</button>
-    <!-- باقي محتوى البوب هنا -->
-</div>
-    <!-- 🔹 اللودر -->
+    <!-- اللودر -->
     <div id="tiktok-loader">
       <div class="orbit-loader">
         <div class="dot dot1"></div>
         <div class="dot dot2"></div>
       </div>
     </div>
+    <!-- باقي محتوى البوب هنا -->
+  </div>
+</div>
 
     <!-- 🔹 محتوى البوب الحقيقي -->
     <div id="popupDetails">
