@@ -358,23 +358,18 @@ flex-direction: row-reverse;
 }
   .popup-back {
     font-family: 'Tajawal', sans-serif;
-    position: absolute;
-    top: 8px;           /* المسافة من أعلى البوب */
-    right: 30px;         /* على اليمين */
+    position: absolute;   /* يبقى مطلق داخل popupDetails */
+    top: 8px;             /* تحكم في المسافة من أعلى popupDetails */
+    right: 13px;          /* على اليمين */
     background: none;
     border: none;
     color: #000;
-    font-size: 50px;     /* حجم السهم */
+    font-size: 42px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 999;
-    transform-origin: left center; /* يمد الخط من جهة الرأس */
-    transform: scaleX(2);         /* يمد الخط 2x أطول */
-}
-.popup-back:hover {
-    color: #ff2d55;
+    z-index: 10;
 }
     .popup-close {
     position: absolute;
