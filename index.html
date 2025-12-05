@@ -342,9 +342,30 @@ flex-direction: row-reverse;
     width: 100%;
     z-index: 999;
     }
-    #closePopup:hover {
-    color: #ff2d55;
-    }
+    .popup-close {
+    position: absolute;
+    top: 12px;           /* بعيد شوية عن الأعلى */
+    left: 50%;           /* يكون في المنتصف أفقي */
+    transform: translateX(-50%);  /* لتوسيطه تمامًا */
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0,0,0,0.85); /* لون أسود غامق */
+    color: #fff;         /* لون الحرف أبيض */
+    border: none;
+    border-radius: 50%;  /* يجعلها دائرية */
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1010;       /* فوق كل شيء */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5); /* ظل خفيف */
+}
+
+.popup-close:hover {
+    background-color: rgba(0,0,0,1); /* غامق أكثر عند المرور */
+}
 #payNow .btn-icon { width:20px; height:auto; }
 
   </style>  
