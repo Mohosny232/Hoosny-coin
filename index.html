@@ -861,32 +861,44 @@ document.getElementById('installBtn').addEventListener('click', async () => {
 // التعامل مع اختيار الخانات
 const options = document.querySelectorAll(".coin-option");
 
-// دالة اختيار الخانة
 function selectOption(opt) {
-  // نشيل selected من الكل
+  // شيل selected من الكل
   options.forEach(o => o.classList.remove("selected"));
 
-  // كل الخانات اللي مش مختارة تتحول رمادي، ما عدا الخانة اللي عليها آخر عملية شراء
-  const last = localStorage.getItem("lastPurchase");
+  // أضف selected للخانة الجديدة
+  opt.classList.add("selected");
 
+  // شيل gray عن الخانة الجديدة
+  opt.classList.remove("gray");
+
+  // شيل الشريط الأحمر
+  const progressBar = document.querySelector("#progressBar");
+  if (progressBar) progressBar.style.width = "0%";
+
+  // كل الخانات الأخرى تتحول رمادي
   options.forEach(o => {
-    if (o !== opt && (!last || o.getAttribute("data-amount") !== last)) {
+    if (o !== opt) {
       o.classList.add("gray");
+      o.classList.remove("selected");
     }
   });
 
-  // نضيف selected للخانة الجديدة
-  opt.classList.add("selected");
-
-  // نشيل gray عن الخانة المختارة
-  opt.classList.remove("gray");
+  // إعادة اللون الأحمر للخانة إذا هي نفسها آخر عملية شراء
+  const last = localStorage.getItem("lastPurchase");
+  if (last) {
+    const lastOption = document.querySelector(`.coin-option[data-amount="${last}"]`);
+    if (lastOption && lastOption !== opt) {
+      lastOption.classList.remove("gray");
+      lastOption.classList.add("special");
+    }
+  }
 
   // حفظ آخر اختيار مؤقت قبل الدفع
   const amount = opt.getAttribute("data-amount");
   if (amount) localStorage.setItem("tempSelected", amount);
 }
 
-// إضافة حدث النقر لكل خانة
+// حدث النقر لكل خانة
 options.forEach(opt => {
   opt.addEventListener("click", () => selectOption(opt));
 
@@ -903,11 +915,8 @@ options.forEach(opt => {
 window.addEventListener("load", () => {
   const last = localStorage.getItem("lastPurchase");
   if (last) {
-    // أولاً نشيل special من كل الخانات عشان نضمن خانة واحدة بس
-    options.forEach(o => o.classList.remove("special"));
-    
     const target = document.querySelector(`.coin-option[data-amount="${last}"]`);
-    if (target) target.classList.add("special"); // تظهر عليها الجملة "آخر عملية شراء"
+    if (target) target.classList.add("special"); // كلمة "آخر عملية شراء" تظهر عليها
   }
 });
   });    
