@@ -852,60 +852,38 @@ document.getElementById('installBtn').addEventListener('click', async () => {
   
   // 🔹 اختيار كل الخانات
   
-document.addEventListener("DOMContentLoaded", () => {
-  const options = document.querySelectorAll(".coin-option");
 
-  function selectOption(opt) {
-    // نشيل selected من الكل
-    options.forEach(o => o.classList.remove("selected"));
-
-    // نرجع كل خانة special للـ gray إذا مش مختارة
-    options.forEach(o => {
-      if (o.classList.contains("special")) {
-        o.classList.add("gray");
-      }
-    });
-
-    // نضيف selected للخانة اللي اضغطت عليها
-    opt.classList.add("selected");
-
-    // لو الخانة اللي اضغطت عليها special، نشيل عنها gray
-    if (opt.classList.contains("special")) {
-      opt.classList.remove("gray");
-    }
-
-    // حفظ آخر عملية شراء إذا مش custom
-    const amount = opt.getAttribute("data-amount");
-    if (amount) localStorage.setItem("lastPurchase", amount);
-  }
-
-  options.forEach(opt => {
-    // إذا كانت custom، لها handler خاص
-    if (opt.classList.contains("custom")) {
-      const input = opt.querySelector(".custom-input");
-      opt.addEventListener("click", () => selectOption(opt));
-      if (input) {
-        input.addEventListener("input", () => selectOption(opt));
-      }
-    } else {
-      opt.addEventListener("click", () => selectOption(opt));
-    }
-  });
-
-  // عند تحميل الصفحة، رجع آخر عملية شراء
-  const last = localStorage.getItem("lastPurchase");
-  if (last) {
-    const target = document.querySelector(`.coin-option[data-amount="${last}"]`);
-    if (target) selectOption(target);
-  }
-});
- const closeBtn = document.getElementById('closePopup');  
-const popup = document.getElementById('paymentPopup');  
+// التعامل مع اختيار الخانات    
+const options = document.querySelectorAll(".coin-option");    
+options.forEach(opt => {    
+  opt.addEventListener("click", () => {    
+    // نشيل selected من الكل    
+    options.forEach(o => o.classList.remove("selected"));    
+    
+    // لو فيه خانة قديمة (special) نخليها رمادية    
+    const currentSpecial = document.querySelector('.coin-option.special');    
+    if (currentSpecial && currentSpecial !== opt) {    
+      currentSpecial.classList.add("gray");    
+    }    
+    
+    // نضيف selected للخانة الجديدة    
+    opt.classList.add("selected");    
+  });    
+});    
+    
+// عند تحميل الصفحة نرجع آخر عملية شراء    
+window.addEventListener("load", () => {    
+  let last = localStorage.getItem("lastPurchase");    
+  if (last) {    
+    options.forEach(o => o.classList.remove("special", "gray"));    
+    let target = document.querySelector(`.coin-option[data-amount="${last}"]`);    
+    if (target) target.classList.add("special");    
+  }    
+});    
+});    
+    
   
-closeBtn.addEventListener('click', () => {  
-    popup.classList.remove('show'); // يخفي البوب والظل  
-});  
-
-</script> 
-</body>  
+  // هنا باقي أكوادك...  
+</script>  
+</body>    
   </html>
