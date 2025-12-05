@@ -149,8 +149,7 @@ transition: all 0.3s ease;
 display: flex;  /* لما يضاف الكلاس show يبان */
 }
 
-.popup-content {
- position: relative; /* مهم للزر × */
+.popup-content {/* مهم للزر × */
 background: #fff;
 border-radius: 16px 16px 0 0;
 width: 100%;
@@ -344,6 +343,7 @@ flex-direction: row-reverse;
     z-index: 999;
     }
     .popup-close {
+    z-index: 10; /* رقم أعلى من باقي العناصر داخل البوب */
     position: absolute;          /* ثابت داخل البوب */
     top: 15px;                   /* بعيد عن الأعلى شوية */
     right: 15px;                 /* أو بدلها left: 15px; لو عاوزه الشمال */
