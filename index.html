@@ -344,7 +344,7 @@ flex-direction: row-reverse;
     }
   .popup-title {
   font-family: 'Tajawal', sans-serif;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: bold;
   text-align: center;
   margin: 0; /* نلغي أي هامش افتراضي */
@@ -356,26 +356,27 @@ flex-direction: row-reverse;
   z-index: 1001; /* فوق اللودر */
 }
     .popup-close {
-    z-index: 10; /* رقم أعلى من باقي العناصر داخل البوب */
-    position: absolute;          /* ثابت داخل البوب */
-    top: 15px;                   /* بعيد عن الأعلى شوية */
-    right: 15px;                 /* أو بدلها left: 15px; لو عاوزه الشمال */
+    position: absolute;
+    top: 15px;
+    right: 15px;           /* لو عايز الشمال بدلها left */
     width: 32px;
     height: 32px;
-    background: rgba(0,0,0,0.6); /* لون خلفية داكن شفاف */
-    color: #fff;                 /* لون الحرف × أبيض */
-    border: none;
-    border-radius: 50%;          /* يخليه دائري */
+    background-color: #fff;   /* خلفية الدائرة أبيض */
+    color: #000;              /* حرف × أسود */
+    border: 2px solid #000;   /* حدود الدائرة سوداء */
+    border-radius: 50%;       /* يجعلها دائرية */
     font-size: 20px;
+    font-weight: bold;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* z-index غير ضروري هنا طالما داخل popup-content */
+    z-index: 10;
 }
 
 .popup-close:hover {
-    background: rgba(0,0,0,0.85); /* داكن أكثر عند المرور */
+    background-color: #000;  /* عند المرور يصبح الخلفية سوداء */
+    color: #fff;             /* وحرف × أبيض */
 }
 #payNow .btn-icon { width:20px; height:auto; }
 
