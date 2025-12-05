@@ -342,6 +342,15 @@ flex-direction: row-reverse;
     width: 100%;
     z-index: 999;
     }
+  .popup-title {
+  font-family: 'Tajawal', sans-serif; /* خط تجوال */
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px 0;
+  color: #000; /* أسود */
+  z-index: 1001; /* فوق اللودر */
+  }
     .popup-close {
     z-index: 10; /* رقم أعلى من باقي العناصر داخل البوب */
     position: absolute;          /* ثابت داخل البوب */
@@ -442,6 +451,10 @@ flex-direction: row-reverse;
   <div class="popup-content">
     <button id="closePopup" class="popup-close">×</button>
     
+    <!-- العنوان الجديد -->
+    <h2 class="popup-title">Order summary</h2>
+
+  
     <!-- اللودر -->
     <div id="tiktok-loader">
       <div class="orbit-loader">
