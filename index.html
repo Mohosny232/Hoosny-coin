@@ -150,7 +150,6 @@ display: flex;  /* لما يضاف الكلاس show يبان */
 }
 
 .popup-content {/* مهم للزر × */
-position: relative; 
 background: #fff;
 border-radius: 16px 16px 0 0;
 width: 100%;
@@ -164,7 +163,8 @@ justify-content: flex-start;
 align-items: center;        
 gap: 10px;
 transform: translateY(100%);
-transition: transform 0.4s ease;
+position: relative;
+transform-style: preserve-3d;
 padding-top: 60px;          
 }
 
