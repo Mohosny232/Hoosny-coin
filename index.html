@@ -902,7 +902,15 @@ window.addEventListener("load", () => {
   }
 });
   });    
+// زر السهم داخل البوب
+const backBtn = document.querySelector('.popup-back');
 
+if (backBtn) {
+  backBtn.addEventListener('click', () => {
+    const popup = document.getElementById('paymentPopup');
+    popup.classList.remove('show'); // نخفي البوب
+  });
+}
   
   // هنا باقي أكوادك...  
 </script>  
