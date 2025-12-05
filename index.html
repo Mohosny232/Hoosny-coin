@@ -1,3 +1,5 @@
+بقولك شايف الكود دا
+
 <!DOCTYPE html>  <html lang="ar" dir="rtl">  
 <head>  
   <meta charset="UTF-8" />  
@@ -9,14 +11,10 @@
 html, body {  
   margin: 0;  
   padding: 0;  
+  background: #fff;  
   min-height: 100vh;  
   overflow-x: hidden;  
   overflow-y: hidden;  
-  background-image: url('hosny11.jpg');   /* اسم الصورة */  
-  background-size: cover;                 /* يخلي الصورة تملى الشاشة */  
-  background-position: center;             /* في النص */  
-  background-repeat: no-repeat;            /* ما تتكررش */  
-  background-attachment: fixed;            /* ثابتة وقت التمرير */  
 }  
 body {  
   display: flex;  
@@ -27,54 +25,66 @@ body {
   overflow-x: hidden;  
   font-family: 'Tajawal', sans-serif;  
   font-weight: bold;  
-}  .bundles-container {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 15px;
-padding: 15px;
-width: 100%;
-margin-top: 65%;
+}  /* الخانة الخاصة (3500) كبداية */
+.coin-option.special {
+border: 2px solid #ff2d55;
+background-color: #fff0f4;
 }
 
-.bundle {
-background: rgba(255,255,255,0.85);
-border-radius: 14px;
-padding: 15px 5px;
-text-align: center;
-cursor: pointer;
-transition: 0.3s;
-box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+.coin-option.special::before {
+content: "آخر عملية شراء";
+position: absolute;
+width: 83%;
+bottom: 66px;
+right: 18px;
+background: #ff2d55;
+color: #fff;
+font-size: 12px;
+padding: 2px 6px;
+border-radius: 12px 0 12px 0;
 }
 
-.bundle:hover,
-.bundle.active {
-transform: scale(1.05);
-border: 2px solid #a855f7;
-box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+/* لما تتحول رمادي */
+.coin-option.special.gray {
+border: 2px solid transparent;
+background: #f2f2f2;
 }
 
-.bundle h2 {
-margin: 5px 0;
-font-size: 24px;
-font-weight: bold;
+.coin-option.special.gray::before {
+background: #aaa;
 }
 
-.bundle .price {
-color: #666;
-margin-top: -5px;
-margin-bottom: 5px;
+/* ضبط خاص للخانة 17000 */
+.coin-option[data-amount="17000"].special::before {
+width: 83% !important;
+bottom: 80px !important;
+right: 18px !important;
 }
 
-.bundle span {
-font-size: 13px;
-color: #333;
+.coin-option[data-amount="17000"].special.gray::before {
+bottom: 80px;
+right: 18px;
+}
+#popupCoins {
+display: flex;
+align-items: center;
+gap: 4px;
 }
 
-.coin-icon {
-width: 40px;
-margin-bottom: 5px;
+#popupCoins .coin-img {
+width: 32px;
+height: 32px;
+position: relative;
+top: -3px; /* ارفع الصورة شويه لتكون في منتصف النص */
 }
-/* الخانة الخاصة (3500) كبداية */
+
+#popupCoins .coins-box {
+display: flex;
+align-items: center;  /* الصورة جنب الكلمة /
+gap: 4px;
+margin-top: 15px; / نزّل العنصر شوية تحت */
+
+}
 
 /* Login overlay /
 / نخفي كل حاجة لد ما JS يقرر */
@@ -327,37 +337,54 @@ margin-top: 0px;   /* 👈 ينزل النص لتحت عن مكانه /
     <button id="loginBtn">Login</button> </div>  
 </div>  <div id="mainContent" style="display:none;">  
   <!-- محتوى التطبيق بعد تسجيل الدخول -->  
-</div>  <div class="bundles-container">    <div class="bundle">  
-    <img src="coin-new.png" class="coin-icon">  
-    <h2>88</h2>  
-    <p class="price">$1.01</p>  
-    <span>Quick Charge</span>  
-  </div>    <div class="bundle">  
-    <img src="coin-new.png" class="coin-icon">  
-    <h2>498</h2>  
-    <p class="price">$5.68</p>  
-    <span>Flash Charge</span>  
-  </div>    <div class="bundle">  
-    <img src="coin-new.png" class="coin-icon">  
-    <h2>998</h2>  
-    <p class="price">$11.38</p>  
-    <span>Silver Charge</span>  
-  </div>    <div class="bundle">  
-    <img src="coin-new.png" class="coin-icon">  
-    <h2>1,998</h2>  
-    <p class="price">$22.78</p>  
-    <span>Gold Charge</span>  
-  </div>    <div class="bundle">  
-    <img src="coin-new.png" class="coin-icon">  
-    <h2>4,998</h2>  
-    <p class="price">$56.98</p>  
-    <span>Power Charge</span>  
-  </div>    <div class="bundle">  
-    <img src="coin-new.png" class="coin-icon">  
-    <h2>10,998</h2>  
-    <p class="price">$125.38</p>  
-    <span>Premium Bundle</span>  
-  </div>  </div>  <img src="pay12.png" alt="Pay Image" class="top-image">  
+</div>  <div class="container">  
+  <h1><span class="tiktok"></span></h1>  
+  <input type="text" id="username" placeholder="Username" />  
+</div>  
+<div class="coins">  
+  <div class="coin-option" data-amount="30">  
+    <img src="coin.png" class="coin-img" alt="coin">  
+    30  
+    <small>$0.01</small>  
+  </div>  
+  <div class="coin-option" data-amount="350">  
+    <img src="coin.png" class="coin-img" alt="coin">  
+    350  
+    <small>$0.06</small>  
+  </div>  
+  <div class="coin-option" data-amount="700">  
+    <img src="coin.png" class="coin-img" alt="coin">  
+    700  
+    <small>$0.12</small>  
+  </div>  
+  <div class="coin-option" data-amount="1400">  
+    <img src="coin.png" class="coin-img" alt="coin">  
+    1,400  
+    <small>$0.25</small>  
+  </div>  
+  <!-- الخانة الخاصة -->  
+  <div class="coin-option special" data-amount="3500">  
+    <img src="coin.png" class="coin-img" alt="coin">  
+    3,500  
+    <small>$0.62</small>  
+  </div>  
+  <div class="coin-option" data-amount="7000">  
+    <img src="coin.png" class="coin-img" alt="coin">  
+    7,000  
+    <small>$1.24</small>  
+  </div>  
+  <div class="coin-option" data-amount="17000">  
+    <img src="coin.png" class="coin-img" alt="coin">  
+    17,000  
+    <small>$3.00</small>  
+  </div>  
+  <!-- خانة custom -->  
+  <div class="coin-option custom">  
+    Custom  
+    <div id="customPrice" style="font-size: 12px; color: gray; margin-top: 4px;"></div>  
+    <input type="number" id="customAmount" class="custom-input" placeholder="..Number of " />  
+  </div>  
+</div>  <img src="pay12.png" alt="Pay Image" class="top-image">  
 <div style="width: 100%; display: flex; justify-content: center; margin-top: -5px;">  
   <button id="charge">  
     <img src="hos2.png" class="btn-icon" alt="">  
@@ -366,6 +393,414 @@ margin-top: 0px;   /* 👈 ينزل النص لتحت عن مكانه /
   </button>  
 </div>  <div id="paymentPopup" class="popup">  
   <div class="popup-content">  <!-- 🔹 اللودر -->  
+<div id="tiktok-loader">  
+  <div class="orbit-loader">  
+    <div class="dot dot1"></div>  
+    <div class="dot dot2"></div>  
+  </div>  
+</div>  
+
+<!-- 🔹 صف العنوان -->
+
+<!-- الهيدر جوه البوب -->    <!-- بقية محتوى البوب هنا -->   <div id="popupDetails">
+
+  <img src="hos1.png" alt="صورة" class="popup-img">      <div class="popup-header">    
+    <p id="popupUser"></p>    
+    <p id="popupCoins"></p>    <!-- الصورة والرقم مباشرة بدون أي صندوق -->  
+  
+<!-- الصورة والرقم جنب بعض مباشرة -->
+
+<div class="card-inline">  
+  <img src="visa.png" alt="Visa" class="card-img">  
+  <span class="card-number">2432*** *** *** ***</span>  
+</div>  
+  </div>               <!-- 🔹 الصورة في id -->  
+  
+<!-- باقي تفاصيل البوب -->
+
+<!-- النص اللي فوق الزر -->  <div class="checkout-box">    <!-- الصف بتاع Total -->    <div class="total-row">  
+    <span class="total-text">Total</span>  
+    <span id="totalAmount">$0.00</span>  
+  </div>  
+  <img id="popupImg" src="pay12.png" alt="Pay">  
+  <!-- زرار الدفع -->  
+  <button id="payNow" class="pay-btn">  
+    <span>Pay now</span>  
+    <img src="hos2.png" alt="icon" class="btn-icon" />  
+  </button>  </div>  
+</div>
+
+  </div>  
+</div>  <div id="successSection">  
+  <img src="success.png" alt="نجاح">  
+  <p>✅ تم الدفع بنجاح!</p>  
+</div>
+
+  </div>  
+</div>  <audio id="clickSound" src="click.mp3"></audio>
+<audio id="successSound" src="success.mp3"></audio>
+<audio id="typeSound" src="type.mp3"></audio>
+
+<script type="module">  
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";  
+  import { getFirestore, doc, getDoc, setDoc, collection } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";  
+  
+// 🔹 إعداد Firebase  
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional  
+const firebaseConfig = {  
+  apiKey: "AIzaSyD0ErbW4GMP2EFIbp6fEUaHwowXr-O3Tiw",  
+  authDomain: "hosny87-edb64.firebaseapp.com",  
+  projectId: "hosny87-edb64",  
+  storageBucket: "hosny87-edb64.appspot.com", // ✅ التصحيح هنا  
+  messagingSenderId: "390181932130",  
+  appId: "1:390181932130:web:307629cd4408514f61d53b",  
+  measurementId: "G-5HXSPP373X"  
+};  
+const app = initializeApp(firebaseConfig);  
+const db = getFirestore(app);  
+  
+// 🔹 تسجيل الدخول  
+async function checkLogin() {  
+  const userId = document.getElementById("deviceInput").value.trim();  
+  const enteredPassword = document.getElementById("passwordInput").value.trim();  
+  
+  if (!userId || !enteredPassword) {   
+    alert("⚠️ اكتب ID وكلمة المرور");   
+    return;   
+  }  
+  
+  try {  
+    const docRef = doc(db, "users", userId);  
+    const docSnap = await getDoc(docRef);  
+  
+    if (docSnap.exists()) {  
+      const correctPassword = docSnap.data().password;  
+      if (enteredPassword === correctPassword) {  
+        // ✅ نجاح تسجيل الدخول  
+        localStorage.setItem("loggedIn", "true");  
+        localStorage.setItem("userId", userId);  
+        localStorage.setItem("password", enteredPassword);  
+  
+        // 📌 هنا بنسجل الجهاز في Firestore  
+  
+// 📌 تسجيل الجهاز في Firestore بعد التحقق من الباسورد  
+if (docSnap.exists() && docSnap.data().password === enteredPassword) {  
+  // ✅ إظهار المحتوى وإخفاء شاشة تسجيل الدخول  
+  document.getElementById('loginOverlay').style.display = 'none';  
+  document.getElementById("mainContent").style.display = 'block';  
+  
+  // ⏰ إنشاء ID عشوائي للجهاز  
+  const deviceId = crypto.randomUUID();  
+  const deviceRef = doc(collection(db, "users", userId, "devices"), deviceId);  
+  
+  // ⏰ الوقت الحالي  
+  const now = new Date();  
+  
+  // 📝 حفظ بيانات الجهاز في Firestore  
+  await setDoc(deviceRef, {  
+    device: getDeviceName(),  
+    loginTime: formatDateTime(now)  
+  });  
+  
+  return; // ✅ وقف الكود هنا بعد الحفظ  
+}  
+  
+// ⏰ دالة لتهيئة الوقت بشكل مقروء  
+function formatDateTime(date) {  
+  return date.getFullYear() + "-" +  
+    String(date.getMonth() + 1).padStart(2, '0') + "-" +  
+    String(date.getDate()).padStart(2, '0') + " " +  
+    String(date.getHours()).padStart(2, '0') + ":" +  
+    String(date.getMinutes()).padStart(2, '0') + ":" +  
+    String(date.getSeconds()).padStart(2, '0');  
+}  
+  
+// 🔹 دالة لتحديد اسم الجهاز أو الشركة  
+function getDeviceName() {  
+  if (navigator.userAgentData) {  
+    // ✅ الطريقة الحديثة (Chrome الجديد)  
+    const brands = navigator.userAgentData.brands.map(b => b.brand).join(", ");  
+    const platform = navigator.userAgentData.platform;  
+    return `${platform} (${brands})`;  
+  } else {  
+    // ✅ الطريقة التقليدية (userAgent)  
+    const ua = navigator.userAgent;  
+  
+    if (/samsung|sm-/i.test(ua)) return "Samsung";  
+    if (/huawei|honor/i.test(ua)) return "Huawei / Honor";  
+    if (/xiaomi|redmi|mi\s/i.test(ua)) return "Xiaomi";  
+    if (/oppo/i.test(ua)) return "Oppo";  
+    if (/vivo/i.test(ua)) return "Vivo";  
+    if (/nokia/i.test(ua)) return "Nokia";  
+    if (/iphone/i.test(ua)) return "iPhone";  
+    if (/ipad/i.test(ua)) return "iPad";  
+    if (/macintosh/i.test(ua)) return "Mac";  
+    if (/windows/i.test(ua)) return "Windows";  
+    if (/linux/i.test(ua)) return "Linux";  
+  
+    return "Unknown Device";  
+  }  
+  }  
+  
+// 🔹 داخل checkLogin بعد ما يتأكد الباسورد صح  
+document.getElementById('loginOverlay').style.display = 'none';  
+document.getElementById("mainContent").style.display = "block";  
+  
+// مجرد لوج في الكونسول يوريك الجهاز  
+console.log("📱 جهازك: " + getDeviceName());  
+alert("✅ تم تسجيل الدخول بنجاح");     
+          
+        document.getElementById('loginOverlay').style.display = 'none';  
+        document.getElementById("mainContent").style.display = "block";  
+        alert("✅ تم تسجيل الدخول بنجاح");  
+      } else {  
+        alert("❌ كلمة المرور غلط");  
+      }  
+    } else {  
+      alert("❌ المستخدم مش موجود");  
+    }  
+  } catch (e) {  
+    console.error(e);  
+    alert("❌ خطأ في الاتصال بـ Firestore");  
+  }  
+}  
+  
+// 🔹 عند تحميل الصفحة  
+document.addEventListener('DOMContentLoaded', async () => {  
+  const loginBtn = document.getElementById("loginBtn");  
+  loginBtn.addEventListener("click", checkLogin);  
+  
+  const loggedIn = localStorage.getItem("loggedIn");  
+  const userId = localStorage.getItem("userId");  
+  const savedPassword = localStorage.getItem("password");  
+  
+  if (loggedIn === "true" && userId && savedPassword) {  
+    try {  
+      const docRef = doc(db, "users", userId);  
+      const docSnap = await getDoc(docRef);  
+      if (docSnap.exists() && docSnap.data().password === savedPassword) {  
+        document.getElementById('loginOverlay').style.display = 'none';  
+        document.getElementById("mainContent").style.display = 'block';  
+        return;  
+      }  
+    } catch(e) { console.error(e); }  
+  }  
+  
+  // لو مش متسجل دخول  
+  document.getElementById('loginOverlay').style.display = 'flex';  
+  document.getElementById("mainContent").style.display = 'none';  
+});  
+  
+  
+  
+  
+  window.addEventListener('DOMContentLoaded', () => {  
+  const chargeButton = document.getElementById('charge');  
+  const customInput = document.getElementById('customAmount');  
+  const popup = document.getElementById('paymentPopup');  
+  const payNowBtn = document.getElementById('payNow');  
+  const loader = document.getElementById('tiktok-loader');  
+  const clickSound = document.getElementById('clickSound');  
+  let deferredPrompt;  
+  
+  function selectCustom() {  
+    document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));  
+    document.querySelector('.coin-option.custom').classList.add('selected');  
+  }  
+  
+  // link the custom element WITHOUT inline onclick  
+  const customOption = document.querySelector('.coin-option.custom');  
+  if (customOption) customOption.addEventListener('click', selectCustom);  
+  
+  function updateChargeText(price) {  
+    document.getElementById('chargeText').textContent = `Recharge ${price} USD`;  
+  }  
+  
+  function updateChargeCoins(amount) {  
+    if (amount > 0) chargeButton.classList.add('active');  
+    else chargeButton.classList.remove('active');  
+  }  
+  
+  if (customInput) {  
+    customInput.addEventListener('input', (e) => {  
+      selectCustom();  
+      const value = parseInt(e.target.value) || 0;  
+      const price = (value * 3 / 17000).toFixed(2);  
+      updateChargeText(price);  
+      document.getElementById('customPrice').textContent = value > 0 ? `${price} $` : '';  
+      updateChargeCoins(value);  
+    });  
+  }  
+  
+  document.querySelectorAll('.coin-option:not(.custom)').forEach(option => {  
+    option.addEventListener('click', () => {  
+      document.querySelectorAll('.coin-option').forEach(e => e.classList.remove('selected'));  
+      option.classList.add('selected');  
+      const value = parseInt(option.dataset.amount);  
+      const price = (value * 3 / 17000).toFixed(2);  
+      updateChargeText(price);  
+      updateChargeCoins(value);  
+    });  
+  });  
+  
+  document.querySelectorAll('button, .coin-option, #username, #customAmount').forEach(el => {  
+    el.addEventListener('click', () => {   
+      clickSound.currentTime = 0;   
+      clickSound.play();   
+    });  
+  });  
+  
+  // زر الشحن - بس يعرض البوب أب  
+// ===== فتح البوب وإظهار اللودر أول مرة =====  
+chargeButton.addEventListener('click', () => {  
+  if (!chargeButton.classList.contains('active')) return;  
+  
+  const textSpan = document.getElementById('chargeText');  
+  const imgIcon = document.querySelector('#charge .btn-icon');  
+  const loaderSpan = document.getElementById('buttonLoader');  
+  
+  loaderSpan.style.display = 'block';  
+  textSpan.style.display = 'none';  
+  if (imgIcon) imgIcon.style.display = 'none';  
+  
+  setTimeout(() => {  
+    loaderSpan.style.display = 'none';  
+    textSpan.style.display = 'inline';  
+    if (imgIcon) imgIcon.style.display = 'inline';  
+  
+    const username = document.getElementById('username').value || "غير معروف";  
+    const selected = document.querySelector('.coin-option.selected');  
+    const coins = selected  
+      ? (selected.classList.contains('custom') ? (customInput.value || "0") : selected.dataset.amount)  
+      : (customInput.value || "0");  
+// بعد ما نحسب السعر من زر الشحن  
+let price;  
+  
+if (selected) {  
+  if (selected.classList.contains("custom")) {  
+    // لو اختار خانة المخصص  
+    const customAmount = document.getElementById("customAmount").value || 0;  
+    // ✅ المعادلة الصحيحة  
+    price = ((customAmount * 3) / 17000).toFixed(2);  
+  } else {  
+    // لو اختار أي خانة عادية  
+    price = selected.querySelector("small")?.textContent.replace("$","") || 0;  
+  }  
+} else {  
+  price = 0;  
+}  
+  
+// خزنه في localStorage  
+localStorage.setItem("selectedPrice", price);  
+  
+// وحدثه في البوب  
+document.getElementById("totalAmount").textContent = `$${price}`;      
+document.getElementById('popupUser').innerHTML = `  
+  <div style="margin-bottom:20px; font-weight:bold;">  
+    Username: ${username}  
+  </div>  
+`;  
+  
+// هنا هنضيف الصورة مع الكلمة Coins  
+document.getElementById('popupCoins').innerHTML = `  
+  <div class="coins-box">  
+    <img src="coin.png" alt="coin" class="coin-img">  
+    <span>Coins: ${coins}</span>  
+  </div>  
+`;  
+  
+    // افتح البوب  
+    const popup = document.getElementById('paymentPopup');  
+    popup.classList.add('show');  
+  
+    // لودر فوق + اخفاء التفاصيل  
+    const popupLoader = document.getElementById('tiktok-loader');  
+    const popupDetails = document.getElementById('popupDetails');  
+    popupLoader.style.display = 'flex';  
+    popupDetails.style.display = 'none';  
+  
+    // بعد ثانيتين اعرض التفاصيل  
+    setTimeout(() => {  
+      popupLoader.style.display = 'none';  
+      popupDetails.style.display = 'block';  
+    }, 2000);  
+  }, 2000);  
+});  
+  
+// ===== زر Pay Now (برا زر الشحن) =====  
+payNowBtn.addEventListener('click', () => {  
+  const username = document.getElementById("username").value || "غير معروف";  
+  const selected = document.querySelector('.coin-option.selected');  
+  const custom = document.getElementById("customAmount").value;  
+  
+  const coins = selected   
+    ? (selected.classList.contains('custom') ? (custom || "0") : selected.dataset.amount)   
+    : (custom || "0");  
+  
+  // تخزين  
+  localStorage.setItem("receiverName", username);  
+  localStorage.setItem("transferredCoins", coins);  
+  if (selected && !selected.classList.contains('custom')) {  
+    localStorage.setItem("lastPurchase", selected.dataset.amount);  
+  }  
+  
+  // اخفي التفاصيل واظهر نفس لودر البوب فوق  
+  const popupLoader = document.getElementById('tiktok-loader');  
+  const popupDetails = document.getElementById('popupDetails');  
+  popupDetails.style.display = 'none';  
+  popupLoader.style.display = 'flex';  
+  
+  setTimeout(() => {  
+    window.location.href = "page2.html";  
+  }, 2000);  
+});  
+  
+// PWA  
+window.addEventListener('beforeinstallprompt', (e) => {  
+  e.preventDefault();  
+  deferredPrompt = e;  
+  document.getElementById('installBtn').style.display = 'block';  
+});  
+  
+document.getElementById('installBtn').addEventListener('click', async () => {  
+  if (!deferredPrompt) return;  
+  deferredPrompt.prompt();  
+  await deferredPrompt.userChoice;  
+  deferredPrompt = null;  
+  document.getElementById('installBtn').style.display = 'none';  
+});  
+  
+// التعامل مع اختيار الخانات  
+const options = document.querySelectorAll(".coin-option");  
+options.forEach(opt => {  
+  opt.addEventListener("click", () => {  
+    // نشيل selected من الكل  
+    options.forEach(o => o.classList.remove("selected"));  
+  
+    // لو فيه خانة قديمة (special) نخليها رمادية  
+    const currentSpecial = document.querySelector('.coin-option.special');  
+    if (currentSpecial && currentSpecial !== opt) {  
+      currentSpecial.classList.add("gray");  
+    }  
+  
+    // نضيف selected للخانة الجديدة  
+    opt.classList.add("selected");  
+  });  
+});  
+  
+// عند تحميل الصفحة نرجع آخر عملية شراء  
+window.addEventListener("load", () => {  
+  let last = localStorage.getItem("lastPurchase");  
+  if (last) {  
+    options.forEach(o => o.classList.remove("special", "gray"));  
+    let target = document.querySelector(`.coin-option[data-amount="${last}"]`);  
+    if (target) target.classList.add("special");  
+  }  
+});  
+});  
+  
+</script>  </body>  
+  </html>  <div class="popup-content">  <!-- 🔹 اللودر -->  
 <div id="tiktok-loader">  
   <div class="orbit-loader">  
     <div class="dot dot1"></div>  
