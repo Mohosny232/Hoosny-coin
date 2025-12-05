@@ -848,9 +848,11 @@ window.addEventListener("load", () => {
   }  
 });  
 });  
-  const closeBtn = document.getElementById('closePopup');
+ const closeBtn = document.getElementById('closePopup');
+const popup = document.getElementById('paymentPopup');
+
 closeBtn.addEventListener('click', () => {
-    popup.classList.remove('show');  // يخفّي البوب
+    popup.classList.remove('show'); // يخفي البوب والظل
 });
 
   // هنا باقي أكوادك...
