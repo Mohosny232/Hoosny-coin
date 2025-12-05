@@ -866,23 +866,22 @@ function selectOption(opt) {
   // نشيل selected من الكل
   options.forEach(o => o.classList.remove("selected"));
 
-  // لو فيه آخر عملية شراء، نخليها ثابتة وما نغيرهاش قبل الدفع
+  // كل الخانات اللي مش مختارة تتحول رمادي، ما عدا الخانة اللي عليها آخر عملية شراء
   const last = localStorage.getItem("lastPurchase");
 
-  if (!last) {
-    // كل الخانات اللي مش مختارة تتحول رمادي
-    options.forEach(o => {
-      if (o !== opt) o.classList.add("gray");
-    });
-  }
+  options.forEach(o => {
+    if (o !== opt && (!last || o.getAttribute("data-amount") !== last)) {
+      o.classList.add("gray");
+    }
+  });
 
   // نضيف selected للخانة الجديدة
   opt.classList.add("selected");
 
-  // لو كانت رمادي، نشيل عنها gray
+  // نشيل gray عن الخانة المختارة
   opt.classList.remove("gray");
 
-  // حفظ آخر اختيار مؤقت لاستخدامه عند الدفع
+  // حفظ آخر اختيار مؤقت قبل الدفع
   const amount = opt.getAttribute("data-amount");
   if (amount) localStorage.setItem("tempSelected", amount);
 }
@@ -904,8 +903,11 @@ options.forEach(opt => {
 window.addEventListener("load", () => {
   const last = localStorage.getItem("lastPurchase");
   if (last) {
+    // أولاً نشيل special من كل الخانات عشان نضمن خانة واحدة بس
+    options.forEach(o => o.classList.remove("special"));
+    
     const target = document.querySelector(`.coin-option[data-amount="${last}"]`);
-    if (target) target.classList.add("special"); // تظهر عليها الجملة
+    if (target) target.classList.add("special"); // تظهر عليها الجملة "آخر عملية شراء"
   }
 });
   });    
