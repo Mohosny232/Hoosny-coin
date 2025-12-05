@@ -343,12 +343,16 @@ flex-direction: row-reverse;
     z-index: 999;
     }
   .popup-title {
-  font-family: 'Tajawal', sans-serif; /* خط تجوال */
+  font-family: 'Tajawal', sans-serif;
   font-size: 22px;
   font-weight: bold;
   text-align: center;
-  margin: 5px 0 2px 0; /* 👈 فوق:5px ، تحت:2px */
-  color: #000; /* أسود */
+  margin: 0; /* نلغي أي هامش افتراضي */
+  position: absolute; /* نجعلها ثابتة داخل البوب */
+  top: 10px; /* تحكم في المسافة من أعلى البوب */
+  left: 50%;
+  transform: translateX(-50%);
+  color: #000;
   z-index: 1001; /* فوق اللودر */
 }
     .popup-close {
