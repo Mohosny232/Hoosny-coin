@@ -877,16 +877,15 @@ function selectOption(opt) {
 
   // كل الخانات الأخرى تتحول رمادي
   // شيل special من كل الخانات قبل إضافة آخر عملية شراء
-options.forEach(o => o.classList.remove("special"));
+// قبل إضافة selected، شيل special من كل الخانات
+options.forEach(o => {
+  if (o !== opt) o.classList.remove("special");
+  if (o !== opt) o.classList.add("gray"); // خلي كل غير المختارة رمادي
+});
 
-// إعادة اللون الأحمر للخانة إذا هي نفسها آخر عملية شراء
-if (last) {
-  const lastOption = document.querySelector(`.coin-option[data-amount="${last}"]`);
-  if (lastOption && lastOption !== opt) {
-    lastOption.classList.remove("gray");
-    lastOption.classList.add("special");
-  }
-}
+// نضيف selected للخانة الجديدة
+opt.classList.add("selected");
+opt.classList.remove("gray"); // خلي المختارة مش رمادية
 
   // إعادة اللون الأحمر للخانة إذا هي نفسها آخر عملية شراء
   const last = localStorage.getItem("lastPurchase");
