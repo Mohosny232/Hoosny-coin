@@ -295,31 +295,37 @@ flex-direction: row-reverse;
 }
 
 .checkout-box {
-width: 100%;
-margin: 0 auto;
-display: flex;
-flex-direction: column; /* 👈 النص فوق والزر تحت /
-gap: 0px; / 👈 المسافة بين النص والزر (زود أو قلل) /
-margin-top: 30%;
-position: relative; / 👈 كدا الصورة هتتثبت جوه /
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column; /* 👈 النص فوق والزر تحت */
+  gap: 0px; /* 👈 المسافة بين النص والزر */
+  margin-top: 30%;
+  position: relative; /* 👈 لتثبيت الصورة فوق */
 }
+
 #popupImg {
-position: absolute;
-top: -50px;   / 👈 اتحكم في ارتفاعها /
-left: 50%;
-transform: translateX(-50%);
-width: 200px;     / 👈 عرض الصورة /
-max-width: 90%;   / 👈 تمنعها تتقطع لو الشاشة صغيرة /
-border-radius: 0; / 👈 خليها زي ما هي بدون تقطيع /
-object-fit: contain; / 👈 تعرضها بالكامل بدون قص */
+  position: absolute;
+  top: -50px;   /* 👈 تحكم في ارتفاعها */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;     /* 👈 عرض الصورة */
+  max-width: 90%;   /* 👈 منع التقطيع على الشاشات الصغيرة */
+  border-radius: 0;
+  object-fit: contain; /* 👈 تعرض الصورة كاملة */
 }
 
 .total-row span {
-margin-top: 0px;   /* 👈 ينزل النص لتحت عن مكانه /
+  margin-top: 0px; /* 👈 تعديل مكان النص */
 }
-/ الجزء اللي فوق (Total + المبلغ) /
-/ 🔹 الصف كله /
-/ 🔹 الهيدر */
+
+/* 🔹 الجزء الخاص بـ (Total + المبلغ) */
+/* 🔹 الصف كله */
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 #payNow .btn-icon { width:20px; height:auto; }
 
