@@ -327,10 +327,13 @@ flex-direction: row-reverse;
   align-items: center;
 }
 .top-banner {
-    width: 70%;        /* 👈 الصورة تمتد بعرض الصفحة */
-    display: block;     /* 👈 تمنع وجود مساحة بيضا تحت الصورة */
-    margin-bottom: -5px; /* 👈 مسافة بسيطة تحت الصورة */
-}
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    z-index: 1000;
+  }
 #payNow .btn-icon { width:20px; height:auto; }
 
   </style>  
