@@ -357,24 +357,19 @@ flex-direction: row-reverse;
   z-index: 1001; /* فوق اللودر */
 }
   .popup-back {
-    position: absolute;
-    top: 5px;
-    right: 13px;
-    font-size: 50px;
-    color: black;
-    cursor: pointer;
     font-family: 'Tajawal', sans-serif;
-}
-
-.popup-back::after {
-    content: '';
-    display: inline-block;
-    width: 25px;  /* طول الخط */
-    height: 5px;  /* سمك الخط */
-    background: black;
-    transform: rotate(0deg);
-    margin-left: 5px;
-    border-radius: 2px;
+    position: absolute;   /* يبقى مطلق داخل popupDetails */
+    top: 6px;             /* تحكم في المسافة من أعلى popupDetails */
+    right: 13px;          /* على اليمين */
+    background: none;
+    border: none;
+    color: #000;
+    font-size: 43px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
 }
     .popup-close {
     position: absolute;
