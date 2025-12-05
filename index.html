@@ -344,27 +344,24 @@ flex-direction: row-reverse;
     }
     .popup-close {
     position: absolute;
-    top: 12px;           /* بعيد شوية عن الأعلى */
-    left: 50%;           /* يكون في المنتصف أفقي */
-    transform: translateX(-50%);  /* لتوسيطه تمامًا */
-    width: 40px;
-    height: 40px;
-    background-color: rgba(0,0,0,0.85); /* لون أسود غامق */
-    color: #fff;         /* لون الحرف أبيض */
+    top: 15px;
+    right: 15px;
+    width: 32px;
+    height: 32px;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
     border: none;
-    border-radius: 50%;  /* يجعلها دائرية */
-    font-size: 24px;
-    font-weight: bold;
+    border-radius: 50%;
+    font-size: 20px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1010;       /* فوق كل شيء */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.5); /* ظل خفيف */
+    z-index: 1050;
 }
 
 .popup-close:hover {
-    background-color: rgba(0,0,0,1); /* غامق أكثر عند المرور */
+    background: rgba(0,0,0,0.85);
 }
 #payNow .btn-icon { width:20px; height:auto; }
 
