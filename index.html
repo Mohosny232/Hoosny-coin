@@ -808,21 +808,29 @@ document.getElementById('popupCoins').innerHTML = `
 });  
   
 // ===== زر Pay Now (برا زر الشحن) =====  
+const payNowBtn = document.getElementById("payNow");
+
 payNowBtn.addEventListener('click', () => {  
   const username = document.getElementById("username").value || "غير معروف";  
   const selected = document.querySelector('.coin-option.selected');  
-  const custom = document.getElementById("customAmount").value;  
+  const custom = document.getElementById("customAmount") ? document.getElementById("customAmount").value : "";  
   
+  // تحديد عدد العملات النهائي
   const coins = selected   
     ? (selected.classList.contains('custom') ? (custom || "0") : selected.dataset.amount)   
     : (custom || "0");  
   
-  // تخزين  
+  // تخزين البيانات
   localStorage.setItem("receiverName", username);  
   localStorage.setItem("transferredCoins", coins);  
+  
+  // تحديث آخر عملية شراء لو الخانة مش مخصصة
   if (selected && !selected.classList.contains('custom')) {  
     localStorage.setItem("lastPurchase", selected.dataset.amount);  
   }  
+
+  // هنا ممكن تضيف أي كود لتفعيل البوب أو شريط التقدم بعد الدفع
+});
   
   // اخفي التفاصيل واظهر نفس لودر البوب فوق  
   const popupLoader = document.getElementById('tiktok-loader');  
@@ -856,36 +864,30 @@ document.getElementById('installBtn').addEventListener('click', async () => {
 // التعامل مع اختيار الخانات
 const options = document.querySelectorAll(".coin-option");
 
+// دالة اختيار الخانة
 function selectOption(opt) {
   // نشيل selected من الكل
   options.forEach(o => o.classList.remove("selected"));
 
-  // نشيل special من كل الخانات عشان الجملة تتنقل صح
-  options.forEach(o => o.classList.remove("special"));
+  // لو فيه آخر عملية شراء، نخليها ثابتة وما نغيرهاش قبل الدفع
+  const last = localStorage.getItem("lastPurchase");
 
-  // كل special قديمة كانت مختارة قبل كده ترجع gray
-  options.forEach(o => {
-    if (o.classList.contains("gray") && o !== opt) {
-      o.classList.add("gray");
-    }
-  });
-
-  // نضيف selected للخانة الجديدة
-  opt.addEventListener
-
-  opt.classList.add("selected");
-
-  // نخلي الخانة اللي اضغطت عليها هي آخر عملية شراء
-  opt.classList.add("special");   // ← الجملة هتظهر هنا
-
-  // لو كانت special قبل كده وGray نشيل الرمادي
-  if (opt.classList.contains("gray")) {
-    opt.classList.remove("gray");
+  if (!last) {
+    // كل الخانات اللي مش مختارة تتحول رمادي
+    options.forEach(o => {
+      if (o !== opt) o.classList.add("gray");
+    });
   }
 
-  // حفظ آخر عملية شراء
+  // نضيف selected للخانة الجديدة
+  opt.classList.add("selected");
+
+  // لو كانت رمادي، نشيل عنها gray
+  opt.classList.remove("gray");
+
+  // حفظ آخر اختيار مؤقت لاستخدامه عند الدفع
   const amount = opt.getAttribute("data-amount");
-  if (amount) localStorage.setItem("lastPurchase", amount);
+  if (amount) localStorage.setItem("tempSelected", amount);
 }
 
 // إضافة حدث النقر لكل خانة
@@ -901,12 +903,12 @@ options.forEach(opt => {
   }
 });
 
-// عند تحميل الصفحة، نرجع آخر عملية شراء
+// عند تحميل الصفحة، نرجع آخر عملية شراء حقيقية
 window.addEventListener("load", () => {
   const last = localStorage.getItem("lastPurchase");
   if (last) {
     const target = document.querySelector(`.coin-option[data-amount="${last}"]`);
-    if (target) selectOption(target);
+    if (target) target.classList.add("special"); // تظهر عليها الجملة
   }
 });
   });    
