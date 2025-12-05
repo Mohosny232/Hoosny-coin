@@ -852,48 +852,51 @@ document.getElementById('installBtn').addEventListener('click', async () => {
   
   // 🔹 اختيار كل الخانات
   
-window.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
   const options = document.querySelectorAll(".coin-option");
 
-  options.forEach(opt => {
-    opt.addEventListener("click", () => {
-      // 1️⃣ نشيل selected من الكل
-      options.forEach(o => o.classList.remove("selected"));
+  function selectOption(opt) {
+    // نشيل selected من الكل
+    options.forEach(o => o.classList.remove("selected"));
 
-      // 2️⃣ نرجع كل خانة special لحالتها gray إذا مش مختارة
-      options.forEach(o => {
-        if (o.classList.contains("special")) {
-          o.classList.add("gray");
-        }
-      });
-
-      // 3️⃣ نضيف selected للخانة اللي اضغطت عليها
-      opt.classList.add("selected");
-
-      // 4️⃣ لو الخانة اللي اضغطت عليها special، نشيل عنها gray
-      if (opt.classList.contains("special")) {
-        opt.classList.remove("gray");
+    // نرجع كل خانة special للـ gray إذا مش مختارة
+    options.forEach(o => {
+      if (o.classList.contains("special")) {
+        o.classList.add("gray");
       }
-
-      // 5️⃣ حفظ آخر عملية شراء
-      const amount = opt.getAttribute("data-amount");
-      if (amount) localStorage.setItem("lastPurchase", amount);
     });
+
+    // نضيف selected للخانة اللي اضغطت عليها
+    opt.classList.add("selected");
+
+    // لو الخانة اللي اضغطت عليها special، نشيل عنها gray
+    if (opt.classList.contains("special")) {
+      opt.classList.remove("gray");
+    }
+
+    // حفظ آخر عملية شراء إذا مش custom
+    const amount = opt.getAttribute("data-amount");
+    if (amount) localStorage.setItem("lastPurchase", amount);
+  }
+
+  options.forEach(opt => {
+    // إذا كانت custom، لها handler خاص
+    if (opt.classList.contains("custom")) {
+      const input = opt.querySelector(".custom-input");
+      opt.addEventListener("click", () => selectOption(opt));
+      if (input) {
+        input.addEventListener("input", () => selectOption(opt));
+      }
+    } else {
+      opt.addEventListener("click", () => selectOption(opt));
+    }
   });
 
-  // 🔹 عند تحميل الصفحة نرجع آخر عملية شراء
+  // عند تحميل الصفحة، رجع آخر عملية شراء
   const last = localStorage.getItem("lastPurchase");
   if (last) {
-    options.forEach(o => {
-      o.classList.remove("selected", "gray");
-      if (o.classList.contains("special")) o.classList.add("gray");
-    });
-
     const target = document.querySelector(`.coin-option[data-amount="${last}"]`);
-    if (target) {
-      target.classList.add("selected");
-      if (target.classList.contains("special")) target.classList.remove("gray");
-    }
+    if (target) selectOption(target);
   }
 });
  const closeBtn = document.getElementById('closePopup');  
