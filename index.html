@@ -389,52 +389,59 @@ margin-top: 0px;   /* 👈 ينزل النص لتحت عن مكانه /
     <span id="chargeText">Recharge</span>  
     <span id="buttonLoader" class="loader"></span>  
   </button>  
-<div id="paymentPopup" class="popup">
-    <div class="popup-content">
+</div> 
+  <div id="paymentPopup" class="popup">
 
-        <!-- اللودر -->
-        <div id="tiktok-loader">
-            <div class="orbit-loader">
-                <div class="dot dot1"></div>
-                <div class="dot dot2"></div>
-            </div>
+  <div class="popup-content">
+
+    <!-- 🔹 اللودر -->
+    <div id="tiktok-loader">
+      <div class="orbit-loader">
+        <div class="dot dot1"></div>
+        <div class="dot dot2"></div>
+      </div>
+    </div>
+
+    <!-- 🔹 محتوى البوب الحقيقي -->
+    <div id="popupDetails">
+
+      <img src="hos1.png" alt="صورة" class="popup-img">
+
+      <div class="popup-header">
+        <p id="popupUser"></p>
+        <p id="popupCoins"></p>
+
+        <!-- الصورة والرقم جنب بعض -->
+        <div class="card-inline">
+          <img src="visa.png" alt="Visa" class="card-img">
+          <span class="card-number">2432*** *** *** ***</span>
+        </div>
+      </div>
+
+      <!-- 🔹 بوكس الدفع -->
+      <div class="checkout-box">
+
+        <!-- Total -->
+        <div class="total-row">
+          <span class="total-text">Total</span>
+          <span id="totalAmount">$0.00</span>
         </div>
 
-        <!-- التفاصيل (مخفية في الأول) -->
-        <div id="popupDetails" style="display:none;">
+        <img id="popupImg" src="pay12.png" alt="Pay">
 
-            <img src="hos1.png" class="popup-img">
+        <!-- زرار الدفع -->
+        <button id="payNow" class="pay-btn">
+          <span>Pay now</span>
+          <img src="hos2.png" alt="icon" class="btn-icon" />
+        </button>
 
-            <div class="popup-header">
-                <p id="popupUser"></p>
-                <div id="popupCoins"></div>
-
-                <div class="card-inline">
-                    <img src="visa.png" class="card-img">
-                    <span class="card-number">2432*** *** *** ***</span>
-                </div>
-            </div>
-
-            <div class="checkout-box">
-                <div class="total-row">
-                    <span>Total</span>
-                    <span id="totalAmount">$0.00</span>
-                </div>
-
-                <img id="popupImg" src="pay12.png">
-
-                <button id="payNow">
-                    <span>Pay now</span>
-                    <img src="hos2.png" class="btn-icon">
-                </button>
-            </div>
-
-        </div>
+      </div>
 
     </div>
-</div>
 
-  </div>  
+  </div>
+
+  </div>
 </div>  <div id="successSection">  
   <img src="success.png" alt="نجاح">  
   <p>✅ تم الدفع بنجاح!</p>  
