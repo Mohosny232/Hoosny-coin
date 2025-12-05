@@ -797,23 +797,22 @@ document.getElementById('installBtn').addEventListener('click', async () => {
   document.getElementById('installBtn').style.display = 'none';  
 });  
   
-// التعامل مع اختيار الخانات  
-const options = document.querySelectorAll(".coin-option");  
-options.forEach(opt => {  
-  opt.addEventListener("click", () => {  
-    // نشيل selected من الكل  
-    options.forEach(o => o.classList.remove("selected"));  
-  
-    // لو فيه خانة قديمة (special) نخليها رمادية  
-    const currentSpecial = document.querySelector('.coin-option.special');  
-    if (currentSpecial && currentSpecial !== opt) {  
-      currentSpecial.classList.add("gray");  
-    }  
-  
-    // نضيف selected للخانة الجديدة  
-    opt.classList.add("selected");  
-  });  
-});  
+// التعامل مع اختيار الخانات (نسخة مصححة)
+const options = document.querySelectorAll(".coin-option");
+options.forEach(opt => {
+  opt.addEventListener("click", () => {
+    // نشيل selected من الكل
+    options.forEach(o => o.classList.remove("selected"));
+
+    // لو الخانة فيها gray، نشيلها
+    if (opt.classList.contains("gray")) {
+      opt.classList.remove("gray");
+    }
+
+    // نضيف selected للخانة اللي اضغطت عليها
+    opt.classList.add("selected");
+  });
+});
   
 // عند تحميل الصفحة نرجع آخر عملية شراء  
 window.addEventListener("load", () => {  
