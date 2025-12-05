@@ -357,23 +357,19 @@ flex-direction: row-reverse;
   z-index: 1001; /* فوق اللودر */
 }
   .popup-back {
-   font-family: 'Tajawal', sans-serif;
-    position: absolute;
-    top: -10px;           /* المسافة من أعلى البوب */
-    right: 13px;         /* نخليه على اليمين */
-    background: none;    /* بدون خلفية */
-    border: none;        /* بدون حدود */
-    color: #000;         /* السهم أسود */
-    font-size: 40px;     /* حجم السهم */
+    font-family: 'Tajawal', sans-serif;
+    position: absolute;   /* يبقى مطلق داخل popupDetails */
+    top: 5px;             /* تحكم في المسافة من أعلى popupDetails */
+    right: 13px;          /* على اليمين */
+    background: none;
+    border: none;
+    color: #000;
+    font-size: 40px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 999;
-}
-
-.popup-back:hover {
-    color: #ff2d55;      /* تأثير عند المرور اختياري */
+    z-index: 10;
 }
     .popup-close {
     position: absolute;
