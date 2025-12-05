@@ -358,18 +358,23 @@ flex-direction: row-reverse;
 }
   .popup-back {
     font-family: 'Tajawal', sans-serif;
-    position: absolute;   /* يبقى مطلق داخل popupDetails */
-    top: 8px;             /* تحكم في المسافة من أعلى popupDetails */
-    right: 13px;          /* على اليمين */
+    position: absolute;
+    top: 8px;           /* المسافة من أعلى البوب */
+    right: 13px;         /* على اليمين */
     background: none;
     border: none;
     color: #000;
-    font-size: 40px;
+    font-size: 50px;     /* حجم السهم */
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10;
+    z-index: 999;
+    transform-origin: left center; /* يمد الخط من جهة الرأس */
+    transform: scaleX(2);         /* يمد الخط 2x أطول */
+}
+.popup-back:hover {
+    color: #ff2d55;
 }
     .popup-close {
     position: absolute;
@@ -483,8 +488,7 @@ flex-direction: row-reverse;
      <button id="closePopup" class="popup-close">?</button>
     <!-- العنوان الجديد -->
     <h2 class="popup-title">Order summary</h2>
-   <button id="backBtn" class="popup-back">→</button>
-      <img src="hos1.png" alt="صورة" class="popup-img">
+    <button class="popup-back">→</button>      <img src="hos1.png" alt="صورة" class="popup-img">
       <div class="popup-header">
         <p id="popupUser"></p>
         <p id="popupCoins"></p>
