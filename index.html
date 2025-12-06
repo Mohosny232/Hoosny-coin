@@ -866,19 +866,20 @@ const options = document.querySelectorAll(".coin-option");
 function selectOption(opt) {
   // شيل selected و gray من كل الخانات
   options.forEach(o => {
-    if (o !== opt) {
-      o.classList.remove("selected");
-      o.classList.add("gray"); // الخانات الأخرى تصبح رمادية
+    o.classList.remove("selected");
+    if (o.classList.contains("special")) {
+      o.classList.add("gray"); // آخر عملية شراء تتحول رمادي مؤقت عند اختيار جديد
     }
 
   // أضف selected للخانة الجديدة
   opt.classList.add("selected");
   opt.classList.remove("gray"); // المختارة مش رمادية
-}
+
   // حفظ آخر اختيار مؤقت قبل الدفع
   const amount = opt.getAttribute("data-amount");
   if (amount) localStorage.setItem("tempSelected", amount);
-
+}
+});                
   // تصفير الشريط الأحمر
   const progressBar = document.querySelector("#progressBar");
   if (progressBar) progressBar.style.width = "0%";
