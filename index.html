@@ -795,7 +795,6 @@ document.getElementById('popupCoins').innerHTML = `
   
   // ===== زر Pay Now (برا زر الشحن) =====  
   // زر الدفع
-window.addEventListener('load', () => {
 
   // -------- التعامل مع اختيار الخانات --------
   const options = document.querySelectorAll(".coin-option");
@@ -845,7 +844,7 @@ window.addEventListener('load', () => {
   }
 
   // -------- زر Pay Now --------
-  const payNowBtn = document.getElementById('payNowBtn'); // تأكد أن ID صحيح
+  const payNowBtn = document.getElementById('payNow'); // تأكد أن ID صحيح
   if (payNowBtn) {
     payNowBtn.addEventListener('click', () => {
       const username = document.getElementById("username").value || "غير معروف";  
