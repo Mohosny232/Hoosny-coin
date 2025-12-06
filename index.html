@@ -822,15 +822,14 @@ payNowBtn.addEventListener('click', () => {
   
   if (selected && !selected.classList.contains('custom')) {  
     // شيل special من كل الخانات
-    options.forEach(o => o.classList.remove("special"));
+    // إزالة special من كل الخانات (عشان الكلمة تختفي من القديم)
+options.forEach(o => {
+  o.classList.remove("special", "gray");
+});
 
-    // اضف special على الخانة الجديدة
-    selected.classList.add("special");
-
-    // احفظ آخر عملية شراء
-    localStorage.setItem("lastPurchase", selected.dataset.amount);  
-  }  
-
+// إضافة special للخانة الجديدة
+selected.classList.add("special");
+selected.classList.remove("gray");
 
   // هنا ممكن تضيف أي كود لتفعيل البوب أو شريط التقدم بعد الدف
   
@@ -875,26 +874,21 @@ function selectOption(opt) {
   opt.classList.remove("gray");
 
   // التعامل مع خانة آخر عملية شراء
-  // التعامل مع خانة آخر عملية شراء
-// التعامل مع خانة آخر عملية شراء
-// التعامل مع خانة آخر عملية شراء
-const last = localStorage.getItem("lastPurchase");
+  const last = localStorage.getItem("lastPurchase");
 
-options.forEach(o => {
-  if (o !== opt) {
-    // كل الخانات غير المختارة تتحول رمادية
-    o.classList.add("gray");
-
-    // إذا هي نفسها آخر عملية شراء، خليها special
-    if (last && o.getAttribute("data-amount") === last) {
-      o.classList.remove("gray");
-      o.classList.add("special");
+  options.forEach(o => {
+    if (o !== opt) {
+      // الخانات اللي مش مختارة
+      if (o.classList.contains("special")) {
+        // خلي "آخر عملية شراء" رمادي
+        o.classList.add("gray");
+      }
     } else {
-      // أي خانة ثانية غير آخر شراء تبقى عادية
-      o.classList.remove("special");
+      // الخانة المختارة الآن.. لازم ما يكونش عليها رمادي
+      o.classList.remove("gray");
     }
-  }
-});
+  });
+}
 
   // حفظ آخر اختيار مؤقت قبل الدفع
   const amount = opt.getAttribute("data-amount");
