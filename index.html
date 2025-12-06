@@ -886,12 +886,13 @@ window.addEventListener("load", () => {
   }    
 });    
 });    
- const closeBtn = document.getElementById('closePopup');  
-const popup = document.getElementById('paymentPopup');  
-  
-closeBtn.addEventListener('click', () => {  
-    popup.classList.remove('show'); // يخفي البوب والظل  
-});  
+ const backBtn = document.querySelector('.popup-back');
+if (backBtn) {
+backBtn.addEventListener('click', () => {
+const popup = document.getElementById('paymentPopup');
+popup.classList.remove('show');
+});
+}
   
   
 </script>  
