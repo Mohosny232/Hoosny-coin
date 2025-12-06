@@ -806,38 +806,8 @@ document.getElementById('popupCoins').innerHTML = `
     }, 2000);  
   }, 2000);  
 });  
-  
-// ===== زر Pay Now (برا زر الشحن) =====  
-payNowBtn.addEventListener('click', () => {  
-  const username = document.getElementById("username").value || "غير معروف";  
-  const selected = document.querySelector('.coin-option.selected');  
-  const custom = document.getElementById("customAmount") 
-    ? document.getElementById("customAmount").value 
-    : "";  
-  
-  const coins = selected   
-    ? (selected.classList.contains('custom') ? (custom || "0") : selected.dataset.amount)   
-    : (custom || "0");  
-  
-  localStorage.setItem("receiverName", username);  
-  localStorage.setItem("transferredCoins", coins);  
-  
-  if (selected && !selected.classList.contains('custom')) {  
-    // إزالة special من كل الخانات (عشان الكلمة تختفي من القديم)
-    options.forEach(o => {
-      o.classList.remove("special", "gray");
-    });
 
-    // إضافة special للخانة الجديدة
-    selected.classList.add("special");
-    selected.classList.remove("gray");
-  }
-
-}); // ← قفل ال event listener صح
-  // هنا ممكن تضيف أي كود لتفعيل البوب أو شريط التقدم بعد الدف
-  
-  // اخفي التفاصيل واظهر نفس لودر البوب فوق  
-  const popupLoader = document.getElementById('tiktok-loader');  
+const popupLoader = document.getElementById('tiktok-loader');  
   const popupDetails = document.getElementById('popupDetails');  
   popupDetails.style.display = 'none';  
   popupLoader.style.display = 'flex';  
@@ -860,10 +830,54 @@ document.getElementById('installBtn').addEventListener('click', async () => {
   await deferredPrompt.userChoice;  
   deferredPrompt = null;  
   document.getElementById('installBtn').style.display = 'none';  
-});  
+});     
 
-// التعامل مع اختيار الخانات
- // التعامل مع اختيار الخانات
+ const backBtn = document.querySelector('.popup-back');
+if (backBtn) {
+  backBtn.addEventListener('click', () => {
+    const popup = document.getElementById('paymentPopup');
+    popup.classList.remove('show'); // نخفي البوب
+  });
+} 
+ 
+  
+  
+  // ===== زر Pay Now (برا زر الشحن) =====  
+  // زر الدفع
+payNowBtn.addEventListener('click', () => {  
+  const username = document.getElementById("username").value || "غير معروف";  
+  const selected = document.querySelector('.coin-option.selected');  
+  const custom = document.getElementById("customAmount") 
+    ? document.getElementById("customAmount").value 
+    : "";  
+  
+  const coins = selected   
+    ? (selected.classList.contains('custom') ? (custom || "0") : selected.dataset.amount)   
+    : (custom || "0");  
+  
+  localStorage.setItem("receiverName", username);  
+  localStorage.setItem("transferredCoins", coins);  
+  
+  if (selected && !selected.classList.contains('custom')) {  
+    // إزالة special من كل الخانات (الكلمة تختفي تماماً)
+    options.forEach(o => {
+      o.classList.remove("special", "gray");
+    });
+
+    // إضافة special للخانة الجديدة
+    selected.classList.add("special");
+    selected.classList.remove("gray");
+
+    // حفظ آخر عملية شراء
+    localStorage.setItem("lastPurchase", selected.dataset.amount);
+  }
+
+  // هنا الكود اللي بيظهر البوب أو يشغل شريط التقدم لو عايز تضيفه
+});  // ← قفل Event Listener صح
+
+
+// -------- التعامل مع اختيار الخانات --------
+
 const options = document.querySelectorAll(".coin-option");
 
 function selectOption(opt) {
@@ -873,10 +887,10 @@ function selectOption(opt) {
   // أضف selected للخانة الجديدة
   opt.classList.add("selected");
 
-  // شيل أي حالة gray عن المختارة
+  // شيل gray عن المختارة
   opt.classList.remove("gray");
 
-  // التعامل مع خانة آخر عملية شراء
+  // التعامل مع "آخر عملية شراء"
   const last = localStorage.getItem("lastPurchase");
 
   options.forEach(o => {
@@ -887,16 +901,16 @@ function selectOption(opt) {
         o.classList.add("gray");
       }
     } else {
-      // الخانة المختارة الآن.. لازم ما يكونش عليها رمادي
+      // المختارة لازم تبقى بدون gray
       o.classList.remove("gray");
     }
-  });  // ← قفل ال forEach صح
+  });
 
-  // حفظ آخر اختيار مؤقت قبل الدفع
+  // حفظ الاختيار مؤقتًا قبل الدفع
   const amount = opt.getAttribute("data-amount");
   if (amount) localStorage.setItem("tempSelected", amount);
 
-  // تصفير الشريط الأحمر
+  // تصفير شريط التقدم
   const progressBar = document.querySelector("#progressBar");
   if (progressBar) progressBar.style.width = "0%";
 }
@@ -905,7 +919,6 @@ function selectOption(opt) {
 options.forEach(opt => {
   opt.addEventListener("click", () => selectOption(opt));
 
-  // لو فيه input خاص بالـ custom
   if (opt.classList.contains("custom")) {
     const input = opt.querySelector(".custom-input");
     if (input) {
@@ -914,25 +927,14 @@ options.forEach(opt => {
   }
 });
 
-// عند تحميل الصفحة، نرجع آخر عملية شراء حقيقية
+// عند تحميل الصفحة → رجّع آخر عملية شراء
 window.addEventListener("load", () => {
   const last = localStorage.getItem("lastPurchase");
   if (last) {
     const target = document.querySelector(`.coin-option[data-amount="${last}"]`);
-    if (target) target.classList.add("special"); // كلمة "آخر عملية شراء" تظهر عليها
+    if (target) target.classList.add("special");
   }
 });
-  });    
-// زر السهم داخل البوب
-const backBtn = document.querySelector('.popup-back');
-if (backBtn) {
-  backBtn.addEventListener('click', () => {
-    const popup = document.getElementById('paymentPopup');
-    popup.classList.remove('show'); // نخفي البوب
-  });
-}
-  
-  // هنا باقي أكوادك...  
 </script>  
 </body>    
   </html>
