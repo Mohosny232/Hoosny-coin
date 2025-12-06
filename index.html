@@ -813,19 +813,24 @@ payNowBtn.addEventListener('click', () => {
   const selected = document.querySelector('.coin-option.selected');  
   const custom = document.getElementById("customAmount") ? document.getElementById("customAmount").value : "";  
   
-  // تحديد عدد العملات النهائي
   const coins = selected   
     ? (selected.classList.contains('custom') ? (custom || "0") : selected.dataset.amount)   
     : (custom || "0");  
   
-  // تخزين البيانات
   localStorage.setItem("receiverName", username);  
   localStorage.setItem("transferredCoins", coins);  
   
-  // تحديث آخر عملية شراء لو الخانة مش مخصصة
   if (selected && !selected.classList.contains('custom')) {  
+    // شيل special من كل الخانات
+    options.forEach(o => o.classList.remove("special"));
+
+    // اضف special على الخانة الجديدة
+    selected.classList.add("special");
+
+    // احفظ آخر عملية شراء
     localStorage.setItem("lastPurchase", selected.dataset.amount);  
   }  
+});
 
   // هنا ممكن تضيف أي كود لتفعيل البوب أو شريط التقدم بعد الدف
   
