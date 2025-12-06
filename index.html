@@ -890,8 +890,7 @@ function selectOption(opt) {
       // الخانة المختارة الآن.. لازم ما يكونش عليها رمادي
       o.classList.remove("gray");
     }
-   }
-  });
+  });  // ← قفل ال forEach صح
 
   // حفظ آخر اختيار مؤقت قبل الدفع
   const amount = opt.getAttribute("data-amount");
