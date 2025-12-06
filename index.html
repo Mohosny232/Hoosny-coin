@@ -862,31 +862,30 @@ document.getElementById('installBtn').addEventListener('click', async () => {
 const options = document.querySelectorAll(".coin-option");
 
 function selectOption(opt) {
-  const last = localStorage.getItem("lastPurchase");
-
-  // شيل selected و special و gray من كل الخانات
-  options.forEach(o => {
-    o.classList.remove("selected");
-    o.classList.remove("special");
-    o.classList.add("gray"); // كل الخانات تتحول رمادي
-  });
+  // شيل selected من الكل
+  options.forEach(o => o.classList.remove("selected"));
 
   // أضف selected للخانة الجديدة
   opt.classList.add("selected");
-  opt.classList.remove("gray"); // خلي المختارة مش رمادية
 
-  // شيل الشريط الأحمر
-  const progressBar = document.querySelector("#progressBar");
-  if (progressBar) progressBar.style.width = "0%";
+  // شيل gray من المختارة
+  opt.classList.remove("gray");
 
-  // خلي كلمة "آخر عملية شراء" على خانة واحدة فقط
+  // شيل كل الخانات غير المختارة من special ورمادي
+  options.forEach(o => {
+    if (o !== opt) {
+      o.classList.remove("special");
+      o.classList.add("gray");
+    }
+  });
+
+  // أرجع اللون الأحمر للخانة اللي هي آخر عملية شراء إذا مش المختارة الحالية
+  const last = localStorage.getItem("lastPurchase");
   if (last) {
     const lastOption = document.querySelector(`.coin-option[data-amount="${last}"]`);
     if (lastOption && lastOption !== opt) {
-      lastOption.classList.add("special"); // تظل عليها الكلمة
-      lastOption.classList.remove("gray");  // تظل أحمر
-    } else if (lastOption === opt) {
-      opt.classList.add("special"); // لو اخترت نفس آخر عملية شراء
+      lastOption.classList.remove("gray");
+      lastOption.classList.add("special");
     }
   }
 
