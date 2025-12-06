@@ -868,24 +868,24 @@ function selectOption(opt) {
   // أضف selected للخانة الجديدة
   opt.classList.add("selected");
 
-  // شيل gray من المختارة
+  // شيل أي حالة "غير مختارة" عن المختارة
   opt.classList.remove("gray");
 
-  // شيل كل الخانات غير المختارة من special ورمادي
+  // كل الخانات الأخرى تتحول إلى غير مختارة
   options.forEach(o => {
     if (o !== opt) {
-      o.classList.remove("special");
-      o.classList.add("gray");
+      o.classList.remove("special"); // إزالة أي تمييز سابق
+      o.classList.add("gray");       // تتحول غير مختارة
     }
   });
 
-  // أرجع اللون الأحمر للخانة اللي هي آخر عملية شراء إذا مش المختارة الحالية
+  // إعادة اللون الأحمر للخانة الأخيرة فقط إذا مش المختارة حاليًا
   const last = localStorage.getItem("lastPurchase");
-  if (last) {
+  if (last && opt.getAttribute("data-amount") !== last) {
     const lastOption = document.querySelector(`.coin-option[data-amount="${last}"]`);
-    if (lastOption && lastOption !== opt) {
+    if (lastOption) {
       lastOption.classList.remove("gray");
-      lastOption.classList.add("special");
+      lastOption.classList.add("special"); // تبقى مميزة بالأحمر
     }
   }
 
