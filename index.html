@@ -854,13 +854,9 @@ document.getElementById('installBtn').addEventListener('click', async () => {
   deferredPrompt = null;  
   document.getElementById('installBtn').style.display = 'none';  
 });  
-  
-  // 🔹 اختيار كل الخانات
-  
 
 // التعامل مع اختيار الخانات
 const options = document.querySelectorAll(".coin-option");
-
 function selectOption(opt) {
   // شيل selected من الكل
   options.forEach(o => o.classList.remove("selected"));
@@ -868,31 +864,26 @@ function selectOption(opt) {
   // أضف selected للخانة الجديدة
   opt.classList.add("selected");
 
-  // شيل أي حالة "غير مختارة" عن المختارة
+  // شيل أي حالة gray عن المختارة
   opt.classList.remove("gray");
 
-  // كل الخانات الأخرى تتحول إلى غير مختارة
+  // كل الخانات الأخرى تتحول غير مختارة
   options.forEach(o => {
     if (o !== opt) {
-      o.classList.remove("special"); // إزالة أي تمييز سابق
       o.classList.add("gray");       // تتحول غير مختارة
+      o.classList.remove("special"); // تشيل كلمة "آخر عملية شراء"
     }
   });
 
-  // إعادة اللون الأحمر للخانة الأخيرة فقط إذا مش المختارة حاليًا
-  const last = localStorage.getItem("lastPurchase");
-  if (last && opt.getAttribute("data-amount") !== last) {
-    const lastOption = document.querySelector(`.coin-option[data-amount="${last}"]`);
-    if (lastOption) {
-      lastOption.classList.remove("gray");
-      lastOption.classList.add("special"); // تبقى مميزة بالأحمر
-    }
-  }
+  // شيل الشريط الأحمر
+  const progressBar = document.querySelector("#progressBar");
+  if (progressBar) progressBar.style.width = "0%";
 
   // حفظ آخر اختيار مؤقت قبل الدفع
   const amount = opt.getAttribute("data-amount");
   if (amount) localStorage.setItem("tempSelected", amount);
 }
+
 // حدث النقر لكل خانة
 options.forEach(opt => {
   opt.addEventListener("click", () => selectOption(opt));
