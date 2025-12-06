@@ -789,23 +789,6 @@ document.getElementById('popupCoins').innerHTML = `
   </div>  
 `;  
   
-    // افتح البوب  
-        
-  
-// PWA  
-window.addEventListener('beforeinstallprompt', (e) => {  
-  e.preventDefault();  
-  deferredPrompt = e;  
-  document.getElementById('installBtn').style.display = 'block';  
-});  
-  
-document.getElementById('installBtn').addEventListener('click', async () => {  
-  if (!deferredPrompt) return;  
-  deferredPrompt.prompt();  
-  await deferredPrompt.userChoice;  
-  deferredPrompt = null;  
-  document.getElementById('installBtn').style.display = 'none';  
-});     
 
  const backBtn = document.querySelector('.popup-back');
 if (backBtn) {
@@ -825,16 +808,16 @@ payNowBtn.addEventListener('click', () => {
   const custom = document.getElementById("customAmount") 
     ? document.getElementById("customAmount").value 
     : "";  
-  
+
   const coins = selected   
     ? (selected.classList.contains('custom') ? (custom || "0") : selected.dataset.amount)   
     : (custom || "0");  
-  
+
   localStorage.setItem("receiverName", username);  
   localStorage.setItem("transferredCoins", coins);  
-  
+
   if (selected && !selected.classList.contains('custom')) {  
-    // إزالة special من كل الخانات (الكلمة تختفي تماماً)
+    // إزالة special من كل الخانات
     options.forEach(o => {
       o.classList.remove("special", "gray");
     });
@@ -846,34 +829,29 @@ payNowBtn.addEventListener('click', () => {
     // حفظ آخر عملية شراء
     localStorage.setItem("lastPurchase", selected.dataset.amount);
   }
-const popup = document.getElementById('paymentPopup');  
-  popup.classList.add('show');  
-  
-    // لودر فوق + اخفاء التفاصيل  
-    const popupLoader = document.getElementById('tiktok-loader');  
-    const popupDetails = document.getElementById('popupDetails');  
-    popupLoader.style.display = 'flex';  
-    popupDetails.style.display = 'none';  
-  
-    // بعد ثانيتين اعرض التفاصيل  
-    setTimeout(() => {  
-      popupLoader.style.display = 'none';  
-      popupDetails.style.display = 'block';  
-    }, 2000);  
-  }, 2000);  
-});  
 
-const popupLoader = document.getElementById('tiktok-loader');  
+  // عرض البوب
+  const popup = document.getElementById('paymentPopup');  
+  popup.classList.add('show');  
+
+  // لودر فوق + اخفاء التفاصيل
+  const popupLoader = document.getElementById('tiktok-loader');  
   const popupDetails = document.getElementById('popupDetails');  
-  popupDetails.style.display = 'none';  
   popupLoader.style.display = 'flex';  
-  
+  popupDetails.style.display = 'none';  
+
+  // بعد ثانيتين اعرض التفاصيل
   setTimeout(() => {  
-    window.location.href = "page2.html";  
-  }, 2000);  
-});  
-  // هنا الكود اللي بيظهر البوب أو يشغل شريط التقدم لو عايز تضيفه
- // ← قفل Event Listener صح
+    popupLoader.style.display = 'none';  
+    popupDetails.style.display = 'block';  
+
+    // بعد ثانيتين من ظهور التفاصيل اذهب لصفحة النجاح
+    setTimeout(() => {
+      window.location.href = "page2.html";
+    }, 2000);
+
+  }, 2000);
+}); // ← إغلاق Event Listener
 
 
 // -------- التعامل مع اختيار الخانات --------
