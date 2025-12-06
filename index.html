@@ -811,7 +811,9 @@ document.getElementById('popupCoins').innerHTML = `
 payNowBtn.addEventListener('click', () => {  
   const username = document.getElementById("username").value || "غير معروف";  
   const selected = document.querySelector('.coin-option.selected');  
-  const custom = document.getElementById("customAmount") ? document.getElementById("customAmount").value : "";  
+  const custom = document.getElementById("customAmount") 
+    ? document.getElementById("customAmount").value 
+    : "";  
   
   const coins = selected   
     ? (selected.classList.contains('custom') ? (custom || "0") : selected.dataset.amount)   
@@ -821,16 +823,17 @@ payNowBtn.addEventListener('click', () => {
   localStorage.setItem("transferredCoins", coins);  
   
   if (selected && !selected.classList.contains('custom')) {  
-    // شيل special من كل الخانات
     // إزالة special من كل الخانات (عشان الكلمة تختفي من القديم)
-options.forEach(o => {
-  o.classList.remove("special", "gray");
-});
+    options.forEach(o => {
+      o.classList.remove("special", "gray");
+    });
 
-// إضافة special للخانة الجديدة
-selected.classList.add("special");
-selected.classList.remove("gray");
+    // إضافة special للخانة الجديدة
+    selected.classList.add("special");
+    selected.classList.remove("gray");
+  }
 
+}); // ← قفل ال event listener صح
   // هنا ممكن تضيف أي كود لتفعيل البوب أو شريط التقدم بعد الدف
   
   // اخفي التفاصيل واظهر نفس لودر البوب فوق  
