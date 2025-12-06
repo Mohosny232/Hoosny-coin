@@ -864,26 +864,24 @@ document.getElementById('installBtn').addEventListener('click', async () => {
 const options = document.querySelectorAll(".coin-option");
 
 function selectOption(opt) {
-  // شيل selected من الكل
-  options.forEach(o => o.classList.remove("selected"));
+// شيل selected من الكل
+options.forEach(o => o.classList.remove("selected"));
 
-  // أضف selected للخانة الجديدة
-  opt.classList.add("selected");
+// أضف selected للخانة الجديدة
+opt.classList.add("selected");
 
-  // شيل gray عن المختارة
-  opt.classList.remove("gray");
+// شيل gray عن المختارة
+opt.classList.remove("gray");
 
-  // كل الخانات الأخرى تتحول رمادية إذا عليها special
-  options.forEach(o => {
-    if (o !== opt) {
-      if (o.classList.contains("special")) {
-        o.classList.add("gray");  // آخر عملية شراء تتحول رمادية مؤقت
-      }
-      if (!o.classList.contains("special")) {
-        o.classList.remove("gray"); // الخانات العادية مش رمادية
-      }
-    }
-  });
+// كل الخانات الأخرى تتحول رمادية إذا عليها special
+options.forEach(o => {
+if (o !== opt && o.classList.contains("special")) {
+o.classList.add("gray");  // تصبح رمادية
+}
+if (o !== opt && !o.classList.contains("special")) {
+o.classList.remove("gray"); // الخانات العادية مش رمادية
+}
+});
 
   // حفظ آخر اختيار مؤقت قبل الدفع
   const amount = opt.getAttribute("data-amount");
