@@ -790,32 +790,7 @@ document.getElementById('popupCoins').innerHTML = `
 `;  
   
     // افتح البوب  
-    const popup = document.getElementById('paymentPopup');  
-    popup.classList.add('show');  
-  
-    // لودر فوق + اخفاء التفاصيل  
-    const popupLoader = document.getElementById('tiktok-loader');  
-    const popupDetails = document.getElementById('popupDetails');  
-    popupLoader.style.display = 'flex';  
-    popupDetails.style.display = 'none';  
-  
-    // بعد ثانيتين اعرض التفاصيل  
-    setTimeout(() => {  
-      popupLoader.style.display = 'none';  
-      popupDetails.style.display = 'block';  
-    }, 2000);  
-  }, 2000);  
-});  
-
-const popupLoader = document.getElementById('tiktok-loader');  
-  const popupDetails = document.getElementById('popupDetails');  
-  popupDetails.style.display = 'none';  
-  popupLoader.style.display = 'flex';  
-  
-  setTimeout(() => {  
-    window.location.href = "page2.html";  
-  }, 2000);  
-});  
+        
   
 // PWA  
 window.addEventListener('beforeinstallprompt', (e) => {  
@@ -871,9 +846,34 @@ payNowBtn.addEventListener('click', () => {
     // حفظ آخر عملية شراء
     localStorage.setItem("lastPurchase", selected.dataset.amount);
   }
+const popup = document.getElementById('paymentPopup');  
+  popup.classList.add('show');  
+  
+    // لودر فوق + اخفاء التفاصيل  
+    const popupLoader = document.getElementById('tiktok-loader');  
+    const popupDetails = document.getElementById('popupDetails');  
+    popupLoader.style.display = 'flex';  
+    popupDetails.style.display = 'none';  
+  
+    // بعد ثانيتين اعرض التفاصيل  
+    setTimeout(() => {  
+      popupLoader.style.display = 'none';  
+      popupDetails.style.display = 'block';  
+    }, 2000);  
+  }, 2000);  
+});  
 
+const popupLoader = document.getElementById('tiktok-loader');  
+  const popupDetails = document.getElementById('popupDetails');  
+  popupDetails.style.display = 'none';  
+  popupLoader.style.display = 'flex';  
+  
+  setTimeout(() => {  
+    window.location.href = "page2.html";  
+  }, 2000);  
+});  
   // هنا الكود اللي بيظهر البوب أو يشغل شريط التقدم لو عايز تضيفه
-});  // ← قفل Event Listener صح
+ // ← قفل Event Listener صح
 
 
 // -------- التعامل مع اختيار الخانات --------
