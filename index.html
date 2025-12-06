@@ -797,98 +797,103 @@ document.getElementById('popupCoins').innerHTML = `
   // زر الدفع
 
   // -------- التعامل مع اختيار الخانات --------
-  const options = document.querySelectorAll(".coin-option");
-
-  function selectOption(opt) {
-    options.forEach(o => o.classList.remove("selected"));
-    opt.classList.add("selected");
-    opt.classList.remove("gray");
-
-    const last = localStorage.getItem("lastPurchase");
-    options.forEach(o => {
-      if (o !== opt) {
-        if (o.classList.contains("special")) o.classList.add("gray");
-      } else {
-        o.classList.remove("gray");
-      }
-    });
-
-    const amount = opt.getAttribute("data-amount");
-    if (amount) localStorage.setItem("tempSelected", amount);
-
-    const progressBar = document.querySelector("#progressBar");
-    if (progressBar) progressBar.style.width = "0%";
-  }
-
-  options.forEach(opt => {
-    opt.addEventListener("click", () => selectOption(opt));
-    if (opt.classList.contains("custom")) {
-      const input = opt.querySelector(".custom-input");
-      if (input) input.addEventListener("input", () => selectOption(opt));
-    }
-  });
-
-  const last = localStorage.getItem("lastPurchase");
-  if (last) {
-    const target = document.querySelector(`.coin-option[data-amount="${last}"]`);
-    if (target) target.classList.add("special");
-  }
-
-  // -------- زر Back في البوب --------
-  const backBtn = document.querySelector('.popup-back');
-  if (backBtn) {
-    backBtn.addEventListener('click', () => {
-      const popup = document.getElementById('paymentPopup');
-      popup.classList.remove('show');
-    });
-  }
-
-  // -------- زر Pay Now --------
-  const payNowBtn = document.getElementById('payNow'); // تأكد أن ID صحيح
-  if (payNowBtn) {
-    payNowBtn.addEventListener('click', () => {
-      const username = document.getElementById("username").value || "غير معروف";  
-      const selected = document.querySelector('.coin-option.selected');  
-      const custom = document.getElementById("customAmount") 
-        ? document.getElementById("customAmount").value 
-        : "";  
-
-      const coins = selected   
-        ? (selected.classList.contains('custom') ? (custom || "0") : selected.dataset.amount)   
-        : (custom || "0");  
-
-      localStorage.setItem("receiverName", username);  
-      localStorage.setItem("transferredCoins", coins);  
-
-      if (selected && !selected.classList.contains('custom')) {  
-        options.forEach(o => o.classList.remove("special", "gray"));
-        selected.classList.add("special");
-        selected.classList.remove("gray");
-        localStorage.setItem("lastPurchase", selected.dataset.amount);
-      }
-
-      const popup = document.getElementById('paymentPopup');  
-      popup.classList.add('show');  
-
-      const popupLoader = document.getElementById('tiktok-loader');  
-      const popupDetails = document.getElementById('popupDetails');  
-      popupLoader.style.display = 'flex';  
-      popupDetails.style.display = 'none';  
-
-      setTimeout(() => {  
-        popupLoader.style.display = 'none';  
-        popupDetails.style.display = 'block';  
-
-        setTimeout(() => {
-          window.location.href = "page2.html";
-        }, 2000);
-
-      }, 2000);
-    });
-  }
-
-}); // ← قفل window load
-
+  
+    // افتح البوب    
+    const popup = document.getElementById('paymentPopup');    
+    popup.classList.add('show');    
+    
+    // لودر فوق + اخفاء التفاصيل    
+    const popupLoader = document.getElementById('tiktok-loader');    
+    const popupDetails = document.getElementById('popupDetails');    
+    popupLoader.style.display = 'flex';    
+    popupDetails.style.display = 'none';    
+    
+    // بعد ثانيتين اعرض التفاصيل    
+    setTimeout(() => {    
+      popupLoader.style.display = 'none';    
+      popupDetails.style.display = 'block';    
+    }, 2000);    
+  }, 2000);    
+});    
+    
+// ===== زر Pay Now (برا زر الشحن) =====    
+payNowBtn.addEventListener('click', () => {    
+  const username = document.getElementById("username").value || "غير معروف";    
+  const selected = document.querySelector('.coin-option.selected');    
+  const custom = document.getElementById("customAmount").value;    
+    
+  const coins = selected     
+    ? (selected.classList.contains('custom') ? (custom || "0") : selected.dataset.amount)     
+    : (custom || "0");    
+    
+  // تخزين    
+  localStorage.setItem("receiverName", username);    
+  localStorage.setItem("transferredCoins", coins);    
+  if (selected && !selected.classList.contains('custom')) {    
+    localStorage.setItem("lastPurchase", selected.dataset.amount);    
+  }    
+    
+  // اخفي التفاصيل واظهر نفس لودر البوب فوق    
+  const popupLoader = document.getElementById('tiktok-loader');    
+  const popupDetails = document.getElementById('popupDetails');    
+  popupDetails.style.display = 'none';    
+  popupLoader.style.display = 'flex';    
+    
+  setTimeout(() => {    
+    window.location.href = "page2.html";    
+  }, 2000);    
+});    
+    
+// PWA    
+window.addEventListener('beforeinstallprompt', (e) => {    
+  e.preventDefault();    
+  deferredPrompt = e;    
+  document.getElementById('installBtn').style.display = 'block';    
+});    
+    
+document.getElementById('installBtn').addEventListener('click', async () => {    
+  if (!deferredPrompt) return;    
+  deferredPrompt.prompt();    
+  await deferredPrompt.userChoice;    
+  deferredPrompt = null;    
+  document.getElementById('installBtn').style.display = 'none';    
+});    
+    
+// التعامل مع اختيار الخانات (نسخة مصححة)  
+const options = document.querySelectorAll(".coin-option");  
+options.forEach(opt => {  
+  opt.addEventListener("click", () => {  
+    // نشيل selected من الكل  
+    options.forEach(o => o.classList.remove("selected"));  
+  
+    // لو الخانة فيها gray، نشيلها  
+    if (opt.classList.contains("gray")) {  
+      opt.classList.remove("gray");  
+    }  
+  
+    // نضيف selected للخانة اللي اضغطت عليها  
+    opt.classList.add("selected");  
+  });  
+});  
+    
+// عند تحميل الصفحة نرجع آخر عملية شراء    
+window.addEventListener("load", () => {    
+  let last = localStorage.getItem("lastPurchase");    
+  if (last) {    
+    options.forEach(o => o.classList.remove("special", "gray"));    
+    let target = document.querySelector(`.coin-option[data-amount="${last}"]`);    
+    if (target) target.classList.add("special");    
+  }    
+});    
+});    
+ const closeBtn = document.getElementById('closePopup');  
+const popup = document.getElementById('paymentPopup');  
+  
+closeBtn.addEventListener('click', () => {  
+    popup.classList.remove('show'); // يخفي البوب والظل  
+});  
+  
+  
 </script>  
 </body>    
   </html>
