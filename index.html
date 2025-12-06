@@ -876,21 +876,24 @@ function selectOption(opt) {
 
   // التعامل مع خانة آخر عملية شراء
   // التعامل مع خانة آخر عملية شراء
+// التعامل مع خانة آخر عملية شراء
 const last = localStorage.getItem("lastPurchase");
 
 options.forEach(o => {
   if (o !== opt) {
-    // كل الخانات غير المختارة تتحول رمادية
-    o.classList.add("gray");
-
-    // إذا هي نفسها آخر عملية شراء، خليها رمادية مؤقتًا
     if (last && o.getAttribute("data-amount") === last) {
-      o.classList.add("gray");
-      o.classList.remove("special"); // إزالة الأحمر مؤقتًا
+      // آخر عملية شراء تتحول رمادي مؤقتًا بدون إزالة الجملة
+      o.classList.add("gray");      
+      o.classList.remove("active"); // اللون الأحمر مؤقت
     } else {
-      // أي خانة ثانية غير آخر شراء تبقى عادية
+      // أي خانة ثانية تتحول رمادي وتفقد أي تمييز
+      o.classList.add("gray");
       o.classList.remove("special");
     }
+  } else {
+    // الخانة المختارة الحالية تظل واضحة
+    o.classList.remove("gray");
+  }
   }
 });
 
