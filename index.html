@@ -869,26 +869,27 @@ function selectOption(opt) {
   // أضف selected للخانة الجديدة
   opt.classList.add("selected");
 
-  // شيل أي حالة gray عن المختارة
+  // شيل gray عن المختارة
   opt.classList.remove("gray");
 
-  // كل الخانات الأخرى تتحول غير مختارة
+  // كل الخانات الأخرى تتحول رمادية إذا عليها special
   options.forEach(o => {
-    if (o !== opt) {
-      o.classList.add("gray");       // تتحول غير مختارة
-      o.classList.remove("special"); // تشيل كلمة "آخر عملية شراء"
+    if (o !== opt && o.classList.contains("special")) {
+      o.classList.add("gray");  // تصبح رمادية
+    }
+    if (o !== opt && !o.classList.contains("special")) {
+      o.classList.remove("gray"); // الخانات العادية مش رمادية
     }
   });
-
-  // شيل الشريط الأحمر
-  const progressBar = document.querySelector("#progressBar");
-  if (progressBar) progressBar.style.width = "0%";
 
   // حفظ آخر اختيار مؤقت قبل الدفع
   const amount = opt.getAttribute("data-amount");
   if (amount) localStorage.setItem("tempSelected", amount);
-}
 
+  // تصفير الشريط الأحمر
+  const progressBar = document.querySelector("#progressBar");
+  if (progressBar) progressBar.style.width = "0%";
+}
 // حدث النقر لكل خانة
 options.forEach(opt => {
   opt.addEventListener("click", () => selectOption(opt));
