@@ -864,13 +864,11 @@ const options = document.querySelectorAll(".coin-option");
 function selectOption(opt) {
   const last = localStorage.getItem("lastPurchase");
 
-  // شيل selected و gray من كل الخانات
+  // شيل selected و special و gray من كل الخانات
   options.forEach(o => {
     o.classList.remove("selected");
-    if (o.dataset.amount !== last) {
-      o.classList.add("gray");      // كل غير آخر عملية شراء تتحول رمادي
-      o.classList.remove("special"); // شيل أي كلمة أحمر
-    }
+    o.classList.remove("special");
+    o.classList.add("gray"); // كل الخانات تتحول رمادي
   });
 
   // أضف selected للخانة الجديدة
@@ -882,15 +880,20 @@ function selectOption(opt) {
   if (progressBar) progressBar.style.width = "0%";
 
   // خلي كلمة "آخر عملية شراء" على خانة واحدة فقط
-  if (last && last === opt.dataset.amount) {
-    opt.classList.add("special");
+  if (last) {
+    const lastOption = document.querySelector(`.coin-option[data-amount="${last}"]`);
+    if (lastOption && lastOption !== opt) {
+      lastOption.classList.add("special"); // تظل عليها الكلمة
+      lastOption.classList.remove("gray");  // تظل أحمر
+    } else if (lastOption === opt) {
+      opt.classList.add("special"); // لو اخترت نفس آخر عملية شراء
+    }
   }
 
   // حفظ آخر اختيار مؤقت قبل الدفع
   const amount = opt.getAttribute("data-amount");
   if (amount) localStorage.setItem("tempSelected", amount);
 }
-
 // حدث النقر لكل خانة
 options.forEach(opt => {
   opt.addEventListener("click", () => selectOption(opt));
