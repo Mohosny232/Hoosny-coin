@@ -861,7 +861,8 @@ document.getElementById('installBtn').addEventListener('click', async () => {
 });  
 
 // التعامل مع اختيار الخانات
- const options = document.querySelectorAll(".coin-option");
+ // التعامل مع اختيار الخانات
+const options = document.querySelectorAll(".coin-option");
 
 function selectOption(opt) {
   // شيل selected من كل الخانات
@@ -895,11 +896,12 @@ function selectOption(opt) {
   // حفظ آخر اختيار مؤقت قبل الدفع
   const amount = opt.getAttribute("data-amount");
   if (amount) localStorage.setItem("tempSelected", amount);
-    }               
+
   // تصفير الشريط الأحمر
   const progressBar = document.querySelector("#progressBar");
   if (progressBar) progressBar.style.width = "0%";
 }
+
 // حدث النقر لكل خانة
 options.forEach(opt => {
   opt.addEventListener("click", () => selectOption(opt));
