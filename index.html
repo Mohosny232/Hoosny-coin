@@ -14,19 +14,27 @@ html, body {
   overflow-x: hidden;  
   overflow-y: hidden;  
 }  
-body {  
-  display: flex;  
-  flex-direction: column;  
-  align-items: center;  
-  justify-content: flex-start;  
-  min-height: 100vh;  
-  overflow-x: hidden;  
-  font-family: 'Tajawal', sans-serif;  
-  font-weight: bold;  
-  margin-top: 87px; /* 👈 زوّد أو قلل الرقم براحتك */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: 'Tajawal', sans-serif;
+  font-weight: bold;
+  margin-top: 87px;
 
-}  /* الخانة الخاصة (3500) كبداية */
-.coin-option.special {
+  /* تصغير الجسم */
+  transform: scale(0.8); /* 0.9 يعني 90% من الحجم الطبيعي */
+  transform-origin: top center; /* منين يبدأ التصغير */
+  transition: transform 0.3s ease-in-out; /* حركة سلسة */
+}
+
+/* لو عايز تأثير عند hover يكبر شوية */
+body:hover {
+  transform: scale(1); /* يرجع للحجم الطبيعي عند المرور */
+}.coin-option.special {
 border: 2px solid #ff2d55;
 background-color: #fff0f4;
 }
