@@ -11,14 +11,14 @@
   <link rel="manifest" href="manifest.json">  
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap" rel="stylesheet">  
   <style>  
-html, body {  
-  margin: 0;  
-  padding: 0;  
-  background: #fff;  
-  min-height: 100vh;  
-  overflow-x: hidden;  
-  overflow-y: hidden;  
-}  
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto; /* مهم */
+}
 body {
   display: flex;
   flex-direction: column;
@@ -31,7 +31,7 @@ body {
   margin-top: 87px;
 
   /* تصغير الجسم */
-  transform: scale(1.0); /* 0.9 يعني 90% من الحجم الطبيعي */
+  transform: scale(0.9); /* 0.9 يعني 90% من الحجم الطبيعي */
   transform-origin: top center; /* منين يبدأ التصغير */
   transition: transform 0.3s ease-in-out; /* حركة سلسة */
 }
