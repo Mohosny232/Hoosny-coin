@@ -419,6 +419,48 @@ flex-direction: row-reverse;
 
   <div id="ttResult" style="margin-top:15px;"></div>
 </div>
+
+  </div>  <div class="container">  
+  <h1><span class="tiktok"></span></h1>  
+  <input type="text" id="username" placeholder="Username" />  
+</div>  
+  <div style="margin-bottom:15px;">
+  <input
+    type="text"
+    id="tiktokUser"
+    placeholder="اكتب اسم مستخدم تيك توك"
+    style="
+      width:100%;
+      padding:14px;
+      font-size:16px;
+      border-radius:8px;
+      border:1px solid #ccc;
+    "
+  />
+  </div>
+  <button
+  onclick="verifyAccount()"
+  style="
+    width:100%;
+    padding:14px;
+    background:#000;
+    color:#fff;
+    font-size:16px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+  "
+>
+  تحقق من الحساب
+  </button>
+  <div
+  id="verifyResult"
+  style="
+    margin-top:12px;
+    text-align:center;
+    font-weight:bold;
+  "
+></div>
   
 </div>  <div class="container">  
   <h1><span class="tiktok"></span></h1>  
@@ -904,39 +946,50 @@ popup.classList.remove('show');
 });
 }
   
-async function getTikTokUserInfo(username) {
-  try {
-    const response = await fetch(
-      `https://tiktok-scaper-api.p.rapidapi.com/userinfo-by-username?username=${username}`,
-      {
-        method: "GET",
-        headers: {
-          "X-RapidAPI-Key": "85ba0bef8cmsh06f9a88a8ed854bp19cb83jsn4685510dce87", // حط مفتاحك هنا
-          "X-RapidAPI-Host": "tiktok-scaper-api.p.rapidapi.com"
-        }
-      }
-    );
+let verified = false;
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+function verifyAccount() {
+  const input = document.getElementById("tiktokUser");
+  const username = input.value.trim();
+  const result = document.getElementById("verifyResult");
 
-    const data = await response.json();
-
-    // مثال لطباعة البيانات على الصفحة أو في الكونسول
-    console.log("اسم المستخدم:", data.username);
-    console.log("عدد المتابعين:", data.followers);
-    console.log("رابط الصورة:", data.avatar);
-
-    // لو عايز تعرضهم في HTML
-    document.getElementById("userName").textContent = data.username;
-    document.getElementById("userFollowers").textContent = data.followers;
-    document.getElementById("userAvatar").src = data.avatar;
-
-  } catch (err) {
-    console.error("حدث خطأ:", err);
+  if (!username) {
+    result.style.color = "red";
+    result.innerText = "❌ اكتب اسم المستخدم أولًا";
+    return;
   }
+
+  // منع الرموز الغلط
+  if (!/^[a-zA-Z0-9._]+$/.test(username)) {
+    result.style.color = "red";
+    result.innerText = "❌ اسم المستخدم غير صالح";
+    return;
+  }
+
+  const profileUrl = `https://www.tiktok.com/@${username}`;
+
+  // فتح الحساب
+  window.open(profileUrl, "_blank");
+
+  verified = true;
+
+  result.style.color = "green";
+  result.innerHTML = `
+    ✅ تم فتح الحساب<br>
+    تأكد أنه الحساب الصحيح ثم أكمل الشحن
+  `;
 }
+
+function buyNow() {
+  if (!verified) {
+    alert("❗ يرجى التحقق من الحساب أولًا");
+    return;
+  }
+
+  // كود الشراء العادي هنا
+  alert("تم البدء في عملية الشحن ✅");
+}
+
   </script>  
 </body>    
 </html> 
