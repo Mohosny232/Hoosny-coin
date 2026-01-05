@@ -413,55 +413,6 @@ flex-direction: row-reverse;
     <button id="loginBtn">Login</button> </div>  
 </div>  <div id="mainContent" style="display:none;">  
   <!-- محتوى التطبيق بعد تسجيل الدخول -->  
-<div style="margin:20px;">
-  <input id="ttUsername" placeholder="اكتب اسم مستخدم تيك توك">
-  <button onclick="getTikTokUser()">بحث</button>
-
-  <div id="ttResult" style="margin-top:15px;"></div>
-</div>
-
-  </div>  <div class="container">  
-  <h1><span class="tiktok"></span></h1>  
-  <input type="text" id="username" placeholder="Username" />  
-</div>  
-  <div style="margin-bottom:15px;">
-  <input
-    type="text"
-    id="tiktokUser"
-    placeholder="اكتب اسم مستخدم تيك توك"
-    style="
-      width:100%;
-      padding:14px;
-      font-size:16px;
-      border-radius:8px;
-      border:1px solid #ccc;
-    "
-  />
-  </div>
-  <button
-  onclick="verifyAccount()"
-  style="
-    width:100%;
-    padding:14px;
-    background:#000;
-    color:#fff;
-    font-size:16px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-  "
->
-  تحقق من الحساب
-  </button>
-  <div
-  id="verifyResult"
-  style="
-    margin-top:12px;
-    text-align:center;
-    font-weight:bold;
-  "
-></div>
-  
 </div>  <div class="container">  
   <h1><span class="tiktok"></span></h1>  
   <input type="text" id="username" placeholder="Username" />  
@@ -946,50 +897,6 @@ popup.classList.remove('show');
 });
 }
   
-let verified = false;
-
-function verifyAccount() {
-  const input = document.getElementById("tiktokUser");
-  const username = input.value.trim();
-  const result = document.getElementById("verifyResult");
-
-  if (!username) {
-    result.style.color = "red";
-    result.innerText = "❌ اكتب اسم المستخدم أولًا";
-    return;
-  }
-
-  // منع الرموز الغلط
-  if (!/^[a-zA-Z0-9._]+$/.test(username)) {
-    result.style.color = "red";
-    result.innerText = "❌ اسم المستخدم غير صالح";
-    return;
-  }
-
-  const profileUrl = `https://www.tiktok.com/@${username}`;
-
-  // فتح الحساب
-  window.open(profileUrl, "_blank");
-
-  verified = true;
-
-  result.style.color = "green";
-  result.innerHTML = `
-    ✅ تم فتح الحساب<br>
-    تأكد أنه الحساب الصحيح ثم أكمل الشحن
-  `;
-}
-
-function buyNow() {
-  if (!verified) {
-    alert("❗ يرجى التحقق من الحساب أولًا");
-    return;
-  }
-
-  // كود الشراء العادي هنا
-  alert("تم البدء في عملية الشحن ✅");
-}
-
   </script>  
 </body>    
 </html> 
