@@ -553,8 +553,9 @@ async function checkLogin() {
     }
 
     // 🔹 نجيب بيانات المستخدم من Firestore
-    const userRef = doc(db, "users", enteredUsername);
-    const snap = await getDoc(userRef);
+    const userRef = doc(db, "users", "mohosny100"); // الاسم هنا لازم مطابق
+const snap = await getDoc(userRef);
+const data = snap.data();
 
     if (!snap.exists()) {
       alert("❌ المستخدم مش موجود");
@@ -564,9 +565,9 @@ async function checkLogin() {
     const data = snap.data();
 
     if (data.password !== enteredPassword) {
-      alert("❌ كلمة المرور غلط");
-      return;
-    }
+  alert("❌ كلمة المرور غلط");
+  return;
+}
 
     // ✅ نجاح تسجيل الدخول
     localStorage.setItem("loggedIn", "true");
