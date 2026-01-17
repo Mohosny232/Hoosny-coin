@@ -524,8 +524,8 @@ flex-direction: row-reverse;
 <audio id="typeSound" src="type.mp3"></audio>
 
         
- <script src="https://openfpcdn.io/fingerprintjs/v4"></script>
-  <script type="module">
+<script src="https://openfpcdn.io/fingerprintjs/v4"></script>
+<script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
 import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
@@ -562,23 +562,19 @@ function getDeviceName() {
 // 🔹 تسجيل الدخول
 async function checkLogin() {
   try {
-    const userRef = doc(db, "users", "MAIN");
-    const snap = await getDoc(userRef);
-
-    console.log("🔥 Firestore Response:", snap.exists());
-    alert("Firestore شغال");
-
-  } catch (e) {
-    console.error("🔥 Firestore Error:", e);
-    alert(e.message);
-  }
-}
+    const enteredPassword = document.getElementById("passwordInput").value.trim();
+    if (!enteredPassword) {
+      alert("⚠️ اكتب كلمة المرور");
+      return;
+    }
 
     const fingerprint = await getFingerprint();
     const deviceName = getDeviceName();
 
     const userRef = doc(db, "users", "MAIN");
     const snap = await getDoc(userRef);
+
+    console.log("🔥 Firestore Response:", snap.exists());
 
     if (!snap.exists()) {
       alert("❌ الحساب غير موجود");
@@ -602,7 +598,6 @@ async function checkLogin() {
 
     // ✅ نجاح
     localStorage.setItem("loggedIn", "true");
-
     document.getElementById("loginOverlay").style.display = "none";
     document.getElementById("mainContent").style.display = "block";
 
@@ -610,9 +605,11 @@ async function checkLogin() {
     alert("✅ تم تسجيل الدخول بنجاح");
 
   } catch (e) {
-  console.error("🔥 ERROR:", e);
-  alert(e.message);
+    console.error("🔥 ERROR:", e);
+    alert("❌ خطأ في الاتصال بـ Firestore");
+  }
 }
+
 
 window.checkLogin = checkLogin;
 
