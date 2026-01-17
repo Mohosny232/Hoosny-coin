@@ -562,11 +562,17 @@ function getDeviceName() {
 // 🔹 تسجيل الدخول
 async function checkLogin() {
   try {
-    const enteredPassword = document.getElementById("passwordInput").value.trim();
-    if (!enteredPassword) {
-      alert("⚠️ اكتب كلمة المرور");
-      return;
-    }
+    const userRef = doc(db, "users", "MAIN");
+    const snap = await getDoc(userRef);
+
+    console.log("🔥 Firestore Response:", snap.exists());
+    alert("Firestore شغال");
+
+  } catch (e) {
+    console.error("🔥 Firestore Error:", e);
+    alert(e.message);
+  }
+}
 
     const fingerprint = await getFingerprint();
     const deviceName = getDeviceName();
@@ -604,9 +610,8 @@ async function checkLogin() {
     alert("✅ تم تسجيل الدخول بنجاح");
 
   } catch (e) {
-    console.error(e);
-    alert("❌ خطأ في الاتصال بـ Firestore");
-  }
+  console.error("🔥 ERROR:", e);
+  alert(e.message);
 }
 
 window.checkLogin = checkLogin;
