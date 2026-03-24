@@ -298,29 +298,25 @@ flex-direction: row-reverse;
 width: 100%;
 margin: 0 auto;
 display: flex;
-flex-direction: column; /* 👈 النص فوق والزر تحت /
-gap: 0px; / 👈 المسافة بين النص والزر /
+flex-direction: column; 
+gap: 0px; 
 margin-top: 30%;
-position: relative; / 👈 لتثبيت الصورة فوق */
+position: relative;
 }
 
 #popupImg {
 position: absolute;
-top: -50px;   /* 👈 تحكم في ارتفاعها /
+top: -50px;   
 left: 50%;
 transform: translateX(-50%);
-width: 200px;     / 👈 عرض الصورة /
-max-width: 90%;   / 👈 منع التقطيع على الشاشات الصغيرة /
+width: 200px;     
+max-width: 90%;   
 border-radius: 0;
-object-fit: contain; / 👈 تعرض الصورة كاملة */
+object-fit: contain; 
 }
 
 .total-row span {
-margin-top: 0px; /* 👈 تعديل مكان النص */
-}
-
-/* 🔹 الجزء الخاص بـ (Total + المبلغ) /
-/ 🔹 الصف كله /
+margin-top: 0px;
 .total-row {
 display: flex;
 justify-content: space-between;
@@ -347,19 +343,19 @@ font-family: 'Tajawal', sans-serif;
 font-size: 22px;
 font-weight: bold;
 text-align: center;
-margin: 0; / نلغي أي هامش افتراضي /
-position: absolute; / نجعلها ثابتة داخل البوب /
-top: 15px; / تحكم في المسافة من أعلى البوب /
+margin: 0; 
+position: absolute; 
+top: 15px; 
 left: 50%;
 transform: translateX(-50%);
 color: #000;
-z-index: 1001; / فوق اللودر /
+z-index: 1001; 
 }
 .popup-back {
 font-family: 'Tajawal', sans-serif;
-position: absolute;   / يبقى مطلق داخل popupDetails /
-top: 5px!important;             / تحكم في المسافة من أعلى popupDetails /
-right: 13px;          / على اليمين /
+position: absolute;   
+top: 5px!important;             
+right: 13px;          
 background: none;
 border: none;
 color: #000;
@@ -373,13 +369,13 @@ z-index: 10;
 .popup-close {
 position: absolute;
 top: 15px!important;
-left: 15px;           / لو عايز الشمال بدلها left /
+left: 15px;           
 width: 24px;
 height: 24px;
-background-color: #fff;   / خلفية الدائرة أبيض /
-color: #000;              / حرف × أسود /
-border: 2px solid #000;   / حدود الدائرة سوداء /
-border-radius: 50%;       / يجعلها دائرية */
+background-color: #fff;   
+color: #000;              
+border: 2px solid #000;   
+border-radius: 50%;       
 font-size: 20px;
 font-weight: bold;
 cursor: pointer;
@@ -390,8 +386,8 @@ z-index: 10;
 }
 
 .popup-close:hover {
-background-color: #000;  /* عند المرور يصبح الخلفية سوداء /
-color: #fff;             / وحرف × أبيض */
+background-color: #000;  
+color:white 
 }
 #payNow .btn-icon { width:20px; height:auto; }
 
