@@ -396,6 +396,29 @@ justify-content: center;
 z-index: 10;
 }
 
+.coin-option.custom {
+    display: flex;          /* نخلي العناصر في صف */
+    flex-direction: column; /* أو row لو عايز جنب بعض */
+    align-items: flex-end;  /* تحريكهم ناحية اليمين */
+    padding: 5px;
+}
+
+.custom-input {
+    width: 60px;        /* صغر حجم الخانة */
+    font-size: 12px;    /* حجم الخط أصغر */
+    padding: 4px 6px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 2px;    /* مسافة بسيطة فوق */
+}
+#customPrice {
+    font-size: 10px;
+    color: gray;
+    margin-top: 2px;
+}
+
 .popup-close:hover {
 background-color: #000;  
 color:white 
@@ -457,11 +480,12 @@ color:white
 
 </div>
   <!-- خانة custom -->      
-  <div class="coin-option custom">    
-    Custom    
-    <div id="customPrice" style="font-size: 10px; color: gray; margin-top: 4px;"></div>    
-    <input type="number" id="customAmount" class="custom-input" placeholder="..Number of " />    
-  </div>    
+  
+<div class="coin-option custom">
+    Custom
+    <div id="customPrice"></div>
+    <input type="number" id="customAmount" class="custom-input" placeholder="..Number of " />
+</div>
 </div>  
   <img src="pay12.png" alt="Pay Image" class="top-image">    
 <div style="width: 100%; display: flex; justify-content: center; margin-top: -5px;">    
